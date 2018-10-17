@@ -6,7 +6,7 @@ import "./css/App.css";
 import Landingpage from "./pages/Landingpage";
 
 import posed, { PoseGroup } from 'react-pose';
-import withAuthentication from './components/Hoc/withAuthentication';
+import withAuthentication from './components/hoc/withAuthentication';
 
 const RoutesContainer = posed.div({
   enter: {

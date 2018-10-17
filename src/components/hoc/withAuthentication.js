@@ -1,6 +1,6 @@
 import React from 'react';
 import { firebase } from '../../firebase';
-import AuthUserContext from '../context/AuthUserContext';
+
 import { inject } from 'mobx-react';
 
 const withAuthentication = (Component) => {

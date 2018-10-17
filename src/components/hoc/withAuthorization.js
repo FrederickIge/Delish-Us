@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import AuthUserContext from '../context/AuthUserContext';
+
 import { firebase } from '../../firebase';
 import { inject, observer } from 'mobx-react';
 import { compose } from 'recompose';
