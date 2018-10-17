@@ -1,28 +1,46 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./css/App.css";
+import { Switch, Route } from "react-router-dom";
+import "./css/App.css";
+
+import Landingpage from "./pages/Landingpage";
+
+import posed, { PoseGroup } from 'react-pose';
+import withAuthentication from './components/Hoc/withAuthentication';
+
+const RoutesContainer = posed.div({
+  enter: {
+    opacity: 1,
+    delay: 300,
+    beforeChildren: true
+  },
+  exit: { opacity: 0 }
+});
 
 class App extends Component {
   render() {
+    console.log(this.props)
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Route render={({ location }) => (
+
+        <div>
+      
+        <PoseGroup>
+          <RoutesContainer key={location.pathname} >
+            <Switch location={location}   >
+
+              <Route path="/" component={Landingpage} />
+              
+            </Switch>
+          </RoutesContainer>
+        </PoseGroup>
+        </div>
+
+      )}>
+
+      </Route>
     );
   }
 }
 
-export default App;
+export default withAuthentication(App);
