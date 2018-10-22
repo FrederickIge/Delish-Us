@@ -435,3 +435,29 @@ h5{
   height: 230px;
   /* overflow: hidden; */
 }
+
+.random-dog{
+  max-height: 500px;
+  height: 300px !important;
+}
+.my-dog{
+
+  height: 200px !important;
+}
+
+body{
+  background-image:  url("../img/bg.png");
+}
+
+.dropdown {
+  display: inline-block;
+}
+
+.dropdown__content {
+  display: none;
+  position: absolute;
+}
+
+.dropdown--active .dropdown__content {
+  display: block;
+}

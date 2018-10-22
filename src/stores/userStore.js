@@ -1,7 +1,17 @@
 import { observable, action } from "mobx";
 import { auth } from "../firebase";
-import axios from "axios";
 import firebase from "firebase";
+
+const db = firebase.firestore();
+
+db.settings({
+  timestampsInSnapshots: true
+});
+
+
+// db.settings({
+//   timestampsInSnapshots: true
+// });
 
 class UserStore {
 
@@ -27,7 +37,7 @@ class UserStore {
     // Popup signin flow rather than redirect flow.
     signInFlow: "popup",
     // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-    signInSuccessUrl: "/searchSchools",
+    signInSuccessUrl: "/dashboard",
     // We will display Google and Facebook as auth providers.
     signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
     callbacks: {
@@ -43,10 +53,9 @@ class UserStore {
 
   @action
   emailLogin = (email, password) => {
-    console.log("aye");
     auth.doSignInWithEmailAndPassword(email, password).then(
       action("fetchSuccess", response => {
-        this.rootStore.routingStore.push("/searchschools");
+        this.rootStore.routingStore.push("/dashboard");
       }),
       action("fetchError", error => {
         this.error = error;
@@ -85,19 +94,25 @@ class UserStore {
 
   @action
   createUser = (user) => {
+
     const newUser = {
       displayName: user.displayName,
       uid: user.uid,
       email: user.email
     };
-    axios.post("api/users/createuser", newUser).then(
-      action("fetchSuccess", response => {
-        this.rootStore.routingStore.push("/searchschools");
-      }),
-      action("fetchError", error => {
-        this.error = error;
-      })
-    );
+
+    console.log(newUser)
+
+    const userRef = db.doc("users/" + newUser.uid)
+
+  userRef.set({
+    displayName: user.displayName,
+    uid: user.uid,
+    email: user.email
+  }).then(data =>{
+    this.rootStore.routingStore.push("/dashboard");
+  })
+
   };
 
  
