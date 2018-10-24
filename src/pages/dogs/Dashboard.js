@@ -5,7 +5,8 @@ import { compose } from "recompose";
 import posed from "react-pose";
 import axios from "axios";
 import firebase from "firebase";
-
+import { Link, NavLink } from 'react-router-dom';
+import Zoom from 'react-reveal/Zoom';
 const db = firebase.firestore();
 
 db.settings({
@@ -154,7 +155,9 @@ class Dashboard extends Component {
                       Keep Dog
                     </button>
                     <br></br>
-                    <p> {this.state.message} </p>
+                    <Slide>
+                  { this.state.message ? <p> {this.state.message} <Link to='/doglist'>Checkout your Dogs</Link> </p> : null}  
+                 </Slide>
                   </div>
                   <div className=" col-md-2" />
                 </div>

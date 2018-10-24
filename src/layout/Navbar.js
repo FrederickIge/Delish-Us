@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import { faUser, faSquare } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faSquare, faDog } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { inject, observer } from 'mobx-react';
 import { compose } from 'recompose';
@@ -33,7 +33,7 @@ class Navbar extends Component {
     const NavigationNonAuth = () =>
       <nav className="navbar navbar-expand-lg py-2">
         <div className="container">
-          <Link to="/" className="navbar-brand">MERN Voting App</Link>
+          <Link to="/" className="navbar-brand"><FontAwesomeIcon className="icon-layers text-primary fa-2x" icon={faDog} /></Link>
         </div>
       </nav>
 
@@ -43,7 +43,7 @@ class Navbar extends Component {
         <div className="container">
 
           <Link to="/dashboard" >
-            <FontAwesomeIcon className="icon-layers text-primary fa-2x" icon={faGraduationCap} />
+            <FontAwesomeIcon className="icon-layers text-primary fa-2x" icon={faDog} />
           </Link>
 
           <Dropdown

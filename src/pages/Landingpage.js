@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faSquare } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faSquare, faFire } from "@fortawesome/free-solid-svg-icons";
 import { faReact, faCss3Alt } from "@fortawesome/free-brands-svg-icons";
 import { Link} from 'react-router-dom';
 
@@ -68,12 +68,12 @@ class Myresults extends Component{
                         <div className="features-icons-icon d-flex">
                           <FontAwesomeIcon
                             className="icon-layers m-auto text-info"
-                            icon={faUser}
+                            icon={faFire}
                           />
                         </div>
-                        <h3>User Login and Auth</h3>
+                        <h3>Firebase</h3>
                         <p className="lead mb-0  text-default">
-                          Built in signup and registration features
+                          Backend Database and Auth powered by Firebase
                         </p>
                       </div>
                     </div>
