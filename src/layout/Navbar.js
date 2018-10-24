@@ -68,7 +68,7 @@ const NavigationNonAuth = () =>
 
 
 const Navbar = ({ sessionStore }) =>
-  <div>
+  <div className="doggo-nav">
     {sessionStore.authUser ? <NavigationAuth photoURL={sessionStore.authUser.photoURL} /> : <NavigationNonAuth />}
   </div>
 

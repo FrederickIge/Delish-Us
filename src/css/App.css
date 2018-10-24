@@ -17,7 +17,7 @@
 header.masthead {
   position: relative;
   /* background-color: #343a40; */
-  background: url("../img/polls.png") no-repeat center center;
+  /* background: url("../img/polls.png") no-repeat center center; */
   background-size: cover;
   padding-top: 8rem;
   padding-bottom: 8rem;
@@ -460,4 +460,8 @@ body{
 
 .dropdown--active .dropdown__content {
   display: block;
+}
+
+.doggo-nav{
+  background-color: #172b4d!important;
 }

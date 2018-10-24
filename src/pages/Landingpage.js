@@ -20,7 +20,7 @@ class Myresults extends Component{
                   <div className="row">
                     <div className="col-xl-9 mx-auto">
                       <h1 className="mb-5 text-secondary">
-                        Make a poll. See what Everyone thinks
+                       Welcome Doggie Boiler
                       </h1>
                     </div>
                     <div className="col-md-10 col-lg-8 col-xl-7 mx-auto">
