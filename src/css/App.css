@@ -17,8 +17,8 @@
 header.masthead {
   position: relative;
   /* background-color: #343a40; */
-  /* background: url("../img/polls.png") no-repeat center center; */
-  background-size: cover;
+  background: url("../img/pupper.png") no-repeat center center;
+  background-size: contain;
   padding-top: 8rem;
   padding-bottom: 8rem;
 }

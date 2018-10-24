@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "./css/App.css";
-import { Switch, Route } from "react-router-dom";
+
 import "./css/App.css";
 import Navbar from "./layout/Navbar";
 
@@ -18,6 +18,9 @@ import Signup from "./pages/account/Signup";
 
 import Dashboard from "./pages/dogs/Dashboard";
 import DogList from './pages/dogs/DogList';
+
+import { RouterStore, syncHistoryWithStore } from 'mobx-react-router';
+import { Switch, Route } from "react-router-dom";
 
 const RoutesContainer = posed.div({
   enter: {
