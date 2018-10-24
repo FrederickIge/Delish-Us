@@ -18,6 +18,12 @@ const Slide = posed.div({
   exit: { x: -50, opacity: 0 }
 });
 
+const Box = posed.div({
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 }
+});
+
+
 const photo = require("../../img/diploma.png");
 
 @inject("schoolStore", "sessionStore")
@@ -32,7 +38,8 @@ class Dashboard extends Component {
     gender: "male",
     breed: null,
     owner: null,
-    message: null
+    message: null,
+    isVisible: true 
   };
 
   handleChange = (event) => {
@@ -57,18 +64,28 @@ class Dashboard extends Component {
     });
   }
 
+  handleImageLoaded = () => {
+    this.setState({ isVisible: true });
+  }
+
 
   nextDog = event => {
-    axios.get("https://dog.ceo/api/breeds/image/random").then(res => {
-      this.setState({
-        picture: res.data.message
+    this.setState({ isVisible: false }, () => {
+      axios.get("https://dog.ceo/api/breeds/image/random").then(res => {
+        this.setState({ picture: res.data.message })
       });
     });
   };
 
   componentDidMount() {
     this.nextDog();
-    console.log(this.props.sessionStore.authUser.uid)
+  }
+
+  componentDidUpdate(prevProps) {
+    
+    // if(this.state.isVisible == false){
+    //   this.setState({ isVisible: true });
+    // }
   }
 
   render() {
@@ -85,11 +102,16 @@ class Dashboard extends Component {
               </h2>
               <div className="spacer" />
 
+            <Box pose={this.state.isVisible ? 'visible' : 'hidden'}  >
+            
+            
               <img
                 src={this.state.picture}
                 alt="Smiley face"
                 className="img-fluid rounded mx-auto d-block random-dog"
+                onLoad={this.handleImageLoaded}
               />
+            </Box>
 
               <div className="mt-3 row">
                 <div className="col-md-2" />

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { faUser, faSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { inject, observer } from 'mobx-react';
@@ -9,21 +9,22 @@ import Dropdown from 'rc-dropdown';
 import Menu, { Item as MenuItem, Divider } from 'rc-menu';
 import 'rc-dropdown/assets/index.css';
 
-function onSelect({ key }) {
+ const onSelect = ({ key }) => {
   console.log(`${key} selected`);
+  console.log(this)
 }
 
 function onVisibleChange(visible) {
   console.log(visible);
 }
 
-const menu = (
+const menu = () => 
   <Menu onSelect={onSelect}>
-    <MenuItem > <Link to="/doglist" className=" ml-auto">My Dogs</Link></MenuItem>
-    <MenuItem > <Link to="/dashboard" className=" ml-auto">The Dog Shelter</Link></MenuItem>
-    <MenuItem > <Link to="/account" className=" ml-auto">My Account</Link></MenuItem>
+    <MenuItem key="/doglist">My Dogs</MenuItem>
+    <MenuItem key="/dashboard">The Dog Shelter</MenuItem>
+    <MenuItem key="/account"> My Account</MenuItem>
   </Menu>
-);
+
 
 const NavigationAuth = (props) =>
   <nav className="navbar navbar-expand-lg py-2">
@@ -34,25 +35,13 @@ const NavigationAuth = (props) =>
         <FontAwesomeIcon className="icon-layers text-primary fa-2x" icon={faGraduationCap} />
       </Link>
 
-      {/* <Link to="/account" className=" ml-auto">
-
-        {props.photoURL ? <img className="rounded-circle avatar-image--icon" src={props.photoURL} alt="Logo" /> : <FontAwesomeIcon className="avatar-image--icon" icon={faUser} />}
-        
-      </Link> */}
-
-   
-        
       <Dropdown
         trigger={['click']}
-        overlay={menu}
-       
+        overlay={menu()}
         onVisibleChange={onVisibleChange}
       >
         {props.photoURL ? <img className="rounded-circle avatar-image--icon" src={props.photoURL} alt="Logo" /> : <FontAwesomeIcon className="avatar-image--icon" icon={faUser} />}
       </Dropdown>
-
- 
-  
 
     </div>
 
@@ -67,7 +56,7 @@ const NavigationNonAuth = () =>
   </nav>
 
 
-const Navbar = ({ sessionStore }) =>
+const Navbar = ({ sessionStore, routingStore }) =>
   <div className="doggo-nav">
     {sessionStore.authUser ? <NavigationAuth photoURL={sessionStore.authUser.photoURL} /> : <NavigationNonAuth />}
   </div>
@@ -76,6 +65,6 @@ const Navbar = ({ sessionStore }) =>
 
 
 export default compose(
-  inject('sessionStore'),
+  inject('sessionStore','routingStore'),
   observer
-)(Navbar);
+)(Navbar,menu);
