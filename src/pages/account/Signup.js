@@ -1,44 +1,36 @@
-import React, { Component } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import { auth } from "../../firebase";
-import firebase from "firebase";
-import { loginUi, uiConfig } from "../../firebase/firebase";
-import { inject, observer } from "mobx-react";
+import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
+import { Link } from 'react-router-dom';
 
-const byPropKey = (propertyName, value) => () => ({
-  [propertyName]: value
-});
+import { loginUi } from '../../firebase/firebase';
 
-@inject("userStore")
+@inject('userStore')
 @observer
 class Signup extends Component {
-
   static firebaseUiDeleted = Promise.resolve();
 
-  registerForm = this.props.userStore.registerForm
+  registerForm = this.props.userStore.registerForm;
 
   componentDidMount() {
-    const { userStore } = this.props
+    const { userStore } = this.props;
     Signup.firebaseUiDeleted.then(() => {
-      loginUi.start("#firebaseui-auth-container", userStore.uiConfig);
+      loginUi.start('#firebaseui-auth-container', userStore.uiConfig);
     });
   }
 
-  onSubmit = event => {
+  onSubmit = (event) => {
     this.props.userStore.emailRegistration();
     event.preventDefault();
   };
 
   render() {
-
     const isInvalid =
-    this.registerForm.passwordOne !== this.registerForm.passwordTwo ||
-    this.registerForm.passwordOne === "" ||
-    this.registerForm.email === "" ||
-    this.registerForm.username === "";
+      this.registerForm.passwordOne !== this.registerForm.passwordTwo ||
+      this.registerForm.passwordOne === '' ||
+      this.registerForm.email === '' ||
+      this.registerForm.username === '';
 
-    const { userStore } = this.props
+    const { userStore } = this.props;
 
     return (
       <div className="container py-5">
@@ -52,32 +44,35 @@ class Signup extends Component {
                   </div>
                   <div className="card-body">
                     <div id="firebaseui-auth-container" />
+
                     <form onSubmit={this.onSubmit}>
                       <fieldset>
                         <div className="form-group has-error">
                           <input
                             value={this.username}
-                            onChange={event => userStore.registerForm.username = event.target.value}
+                            onChange={(event) => (userStore.registerForm.username = event.target.value)}
                             className="form-control form-control-lg rounded-0 form-control-alternative"
                             placeholder="Username"
                             type="text"
                             placeholder="username"
                           />
                         </div>
+
                         <div className="form-group">
                           <input
                             value={this.email}
-                            onChange={event => userStore.registerForm.email = event.target.value}
+                            onChange={(event) => (userStore.registerForm.email = event.target.value)}
                             className="form-control form-control-lg rounded-0 form-control-alternative"
                             placeholder="email"
                             type="text"
                             placeholder="email"
                           />
                         </div>
+
                         <div className="form-group">
                           <input
                             value={this.passwordOne}
-                            onChange={event => userStore.registerForm.passwordOne = event.target.value}
+                            onChange={(event) => (userStore.registerForm.passwordOne = event.target.value)}
                             className="form-control form-control-lg rounded-0 form-control-alternative"
                             placeholder="Enter password"
                             type="password"
@@ -87,20 +82,16 @@ class Signup extends Component {
                         <div className="form-group">
                           <input
                             value={this.passwordTwo}
-                            onChange={event => userStore.registerForm.passwordTwo = event.target.value}
+                            onChange={(event) => (userStore.registerForm.passwordTwo = event.target.value)}
                             className="form-control form-control-lg rounded-0 form-control-alternative"
                             placeholder="Re-enter password"
                             type="password"
                           />
                         </div>
 
-                        <input
-                          className="btn btn-lg btn-primary btn-block"
-                          defaultValue="Sign Me Up"
-                          type="submit"
-                          disabled={isInvalid}
-                        />
+                        <input className="btn btn-lg btn-primary btn-block" defaultValue="Sign Me Up" type="submit" disabled={isInvalid} />
                       </fieldset>
+
                       {this.isInvalid}
                       <div className="warning-wrapper">
                         {userStore.registerForm.error ? (
@@ -110,8 +101,8 @@ class Signup extends Component {
                         ) : null}
                       </div>
                     </form>
+
                     <p>
-                      {" "}
                       <Link to="/login">Already have an account?</Link>
                     </p>
                   </div>
