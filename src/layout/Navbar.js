@@ -17,6 +17,7 @@ class Navbar extends Component {
     console.log(`${key} selected`);
     this.routingStore.push(key);
   };
+
   render() {
     const menu = () => (
       <Menu onSelect={this.onSelect}>
@@ -43,13 +44,18 @@ class Navbar extends Component {
             <FontAwesomeIcon className="icon-layers text-primary fa-2x" icon={faDog} />
           </Link>
 
-          <Dropdown trigger={['click']} overlay={menu()}>
-            {props.photoURL ? (
-              <img className="rounded-circle avatar-image--icon" src={props.photoURL} alt="Logo" />
-            ) : (
-              <FontAwesomeIcon className="avatar-image--icon" icon={faUser} />
-            )}
-          </Dropdown>
+          <div>
+            <Link to="/doglist" className="ml-auto mr-2">
+              My Dogs
+            </Link>
+            <Dropdown trigger={['click']} overlay={menu()}>
+              {props.photoURL ? (
+                <img className="rounded-circle avatar-image--icon" src={props.photoURL} alt="Logo" />
+              ) : (
+                <FontAwesomeIcon className="avatar-image--icon" icon={faUser} />
+              )}
+            </Dropdown>
+          </div>
         </div>
       </nav>
     );
