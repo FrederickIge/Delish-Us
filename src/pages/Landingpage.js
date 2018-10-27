@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFire } from '@fortawesome/free-solid-svg-icons';
-import { faReact, faCss3Alt } from '@fortawesome/free-brands-svg-icons';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faFire} from '@fortawesome/free-solid-svg-icons';
+import {faReact, faCss3Alt} from '@fortawesome/free-brands-svg-icons';
+import {Link} from 'react-router-dom';
+import pupper from '../img/pupper.png';
 
 class Myresults extends Component {
   render() {
@@ -13,7 +14,7 @@ class Myresults extends Component {
           <div className="container">
             <div className="row">
               <div className="col-xl-9 mx-auto">
-                <h1 className="mb-5 text-secondary">Welcome to Doggie Boiler</h1>
+                <h1 className="mb-5 text-secondary">Welcome to Doggie-Boiler</h1>
               </div>
               <div className="col-md-10 col-lg-8 col-xl-7 mx-auto">
                 <form>
@@ -28,6 +29,7 @@ class Myresults extends Component {
                       <Link to="/login" className="btn btn-block btn-lg btn-primary">
                         Login
                       </Link>
+                      {/* <img src="../img/pupper.png" alt="boohoo" className="img-fluid" /> */}
                     </div>
                   </div>
                 </form>
