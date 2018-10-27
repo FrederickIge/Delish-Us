@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import posed, { PoseGroup } from 'react-pose';
-import { Switch, Route } from 'react-router-dom';
+import React, {Component} from 'react';
+import posed, {PoseGroup} from 'react-pose';
+import {Switch, Route} from 'react-router-dom';
 
 import withAuthentication from './components/hoc/withAuthentication';
 import Navbar from './layout/Navbar';
@@ -20,14 +20,14 @@ const RoutesContainer = posed.div({
     delay: 300,
     beforeChildren: true
   },
-  exit: { opacity: 0 }
+  exit: {opacity: 0}
 });
 
 class App extends Component {
   render() {
     return (
       <Route
-        render={({ location }) => (
+        render={({location}) => (
           <div>
             <Navbar />
             <PoseGroup>
