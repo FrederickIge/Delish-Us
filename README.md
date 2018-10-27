@@ -22,5 +22,8 @@ I will be improving and adding new features to Doggie boiler overtime
 
 Feel free to fork and contribute as well
 
+### To-dos
 
-
+- [ ] Add ESLint
+- [ ] Take the Firebase configs out of the version control (and document it)
+- [ ] Add Unit Testing Suite with Jest 
