@@ -18,11 +18,8 @@ You need to know the following to use Doggie Boiler
 - Bootsrap 4
 
 ## Contribute
-Doggie Boiler
-- React
-- Mobx
-- Firebase Firestore
-- Bootsrap 4
+I will be improving and adding new features to Doggie boiler overtime
+Feel free to fork and contribute as well
 
 
 
