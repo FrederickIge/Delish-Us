@@ -50,7 +50,7 @@ const RandomDog = ({isVisible, picture, handleImageLoaded, nextDog}) => {
   );
 };
 
-const AddDogForm = ({handleChange, handleSubmit, message, name, uid}) => {
+const AddDogForm = ({handleChange, handleSubmit, message, name, uid,description}) => {
   return (
     <form onSubmit={handleSubmit}>
       <h4 className="text-center dashboard-header">Like this dog?</h4>
@@ -67,13 +67,14 @@ const AddDogForm = ({handleChange, handleSubmit, message, name, uid}) => {
                 type="text"       
                 onChange={handleChange}
                 name="name"
+                value={name}
               />
              
                 
                   
             </div>
             <div className="input-group input-group-alternative mb-4">
-            <textarea className="form-control" name="description"  onChange={handleChange}  rows="3" placeholder="Doggie Description (Optional)"></textarea>
+            <textarea value={description} className="form-control" name="description"  onChange={handleChange}  rows="3" placeholder="Doggie Description (Optional)"></textarea>
             </div>
             <button type="submit" className="btn btn-success btn-block" disabled={!name}>
               Keep Dog
@@ -129,6 +130,7 @@ class Dashboard extends Component {
         this.setState({message: message});
         this.nextDog();
         this.state.name = '';
+        this.state.description = '';
       })
       .catch(function(error) {
         console.error('Error adding document: ', error);
@@ -173,7 +175,7 @@ class Dashboard extends Component {
               nextDog={this.nextDog}
             />
 
-            <AddDogForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} message={this.state.message} name={this.state.name} uid={this.sessionStore.authUser.uid} />
+            <AddDogForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} message={this.state.message} name={this.state.name} description={this.state.description} uid={this.sessionStore.authUser.uid} />
 
           </div>
         </div>
