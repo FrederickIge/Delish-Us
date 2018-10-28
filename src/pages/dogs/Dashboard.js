@@ -33,7 +33,7 @@ const RandomDog = ({isVisible, picture, handleImageLoaded, nextDog}) => {
       <div className="spacer" />
 
       <Fade pose={isVisible ? 'visible' : 'hidden'}>
-        <img src={picture} alt="Smiley face" className="img-fluid rounded mx-auto d-block random-dog" onLoad={handleImageLoaded} />
+        <img src={picture} alt="Smiley face" className="img-fluid  mx-auto d-block random-dog" onLoad={handleImageLoaded} />
       </Fade>
 
       <div className="mt-3 row">
@@ -70,8 +70,7 @@ const AddDogForm = ({handleChange, handleSubmit, message, name, uid}) => {
               />
              
                 
-            
-              
+                  
             </div>
             <div className="input-group input-group-alternative mb-4">
             <textarea className="form-control" name="description"  onChange={handleChange}  rows="3" placeholder="Doggie Description (Optional)"></textarea>
