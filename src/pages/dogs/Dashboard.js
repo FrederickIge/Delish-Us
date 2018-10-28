@@ -50,7 +50,7 @@ const RandomDog = ({isVisible, picture, handleImageLoaded, nextDog}) => {
   );
 };
 
-const AddDogForm = ({handleChange, handleSubmit, message, name}) => {
+const AddDogForm = ({handleChange, handleSubmit, message, name, uid}) => {
   return (
     <form onSubmit={handleSubmit}>
       <h4 className="text-center dashboard-header">Like this dog?</h4>
@@ -63,11 +63,18 @@ const AddDogForm = ({handleChange, handleSubmit, message, name}) => {
             <div className="input-group input-group-alternative mb-4">
               <input
                 className="form-control form-control-lg form-control-alternative"
-                placeholder="Dog Name"
-                type="text"
-                value={name}
+                placeholder="Doggie Name"
+                type="text"       
                 onChange={handleChange}
+                name="name"
               />
+             
+                
+            
+              
+            </div>
+            <div className="input-group input-group-alternative mb-4">
+            <textarea className="form-control" name="description"  onChange={handleChange}  rows="3" placeholder="Doggie Description (Optional)"></textarea>
             </div>
             <button type="submit" className="btn btn-success btn-block" disabled={!name}>
               Keep Dog
@@ -76,7 +83,7 @@ const AddDogForm = ({handleChange, handleSubmit, message, name}) => {
             <Slide>
               {message ? (
                 <p>
-                  {message} <Link to="/doglist">Checkout your Dogs</Link>
+                  {message} <Link to={"/doglist/"+ uid}>Checkout your Dogs</Link>
                 </p>
               ) : null}
             </Slide>
@@ -88,10 +95,11 @@ const AddDogForm = ({handleChange, handleSubmit, message, name}) => {
   );
 };
 
-@inject('sessionStore')
+@inject('sessionStore', 'dogStore')
 @observer
 class Dashboard extends Component {
   sessionStore = this.props.sessionStore;
+  dogStore = this.props.dogStore;
 
   state = {
     name: '',
@@ -100,11 +108,12 @@ class Dashboard extends Component {
     breed: null,
     owner: null,
     message: null,
-    isVisible: true
+    isVisible: true,
+    description: null
   };
 
   handleChange = (event) => {
-    this.setState({name: event.target.value});
+    this.setState({[event.target.name]: event.target.value});
   };
 
   handleSubmit = (event) => {
@@ -113,6 +122,7 @@ class Dashboard extends Component {
       .add({
         name: this.state.name,
         picture: this.state.picture,
+        description:this.state.description,
         owner: this.sessionStore.authUser.uid
       })
       .then(() => {
@@ -134,12 +144,20 @@ class Dashboard extends Component {
     this.setState({isVisible: false}, () => {
       axios.get('https://dog.ceo/api/breeds/image/random').then((res) => {
         this.setState({picture: res.data.message});
+        this.dogStore.currentDog = res.data.message;
       });
     });
   };
 
   componentDidMount() {
-    this.nextDog();
+    if(!this.dogStore.currentDog){
+      this.nextDog();
+    }
+    else{
+      this.setState({
+        picture: this.dogStore.currentDog
+      })
+    }
   }
 
   render() {
@@ -156,7 +174,7 @@ class Dashboard extends Component {
               nextDog={this.nextDog}
             />
 
-            <AddDogForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} message={this.state.message} name={this.state.name} />
+            <AddDogForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} message={this.state.message} name={this.state.name} uid={this.sessionStore.authUser.uid} />
 
           </div>
         </div>

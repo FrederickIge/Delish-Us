@@ -1,5 +1,4 @@
 import {observable, action, computed} from 'mobx';
-import axios from 'axios';
 import algolia from 'algoliasearch';
 var AlgoliaClient = algolia('9PBF06L4BR', 'c6af2a9913ebd6b8770b5dc9fca5c784');
 

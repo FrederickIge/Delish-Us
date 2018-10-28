@@ -26,6 +26,7 @@ const Dogs = ({dogs}) => {
             <div className="card-body text-dark">
               <h5 className="card-title">{dog.name}</h5>
               <img src={dog.picture} className="img-fluid rounded mx-auto d-block my-dog" />
+              <p>{dog.description}</p>
             </div>
           </div>
         </div>
@@ -44,7 +45,8 @@ class DogList extends Component {
   userId = null
 
   state = {
-    dogs: []
+    dogs: [],
+    userName: null
   };
 
   getMyDogs = (event) => {
@@ -54,13 +56,13 @@ class DogList extends Component {
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          const {picture, name, owner} = doc.data();
-
+          const {picture, name, owner, description} = doc.data();
           dogs.push({
             key: doc.id,
             picture,
             owner,
-            name
+            name,
+            description
           });
         });
         this.setState({dogs: dogs});
@@ -72,14 +74,26 @@ class DogList extends Component {
 
   componentDidMount() {
     this.userId = this.props.match.params.id
-    console.log(this.userId)
-
+    if(this.userId != this.sessionStore.authUser.uid){
+      var docRef = db.collection("users").doc(this.userId).get().then((doc) => {
+        if (doc.exists) {
+            console.log("Document data:", doc.data().displayName);
+            let displayName =  doc.data().displayName
+            this.setState({userName: displayName})
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+    }
     this.getMyDogs();
   }
 
   render() {
 
-    const title = this.userId == this.sessionStore.authUser.uid ? <h2 className="text-center dashboard-header">My Dogs</h2> : <h2 className="text-center dashboard-header">{this.sessionStore.authUser.displayName}'s Dogs</h2>;
+    const title = this.userId == this.sessionStore.authUser.uid ? <h2 className="text-center dashboard-header">My Dogs</h2> : <h2 className="text-center dashboard-header">{this.state.userName}'s Dogs</h2>;
 
     return (
       <Slide>

@@ -5,6 +5,7 @@ import { RouterStore, syncHistoryWithStore } from 'mobx-react-router';
 import SessionStore from './sessionStore';
 import UserStore from './userStore';
 import schoolStore from './schoolStore';
+import dogStore from './dogStore';
 
 const browserHistory = createBrowserHistory();
 
@@ -16,6 +17,7 @@ class RootStore {
     this.userStore = new UserStore(this);
     this.schoolStore = new schoolStore(this);
     this.routingStore = new RouterStore(this);
+    this.dogStore = new dogStore(this);
   }
 }
 
