@@ -38,7 +38,7 @@ class Navbar extends Component {
       <nav className="navbar navbar-expand-lg py-2">
         <div className="container">
           <Link to="/" className="navbar-brand">
-            <FontAwesomeIcon className="icon-layers text-primary fa-2x" icon={faDog} />
+            <FontAwesomeIcon className="icon-layers text-primary fa-lg ml-auto" icon={faDog} />
           </Link>
         </div>
       </nav>
@@ -55,7 +55,7 @@ class Navbar extends Component {
             <Link to="/users" className="ml-auto mr-3">
               More Dogs
             </Link>
-            <Link to={"doglist/" + this.sessionStore.authUser.uid} className="ml-auto mr-2">
+            <Link to = {"/doglist/" + this.sessionStore.authUser.uid} className="ml-auto mr-2">
               My Dogs
             </Link>
             <Dropdown trigger={['click']} overlay={menu()}>
