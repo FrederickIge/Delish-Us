@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faFire} from '@fortawesome/free-solid-svg-icons';
+import {faFire, faDog, faHeart, faShareAlt} from '@fortawesome/free-solid-svg-icons';
 import {faReact, faCss3Alt} from '@fortawesome/free-brands-svg-icons';
 import {Link} from 'react-router-dom';
-import pupper from '../img/pupper.png';
+
 
 class Myresults extends Component {
   render() {
@@ -14,7 +14,8 @@ class Myresults extends Component {
           <div className="container">
             <div className="row">
               <div className="col-xl-9 mx-auto">
-                <h1 className="mb-5 text-secondary">Welcome to Doggie-Boiler</h1>
+                <h1 className="mb-5 text-secondary">Welcome to Doggie Time</h1>
+                <h3 className="mb-5 text-secondary">Time for some Doggies!</h3>
               </div>
               <div className="col-md-10 col-lg-8 col-xl-7 mx-auto">
                 <form>
@@ -48,28 +49,28 @@ class Myresults extends Component {
               <div className="col-lg-4">
                 <div className="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3 p-3 mb-5 bg-white rounded hvr-grow-shadow">
                   <div className="features-icons-icon d-flex">
-                    <FontAwesomeIcon className="icon-layers m-auto text-info" icon={faCss3Alt} />
+                    <FontAwesomeIcon className="icon-layers m-auto text-info" icon={faDog} />
                   </div>
-                  <h3>Bootstrap 4</h3>
-                  <p className="lead mb-0">The world's most popular CSS framework</p>
+                  <h3>Pictures</h3>
+                  <p className="lead mb-0">Check out pictures of some cute doggies!</p>
                 </div>
               </div>
               <div className="col-lg-4">
                 <div className="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3 p-3 mb-5 bg-white rounded hvr-grow-shadow">
                   <div className="features-icons-icon d-flex">
-                    <FontAwesomeIcon className="icon-layers m-auto text-info" icon={faFire} />
+                    <FontAwesomeIcon className="icon-layers m-auto text-info" icon={faHeart} />
                   </div>
-                  <h3>Firebase</h3>
-                  <p className="lead mb-0  text-default">Backend Database and Auth powered by Firebase</p>
+                  <h3>Adopt</h3>
+                  <p className="lead mb-0  text-default">Adpot your doggies and give them a name!</p>
                 </div>
               </div>
               <div className="col-lg-4">
                 <div className="features-icons-item mx-auto mb-0 mb-lg-3 p-3 mb-5 bg-white rounded hvr-grow-shadow">
                   <div className="features-icons-icon d-flex">
-                    <FontAwesomeIcon className="icon-layers m-auto text-info" icon={faReact} />
+                    <FontAwesomeIcon className="icon-layers m-auto text-info" icon={faShareAlt} />
                   </div>
-                  <h3>Create React App</h3>
-                  <p className="lead mb-0 text-default">The world's most popular JS framework + starter kit</p>
+                  <h3>Share!</h3>
+                  <p className="lead mb-0 text-default">Check out doggies owned by other users!</p>
                 </div>
               </div>
             </div>

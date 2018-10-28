@@ -14,8 +14,15 @@ class Navbar extends Component {
   sessionStore = this.props.sessionStore;
 
   onSelect = ({key}) => {
-    console.log(`${key} selected`);
-    this.routingStore.push(key);
+    
+    let uid = this.sessionStore.authUser.uid
+
+    if(key == "/doglist"){
+     this.routingStore.push('/doglist/' + uid)
+    }
+    else{
+      this.routingStore.push(key);
+    }
   };
 
   render() {
@@ -45,7 +52,10 @@ class Navbar extends Component {
           </Link>
 
           <div>
-            <Link to="/doglist" className="ml-auto mr-2">
+            <Link to="/users" className="ml-auto mr-3">
+              More Dogs
+            </Link>
+            <Link to={"doglist/" + this.sessionStore.authUser.uid} className="ml-auto mr-2">
               My Dogs
             </Link>
             <Dropdown trigger={['click']} overlay={menu()}>

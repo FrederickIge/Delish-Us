@@ -11,6 +11,7 @@ import Login from './pages/account/Login';
 import Signup from './pages/account/Signup';
 import Dashboard from './pages/dogs/Dashboard';
 import DogList from './pages/dogs/DogList';
+import UsersList from './pages/users/UsersList'
 
 import './css/App.css';
 
@@ -37,7 +38,8 @@ class App extends Component {
                   <Route exact path="/signup" component={Signup} />
                   <Route exact path="/account" component={AccountPage} />
                   <Route exact path="/dashboard" component={Dashboard} />
-                  <Route exact path="/doglist" component={DogList} />
+                  <Route exact path="/doglist/:id" component={DogList} />
+                  <Route exact path="/users" component={UsersList} />
                   <Route path="/" component={Landingpage} />
                 </Switch>
               </RoutesContainer>

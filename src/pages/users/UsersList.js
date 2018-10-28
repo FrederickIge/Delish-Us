@@ -17,15 +17,15 @@ const Slide = posed.div({
   exit: {x: -50, opacity: 0}
 });
 
-const Dogs = ({dogs}) => {
+const Users = ({users,goToUsersDogs}) => {
   return (
     <div>
-      {dogs.map((dog) => (
-        <div key={dog.key} className="col-md-4 hvr-grow">
+      {users.map((user) => (
+        <div key={user.key} onClick={() => goToUsersDogs(user.uid) } className="col-md-4 hvr-grow">
           <div className="card shadow-lg mb-3 quote-card ">
             <div className="card-body text-dark">
-              <h5 className="card-title">{dog.name}</h5>
-              <img src={dog.picture} className="img-fluid rounded mx-auto d-block my-dog" />
+              <h5 className="card-title">{user.displayName}</h5>
+                <p>{user.email}</p>
             </div>
           </div>
         </div>
@@ -36,7 +36,7 @@ const Dogs = ({dogs}) => {
 
 @inject('routingStore','sessionStore')
 @observer
-class DogList extends Component {
+class UsersList extends Component {
 
   sessionStore = this.props.sessionStore;
   routingStore = this.props.routingStore;
@@ -44,52 +44,50 @@ class DogList extends Component {
   userId = null
 
   state = {
-    dogs: []
+    users: []
   };
 
-  getMyDogs = (event) => {
-    const dogs = [];
-    db.collection('dogs')
-      .where('owner', '==', this.userId )
+  getUsersList = (event) => {
+    const users = [];
+    db.collection('users')
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          const {picture, name, owner} = doc.data();
+          const {displayName, email, uid} = doc.data();
 
-          dogs.push({
+          users.push({
             key: doc.id,
-            picture,
-            owner,
-            name
+            displayName,
+            email,
+            uid
           });
         });
-        this.setState({dogs: dogs});
+        this.setState({users: users});
       })
       .catch(function(error) {
         console.log('Error getting documents: ', error);
       });
   };
 
-  componentDidMount() {
-    this.userId = this.props.match.params.id
-    console.log(this.userId)
+  goToUsersDogs = (id) => {
+    this.routingStore.push("/doglist/" + id );
+  }
 
-    this.getMyDogs();
+  componentDidMount() {
+    this.getUsersList();
   }
 
   render() {
-
-    const title = this.userId == this.sessionStore.authUser.uid ? <h2 className="text-center dashboard-header">My Dogs</h2> : <h2 className="text-center dashboard-header">{this.sessionStore.authUser.displayName}'s Dogs</h2>;
-
     return (
       <Slide>
         <div className="container container-dashboard ">
           <div className="spacer" />
           <div className="search-container">
-        {title}
+            <h2 className="text-center dashboard-header">Users</h2>
+            <h3 className="text-center dashboard-header">Check out other users Doggies!</h3>
             <div className="spacer" />
 
-            <Dogs dogs={this.state.dogs} />
+            <Users users = {this.state.users} goToUsersDogs={this.goToUsersDogs} />
           </div>
         </div>
       </Slide>
@@ -98,4 +96,4 @@ class DogList extends Component {
 }
 const authCondition = (authUser) => !!authUser;
 
-export default compose(withAuthorization(authCondition))(DogList);
+export default compose(withAuthorization(authCondition))(UsersList);
