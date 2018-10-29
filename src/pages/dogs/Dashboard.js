@@ -109,7 +109,7 @@ class Dashboard extends Component {
     owner: null,
     message: null,
     isVisible: true,
-    description: null
+    description: ""
   };
 
   handleChange = (event) => {
