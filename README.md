@@ -26,4 +26,4 @@ Feel free to fork and contribute as well
 
 - [ ] Add ESLint
 - [ ] Take the Firebase configs out of the version control (and document it)
-- [ ] Add Unit Testing Suite with Jest 
+- [x] Add Unit Testing Suite with Jest 
