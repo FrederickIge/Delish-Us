@@ -4,7 +4,6 @@ import {MemoryRouter} from "react-router-dom";
 import {Provider} from "mobx-react";
 import Dashboard from "./Dashboard";
 import axios from "axios";
-import { debug } from "util";
 
 const resp = {
   data: {
@@ -55,7 +54,6 @@ describe("<Dashboard>", () => {
   });
 
   it('allows the submit button to be clicked after the name field has been filled out', () => {
-  //Typing and submitting "Wofferson" into the name form field
   const searchString = "Wofferson";
   fireEvent.change(inputNode, {target: {value: searchString}});
   expect(wrapper.getByTestId('save-dog').hasAttribute('disabled')).toBeFalsy()
@@ -63,9 +61,7 @@ describe("<Dashboard>", () => {
 
   it("Clears the name form field after saving a dog", async () => {
     fireEvent.click(saveDogButton);
-    //Waiting for mocked firestore promise to return
     await waitForElement(() => wrapper.getByText('Checkout your Dogs'));
-    // inputNode = wrapper.getByPlaceholderText("Doggie Name");
     expect(inputNode.value).toBe('')
   });
 
