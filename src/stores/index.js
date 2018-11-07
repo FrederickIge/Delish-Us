@@ -21,6 +21,7 @@ class RootStore {
   }
 }
 
-const rootStore = new RootStore();
 
+const rootStore = new RootStore();
+console.log(rootStore)
 export default rootStore;

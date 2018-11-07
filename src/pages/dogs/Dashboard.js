@@ -5,7 +5,6 @@ import posed from 'react-pose';
 import axios from 'axios';
 import firebase from 'firebase';
 import {Link} from 'react-router-dom';
-
 import withAuthorization from '../../components/hoc/withAuthorization';
 
 const db = firebase.firestore();
@@ -33,7 +32,7 @@ const RandomDog = ({isVisible, picture, handleImageLoaded, nextDog}) => {
       <div className="spacer" />
 
       <Fade pose={isVisible ? 'visible' : 'hidden'}>
-        <img src={picture} alt="Smiley face" className="img-fluid  mx-auto d-block random-dog" onLoad={handleImageLoaded} />
+        <img data-testid="random-dog-image" src={picture} alt="Smiley face" className="img-fluid  mx-auto d-block random-dog" onLoad={handleImageLoaded} />
       </Fade>
 
       <div className="mt-3 row">
@@ -76,7 +75,7 @@ const AddDogForm = ({handleChange, handleSubmit, message, name, uid,description}
             <div className="input-group input-group-alternative mb-4">
             <textarea value={description} className="form-control" name="description"  onChange={handleChange}  rows="3" placeholder="Doggie Description (Optional)"></textarea>
             </div>
-            <button type="submit" className="btn btn-success btn-block" disabled={!name}>
+            <button data-testid="save-dog" type="submit" className="btn btn-success btn-block" disabled={!name}>
               Keep Dog
             </button>
             <br />
@@ -113,11 +112,13 @@ class Dashboard extends Component {
   };
 
   handleChange = (event) => {
+    console.log(event.target.value)
     this.setState({[event.target.name]: event.target.value});
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
+  
     dogRef
       .add({
         name: this.state.name,
@@ -126,15 +127,17 @@ class Dashboard extends Component {
         owner: this.sessionStore.authUser.uid
       })
       .then(() => {
+    
         let message = this.state.name + ' has been added!';
-        this.setState({message: message});
+        this.setState({message: message, name:'', description: ''});
         this.nextDog();
-        this.state.name = '';
-        this.state.description = '';
+     
       })
       .catch(function(error) {
+      
         console.error('Error adding document: ', error);
       });
+     
   };
 
   handleImageLoaded = () => {
@@ -142,6 +145,7 @@ class Dashboard extends Component {
   };
 
   nextDog = (event) => {
+   
     this.setState({isVisible: false}, () => {
       axios.get('https://dog.ceo/api/breeds/image/random').then((res) => {
         this.setState({picture: res.data.message});
@@ -163,7 +167,7 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <Slide>
+    
         <div className="container container-dashboard ">
           <div className="spacer" />
           <div className="search-container">
@@ -179,7 +183,7 @@ class Dashboard extends Component {
 
           </div>
         </div>
-      </Slide>
+      
     );
   }
 }

@@ -19,6 +19,7 @@ const withAuthorization = (authCondition) => (Component) => {
     }
 
     render() {
+      // console.log(this.props.sessionStore)
       return (
         this.props.sessionStore.authUser ? <Component {...this.props} /> : null
         )
