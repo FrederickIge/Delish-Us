@@ -24,6 +24,12 @@ Feel free to fork and contribute as well
 
 ### To-dos
 
-- [ ] Add ESLint
+- [x] Add ESLint
+- [x] Add basic Unit Testing Suite with Jest and React Testing Library
+- [ ] Dashboad component should realy be updating nested state object, not a flat object
 - [ ] Take the Firebase configs out of the version control (and document it)
-- [x] Add Unit Testing Suite with Jest 
+- [ ] Add styled components
+- [ ] Simplify the menu drop down by removing rc menu
+- [ ] Implement an SEO solution that isn't Nextjs 
+- [ ] Add icon for chrome tab
+
