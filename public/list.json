@@ -1,0 +1,733 @@
+
+  [
+    {
+      "id": "1",
+      "name": "Amaranth greens",
+      "category": "Vegetables",
+      "description": [
+        "Amaranthus",
+        "collectively known as amaranth",
+        "[1] is a cosmopolitan genus of annual or short-lived perennial plants. Some amaranth species are cultivated as leaf vegetables",
+        "pseudocereals",
+        "and ornamental plants. Most of the Amaranthus species are summer annual weeds and are commonly referred to as pigweed.[2] Catkin-like cymes of densely packed flowers grow in summer or autumn.[3] Approximately 60 species are recognized",
+        "with inflorescences and foliage ranging from purple",
+        "through red and green to gold. Members of this genus share many characteristics and uses with members of the closely related genus Celosia."
+      ],
+      "image": "https://firebasestorage.googleapis.com/v0/b/doggietime-prod.appspot.com/o/amaranth%20leaves.png?alt=media&token=566df0e3-4160-43b2-bbf3-8501108ab2e1",
+      "affiliateLink": ""
+    },
+    {
+      "id": "2",
+      "name": "Avocado",
+      "category": "Vegetables",
+      "description": [
+        "The avocado (Persea americana) is a tree",
+        "long thought to have originated in South Central Mexico",
+        "[2][3] classified as a member of the flowering plant family Lauraceae.[4] The fruit of the plant",
+        "also called an avocado (or avocado pear or alligator pear)",
+        "is botanically a large berry containing a single large seed known as a  pit  or a \"stone\".[5]"
+      ],
+      "image": "https://firebasestorage.googleapis.com/v0/b/doggietime-prod.appspot.com/o/avocado.png?alt=media&token=655045bf-3c1f-484d-9ebb-403165499a3c",
+      "affiliateLink": ""
+    },
+    {
+      "id": "3",
+      "name": "Bell Peppers",
+      "category": "Vegetables",
+      "description": [
+        "The misleading name  pepper  was given by Europeans when Christopher Columbus brought the plant back to Europe. At that time",
+        "black pepper (peppercorns)",
+        "from the unrelated plant Piper nigrum originating from India",
+        "was a highly prized condiment; the name  pepper  was at that time applied in Europe to all known spices with a hot and pungent taste and was therefore naturally extended to the newly discovered genus Capsicum. The most commonly used alternative name of the plant family",
+        "chile",
+        "is of Mexican origin",
+        "from the Nahuatl word chilli. Botanically speaking",
+        "bell peppers are fruits; however",
+        "they are considered vegetables in culinary contexts."
+      ],
+      "image": "https://firebasestorage.googleapis.com/v0/b/doggietime-prod.appspot.com/o/bell%20pepper.png?alt=media&token=383a2ee1-d9de-4626-8c1a-b4df7006be35",
+      "affiliateLink": ""
+    },
+    {
+      "id": "4",
+      "name": "Chayote (Mexican Squash)",
+      "category": "Vegetables",
+      "description": [
+        "Chayote[1] (Sechium edule) also known as mirliton squash is an edible plant belonging to the gourd family Cucurbitaceae. Chayote was one of the several foods introduced to the Old World during the Columbian Exchange. Also during this period",
+        "the plant spread from Mexico to other parts of the Americas",
+        "ultimately causing it to be integrated into the cuisine of many other Latin American nations."
+      ],
+      "image": "https://firebasestorage.googleapis.com/v0/b/doggietime-prod.appspot.com/o/chayote.png?alt=media&token=e88531c4-9fd4-4065-8f5f-922870f26e78",
+      "affiliateLink": ""
+    },
+    {
+      "id": "5",
+      "name": "Cucumber",
+      "category": "Vegetables",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "6",
+      "name": "Dandelion greens",
+      "category": "Vegetables",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "7",
+      "name": "Garbanzo beans",
+      "category": "Vegetables",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "8",
+      "name": "Green banana",
+      "category": "Vegetables",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "9",
+      "name": "Izote",
+      "category": "Vegetables",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "10",
+      "name": "Kale",
+      "category": "Vegetables",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "11",
+      "name": [
+        "Lettuce (all",
+        "except Iceberg)"
+      ],
+      "category": "Vegetables",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "12",
+      "name": [
+        "Mushrooms (all",
+        "except Shiitake)"
+      ],
+      "category": "Vegetables",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "13",
+      "name": "Nopales – Mexican Cactus",
+      "category": "Vegetables",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "14",
+      "name": "Okra",
+      "category": "Vegetables",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "15",
+      "name": "Olives",
+      "category": "Vegetables",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "16",
+      "name": "Onions",
+      "category": "Vegetables",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "17",
+      "name": "Poke salad – greens",
+      "category": "Vegetables",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "18",
+      "name": "Purslane (Verdolaga)",
+      "category": "Vegetables",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "19",
+      "name": "Sea Vegetables (wakame/dulse/arame/hijiki/nori)",
+      "category": "Vegetables",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "20",
+      "name": "Squash",
+      "category": "Vegetables",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "21",
+      "name": "Tomato – cherry and plum only",
+      "category": "Vegetables",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "22",
+      "name": "Tomatillo",
+      "category": "Vegetables",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "23",
+      "name": "Turnip greens",
+      "category": "Vegetables",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "24",
+      "name": "Watercress",
+      "category": "Vegetables",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "25",
+      "name": "Zucchini",
+      "category": "Vegetables",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "26",
+      "name": "Apples",
+      "category": "Fruits",
+      "description": "",
+      "image": "https://firebasestorage.googleapis.com/v0/b/doggietime-prod.appspot.com/o/apples.png?alt=media&token=40429613-58cd-4f52-b663-5301d8843708",
+      "affiliateLink": ""
+    },
+    {
+      "id": "27",
+      "name": "Bananas",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "28",
+      "name": "Berries",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "29",
+      "name": "Cantaloupe",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "30",
+      "name": "Cherries",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "31",
+      "name": "Currants",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "32",
+      "name": "Dates",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "33",
+      "name": "Figs",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "34",
+      "name": "Grapes",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "35",
+      "name": "Limes",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "36",
+      "name": "Mango",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "37",
+      "name": "Melons",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "38",
+      "name": "Orange",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "39",
+      "name": "Papayas",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "40",
+      "name": "Peaches",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "41",
+      "name": "Pears",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "42",
+      "name": "Plums",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "43",
+      "name": "Prickly Pear",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "44",
+      "name": "Prunes",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "45",
+      "name": "Rasins",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "46",
+      "name": "Soft Jelly Coconuts",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "47",
+      "name": "Soursoups",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "48",
+      "name": "Tamarind",
+      "category": "Fruits",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "49",
+      "name": "Achiote",
+      "category": "Spices and Seasonings",
+      "description": "",
+      "image": "https://firebasestorage.googleapis.com/v0/b/doggietime-prod.appspot.com/o/achiote.png?alt=media&token=121a462e-96d0-477e-9f4d-09a3739e72f7",
+      "affiliateLink": ""
+    },
+    {
+      "id": "50",
+      "name": "Basil",
+      "category": "Spices and Seasonings",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "51",
+      "name": "Bay Leaf",
+      "category": "Spices and Seasonings",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "52",
+      "name": "Cayenne",
+      "category": "Spices and Seasonings",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "53",
+      "name": "Cloves",
+      "category": "Spices and Seasonings",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "54",
+      "name": "Dill",
+      "category": "Spices and Seasonings",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "55",
+      "name": "Habanero",
+      "category": "Spices and Seasonings",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "56",
+      "name": "Onion Powder",
+      "category": "Spices and Seasonings",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "57",
+      "name": "Oregano",
+      "category": "Spices and Seasonings",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "58",
+      "name": "Powdered Granulated Seaweed",
+      "category": "Spices and Seasonings",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "59",
+      "name": "Pure Sea Salt",
+      "category": "Spices and Seasonings",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "60",
+      "name": "Sage",
+      "category": "Spices and Seasonings",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "61",
+      "name": "Savory",
+      "category": "Spices and Seasonings",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "62",
+      "name": "Sweet Basil",
+      "category": "Spices and Seasonings",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "63",
+      "name": "Tarragon",
+      "category": "Spices and Seasonings",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "64",
+      "name": "Thyme",
+      "category": "Spices and Seasonings",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "65",
+      "name": "Amaranth",
+      "category": "Alkaline Grains",
+      "description": "",
+      "image": "https://firebasestorage.googleapis.com/v0/b/doggietime-prod.appspot.com/o/amaranth-seeds.png?alt=media&token=7bce4319-5360-4d06-ba80-0b76a8310dd2",
+      "affiliateLink": ""
+    },
+    {
+      "id": "66",
+      "name": "Fonio",
+      "category": "Alkaline Grains",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "67",
+      "name": "Kamut",
+      "category": "Alkaline Grains",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "68",
+      "name": "Quinoa",
+      "category": "Alkaline Grains",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "69",
+      "name": "Rye",
+      "category": "Alkaline Grains",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "70",
+      "name": "Spelt",
+      "category": "Alkaline Grains",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "71",
+      "name": "Tef",
+      "category": "Alkaline Grains",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "72",
+      "name": "Wild Rice",
+      "category": "Alkaline Grains",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "73",
+      "name": "Date Sugar from dried dates",
+      "category": "Alkaline Sugars and Sweeteners",
+      "description": "",
+      "image": "https://firebasestorage.googleapis.com/v0/b/doggietime-prod.appspot.com/o/date%20sugar.png?alt=media&token=2eb8d698-8a0d-4d68-a881-666ca0de7599",
+      "affiliateLink": ""
+    },
+    {
+      "id": "74",
+      "name": "100%  Pure Agave Syrup from cactus",
+      "category": "Alkaline Sugars and Sweeteners",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "75",
+      "name": "Burdock",
+      "category": "Herbal Teas",
+      "description": "",
+      "image": "https://firebasestorage.googleapis.com/v0/b/doggietime-prod.appspot.com/o/Burdock.png?alt=media&token=be218b96-6257-41dd-851b-00d7ca4985b4",
+      "affiliateLink": ""
+    },
+    {
+      "id": "76",
+      "name": "Chamomile",
+      "category": "Herbal Teas",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "77",
+      "name": "Elderberry",
+      "category": "Herbal Teas",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "78",
+      "name": "Fennel",
+      "category": "Herbal Teas",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "79",
+      "name": "Ginger",
+      "category": "Herbal Teas",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "80",
+      "name": "Red Raspberry",
+      "category": "Herbal Teas",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "81",
+      "name": "Tila",
+      "category": "Herbal Teas",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "82",
+      "name": "Basil",
+      "category": "Herb",
+      "description": "",
+      "image": "https://firebasestorage.googleapis.com/v0/b/doggietime-prod.appspot.com/o/Basil.png?alt=media&token=e54a800f-d9a5-41fa-9781-bb3219a17511",
+      "affiliateLink": ""
+    },
+    {
+      "id": "83",
+      "name": "Dill",
+      "category": "Herb",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "84",
+      "name": "Oregano",
+      "category": "Herb",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "85",
+      "name": "Onion powder",
+      "category": "Herb",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "86",
+      "name": "Pure sea salt",
+      "category": "Herb",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    },
+    {
+      "id": "87",
+      "name": "Cayenne",
+      "category": "Herb",
+      "description": "",
+      "image": "",
+      "affiliateLink": ""
+    }
+  ]

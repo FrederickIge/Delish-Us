@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {faUser, faDog} from '@fortawesome/free-solid-svg-icons';
+import {faUser, faGlobeAfrica} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {inject, observer} from 'mobx-react';
 import Dropdown from 'rc-dropdown';
@@ -38,7 +38,7 @@ class Navbar extends Component {
       <nav className="navbar navbar-expand-lg py-2">
         <div className="container">
           <Link to="/" className="navbar-brand">
-            <FontAwesomeIcon className="icon-layers text-primary fa-lg ml-auto" icon={faDog} />
+            <FontAwesomeIcon id = "globe" className="icon-layers fa-2x ml-auto globe" icon={faGlobeAfrica} />
           </Link>
         </div>
       </nav>
@@ -48,7 +48,7 @@ class Navbar extends Component {
       <nav className="navbar navbar-expand-lg py-2">
         <div className="container">
           <Link to="/dashboard">
-            <FontAwesomeIcon className="icon-layers text-primary fa-2x" icon={faDog} />
+            <FontAwesomeIcon className="icon-layers  fa-2x globe" icon={faGlobeAfrica} />
           </Link>
 
           <div>

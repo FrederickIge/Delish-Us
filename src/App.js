@@ -11,7 +11,8 @@ import Login from './pages/account/Login';
 import Signup from './pages/account/Signup';
 import Dashboard from './pages/dogs/Dashboard';
 import DogList from './pages/dogs/DogList';
-import UsersList from './pages/users/UsersList'
+
+import FoodDetail from './pages/dogs/FoodDetail'
 
 import './css/App.css';
 
@@ -34,12 +35,12 @@ class App extends Component {
             <PoseGroup>
               <RoutesContainer key={location.pathname}>
                 <Switch location={location}>
-                  <Route exact path="/login" component={Login} />
-                  <Route exact path="/signup" component={Signup} />
-                  <Route exact path="/account" component={AccountPage} />
+   
+               
                   <Route exact path="/dashboard" component={Dashboard} />
                   <Route exact path="/doglist/:id" component={DogList} />
-                  <Route exact path="/users" component={UsersList} />
+                  <Route exact path="/food/:id" component={FoodDetail} />
+                
                   <Route path="/" component={Landingpage} />
                 </Switch>
               </RoutesContainer>

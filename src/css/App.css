@@ -16,15 +16,15 @@
 header.masthead {
   position: relative;
   /* background-color: #343a40; */
-  background: url('../img/pupper.png') no-repeat center center;
+  /* background: url('../img/pupper.png') no-repeat center center; */
   background-size: contain, cover;
-  padding-top: 8rem;
-  padding-bottom: 8rem;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
 }
 
 header.masthead .overlay {
   position: absolute;
-  background-color: #212529;
+  /* background-color: #212529; */
   height: 100%;
   width: 100%;
   top: 0;
@@ -38,8 +38,8 @@ header.masthead h1 {
 
 @media (min-width: 768px) {
   header.masthead {
-    padding-top: 12rem;
-    padding-bottom: 12rem;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
   }
   header.masthead h1 {
     font-size: 3rem;
@@ -64,10 +64,12 @@ header.masthead h1 {
 .features-icons {
   padding-top: 7rem;
   padding-bottom: 7rem;
+  
 }
 
 .features-icons .features-icons-item {
   max-width: 20rem;
+
 }
 
 .features-icons .features-icons-item .features-icons-icon {
@@ -125,9 +127,9 @@ footer.footer {
   margin-top: 10px;
 }
 
-.features-icons-item:hover {
+/* .features-icons-item:hover {
   box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07) !important ;
-}
+} */
 
 .avatar-image--icon {
   height: 32px;
@@ -432,5 +434,63 @@ body {
 }
 
 .doggo-nav {
-  background-color: #172b4d !important;
+  background-color: #95876A !important;
+}
+
+#landing-leaf{
+  margin-bottom: 48px !important;
+  color: #62B155 !important;
+}
+
+.globe{
+  color: #62B155 !important;
+}
+
+.food-category{
+  width:35%;
+  min-height: 200px;
+  height:300px;
+}
+
+.food-category-container{
+  background: rgb(252,238,209);
+background: linear-gradient(30deg, rgba(252,238,209,1) 0%, rgba(119,81,68,1) 100%);
+border-radius: 20px;
+width:80%;
+margin-bottom: 15px;
+position: relative;
+overflow: hidden
+}
+
+.food-detail-container{
+  background: rgb(252,238,209);
+background: linear-gradient(30deg, rgba(252,238,209,1) 0%, rgba(119,81,68,1) 100%);
+border-radius: 20px;
+width:100%;
+margin-bottom: 15px;
+position: relative;
+overflow: hidden
+}
+.category-img{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.africa-img{
+  position: absolute;
+  height:10rem;
+  opacity: 0.1;
+  top:30px;
+  overflow: hidden;
+  left: 55%;
+}
+
+.africa-img-detail{
+  position: absolute;
+  height:12rem;
+  opacity: 0.1;
+  top:30px;
+  overflow: hidden;
+  left: 60%;
 }
