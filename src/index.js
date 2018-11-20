@@ -9,6 +9,7 @@ import App from './App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import stores from './stores';
+import ScrollToTop from './components/ScrollToTop';
 
 const browserHistory = createBrowserHistory();
 
@@ -16,8 +17,10 @@ const history = syncHistoryWithStore(browserHistory, stores.routingStore);
 
 ReactDOM.render(
   <Provider {...stores}>
-    <Router history={history}>
+    <Router history={history} onUpdate={() => window.scrollTo(0, 0)} >
+    
       <App />
+    
     </Router>
   </Provider>,
   document.getElementById('root')

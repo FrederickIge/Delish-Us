@@ -418,6 +418,7 @@ h5 {
 
 body {
   background-image: url('../img/bg.png');
+  background-attachment: fixed;
 }
 
 .dropdown {

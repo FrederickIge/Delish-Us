@@ -34,7 +34,6 @@ class FoodDetail extends Component {
     let id = this.props.match.params.id;
     let foodList = this.dogStore.foodList
     let food = foodList.find(element => element.id === id);
-    console.log(food)
     this.setState({
       food: food
     })
@@ -52,6 +51,7 @@ class FoodDetail extends Component {
 
             <div className="row">
               <div className="col-md-6 col-sm-12 ">
+              <Slide>
                   <div className="features-icons-item  rounded ">
                     <div className="food-detail-container  shadow">
                       <img
@@ -71,6 +71,7 @@ class FoodDetail extends Component {
                     <br />
                   
                   </div>
+                  </Slide>
               </div>
               <div className="col-md-6">
               <div className="spacer" />
