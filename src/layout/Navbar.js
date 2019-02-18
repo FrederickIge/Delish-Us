@@ -51,7 +51,7 @@ class Navbar extends Component {
             <FontAwesomeIcon className="icon-layers  fa-2x globe" icon={faGlobeAfrica} />
           </Link>
 
-          <div>
+          {/* <div>
             <Link to="/users" className="ml-auto mr-3">
               More Dogs
             </Link>
@@ -65,7 +65,8 @@ class Navbar extends Component {
                 <FontAwesomeIcon className="avatar-image--icon" icon={faUser} />
               )}
             </Dropdown>
-          </div>
+          </div> */}
+
         </div>
       </nav>
     );
