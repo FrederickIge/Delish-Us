@@ -12,6 +12,9 @@
 @import './hover.css';
 @import './nucleo/css/nucleo.css';
 @import 'https://cdn.jsdelivr.net/npm/instantsearch.css@7.0.0/themes/reset-min.css';
+@import 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
+@import '~antd/dist/antd.css';
+
 
 header.masthead {
   position: relative;
@@ -219,7 +222,8 @@ label {
 }
 
 body {
-  background-color: #2098d130 !important;
+  background-color: #FADDBC !important;
+  height:100%;
 }
 
 .jumbotron {
@@ -260,12 +264,13 @@ h5 {
   font-family: 'Open Sans', sans-serif !important;
 }
 
-.container-dashboard {
-  /* background-color: #DFE2E9;
-  border-radius: 5px; */
+.container-fluid {
+  /* background-color: #FADDBC; */
+
 }
 .switch-body {
   background-color: grey;
+
 }
 
 .dashboard-header {
@@ -417,7 +422,7 @@ h5 {
 }
 
 body {
-  background-image: url('../img/bg.png');
+  /* background-image: url('../img/bg.png'); */
   background-attachment: fixed;
 }
 
@@ -435,7 +440,8 @@ body {
 }
 
 .doggo-nav {
-  background-color: #95876A !important;
+  background-color: white !important;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
 }
 
 #landing-leaf{
@@ -495,3 +501,132 @@ overflow: hidden
   overflow: hidden;
   left: 60%;
 }
+
+.section-shaped .shape-style-1.shape-default{
+  background: linear-gradient(150deg, #faddbc 15%, #faddbc94 70%, #faddbc 94%) !important;
+}
+
+.bg-secondary {
+  background-color: #FADDBC !important;
+}
+
+.footer.has-cards:before{
+  /* background-color: #FADDBC !important; */
+}
+
+.headroom--unpinned {
+  transition: none !important;
+}
+
+thead{
+  border-bottom-color: transparent !important;
+
+}
+
+tr:first-child  {
+  border-top-color: transparent !important;
+}
+
+tbody{
+  border-color: transparent !important;
+}
+
+.ant-table-thead > tr > th{
+  border-color: transparent !important;
+}
+
+thead {
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+}
+
+tbody{
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+}
+
+table{
+  border-collapse: separate;
+}
+
+td{
+  padding-top: 36px !important;
+  padding-bottom: 36px !important;
+}
+
+.delishus-card{
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 8px;
+  border-radius: 18px;
+  background-color: white;
+}
+
+.footer{
+  /* background-color: white !important; */
+}
+
+.google-map{
+  height: 82vh;
+  width: 100%;
+}
+
+.google-map div{
+  border-radius: 10px;
+}
+
+.spot-detail{
+  height: 82vh;
+}
+
+.white-bg{
+background-color: white !important;
+}
+footer{
+  padding-top: 0rem !important;
+
+  padding-bottom: 0rem !important;
+  
+}
+
+
+@media (min-width: 1200px){
+  .container {
+    max-width: 1600px !important;
+}
+}
+
+
+.main-container {
+  min-height: 100vh; /* will cover the 100% of viewport */
+  overflow: hidden;
+  display: block;
+  position: relative;
+  padding-bottom: 50px; /* height of your footer */
+ }
+
+ footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* box-shadow:rgba(0, 0, 0, 0.15) 0px 0px 20px 0px; */
+  height: 50px;
+
+ }
+
+ html,
+body {
+ height: 100%;
+ position: relative;
+}
+
+* {
+  box-sizing: border-box;
+ }
+ *:before,
+ *:after {
+  box-sizing: border-box;
+ }
+
+ tr{
+   background-color: white !important;
+ }

@@ -7945,7 +7945,7 @@ button.bg-primary:focus
 
 .bg-secondary
 {
-    background-color: #f4f5f7 !important;
+    background-color: #FADDBC !important;
 }
 
 a.bg-secondary:hover,
@@ -15237,7 +15237,7 @@ a.btn-icon-only
     content: '';
     transform: skew(0, -8deg); 
 
-    background: #f4f5f7;
+    /* background: #f4f5f7; */
 }
 .footer.has-cards .container
 {

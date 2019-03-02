@@ -6,6 +6,7 @@ import {inject, observer} from 'mobx-react';
 import Dropdown from 'rc-dropdown';
 import Menu, {Item as MenuItem} from 'rc-menu';
 import 'rc-dropdown/assets/index.css';
+import Headroom from 'react-headroom'
 
 @inject('routingStore', 'sessionStore')
 @observer
@@ -35,28 +36,35 @@ class Navbar extends Component {
     );
 
     const NavigationNonAuth = () => (
-      <nav className="navbar navbar-expand-lg py-2">
+      <nav className="navbar navbar-expand-lg py-4">
         <div className="container">
           <Link to="/" className="navbar-brand">
-            <FontAwesomeIcon id = "globe" className="icon-layers fa-2x ml-auto globe" icon={faGlobeAfrica} />
+            {/* <FontAwesomeIcon id = "globe" className="icon-layers fa-2x ml-auto globe" icon={faGlobeAfrica} /> */}
+            DelishUs
           </Link>
+          <div>
+          <Link to="/login" className="ml-auto mr-3">
+              Login
+            </Link>
+          </div>
         </div>
       </nav>
     );
 
     const NavigationAuth = (props) => (
-      <nav className="navbar navbar-expand-lg py-2">
+      <nav className="navbar navbar-expand-lg py-4">
         <div className="container">
           <Link to="/dashboard">
-            <FontAwesomeIcon className="icon-layers  fa-2x globe" icon={faGlobeAfrica} />
+            {/* <FontAwesomeIcon className="icon-layers  fa-2x globe" icon={faGlobeAfrica} /> */}
+            DelishUs
           </Link>
 
-          {/* <div>
+          <div>
             <Link to="/users" className="ml-auto mr-3">
-              More Dogs
+              My Spots
             </Link>
             <Link to = {"/doglist/" + this.sessionStore.authUser.uid} className="ml-auto mr-2">
-              My Dogs
+              Map
             </Link>
             <Dropdown trigger={['click']} overlay={menu()}>
               {props.photoURL ? (
@@ -65,16 +73,18 @@ class Navbar extends Component {
                 <FontAwesomeIcon className="avatar-image--icon" icon={faUser} />
               )}
             </Dropdown>
-          </div> */}
+          </div>
 
         </div>
       </nav>
     );
 
     return (
-      <div className="doggo-nav">
-        {this.sessionStore.authUser ? <NavigationAuth photoURL={this.sessionStore.authUser.photoURL} /> : <NavigationNonAuth />}
-      </div>
+      <Headroom>
+        <div className="doggo-nav">
+          {this.sessionStore.authUser ? <NavigationAuth photoURL={this.sessionStore.authUser.photoURL} /> : <NavigationNonAuth />}
+        </div>
+      </Headroom>
     );
   }
 }
