@@ -1,78 +1,80 @@
-// Imports
-import React, { Component } from 'react';
+import React from 'react';
+import PlacesAutocomplete from 'react-places-autocomplete';
+import { inject } from 'mobx-react';
 
-// Import Search Bar Components
-import SearchBar from 'material-ui-search-bar';
+@inject('spotStore')
+class Search extends React.Component {
 
-// Import React Scrit Libraray to load Google object
-import Script from 'react-load-script';
+  spotStore = this.props.spotStore;
 
-class Search extends Component {
-  // Define Constructor
-  constructor(props) {
-    super(props);
+  state = { address: '', showResults: false };
 
-    // Declare State
-    this.state = {
-      city: '',
-      query: ''
-    };
+  handleChange = address => {
+    this.setState({ address });
+  };
 
-    // Bind Functions
-    this.handleScriptLoad = this.handleScriptLoad.bind(this);
-    this.handlePlaceSelect = this.handlePlaceSelect.bind(this);
+  handleSelect = address => {
+    this.spotStore.selectSpot(address);
+    this.setState({address:''});
+  };
 
+  handleBlur = () => {
+    this.setState({ showResults: false })
   }
 
-  handleScriptLoad() {
-    // Declare Options For Autocomplete
-    var options = {
-      types: ['establishment'],
-    };
-
-    // Initialize Google Autocomplete
-    /*global google*/ // To disable any eslint 'google not defined' errors
-    this.autocomplete = new google.maps.places.Autocomplete(
-      document.getElementById('autocomplete'),
-      options,
-    );
-
-    // Fire Event when a suggested name is selected
-    this.autocomplete.addListener('place_changed', this.handlePlaceSelect);
-  }
-  
-  handlePlaceSelect() {
-
-    // Extract City From Address Object
-    let addressObject = this.autocomplete.getPlace();
-    let address = addressObject.address_components;
-
-    // Check if address is valid
-    if (address) {
-      // Set State
-      this.setState(
-        {
-          city: address[0].long_name,
-          query: addressObject.formatted_address,
-        }
-      );
-    }
+  handleFocus = () => {
+    this.setState({ showResults: true })
   }
 
   render() {
     return (
-      <div>
-        <Script
-          url="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJdMUyuQiG2DEHgGG3Tvebb9-BzR0JXwE&libraries=places"
-          onLoad={this.handleScriptLoad}
-        />
-        <SearchBar id="autocomplete" placeholder="" hintText="Search City" value={this.state.query}
-          style={{
-            margin: '0 auto',
-            maxWidth: 800,
-          }}
-        />
-      </div>
+      <PlacesAutocomplete ref={(c) => {
+        if (!c) return;
+        c.handleInputOnBlur = () => { };
+      }}
+        value={this.state.address}
+        onChange={this.handleChange}
+        onSelect={this.handleSelect}
+      >
+        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+          <div className="autocomplete">
+            <input
+              onFocus={this.handleFocus}
+              {...getInputProps({
+                placeholder: 'Search Places ...',
+                className: 'form-control form-control-alternative',
+                onBlur: () => { this.handleBlur() },
+              })}
+            />
+            {this.state.showResults ?
+              <div className="autocomplete-items">
+                {loading && <div>Loading...</div>}
+                {suggestions.map(suggestion => {
+                  const className = suggestion.active
+                    ? 'suggestion-item--active'
+                    : 'suggestion-item';
+                  // inline style for demonstration purpose
+                  const style = suggestion.active
+                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                  return (
+
+                    <div
+                      {...getSuggestionItemProps(suggestion, {
+                        className,
+                        style,
+                      })}
+                    >
+                      <span>{suggestion.description}</span>
+                    </div>
+
+                  );
+                })}
+              </div>
+              : null}
+          </div>
+        )}
+      </PlacesAutocomplete>
     );
   }
 }

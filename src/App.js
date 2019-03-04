@@ -48,7 +48,6 @@ class App extends Component {
               </RoutesContainer>
             </PoseGroup>
             <Footer />
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJdMUyuQiG2DEHgGG3Tvebb9&libraries=places"></script>
           </div>
         )}
       />
