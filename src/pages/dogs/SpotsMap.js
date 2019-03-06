@@ -19,7 +19,7 @@ class SpotsMap extends Component {
 
     apiIsLoaded = (map, maps) => {
         this.spotStore.gmapsLoaded = true;
-        this.spotStore.googleDetailsService = new maps.places.PlacesService(map);
+        this.spotStore.googlePlacesService = new maps.places.PlacesService(map);
     };
 
     render() {

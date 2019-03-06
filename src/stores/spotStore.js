@@ -1,15 +1,15 @@
 import { observable, action, computed } from "mobx";
-import {geocodeByAddress, getLatLng} from "react-places-autocomplete";
-import {DEFAULT_GEOLOCATION, GOOGLE_DETAILS_FIELDS} from "../constants/mapConstants";
+import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+import { DEFAULT_GEOLOCATION, GOOGLE_DETAILS_FIELDS } from "../constants/mapConstants";
 import Spot from "../pages/dogs/Spot";
 
 class spotStore {
 
   @observable
-  googleDetailsService;
+  googlePlacesService;
 
   @observable
-  selectedSpot = { };
+  selectedSpot = {};
 
   @observable
   mapGeolocation = DEFAULT_GEOLOCATION;
@@ -17,37 +17,50 @@ class spotStore {
   @observable
   gmapsLoaded = false;
 
-  // when spot it clicked 
+  @observable
+  requestOptions
+
   @action
   async selectSpot(address) {
+    let { latLng, googlePlaceId } = await this.getGoogleGeoData(address);
+    this.moveMapToSpot(latLng);
+    await this.loadSpotDetails(googlePlaceId);
+  }
 
-    let results = await geocodeByAddress(address);
+  async getGoogleGeoData(address) {
+    let [first] = await geocodeByAddress(address);
+    return this.fetchGeoData(first);
+  }
 
-    let latLng = await getLatLng(results[0]);
+  async fetchGeoData(first){
+    let googlePlaceId = first.place_id;
+    let latLng = await getLatLng(first);
+    return { latLng, googlePlaceId }
+  }
 
+  moveMapToSpot(latLng) {
     this.mapGeolocation.center = latLng;
-
-    this.selectedSpot = await this.getSpotDetails(results[0].place_id);
-    console.log(this.selectedSpot);
-
   }
 
-  //requesting spot details
+  async loadSpotDetails(googlePlaceId) {
+    this.requestOptions = { placeId: googlePlaceId, fields: GOOGLE_DETAILS_FIELDS };
+    this.selectedSpot = await this.getGooglePlaceDetails();
+  }
+
   @action
-  getSpotDetails(placeID) {
-    var request = { placeId: placeID, fields: GOOGLE_DETAILS_FIELDS };
-
-    return new Promise( (resolve, reject) => {
-      this.googleDetailsService.getDetails(request, (place, status) => {
-
-
-        resolve(new Spot(place));
-
-
-      });
+  getGooglePlaceDetails() {
+    return new Promise((resolve) => {
+      let SpotCreationCallback = (place) => {resolve(new Spot(place));}
+      this.googlePlacesService.getDetails(this.requestOptions, SpotCreationCallback);
     });
-
   }
+
+
+
+
+
+
+
 
 }
 
