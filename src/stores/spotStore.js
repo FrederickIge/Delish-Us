@@ -43,14 +43,18 @@ class spotStore {
   }
 
   async loadSpotDetails(googlePlaceId) {
-    this.requestOptions = { placeId: googlePlaceId, fields: GOOGLE_DETAILS_FIELDS };
-    this.selectedSpot = await this.getGooglePlaceDetails();
+    this.requestOptions = this.prepareRequest(googlePlaceId);
+    this.selectedSpot = await this.fetchGooglePlaceDetails();
+  }
+
+  prepareRequest(googlePlaceId) {
+    return { placeId: googlePlaceId, fields: GOOGLE_DETAILS_FIELDS };
   }
 
   @action
-  getGooglePlaceDetails() {
+  fetchGooglePlaceDetails() {
     return new Promise((resolve) => {
-      let SpotCreationCallback = (place) => {resolve(new Spot(place));}
+      let SpotCreationCallback = (place) => {resolve(new Spot(place))}
       this.googlePlacesService.getDetails(this.requestOptions, SpotCreationCallback);
     });
   }
