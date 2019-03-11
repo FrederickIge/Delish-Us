@@ -38,6 +38,10 @@ class DogList extends Component {
     this.spotStore.mapGeolocation.center = { lat: position.coords.latitude, lng: position.coords.longitude };
   }
 
+  handleInputChange = (event) => {
+      this.spotStore.showAllSpots = !this.spotStore.showAllSpots;
+  }
+
   render() {
 
     return (
@@ -55,12 +59,28 @@ class DogList extends Component {
               <SpotDetailsCard />
             </div>
 
-            <div className="col-8 col-md-8 col-sm-12 order-sm-2">
+            <div className="col-6 col-md-8 col-sm-12 order-sm-2">
 
 
               <div className="google-map-container">
 
-                {this.spotStore.gmapsLoaded ? <Search /> : null}
+                {this.spotStore.gmapsLoaded ? <div style={{ height: "8%" }}>
+                  <div className="justify-content-center align-self-center">
+                    <Search />
+
+
+
+                    <label style={{ marginLeft: "20px" }} className="switch align-middle center-block">
+                      <input name="switch" type="checkbox" onChange={this.handleInputChange} />
+                      <span className="slider"></span>
+                    </label>
+
+
+                  </div>
+
+
+
+                </div> : null}
 
                 <SpotsMap />
               </div>

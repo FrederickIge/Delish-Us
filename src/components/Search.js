@@ -14,7 +14,7 @@ class Search extends React.Component {
   };
 
   handleSelect = address => {
-    this.spotStore.selectSpot(address);
+    this.spotStore.selectSearchedSpot(address);
     this.setState({address:''});
   };
 
