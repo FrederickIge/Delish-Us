@@ -9,10 +9,10 @@ import Landingpage from './pages/Landingpage';
 import AccountPage from './pages/account/Account';
 import Login from './pages/account/Login';
 import Signup from './pages/account/Signup';
-import Dashboard from './pages/dogs/Dashboard';
-import DogList from './pages/dogs/DogList';
+import Dashboard from './pages/spots/Dashboard';
+import MapDashboard from './pages/spots/MapDashboard';
 import Footer from  './layout/Footer';
-import FoodDetail from './pages/dogs/FoodDetail'
+import FoodDetail from './pages/spots/FoodDetail'
 
 import './css/App.css';
 
@@ -38,7 +38,7 @@ class App extends Component {
    
                
                   <Route exact path="/dashboard" component={Dashboard} />
-                  <Route exact path="/doglist/:id" component={DogList} />
+                  <Route exact path="/doglist/:id" component={MapDashboard} />
                   <Route exact path="/food/:id" component={FoodDetail} />
                   <Route exact path="/account" component={AccountPage} />
                   <Route exact path="/login" component={Login} />

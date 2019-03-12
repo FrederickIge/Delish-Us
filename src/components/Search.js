@@ -13,9 +13,10 @@ class Search extends React.Component {
     this.setState({ address });
   };
 
-  handleSelect = address => {
-    this.spotStore.selectSearchedSpot(address);
-    this.setState({address:''});
+  handleSelect = suggestion => {
+    console.log(suggestion.placeId)
+    // this.spotStore.selectSearchedSpot(address);
+    // this.setState({address:''});
   };
 
   handleBlur = () => {
@@ -34,7 +35,7 @@ class Search extends React.Component {
       }}
         value={this.state.address}
         onChange={this.handleChange}
-        onSelect={this.handleSelect}
+        // onSelect={this.handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div className="autocomplete">
@@ -65,7 +66,7 @@ class Search extends React.Component {
                         style,
                       })}
                     >
-                      <span>{suggestion.description}</span>
+                      <span onClick={() => this.handleSelect(suggestion) }>{suggestion.description} gang</span>
                     </div>
 
                   );

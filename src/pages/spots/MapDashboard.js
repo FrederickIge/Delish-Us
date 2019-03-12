@@ -28,7 +28,7 @@ var getPosition = function (options) {
 
 @inject('sessionStore', 'spotStore')
 @observer
-class DogList extends Component {
+class MapDashboard extends Component {
 
   sessionStore = this.props.sessionStore;
   spotStore = this.props.spotStore;
@@ -94,4 +94,4 @@ class DogList extends Component {
 }
 const authCondition = (authUser) => !!authUser;
 
-export default compose(withAuthorization(authCondition))(DogList);
+export default compose(withAuthorization(authCondition))(MapDashboard);

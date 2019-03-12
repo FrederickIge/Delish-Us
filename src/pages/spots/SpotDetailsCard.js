@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { compose } from 'recompose';
-import firebase from 'firebase';
 import withAuthorization from '../../components/hoc/withAuthorization';
-import   Geopoint  from "../dogs/Geopoint";
-
-const db = firebase.firestore();
+import { If} from 'react-if'
 
 @inject('sessionStore', 'spotStore')
 @observer
@@ -19,37 +16,11 @@ class SpotDetailsCard extends Component {
     }
 
     handleSave = ( ) => {
-
-    
-        let payload = {
-            name: this.spotStore.selectedSpot.name,
-            latLng: new firebase.firestore.GeoPoint(this.spotStore.selectedSpot.lat, this.spotStore.selectedSpot.lng),
-            googlePlaceId: this.spotStore.googlePlaceId,
-            userId: this.sessionStore.authUser.uid
-        }
-  
-        db.collection("spots").add(payload)
-        .then((docRef) => {
-
-            let latLng = {_lat: this.spotStore.selectedSpot.lat, _long:this.spotStore.selectedSpot.lng }
-
-           let test = new Geopoint (this.spotStore.selectedSpot.name, latLng, this.spotStore.googlePlaceId, docRef.id, this.sessionStore.authUser.uid)
-            this.spotStore.allSpots.push( test )
-          console.log(this.spotStore.uniqueSpotsByGooglePlaceIds);
-          console.log(this.spotStore.currentUserSpots);
-        })
-        .catch(function(error) {
-            console.error("Error adding document: ", error);
-        });
-    }
-
-    componentDidMount(){
+        this.spotStore.saveSpot();
     }
 
     render() {
         return (
-
-
 
             <div className="delishus-card spot-detail p-3">
                 {this.spotStore.selectedSpot.name ?
@@ -80,10 +51,16 @@ class SpotDetailsCard extends Component {
 
                 <div>
                     <div className="row justify-content-center">
+                
+                    <br></br>
+                
+                    <br></br>
+                    <If condition = { !this.spotStore.alreadySaved }>
                         <button type="button" className="btn btn-success mt-5 mb-5 btn-lg"  onClick={this.handleSave}>
                             <span className="btn-inner--icon"><i className="ni ni-fat-add"></i></span>
                             Save Spot
-                    </button>
+                        </button>
+                        </If>
                     </div>
                 </div>
 
