@@ -6,9 +6,12 @@ import Geopoint from "../models/Geopoint";
 const db = firebase.firestore();
 
 class spotStore {
-
-  constructor(root) {
-    autorun(() => root.sessionStore.authUser ? this.userId = root.sessionStore.authUser.uid : null)
+  sessionStore
+  constructor(rootStore) {
+    // this.rootStore = rootStore
+    // this.userId = rootStore.sessionStore.authUser.uid
+    // autorun(() => root.sessionStore.authUser ? this.userId = root.sessionStore.authUser.uid : null)
+    console.log(rootStore.sessionStore.authUser)
   }
 
   @observable googlePlacesService;
@@ -21,24 +24,18 @@ class spotStore {
 
   @observable requestOptions;
 
-  @observable selectedSpotLatLng;
-
   @observable googlePlaceId;
 
   @observable allSpots = [];
-
-  @observable displayedSpots = [];
 
   @observable userId; 
 
   @observable showAllSpots = true;
 
-  @observable selectedSpotUserId;
-
   @observable alreadySaved = true;
 
   @observable selectedGeopoint;
-
+ 
   @action
   async getAllSpots() {
     let querySnapshot = await db.collection("spots").get()
@@ -55,13 +52,12 @@ class spotStore {
   @action
   async saveSpot() {
     let payload = this.prepareSpotPayload();
-    console.log(payload)
     let docRef = await db.collection("spots").add(payload);
-    this.displayNewSpot(docRef);
+    await this.displayNewSpot(docRef);
+    this.alreadySaved = this.checkifSaved();
   }
 
   prepareSpotPayload() {
-    console.log(this.selectedSpot)
     return {
       name: this.selectedSpot.name,
       latLng: new firebase.firestore.GeoPoint(this.selectedSpot.lat, this.selectedSpot.lng),
@@ -73,6 +69,7 @@ class spotStore {
   async displayNewSpot(docRef) {
     let doc = await db.collection("spots").doc(docRef.id).get();
     this.allSpots.push(new Geopoint(doc));
+    this.selectedSpot.key = doc.id
   }
 
   @action
@@ -115,11 +112,13 @@ class spotStore {
   async deleteSpot() {
     let key = this.selectedSpot.key;
     await db.collection("spots").doc(key).delete();
-    this.allSpots.splice(this.allSpots.findIndex((spot) => spot.key == key),1)  
+    this.allSpots.splice(this.allSpots.findIndex((spot) => spot.key == key), 1);  
+    this.selectedSpot = {};
+    this.alreadySaved = false;
   }
 
   checkifSaved() {
-     return  0 < this.currentUserSpots.findIndex(item => item.googlePlaceId === this.selectedGeopoint.googlePlaceId)
+     return  0 <= this.currentUserSpots.findIndex(item => item.googlePlaceId === this.selectedGeopoint.googlePlaceId)
   }
 
   @computed get uniqueSpotsByGooglePlaceIds() {

@@ -39,7 +39,7 @@ const uiConfig = {
   callbacks: {
     // Avoid redirects after sign-in.
     signInSuccessWithAuthResult: (data) => {
-      this.props.history.push('/searchschools');
+      this.props.history.push('/doglist');
     }
   }
 };

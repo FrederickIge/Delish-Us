@@ -59,18 +59,21 @@ class SpotDetailsCard extends Component {
                     <br></br>
                 
                     <br></br>
-                    <If condition = { !this.spotStore.alreadySaved }>
+                    {!this.spotStore.alreadySaved && this.spotStore.selectedSpot.name ?
                         <button type="button" className="btn btn-success mt-5 mb-5 btn-lg"  onClick={this.handleSave}>
                             <span className="btn-inner--icon"><i className="ni ni-fat-add"></i></span>
                             Save Spot
                         </button>
-                    </If>
-                    <If condition = { this.spotStore.alreadySaved }>
-                        <button type="button" className="btn btn-danger mt-5 mb-5 btn-lg"  onClick={this.handleDelete}>
-                            <span className="btn-inner--icon"><i className="ni ni-fat-add"></i></span>
-                            Delete Spot
-                        </button>
-                    </If>
+                   : null}
+
+                        {this.spotStore.alreadySaved && this.spotStore.selectedSpot.name ?
+                            <button type="button" className="btn btn-danger mt-5 mb-5 btn-lg" onClick={this.handleDelete}>
+                                <span className="btn-inner--icon"><i className="ni ni-fat-add"></i></span>
+                                Delete Spot
+                        </button> 
+                        : null}
+
+                    
                     </div>
                 </div>
 

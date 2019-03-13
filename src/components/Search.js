@@ -14,12 +14,8 @@ class Search extends React.Component {
   };
 
   handleSelect = (description, placeId, suggestion) => {
-    console.log(suggestion)
-    console.log(description)
-    console.log(placeId)
     this.spotStore.selectSearchedSpot(suggestion);
     this.setState({address:''});
-
   };
 
   handleBlur = () => {
