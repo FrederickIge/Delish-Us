@@ -1,27 +1,21 @@
 import { observable, action,computed, autorun } from "mobx";
-import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { DEFAULT_GEOLOCATION, GOOGLE_DETAILS_FIELDS } from "../constants/mapConstants";
 import Spot from "../models/Spot";
 import firebase from 'firebase';
 import Geopoint from "../models/Geopoint";
 const db = firebase.firestore();
 
-
 class spotStore {
 
   constructor(root) {
-    autorun(() => {
-      if (root.sessionStore.authUser) {
-        this.userId = root.sessionStore.authUser.uid;
-      }
-    });
+    autorun(() => root.sessionStore.authUser ? this.userId = root.sessionStore.authUser.uid : null)
   }
 
   @observable googlePlacesService;
 
   @observable selectedSpot = {};
 
-  @observable  mapGeolocation = DEFAULT_GEOLOCATION;
+  @observable mapGeolocation = DEFAULT_GEOLOCATION;
 
   @observable gmapsLoaded = false;
 
@@ -33,9 +27,9 @@ class spotStore {
 
   @observable allSpots = [];
 
-  @observable userId 
-
   @observable displayedSpots = [];
+
+  @observable userId; 
 
   @observable showAllSpots = true;
 
@@ -43,15 +37,17 @@ class spotStore {
 
   @observable alreadySaved = true;
 
+  @observable selectedGeopoint;
+
   @action
- async getAllSpots() {
+  async getAllSpots() {
     let querySnapshot = await db.collection("spots").get()
     this.displaySpots(querySnapshot);
   }
 
   displaySpots(querySnapshot) {
     querySnapshot.forEach((doc) => {
-      let geopoint = new Geopoint(doc.data().name, doc.data().latLng, doc.data().googlePlaceId, doc.id, doc.data().userId);
+      let geopoint = new Geopoint(doc);
       this.allSpots.push(geopoint);
     });
   }
@@ -59,19 +55,71 @@ class spotStore {
   @action
   async saveSpot() {
     let payload = this.prepareSpotPayload();
+    console.log(payload)
     let docRef = await db.collection("spots").add(payload);
-    let latLng = { _lat: this.selectedSpot.lat, _long: this.selectedSpot.lng };
-    let newSpot = new Geopoint(this.selectedSpot.name, latLng, this.googlePlaceId, docRef.id, this.userId);
-    this.allSpots.push(newSpot);
+    this.displayNewSpot(docRef);
   }
 
   prepareSpotPayload() {
+    console.log(this.selectedSpot)
     return {
       name: this.selectedSpot.name,
       latLng: new firebase.firestore.GeoPoint(this.selectedSpot.lat, this.selectedSpot.lng),
-      googlePlaceId: this.googlePlaceId,
+      googlePlaceId: this.selectedSpot.googlePlaceId,
       userId: this.userId
     };
+  }
+
+  async displayNewSpot(docRef) {
+    let doc = await db.collection("spots").doc(docRef.id).get();
+    this.allSpots.push(new Geopoint(doc));
+  }
+
+  @action
+  async selectSearchedSpot(geopoint) {
+    this.selectedGeopoint = new Geopoint(geopoint)
+    this.selectedSpot = await this.loadSpotDetails();
+    this.moveMapToSelectedSpot();
+    this.alreadySaved = this.checkifSaved();
+  }
+
+  @action
+  async selectExistingSpot(spot) {
+    this.selectedGeopoint = spot
+    this.selectedSpot = await this.loadSpotDetails();
+    this.alreadySaved = this.checkifSaved();
+  }
+
+  async loadSpotDetails() {
+    this.requestOptions = this.prepareRequest();
+    return await this.fetchGooglePlaceDetails();
+  }
+
+  moveMapToSelectedSpot() {
+    this.mapGeolocation.center = { lat: this.selectedSpot.lat, lng: this.selectedSpot.lng };
+  }
+
+  prepareRequest() {
+    return { placeId: this.selectedGeopoint.googlePlaceId, fields: GOOGLE_DETAILS_FIELDS };
+  }
+
+  @action
+  fetchGooglePlaceDetails() {
+    return new Promise((resolve) => {
+      let SpotCreationCallback = (place) => {resolve(new Spot(place, this.selectedGeopoint)) }
+      this.googlePlacesService.getDetails(this.requestOptions, SpotCreationCallback);
+    });
+  }
+
+  @action
+  async deleteSpot() {
+    let key = this.selectedSpot.key;
+    await db.collection("spots").doc(key).delete();
+    this.allSpots.splice(this.allSpots.findIndex((spot) => spot.key == key),1)  
+  }
+
+  checkifSaved() {
+     return  0 < this.currentUserSpots.findIndex(item => item.googlePlaceId === this.selectedGeopoint.googlePlaceId)
   }
 
   @computed get uniqueSpotsByGooglePlaceIds() {
@@ -83,64 +131,6 @@ class spotStore {
     return this.allSpots.filter((element) => element.userId === this.userId )
   }
 
- checkifSaved() {
-    let alreadySaved = false;
-     this.currentUserSpots.forEach((element) => {
-        if(element.googlePlaceId == this.googlePlaceId){
-          alreadySaved = true;
-        }
-    })
-
-    return alreadySaved;
-  }
-
-  @action
-  async selectSearchedSpot(address) {
-    await this.getGoogleGeoData(address);
-    this.moveMapToSelectedSpot();
-    this.selectedSpot = await this.loadSpotDetails();
-  }
-
-  @action
-  async selectExistingSpot(spot) {
-    this.googlePlaceId = spot.googlePlaceId
-    this.selectedSpotLatLng = { lat: spot.lat, lng: spot.lng };
-    this.selectedSpotUserId = spot.userId;
-    this.selectedSpot = await this.loadSpotDetails();
-    this.alreadySaved = this.checkifSaved();
-    console.log(this.alreadySaved)
-  }
-
-  async getGoogleGeoData(address) {
-    let [first] = await geocodeByAddress(address);
-    return await this.fetchGeoData(first);
-  }
-
-  async fetchGeoData(first){
-    this.googlePlaceId = first.place_id;
-    this.selectedSpotLatLng = await getLatLng(first);
-  }
-
-  moveMapToSelectedSpot() {
-    this.mapGeolocation.center = this.selectedSpotLatLng;
-  }
-
-  async loadSpotDetails() {
-    this.requestOptions = this.prepareRequest();
-    return await this.fetchGooglePlaceDetails();
-  }
-
-  prepareRequest() {
-    return { placeId: this.googlePlaceId, fields: GOOGLE_DETAILS_FIELDS };
-  }
-
-  @action
-  fetchGooglePlaceDetails() {
-    return new Promise((resolve) => {
-      let SpotCreationCallback = (place) => { resolve(new Spot(place, this.selectedSpotLatLng, this.selectedSpotUserId)) }
-      this.googlePlacesService.getDetails(this.requestOptions, SpotCreationCallback);
-    });
-  }
 }
 
 export default spotStore;

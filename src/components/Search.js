@@ -1,5 +1,5 @@
 import React from 'react';
-import PlacesAutocomplete from 'react-places-autocomplete';
+import PlacesAutocomplete from 'reactjs-places-autocomplete';
 import { inject } from 'mobx-react';
 
 @inject('spotStore')
@@ -13,10 +13,13 @@ class Search extends React.Component {
     this.setState({ address });
   };
 
-  handleSelect = suggestion => {
-    console.log(suggestion.placeId)
-    // this.spotStore.selectSearchedSpot(address);
-    // this.setState({address:''});
+  handleSelect = (description, placeId, suggestion) => {
+    console.log(suggestion)
+    console.log(description)
+    console.log(placeId)
+    this.spotStore.selectSearchedSpot(suggestion);
+    this.setState({address:''});
+
   };
 
   handleBlur = () => {
@@ -35,7 +38,7 @@ class Search extends React.Component {
       }}
         value={this.state.address}
         onChange={this.handleChange}
-        // onSelect={this.handleSelect}
+        onSelect={this.handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div className="autocomplete">
@@ -60,13 +63,13 @@ class Search extends React.Component {
                     : { backgroundColor: '#ffffff', cursor: 'pointer' };
                   return (
 
-                    <div
+                    <div 
                       {...getSuggestionItemProps(suggestion, {
                         className,
                         style,
                       })}
                     >
-                      <span onClick={() => this.handleSelect(suggestion) }>{suggestion.description} gang</span>
+                      <span>{suggestion.description} gang</span>
                     </div>
 
                   );

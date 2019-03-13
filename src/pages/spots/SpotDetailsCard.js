@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { compose } from 'recompose';
 import withAuthorization from '../../components/hoc/withAuthorization';
-import { If} from 'react-if'
+import { If, Then} from 'react-if'
 
 @inject('sessionStore', 'spotStore')
 @observer
@@ -17,6 +17,10 @@ class SpotDetailsCard extends Component {
 
     handleSave = ( ) => {
         this.spotStore.saveSpot();
+    }
+
+    handleDelete = () =>{
+        this.spotStore.deleteSpot();
     }
 
     render() {
@@ -60,7 +64,13 @@ class SpotDetailsCard extends Component {
                             <span className="btn-inner--icon"><i className="ni ni-fat-add"></i></span>
                             Save Spot
                         </button>
-                        </If>
+                    </If>
+                    <If condition = { this.spotStore.alreadySaved }>
+                        <button type="button" className="btn btn-danger mt-5 mb-5 btn-lg"  onClick={this.handleDelete}>
+                            <span className="btn-inner--icon"><i className="ni ni-fat-add"></i></span>
+                            Delete Spot
+                        </button>
+                    </If>
                     </div>
                 </div>
 

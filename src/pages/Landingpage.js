@@ -51,8 +51,6 @@ class Myresults extends Component {
 
    let filteredList = fullList.filter(food => food.category == event.target.value)
    
-
-
     this.setState({
       category: event.target.value,
       foodList: filteredList
