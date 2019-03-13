@@ -6,17 +6,15 @@ import Geopoint from "../models/Geopoint";
 const db = firebase.firestore();
 
 class spotStore {
-  sessionStore
-  constructor(rootStore) {
-    // this.rootStore = rootStore
-    // this.userId = rootStore.sessionStore.authUser.uid
-    // autorun(() => root.sessionStore.authUser ? this.userId = root.sessionStore.authUser.uid : null)
-    console.log(rootStore.sessionStore.authUser)
+ 
+  constructor(root) {
+    autorun(() => root.sessionStore.authUser ? this.userId = root.sessionStore.authUser.uid : null);
+    this.fireStore = root.fireStore
   }
 
   @observable googlePlacesService;
 
-  @observable selectedSpot = {};
+  @observable selectedSpot = { };
 
   @observable mapGeolocation = DEFAULT_GEOLOCATION;
 
@@ -38,7 +36,7 @@ class spotStore {
  
   @action
   async getAllSpots() {
-    let querySnapshot = await db.collection("spots").get()
+    let querySnapshot = await this.fireStore.fetchAllSpots();
     this.displaySpots(querySnapshot);
   }
 
@@ -52,7 +50,7 @@ class spotStore {
   @action
   async saveSpot() {
     let payload = this.prepareSpotPayload();
-    let docRef = await db.collection("spots").add(payload);
+    let docRef = await this.fireStore.postSpot(payload);
     await this.displayNewSpot(docRef);
     this.alreadySaved = this.checkifSaved();
   }
@@ -67,7 +65,7 @@ class spotStore {
   }
 
   async displayNewSpot(docRef) {
-    let doc = await db.collection("spots").doc(docRef.id).get();
+    let doc = await this.fireStore.fetchSingleSpot(docRef.id)
     this.allSpots.push(new Geopoint(doc));
     this.selectedSpot.key = doc.id
   }
@@ -111,7 +109,8 @@ class spotStore {
   @action
   async deleteSpot() {
     let key = this.selectedSpot.key;
-    await db.collection("spots").doc(key).delete();
+    // await db.collection("spots").doc(key).delete();
+    await this.fireStore.deleteSpot(key)
     this.allSpots.splice(this.allSpots.findIndex((spot) => spot.key == key), 1);  
     this.selectedSpot = {};
     this.alreadySaved = false;
