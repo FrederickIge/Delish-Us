@@ -38,7 +38,7 @@ class App extends Component {
    
                
                   <Route exact path="/dashboard" component={Dashboard} />
-                  <Route exact path="/doglist/:id" component={MapDashboard} />
+                  <Route exact path="/doglist" component={MapDashboard} />
                   <Route exact path="/food/:id" component={FoodDetail} />
                   <Route exact path="/account" component={AccountPage} />
                   <Route exact path="/login" component={Login} />
@@ -47,7 +47,7 @@ class App extends Component {
                 </Switch>
               </RoutesContainer>
             </PoseGroup>
-            <Footer />
+            {/* <Footer /> */}
           </div>
         )}
       />

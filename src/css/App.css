@@ -11,6 +11,7 @@
 @import './argon.css';
 @import './hover.css';
 @import './nucleo/css/nucleo.css';
+@import './toast.css';
 @import 'https://cdn.jsdelivr.net/npm/instantsearch.css@7.0.0/themes/reset-min.css';
 @import 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
 @import '~antd/dist/antd.css';
@@ -634,13 +635,13 @@ body {
  tr{
    background-color: white !important;
  }
-
+/* 
  .autocomplete {
   position: relative;
   display: inline-block;
   width:90%;
   height: 8%;
-}
+} */
 
 .autocomplete-items {
   position: absolute;

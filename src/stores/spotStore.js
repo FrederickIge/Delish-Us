@@ -3,7 +3,7 @@ import { DEFAULT_GEOLOCATION, GOOGLE_DETAILS_FIELDS } from "../constants/mapCons
 import Spot from "../models/Spot";
 import firebase from 'firebase';
 import Geopoint from "../models/Geopoint";
-const db = firebase.firestore();
+import { ToastContainer, toast } from 'react-toastify';
 
 class spotStore {
  
@@ -33,6 +33,23 @@ class spotStore {
   @observable alreadySaved = true;
 
   @observable selectedGeopoint;
+
+  @observable drawerState = false;
+
+  @action
+  async selectSearchedSpot(geopoint) {
+    this.selectedGeopoint = new Geopoint(geopoint);
+    this.selectedSpot = await this.loadSpotDetails();
+    this.moveMapToSelectedSpot();
+    this.alreadySaved = this.checkifSaved();
+  }
+
+  @action
+  async selectExistingSpot(spot) {
+    this.selectedGeopoint = spot;
+    this.selectedSpot = await this.loadSpotDetails();
+    this.alreadySaved = this.checkifSaved();
+  }
  
   @action
   async getAllSpots() {
@@ -40,19 +57,30 @@ class spotStore {
     this.displaySpots(querySnapshot);
   }
 
-  displaySpots(querySnapshot) {
-    querySnapshot.forEach((doc) => {
-      let geopoint = new Geopoint(doc);
-      this.allSpots.push(geopoint);
-    });
-  }
-
   @action
   async saveSpot() {
     let payload = this.prepareSpotPayload();
     let docRef = await this.fireStore.postSpot(payload);
     await this.displayNewSpot(docRef);
+    toast("Spot Saved !")
     this.alreadySaved = this.checkifSaved();
+  }
+
+  @action
+  async deleteSpot() {
+    let key = this.selectedSpot.key;
+    await this.fireStore.deleteSpot(this.selectedSpot.key);
+    toast("Spot Deleted !")
+    this.allSpots.splice(this.allSpots.findIndex((spot) => spot.key === key), 1);  
+    this.selectedSpot = {};
+    this.alreadySaved = false;
+  }
+
+  displaySpots(querySnapshot) {
+    querySnapshot.forEach((doc) => {
+      let geopoint = new Geopoint(doc);
+      this.allSpots.push(geopoint);
+    });
   }
 
   prepareSpotPayload() {
@@ -67,22 +95,7 @@ class spotStore {
   async displayNewSpot(docRef) {
     let doc = await this.fireStore.fetchSingleSpot(docRef.id)
     this.allSpots.push(new Geopoint(doc));
-    this.selectedSpot.key = doc.id
-  }
-
-  @action
-  async selectSearchedSpot(geopoint) {
-    this.selectedGeopoint = new Geopoint(geopoint)
-    this.selectedSpot = await this.loadSpotDetails();
-    this.moveMapToSelectedSpot();
-    this.alreadySaved = this.checkifSaved();
-  }
-
-  @action
-  async selectExistingSpot(spot) {
-    this.selectedGeopoint = spot
-    this.selectedSpot = await this.loadSpotDetails();
-    this.alreadySaved = this.checkifSaved();
+    this.selectedSpot.key = doc.id;
   }
 
   async loadSpotDetails() {
@@ -106,27 +119,22 @@ class spotStore {
     });
   }
 
-  @action
-  async deleteSpot() {
-    let key = this.selectedSpot.key;
-    // await db.collection("spots").doc(key).delete();
-    await this.fireStore.deleteSpot(key)
-    this.allSpots.splice(this.allSpots.findIndex((spot) => spot.key == key), 1);  
-    this.selectedSpot = {};
-    this.alreadySaved = false;
-  }
-
   checkifSaved() {
-     return  0 <= this.currentUserSpots.findIndex(item => item.googlePlaceId === this.selectedGeopoint.googlePlaceId)
+     return  0 <= this.currentUserSpots.findIndex(item => item.googlePlaceId === this.selectedGeopoint.googlePlaceId);
   }
 
   @computed get uniqueSpotsByGooglePlaceIds() {
     return this.allSpots.filter((elem, index, self) => self.findIndex(
-      (t) => { return (t.googlePlaceId === elem.googlePlaceId) }) === index)
+      (t) => { return (t.googlePlaceId === elem.googlePlaceId) }) === index);
   }
 
   @computed get currentUserSpots() {
-    return this.allSpots.filter((element) => element.userId === this.userId )
+    return this.allSpots.filter((element) => element.userId === this.userId );
+  }
+  @action
+  toggleDrawer = () => {
+    console.log("gang")
+    this.drawerState = !this.drawerState
   }
 
 }

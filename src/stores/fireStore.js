@@ -1,5 +1,6 @@
 import {observable, action, computed} from 'mobx';
 import firebase from 'firebase';
+import { Then } from 'react-if';
 
 const db = firebase.firestore().collection("spots");
 

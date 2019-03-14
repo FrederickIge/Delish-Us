@@ -63,7 +63,7 @@ class Navbar extends Component {
             <Link to="/users" className="ml-auto mr-3">
               My Spots
             </Link>
-            <Link to = {"/doglist/" + this.sessionStore.authUser.uid} className="ml-auto mr-2">
+            <Link to = {"/doglist"} className="ml-auto mr-2">
               Map
             </Link>
             <Dropdown trigger={['click']} overlay={menu()}>
