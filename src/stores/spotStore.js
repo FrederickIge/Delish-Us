@@ -4,6 +4,7 @@ import Spot from "../models/Spot";
 import firebase from 'firebase';
 import Geopoint from "../models/Geopoint";
 import { ToastContainer, toast } from 'react-toastify';
+import { BrowserView, MobileView ,isBrowser ,isMobile } from "react-device-detect";
 
 class spotStore {
  
@@ -49,6 +50,11 @@ class spotStore {
     this.selectedGeopoint = spot;
     this.selectedSpot = await this.loadSpotDetails();
     this.alreadySaved = this.checkifSaved();
+    console.log(window.innerWidth <= 992)
+    if(window.innerWidth <= 992){
+      console.log(window.innerWidth <= 992)
+      this.toggleDrawer();
+    }
   }
  
   @action

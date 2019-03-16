@@ -3,6 +3,8 @@ import { inject, observer } from 'mobx-react';
 import { compose } from 'recompose';
 import withAuthorization from '../../components/hoc/withAuthorization';
 import { If, Then} from 'react-if'
+import StarRatings from 'react-star-ratings';
+import StarRatingComponent from 'react-star-rating-component';
 
 @inject('sessionStore', 'spotStore')
 @observer
@@ -26,15 +28,34 @@ class SpotDetailsCard extends Component {
     render() {
         return (
 
-            <div className="delishus-card spot-detail p-3">
+            <React.Fragment>
                 {this.spotStore.selectedSpot.name ?
                     <div style={this.style}>
-                        <div style={this.style} className="spot-details-top">
-                            <h3>{this.spotStore.selectedSpot.name}</h3>
-                            <img className="img-fluid detail-image shadow" alt="gag" src={this.spotStore.selectedSpot.image} />
-                            <div className="spacer"></div>
-                            <p>{this.spotStore.selectedSpot.address}</p>
-                            <p> Rating: {this.spotStore.selectedSpot.rating}</p>
+
+                        <div className="spot-details-top">
+
+                            <div style={{minHeight:"50%"}}>
+                                <img style={{height:"30vh", width:"100%"}} className="img-fluid detail-image" alt="gag" src={this.spotStore.selectedSpot.image} />                         
+                            </div>
+
+                            <div className="p-3">
+                                <h3>{this.spotStore.selectedSpot.name}</h3>
+                                <p>{this.spotStore.selectedSpot.address}</p>
+
+                                <div className="d-flex align-items-center">
+                                    <div> Rating: {this.spotStore.selectedSpot.rating}</div>
+
+                                    <StarRatingComponent
+                                        name="rate2"
+                                        renderStarIcon={() => <span><i class="fa fa-star" aria-hidden="true"></i></span>}
+                                        starCount={5}
+                                        value={this.spotStore.selectedSpot.rating}
+                                    />
+                                </div>
+
+                            </div>
+
+
                         </div>
                       
 
@@ -51,23 +72,23 @@ class SpotDetailsCard extends Component {
                         
                     </div>
                 }
-                  <hr></hr>
+                  <hr className="d-lg-block d-none"></hr>
 
                 <div>
                     <div className="row justify-content-center">
                 
-                    <br></br>
+                    <br className="d-lg-block d-none"></br>
                 
-                    <br></br>
+                    <br className="d-lg-block d-none"></br>
                     {!this.spotStore.alreadySaved && this.spotStore.selectedSpot.name ?
-                        <button type="button" className="btn btn-success mt-5 mb-5 btn-lg"  onClick={this.handleSave}>
+                        <button type="button" className="btn btn-success mt-3 mb-3 btn-lg"  onClick={this.handleSave}>
                             <span className="btn-inner--icon"><i className="ni ni-fat-add"></i></span>
                             Save Spot
                         </button>
                    : null}
 
                         {this.spotStore.alreadySaved && this.spotStore.selectedSpot.name ?
-                            <button type="button" className="btn btn-danger mt-5 mb-5 btn-lg" onClick={this.handleDelete}>
+                            <button type="button" className="btn btn-danger mt-3 mb-3 btn-lg" onClick={this.handleDelete}>
                                 <span className="btn-inner--icon"><i className="ni ni-fat-add"></i></span>
                                 Delete Spot
                         </button> 
@@ -78,7 +99,7 @@ class SpotDetailsCard extends Component {
                 </div>
 
 
-            </div>
+                </React.Fragment>
 
         )
     }

@@ -68,35 +68,25 @@ class MapDashboard extends Component {
           open={this.spotStore.drawerState}
           onClose={this.spotStore.toggleDrawer}
           onOpen={this.spotStore.toggleDrawer}
+          className="d-md-none"
         >
-     
-           
-        
+          <div className="curve">
+          <SpotDetailsCard />
+          </div>
+       
+
         </SwipeableDrawer>
 
-        <div className="container-fluid">
-          <MobileView>
-            {this.spotStore.gmapsLoaded ? <div style={{ height: "8%", zIndex: "100" }}>
-              <div className="justify-content-center align-self-center">
-                <Search />
-                <label style={{ marginLeft: "20px" }} className="switch align-middle center-block">
-                  <input name="switch" type="checkbox" onChange={this.handleInputChange} />
-                  <span className="slider"></span>
-                </label>
-              </div>
-            </div> : null}
-            <SpotsMap />
-          </MobileView>
-        </div>
 
-        <BrowserView>
           <div className="container-fluid container-dashboard big-container">
             <div className="spacer" />
 
             <div className="row">
 
               <div className="col-md-4 d-none d-lg-block">
+              <div className="delishus-card spot-detail">
                 <SpotDetailsCard />
+                </div>
               </div>
 
               <div className="col-md-12 col-lg-8">
@@ -117,13 +107,12 @@ class MapDashboard extends Component {
                   </div> 
 
                   : null}
- <div className="spacer" />
                   <SpotsMap />
                 </div>
               </div>
             </div>
           </div>
-        </BrowserView>
+        
         </React.Fragment>
 
      

@@ -557,6 +557,14 @@ td{
 
 .delishus-card{
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+
+  /* padding: 8px; */
+  border-radius: 18px;
+  background-color: white;
+}
+
+.delishus-map-card{
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   padding: 8px;
   border-radius: 18px;
   background-color: white;
@@ -635,13 +643,13 @@ body {
  tr{
    background-color: white !important;
  }
-/* 
+
  .autocomplete {
   position: relative;
   display: inline-block;
   width:90%;
   height: 8%;
-} */
+}
 
 .autocomplete-items {
   position: absolute;
@@ -674,7 +682,8 @@ body {
 }
 
 .detail-image{
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .pin{
@@ -813,4 +822,14 @@ input:checked + .slider:before {
   -webkit-transform: translateX(32px);
   -ms-transform: translateX(32px);
   transform: translateX(32px);
+}
+
+
+.MuiDrawer-paper-3 {
+  border-radius: 10px;
+}
+
+.dv-star-rating{
+  padding-left: 10px;
+  padding-top: 8px;
 }

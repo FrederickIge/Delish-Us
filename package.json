@@ -93,6 +93,8 @@
     "react-router-dom": "^4.3.1",
     "react-router-page-transition": "^3.1.0",
     "react-simple-dropdown": "^3.2.3",
+    "react-star-rating-component": "^1.4.1",
+    "react-star-ratings": "^2.3.0",
     "react-toastify": "^4.5.2",
     "react-transition-group": "^1.2.1",
     "reactjs-places-autocomplete": "^7.2.1",
