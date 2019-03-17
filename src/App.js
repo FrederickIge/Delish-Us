@@ -37,7 +37,7 @@ class App extends Component {
                 <Switch location={location}>
    
                
-                  <Route exact path="/dashboard" component={Dashboard} />
+                  <Route exact path="/dashboard" component={MapDashboard} />
                   <Route exact path="/doglist" component={MapDashboard} />
                   <Route exact path="/food/:id" component={FoodDetail} />
                   <Route exact path="/account" component={AccountPage} />

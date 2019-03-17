@@ -35,37 +35,57 @@ class Navbar extends Component {
       </Menu>
     );
 
+    const newmenu = ( ) => (
+
+      <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a className="dropdown-item">Action</a>
+        <a className="dropdown-item" >Another action</a>
+        <a className="dropdown-item" >Something else here</a>
+      </div>
+    )
+
     const NavigationNonAuth = () => (
-      <nav className="navbar navbar-expand-lg py-4">
+      <nav className="navbar navbar-expand-lg py-3">
         <div className="container">
-          <Link to="/" className="navbar-brand">
-            {/* <FontAwesomeIcon id = "globe" className="icon-layers fa-2x ml-auto globe" icon={faGlobeAfrica} /> */}
-            DelishUs
+
+        <Link style={{ textDecoration: 'none' }} to="/dashboard">
+            {/* <FontAwesomeIcon className="icon-layers  fa-2x globe" icon={faGlobeAfrica} /> */}
+          <b>DELISH-US</b>  
           </Link>
+
           <div>
-          <Link to="/login" className="ml-auto mr-3">
-              Login
-            </Link>
+
+          <Link style={{ textDecoration: 'none' }} to = "/login" className="ml-auto mr-3 nav-text-style">   
+                <b>LOGIN</b>     
+          </Link>
+
           </div>
         </div>
       </nav>
     );
 
     const NavigationAuth = (props) => (
-      <nav className="navbar navbar-expand-lg py-4">
+      <nav className="navbar navbar-expand-lg py-3">
         <div className="container">
-          <Link to="/dashboard">
-            {/* <FontAwesomeIcon className="icon-layers  fa-2x globe" icon={faGlobeAfrica} /> */}
-            DelishUs
+        
+          <Link style={{ textDecoration: 'none' }} to="/dashboard">
+            <img style={{ height: '25px', paddingBottom:"3px" }} className="img-fluid" src={require("../img/compass.png")} alt="Logo" />
+
+          <b style={{  marginLeft:"10px" }}>DELISH-US</b>  
           </Link>
 
           <div>
-            <Link to="/users" className="ml-auto mr-3">
-              My Spots
+
+            <Link style={{ textDecoration: 'none' }} to="/users" className="ml-auto mr-3 nav-text-style">
+              <b>MY SPOTS</b>
             </Link>
-            <Link to = {"/doglist"} className="ml-auto mr-2">
-              Map
+
+            <Link style={{ textDecoration: 'none' }} to = {"/doglist"} className="ml-auto mr-3 nav-text-style">
+            <b>MAP</b>  
             </Link>
+
+
+
             <Dropdown trigger={['click']} overlay={menu()}>
               {props.photoURL ? (
                 <img className="rounded-circle avatar-image--icon" src={props.photoURL} alt="Logo" />
@@ -73,6 +93,7 @@ class Navbar extends Component {
                 <FontAwesomeIcon className="avatar-image--icon" icon={faUser} />
               )}
             </Dropdown>
+
           </div>
 
         </div>

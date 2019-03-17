@@ -48,7 +48,7 @@ class Search extends React.Component {
             <input
               onFocus={this.handleFocus}
               {...getInputProps({
-                placeholder: 'Search Places ...',
+                placeholder: 'Search For a Spot',
                 className: 'form-control form-control-alternative',
                 onBlur: () => { this.handleBlur() },
               })}
