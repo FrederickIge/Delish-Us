@@ -6,21 +6,14 @@ import firebase from 'firebase';
 
 import SpotDetailsCard from "./SpotDetailsCard"
 import SpotsMap from './SpotsMap'
+import SpotList from "./SpotList";
 import Search from "../../components/Search"
 import withAuthorization from '../../components/hoc/withAuthorization';
-import { BrowserView, MobileView ,isBrowser ,isMobile } from "react-device-detect";
-
-import { withStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import Switch from "react-switch";
 
+
+import "react-table/react-table.css";
 
 const db = firebase.firestore();
 
@@ -99,15 +92,39 @@ class MapDashboard extends Component {
                   <div style={{ height: "8%" }}>
                     <div className="d-flex">
                       <Search  />
-                      <label style={{ marginBottom: "0rem", marginLeft:"10px" }}  className="switch  align-self-center">
+
+                      <Switch
+                       onChange={this.handleInputChange} 
+                       checkedIcon={
+                        <div>
+                          gang
+                        </div>
+                        }/>
+
+                      {/* <Switch size="large" checkedChildren="My Spots" unCheckedChildren="All Spots" defaultChecked /> */}
+                    
+
+                    {/* <label style={{ marginBottom: "0rem", marginLeft:"10px" }}  className="switch  align-self-center">
                         <input name="switch  align-self-center" type="checkbox" onChange={this.handleInputChange} />
                         <span className="slider"></span>
-                      </label>
+                    </label> */}
+
+
+
                     </div>
                   </div> 
 
                   : null}
-                  <SpotsMap />
+
+                   <SpotsMap/> 
+                   
+                   <SpotList/> 
+
+                  
+
+
+
+                    
                 </div>
               </div>
             </div>

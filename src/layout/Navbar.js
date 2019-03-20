@@ -8,16 +8,16 @@ import Menu, {Item as MenuItem} from 'rc-menu';
 import 'rc-dropdown/assets/index.css';
 import Headroom from 'react-headroom'
 
-@inject('routingStore', 'sessionStore')
+@inject('routingStore', 'sessionStore', 'spotStore')
 @observer
 class Navbar extends Component {
+
   routingStore = this.props.routingStore;
   sessionStore = this.props.sessionStore;
+  spotStore = this.props.spotStore;
 
   onSelect = ({key}) => {
-    
     let uid = this.sessionStore.authUser.uid
-
     if(key == "/doglist"){
      this.routingStore.push('/doglist/' + uid)
     }
@@ -25,6 +25,10 @@ class Navbar extends Component {
       this.routingStore.push(key);
     }
   };
+
+  componentDidMount(){
+    console.log(this.spotStore)
+  }
 
   render() {
     const menu = () => (
@@ -70,23 +74,24 @@ class Navbar extends Component {
         
           <Link style={{ textDecoration: 'none' }} to="/dashboard">
             <img style={{ height: '25px', paddingBottom:"3px" }} className="img-fluid" src={require("../img/compass.png")} alt="Logo" />
-
-          <b style={{  marginLeft:"10px" }}>DELISH-US</b>  
+            <b style={{  marginLeft:"10px" }}>DELISH-US</b>  
           </Link>
 
           <div>
 
-            <Link style={{ textDecoration: 'none' }} to="/users" className="ml-auto mr-3 nav-text-style">
+            {/* <Link style={{ textDecoration: 'none' }} to="/users" className="ml-auto mr-3 nav-text-style">
               <b>MY SPOTS</b>
-            </Link>
+            </Link> */}
 
-            <Link style={{ textDecoration: 'none' }} to = {"/doglist"} className="ml-auto mr-3 nav-text-style">
-            <b>MAP</b>  
-            </Link>
+            <span style={{ textDecoration: 'none' }} onClick = { this.spotStore.toggleView } className="ml-auto mr-3 nav-text-style">
+              <b>MAP</b>  
+            </span>
 
+            <span style={{ textDecoration: 'none' }} onClick = { this.spotStore.toggleView }  className="ml-auto mr-3 nav-text-style">
+              <b>Map View</b>  
+            </span>
 
-
-            <Dropdown trigger={['click']} overlay={menu()}>
+            <Dropdown trigger={['click']} overlay={ menu() }>
               {props.photoURL ? (
                 <img className="rounded-circle avatar-image--icon" src={props.photoURL} alt="Logo" />
               ) : (

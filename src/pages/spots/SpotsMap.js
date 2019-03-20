@@ -46,7 +46,7 @@ class SpotsMap extends Component {
 
   render() {
     return (
-      <div className="delishus-map-card google-map" >
+      <div className="delishus-map-card google-map" style={{display: this.spotStore.mapView ? 'block' : 'none'}} >
       <ToastContainer />
         {this.spotStore.showAllSpots}
         <GoogleMapReact

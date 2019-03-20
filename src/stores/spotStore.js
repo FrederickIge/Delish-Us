@@ -37,6 +37,8 @@ class spotStore {
 
   @observable drawerState = false;
 
+  @observable mapView = true;
+
   @action
   async selectSearchedSpot(geopoint) {
     this.selectedGeopoint = new Geopoint(geopoint);
@@ -68,7 +70,7 @@ class spotStore {
     let payload = this.prepareSpotPayload();
     let docRef = await this.fireStore.postSpot(payload);
     await this.displayNewSpot(docRef);
-    toast("Spot Saved !")
+    toast("Spot Saved !");
     this.alreadySaved = this.checkifSaved();
   }
 
@@ -76,7 +78,7 @@ class spotStore {
   async deleteSpot() {
     let key = this.selectedSpot.key;
     await this.fireStore.deleteSpot(this.selectedSpot.key);
-    toast("Spot Deleted !")
+    toast("Spot Deleted !");
     this.allSpots.splice(this.allSpots.findIndex((spot) => spot.key === key), 1);  
     this.selectedSpot = {};
     this.alreadySaved = false;
@@ -137,10 +139,15 @@ class spotStore {
   @computed get currentUserSpots() {
     return this.allSpots.filter((element) => element.userId === this.userId );
   }
+  
   @action
   toggleDrawer = () => {
-    console.log("gang")
     this.drawerState = !this.drawerState
+  }
+
+  toggleView = () => {
+    console.log('gang')
+    this.mapView = !this.mapView;
   }
 
 }

@@ -1,0 +1,64 @@
+import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
+import { compose } from 'recompose';
+import withAuthorization from '../../components/hoc/withAuthorization';
+import Table from 'react-bootstrap/Table'
+
+@inject('sessionStore', 'spotStore')
+@observer
+class SpotList extends Component {
+
+    spotStore = this.props.spotStore;
+    sessionStore = this.props.sessionStore;
+
+    state = {
+        mobileStyle: {},
+        mobileSearch: {}
+    }
+
+
+    componentDidMount() {
+
+    }
+
+    selectSpot(spot) {
+        this.props.spotStore.selectExistingSpot(spot);
+    }
+
+    render() {
+        return (
+            <div className="delishus-map-card spot-list" style={{ display: this.spotStore.mapView ? 'none' : 'block' }}>
+                <div className="container-fluid">
+                    <br></br>
+
+
+                    {!this.spotStore.showAllSpots ?
+                        this.spotStore.uniqueSpotsByGooglePlaceIds.map((spot) =>
+                        <React.Fragment>
+                            <div onClick={() => this.selectSpot(spot)} className="py-5 pl-4 spot-list-item border-bottom">
+                                <div style={{ fontSize: "24px"}}>{spot.name}</div>
+                            </div>            
+                        </React.Fragment>
+                    ): null
+                    }
+
+                    {this.spotStore.showAllSpots ?
+                        this.spotStore.currentUserSpots.map((spot) =>
+                        <React.Fragment>
+                            <div onClick={() => this.selectSpot(spot)} className="py-5 pl-4 spot-list-item border-bottom">
+                                <div style={{ fontSize: "24px"}}>{spot.name}</div>
+                            </div>            
+                        </React.Fragment>
+                    )
+                    : null}
+
+                </div>
+
+
+            </div>
+        )
+    }
+}
+const authCondition = (authUser) => !!authUser;
+
+export default compose(withAuthorization(authCondition))(SpotList);

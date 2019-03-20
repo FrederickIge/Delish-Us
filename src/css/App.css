@@ -583,6 +583,10 @@ td{
   height: 92%;
 }
 
+.spot-list{
+  min-height: 92%;
+}
+
 .google-map div{
   border-radius: 10px;
 }
@@ -832,4 +836,14 @@ input:checked + .slider:before {
 .dv-star-rating{
   padding-left: 10px;
   padding-top: 8px;
+}
+
+.nav-text-style{
+  font-family: 'Roboto', sans-serif;
+}
+
+.spot-list-item:hover{
+  background-color: #adb5bd;
+  cursor: pointer;
+  border-radius: 10px;
 }
