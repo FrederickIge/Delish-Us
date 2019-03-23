@@ -6,21 +6,21 @@ let loginUi = null;
 let config = null;
 
 const prodconfig = {
-  apiKey: 'AIzaSyCuUSuEVo_s9IBall-MpUvDQMdcSLmx7BI',
-  authDomain: 'react-fire-9a99e.firebaseapp.com',
-  databaseURL: 'https://react-fire-9a99e.firebaseio.com',
-  projectId: 'react-fire-9a99e',
-  storageBucket: 'react-fire-9a99e.appspot.com',
-  messagingSenderId: '528027897230'
+  apiKey: "AIzaSyB91ib-e9kb_ODsGtKM6TatzPy58q4xtxo",
+  authDomain: "delish-50d4b.firebaseapp.com",
+  databaseURL: "https://delish-50d4b.firebaseio.com",
+  projectId: "delish-50d4b",
+  storageBucket: "delish-50d4b.appspot.com",
+  messagingSenderId: "790815818945"
 };
 
 const devconfig = {
-  apiKey: 'AIzaSyCtkGCQVNHOxKgKYgDeBeYPaJiYDoYa9uo',
-  authDomain: 'doggietime-prod.firebaseapp.com',
-  databaseURL: 'https://doggietime-prod.firebaseio.com',
-  projectId: 'doggietime-prod',
-  storageBucket: '',
-  messagingSenderId: '1088180833349'
+  apiKey: "AIzaSyB91ib-e9kb_ODsGtKM6TatzPy58q4xtxo",
+  authDomain: "delish-50d4b.firebaseapp.com",
+  databaseURL: "https://delish-50d4b.firebaseio.com",
+  projectId: "delish-50d4b",
+  storageBucket: "delish-50d4b.appspot.com",
+  messagingSenderId: "790815818945"
 };
 
 if (process.env.NODE_ENV === 'production') {

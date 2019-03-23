@@ -5,7 +5,7 @@ import {Switch, Route} from 'react-router-dom';
 import withAuthentication from './components/hoc/withAuthentication';
 import Navbar from './layout/Navbar';
 import { inject, observer } from 'mobx-react';
-
+import { ToastContainer, toast } from 'react-toastify';
 import Landingpage from './pages/Landingpage';
 import AccountPage from './pages/account/Account';
 import Login from './pages/account/Login';
@@ -34,6 +34,7 @@ class App extends Component {
           <div className="main-container" >
             <Navbar />
             {/* <PoseGroup> */}
+            <ToastContainer/>
               <RoutesContainer key={location.pathname} style={{ height: "80vh"}}>
                 <Switch location={location}>
                   <Route exact path="/dashboard" component={MapDashboard} />
