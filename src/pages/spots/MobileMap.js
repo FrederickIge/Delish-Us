@@ -51,43 +51,25 @@ class MobileMap extends Component {
 
   render() {
     return (
-      <div className="google-map d-lg-none" style={{display: this.spotStore.mapView ? 'block' : 'none', position: "absolute", top: "0",bottom: "0", right: "0",   left: "0", zIndex:"1000"}} >
+      <div className="google-map d-lg-none" style={{display: this.spotStore.mapView ? 'block' : 'none', position: "absolute", top: "0",bottom: "0", right: "0",   left: "0", zIndex:"400"}} >
 
 
    {this.spotStore.gmapsLoaded ?<div style={{position: "absolute", zIndex:500, width:"100%", left:"0",right:"0"}}><MobileSearch /></div>: null}
         
-      {/* { this.spotStore.showAllSpots ?
-      <button 
-      onClick={() => this.spotStore.getRandomSpot()} 
-      style={{position: "absolute", zIndex:500, borderRadius:"10px"}} 
-      type="button" className="btn btn-primary">
-      Random
-      </button> :null} */}
 
-      {/* <ToastContainer /> */}
-        {this.spotStore.showAllSpots}
-        { this.spotStore.showAllSpots ?
-
-                <div style={{ position: "absolute", zIndex: 500, borderRadius: "0px", top: 46 }} >
+      
+        {this.spotStore.showAllSpots ?
+                <div style={{ position: "absolute",  borderRadius: "0px", top: 46 }} >
                     <button
                         onClick={() => this.spotStore.getRandomSpot()}
-                        style={{ zIndex: 500, borderRadius: "0px" }}
+                        style={{ zIndex: 100, borderRadius: "0px" }}
                         type="button" className="btn btn-primary">
                         Random
                     </button>
-
-                    {/* <label style={{ position: "absolute", zIndex: 500, borderRadius: "0px", top: 60, right: "0" }} className="switch  align-self-center">
-                        <input name="switch  align-self-center" type="checkbox" onChange={this.handleInputChange} />
-                        <span className="slider"></span>
-                    </label> */}
                 </div>
-
-      
-      
-      
       :null}
           
-    <label style={{position: "absolute", zIndex:500, borderRadius:"0px", top:55, right:"0"}}  className="switch  align-self-center">
+    <label style={{position: "absolute", zIndex:100, borderRadius:"0px", top:55, right:"0"}}  className="switch  align-self-center">
         <input name="switch  align-self-center" type="checkbox" onChange={this.handleInputChange} />
         <span className="slider"></span>
     </label>
@@ -135,7 +117,6 @@ class MobileMap extends Component {
               lng={this.spotStore.selectedSpot.lng}
               text={this.spotStore.selectedSpot.name}
             /> : null}
-
         </GoogleMapReact>
 
       </div>

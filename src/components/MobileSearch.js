@@ -21,6 +21,7 @@ class MobileSearch extends React.Component {
   };
 
   handleBlur = () => {
+    console.log("gan")
     this.setState({ showResults: false })
   }
 
@@ -31,7 +32,7 @@ class MobileSearch extends React.Component {
   componentDidMount() {
     console.log(this.search)
     if (isMobile) {
-      this.setState({ mobileSearch: { position: "absolute", top: "0px" , zIndex :"4"} })
+      this.setState({ mobileSearch: { position: "absolute", top: "0px" , zIndex :"600"} })
     }
   }
 
