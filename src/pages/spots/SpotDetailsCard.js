@@ -30,11 +30,11 @@ class SpotDetailsCard extends Component {
 
             <React.Fragment>
                 {this.spotStore.selectedSpot.name ?
-                    <div style={this.style}>
+                    <div style={this.style} className="detail-image">
 
-                        <div className="spot-details-top">
+                        <div className="spot-details-top detail-image">
 
-                            <div style={{minHeight:"50%"}}>
+                            <div style={{minHeight:"50%"}} className="detail-image">
                                 <img style={{height:"30vh", width:"100%"}} className="img-fluid detail-image" alt="gag" src={this.spotStore.selectedSpot.image} />                         
                             </div>
 

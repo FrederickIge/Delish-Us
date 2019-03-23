@@ -17,6 +17,7 @@ class Search extends React.Component {
   handleSelect = (description, placeId, suggestion) => {
     this.spotStore.selectSearchedSpot(suggestion);
     this.setState({address:''});
+    this.exampleRef.blur();
   };
 
   handleBlur = () => {
@@ -28,6 +29,7 @@ class Search extends React.Component {
   }
 
   componentDidMount() {
+    this.exampleRef = React.createRef();
     if (isMobile) {
       this.setState({ mobileSearch: { position: "absolute", top: "0px" , zIndex :"4"} })
     }
@@ -46,6 +48,7 @@ class Search extends React.Component {
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div className="autocomplete flex-grow-1 align-self-center">
             <input
+              ref={this.exampleRef}
               onFocus={this.handleFocus}
               {...getInputProps({
                 placeholder: 'Search For a Spot',

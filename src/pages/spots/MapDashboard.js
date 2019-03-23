@@ -71,9 +71,9 @@ class MapDashboard extends Component {
           open={this.spotStore.drawerState}
           onClose={()=>this.spotStore.toggleDrawer(false)}
           onOpen={() =>this.spotStore.toggleDrawer(true)}
-          className="d-lg-none"
+          className="d-lg-none detail-image curved-drawer"
         >
-          <div className="curve">
+          <div className="curve detail-image">
             <SpotDetailsCard />
           </div>
         </SwipeableDrawer>

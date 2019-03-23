@@ -2,14 +2,14 @@ import React from 'react';
 import PlacesAutocomplete from 'reactjs-places-autocomplete';
 import { inject } from 'mobx-react';
 import { isMobile } from 'react-device-detect';
-
+import ReactDOM from "react-dom"
 @inject('spotStore')
 class MobileSearch extends React.Component {
 
   spotStore = this.props.spotStore;
 
   state = { address: '', showResults: false, mobileSearch:{ } };
-
+  search = React.createRef()
   handleChange = address => {
     this.setState({ address });
   };
@@ -17,10 +17,10 @@ class MobileSearch extends React.Component {
   handleSelect = (description, placeId, suggestion) => {
     this.spotStore.selectSearchedSpot(suggestion);
     this.setState({address:''});
+    this.search.current.blur();
   };
 
   handleBlur = () => {
-    console.log("mob")
     this.setState({ showResults: false })
   }
 
@@ -29,6 +29,7 @@ class MobileSearch extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.search)
     if (isMobile) {
       this.setState({ mobileSearch: { position: "absolute", top: "0px" , zIndex :"4"} })
     }
@@ -47,6 +48,8 @@ class MobileSearch extends React.Component {
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div className="autocomplete flex-grow-1 align-self-center">
             <input
+              name="search"
+              ref={this.search}
               onFocus={this.handleFocus}
               {...getInputProps({
                 placeholder: 'Search For a Spot',

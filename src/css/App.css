@@ -947,6 +947,11 @@ div#simple-popper {
   }
   }
 
+  .MuiDrawer-paperAnchorBottom-40 {
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+}
+
 
  /* .container-dashboard {
     overflow: hidden;
