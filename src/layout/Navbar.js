@@ -1,16 +1,38 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {faUser, faGlobeAfrica} from '@fortawesome/free-solid-svg-icons';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {inject, observer} from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 import Dropdown from 'rc-dropdown';
-import Menu, {Item as MenuItem} from 'rc-menu';
 import 'rc-dropdown/assets/index.css';
-import Headroom from 'react-headroom'
+import Headroom from 'react-headroom';
+import Fade from '@material-ui/core/Fade';
+import Popper from '@material-ui/core/Popper';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import AvatarMenu from './avatar-menu'
+const styles = theme => ({
+  typography: {
+    padding: theme.spacing.unit * 2,
+  },
+});
 
 @inject('routingStore', 'sessionStore', 'spotStore')
 @observer
 class Navbar extends Component {
+  state = {
+    anchorEl: null,
+  };
+
+  handleClick = event => {
+    console.log(event.currentTarget)
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
 
   routingStore = this.props.routingStore;
   sessionStore = this.props.sessionStore;
@@ -31,22 +53,8 @@ class Navbar extends Component {
   }
 
   render() {
-    const menu = () => (
-      <Menu onSelect={this.onSelect}>
-        <MenuItem key="/doglist">My Dogs</MenuItem>
-        <MenuItem key="/dashboard">The Dog Shelter</MenuItem>
-        <MenuItem key="/account"> My Account</MenuItem>
-      </Menu>
-    );
 
-    const newmenu = ( ) => (
-
-      <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a className="dropdown-item">Action</a>
-        <a className="dropdown-item" >Another action</a>
-        <a className="dropdown-item" >Something else here</a>
-      </div>
-    )
+    const { anchorEl } = this.state;
 
     const NavigationNonAuth = () => (
       <nav className="navbar navbar-expand-lg py-3">
@@ -76,28 +84,43 @@ class Navbar extends Component {
             <img style={{ height: '25px', paddingBottom:"3px" }} className="img-fluid" src={require("../img/compass.png")} alt="Logo" />
             <b style={{  marginLeft:"10px" }}>DELISH-US</b>  
           </Link>
-
           <div>
 
-            {/* <Link style={{ textDecoration: 'none' }} to="/users" className="ml-auto mr-3 nav-text-style">
-              <b>MY SPOTS</b>
-            </Link> */}
-
-            <span style={{ textDecoration: 'none' }} onClick = { this.spotStore.toggleView } className="ml-auto mr-3 nav-text-style">
-              <b>MAP</b>  
+            <span style={{ textDecoration: 'none', color:"#1890ff" }} onClick={this.spotStore.toggleView} className="ml-auto mr-3 nav-text-style">
+              {props.mapView ? <b>MAP VIEW</b> : <b>LIST VIEW</b>} 
             </span>
 
-            <span style={{ textDecoration: 'none' }} onClick = { this.spotStore.toggleView }  className="ml-auto mr-3 nav-text-style">
-              <b>Map View</b>  
-            </span>
 
-            <Dropdown trigger={['click']} overlay={ menu() }>
+
+            <AvatarMenu/>
+
+            {/* <Button
+              aria-owns={anchorEl ? 'simple-menu' : undefined}
+              aria-haspopup="true"
+              onClick={this.handleClick}
+            >
+              <img className="rounded-circle avatar-image--icon" src={props.photoURL} alt="Logo"/>
+            </Button>
+
+            <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={this.handleClose}
+        >
+          <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+          <MenuItem onClick={this.handleClose}>My account</MenuItem>
+          <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+        </Menu> */}
+
+
+            {/* <Dropdown trigger={['click']} overlay={ menu() }>
               {props.photoURL ? (
                 <img className="rounded-circle avatar-image--icon" src={props.photoURL} alt="Logo" />
               ) : (
                 <FontAwesomeIcon className="avatar-image--icon" icon={faUser} />
               )}
-            </Dropdown>
+            </Dropdown> */}
 
           </div>
 
@@ -108,7 +131,7 @@ class Navbar extends Component {
     return (
       <Headroom>
         <div className="doggo-nav">
-          {this.sessionStore.authUser ? <NavigationAuth photoURL={this.sessionStore.authUser.photoURL} /> : <NavigationNonAuth />}
+          {this.sessionStore.authUser ? <NavigationAuth mapView = {this.spotStore.mapView } photoURL={this.sessionStore.authUser.photoURL} /> : <NavigationNonAuth />}
         </div>
       </Headroom>
     );

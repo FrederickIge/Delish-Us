@@ -61,7 +61,7 @@ class MapDashboard extends Component {
           open={this.spotStore.drawerState}
           onClose={this.spotStore.toggleDrawer}
           onOpen={this.spotStore.toggleDrawer}
-          className="d-md-none"
+          className="d-lg-none"
         >
           <div className="curve">
           <SpotDetailsCard />
@@ -71,16 +71,16 @@ class MapDashboard extends Component {
         </SwipeableDrawer>
 
 
-          <div className="container-fluid container-dashboard big-container">
+          <div className="container-fluid container-dashboard big-container" style={{ height: "100%"}}  >
             <div className="spacer" />
 
-            <div className="row">
+            <div className="row" style={{ height: "100%"}}>
 
-              <div className="col-md-4 d-none d-lg-block">
+            <div className="col-md-4 d-none d-lg-block">
               <div className="delishus-card spot-detail">
                 <SpotDetailsCard />
-                </div>
               </div>
+            </div>
 
               <div className="col-md-12 col-lg-8">
 
@@ -89,36 +89,30 @@ class MapDashboard extends Component {
 
                   {this.spotStore.gmapsLoaded ? 
 
-                  <div style={{ height: "8%" }}>
+                  <div style={{ height: "10%"}}>
+
                     <div className="d-flex">
-                      <Search  />
-
-                      <Switch
-                       onChange={this.handleInputChange} 
-                       checkedIcon={
-                        <div>
-                          gang
-                        </div>
-                        }/>
-
-                      {/* <Switch size="large" checkedChildren="My Spots" unCheckedChildren="All Spots" defaultChecked /> */}
-                    
-
-                    {/* <label style={{ marginBottom: "0rem", marginLeft:"10px" }}  className="switch  align-self-center">
+                      <Search />                
+                      <label style={{ marginBottom: "0rem", marginLeft: "10px" }} className="switch  align-self-center">
                         <input name="switch  align-self-center" type="checkbox" onChange={this.handleInputChange} />
                         <span className="slider"></span>
-                    </label> */}
-
-
-
+                      </label>
                     </div>
+
+                    <div className="d-flex justify-content-center">
+                      {this.spotStore.showAllSpots ? <span style={{ color: "rgba(0, 0, 0, 0.41)", fontSize: "18px" }}><b>Displaying My Spots</b></span> : <span style={{ color: "rgba(0, 0, 0, 0.41)", fontSize: "18px" }}><b>Displaying All Spots</b></span>}
+                    </div>
+
                   </div> 
 
                   : null}
 
-                   <SpotsMap/> 
-                   
-                   <SpotList/> 
+                <div style={{ height: "90%" }}>
+                  <SpotsMap />
+
+                  <SpotList />
+
+                </div>
 
                   
 

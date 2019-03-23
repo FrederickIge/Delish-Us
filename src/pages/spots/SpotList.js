@@ -31,24 +31,20 @@ class SpotList extends Component {
                 <div className="container-fluid">
                     <br></br>
 
-
+            
                     {!this.spotStore.showAllSpots ?
                         this.spotStore.uniqueSpotsByGooglePlaceIds.map((spot) =>
-                        <React.Fragment>
-                            <div onClick={() => this.selectSpot(spot)} className="py-5 pl-4 spot-list-item border-bottom">
+                            <div key={spot.key} onClick={() => this.selectSpot(spot)} className="py-4 pl-4 spot-list-item border-bottom">
                                 <div style={{ fontSize: "24px"}}>{spot.name}</div>
                             </div>            
-                        </React.Fragment>
                     ): null
                     }
 
                     {this.spotStore.showAllSpots ?
                         this.spotStore.currentUserSpots.map((spot) =>
-                        <React.Fragment>
-                            <div onClick={() => this.selectSpot(spot)} className="py-5 pl-4 spot-list-item border-bottom">
-                                <div style={{ fontSize: "24px"}}>{spot.name}</div>
+                            <div key={spot.key} onClick={() => this.selectSpot(spot)} className="py-4 pl-4 spot-list-item border-bottom">
+                                <div style={{ fontSize: "24px"}}>{spot.name} </div>
                             </div>            
-                        </React.Fragment>
                     )
                     : null}
 

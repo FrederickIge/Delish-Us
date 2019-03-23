@@ -30,10 +30,8 @@ class SpotsMap extends Component {
   };
 
   componentDidMount() {
-    console.log('check')
     if (isMobile) {
       this.setState({ mobileStyle: { height: "100vh", width: "100%" , zIndex :"1"} })
-      console.log('check')
     }
     this.spotStore.getAllSpots();
   }
@@ -47,7 +45,15 @@ class SpotsMap extends Component {
   render() {
     return (
       <div className="delishus-map-card google-map" style={{display: this.spotStore.mapView ? 'block' : 'none'}} >
-      <ToastContainer />
+      { this.spotStore.showAllSpots ?
+      <button 
+      onClick={() => this.spotStore.getRandomSpot()} 
+      style={{position: "absolute", zIndex:500}} 
+      type="button" className="btn btn-primary">
+      Random
+      </button> :null}
+
+      {/* <ToastContainer /> */}
         {this.spotStore.showAllSpots}
         <GoogleMapReact
           id="map"

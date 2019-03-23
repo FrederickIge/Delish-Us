@@ -39,6 +39,8 @@ class spotStore {
 
   @observable mapView = true;
 
+  @observable likedBy = []
+
   @action
   async selectSearchedSpot(geopoint) {
     this.selectedGeopoint = new Geopoint(geopoint);
@@ -48,15 +50,21 @@ class spotStore {
   }
 
   @action
+  async getRandomSpot() {
+    let randomSpot = this.allSpots[Math.floor(Math.random() * this.allSpots.length)];
+    await this.selectExistingSpot(randomSpot);
+    this.moveMapToSelectedSpot();
+  }
+
+  @action
   async selectExistingSpot(spot) {
     this.selectedGeopoint = spot;
     this.selectedSpot = await this.loadSpotDetails();
     this.alreadySaved = this.checkifSaved();
-    console.log(window.innerWidth <= 992)
     if(window.innerWidth <= 992){
-      console.log(window.innerWidth <= 992)
       this.toggleDrawer();
     }
+    this.findLikedBy()
   }
  
   @action
@@ -145,9 +153,13 @@ class spotStore {
     this.drawerState = !this.drawerState
   }
 
+  @action
   toggleView = () => {
-    console.log('gang')
     this.mapView = !this.mapView;
+  }
+
+  async findLikedBy() {
+     this.likedBy = await this.fireStore.findLikedBy(this.selectedSpot.googlePlaceId);
   }
 
 }

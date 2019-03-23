@@ -574,25 +574,24 @@ td{
   /* background-color: white !important; */
 }
 
-.google-map-container{
-  height: 82vh;
-
+/* .google-map-container{
+  height: 100%;
 }
 
 .google-map{
-  height: 92%;
+  height: 100%;
 }
 
 .spot-list{
   min-height: 92%;
-}
+} */
 
 .google-map div{
   border-radius: 10px;
 }
 
 .spot-detail{
-  height: 82vh;
+  height: 100%;
 }
 
 .white-bg{
@@ -618,7 +617,6 @@ footer{
   overflow: hidden;
   display: block;
   position: relative;
-  padding-bottom: 50px; /* height of your footer */
  }
 
  footer {

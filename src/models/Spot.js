@@ -1,6 +1,5 @@
 class Spot {
   constructor(place, spot) {
-      console.log(spot)
     this.name = place.name;
     this.address = place.formatted_address;
     this.rating = place.rating;

@@ -54,7 +54,16 @@ class SpotDetailsCard extends Component {
                                 </div>
 
                                <div>
+
                                Liked By:
+                    
+
+                                    {this.spotStore.likedBy.map((user) =>
+                                             <div key={user}>
+                                                 {user}
+                                             </div>
+                                    )}
+
                                </div> 
 
                             </div>
@@ -95,10 +104,7 @@ class SpotDetailsCard extends Component {
 
                             {this.spotStore.alreadySaved && this.spotStore.selectedSpot.name ?
                                 <div>
-                                    <button type="button" className="btn btn-primary mt-3 mb-3 btn-lg btn-block" onClick={this.handleDelete}>
-                                        <span className="btn-inner--icon"><i className="ni ni-fat-add"></i></span>
-                                        Add Comment
-                                                                </button>
+
                                     <button type="button" className="btn btn-danger mt-3 mb-3 btn-lg btn-block" onClick={this.handleDelete}>
                                         <span className="btn-inner--icon"><i className="ni ni-fat-add"></i></span>
                                         Delete Spot
