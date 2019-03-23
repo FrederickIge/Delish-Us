@@ -43,6 +43,10 @@ class MobileMap extends Component {
     this.props.spotStore.selectExistingSpot(spot);
   }
 
+  handleInputChange = (event) => {
+    this.spotStore.showAllSpots = !this.spotStore.showAllSpots;
+}
+
 
 
   render() {
@@ -51,7 +55,7 @@ class MobileMap extends Component {
 
 
    {this.spotStore.gmapsLoaded ?<div style={{position: "absolute", zIndex:500, width:"100%", left:"0",right:"0"}}><MobileSearch /></div>: null}
-
+        
       {/* { this.spotStore.showAllSpots ?
       <button 
       onClick={() => this.spotStore.getRandomSpot()} 
@@ -62,6 +66,31 @@ class MobileMap extends Component {
 
       {/* <ToastContainer /> */}
         {this.spotStore.showAllSpots}
+        { this.spotStore.showAllSpots ?
+
+                <div style={{ position: "absolute", zIndex: 500, borderRadius: "0px", top: 46 }} >
+                    <button
+                        onClick={() => this.spotStore.getRandomSpot()}
+                        style={{ zIndex: 500, borderRadius: "0px" }}
+                        type="button" className="btn btn-primary">
+                        Random
+                    </button>
+
+                    {/* <label style={{ position: "absolute", zIndex: 500, borderRadius: "0px", top: 60, right: "0" }} className="switch  align-self-center">
+                        <input name="switch  align-self-center" type="checkbox" onChange={this.handleInputChange} />
+                        <span className="slider"></span>
+                    </label> */}
+                </div>
+
+      
+      
+      
+      :null}
+          
+    <label style={{position: "absolute", zIndex:500, borderRadius:"0px", top:55, right:"0"}}  className="switch  align-self-center">
+        <input name="switch  align-self-center" type="checkbox" onChange={this.handleInputChange} />
+        <span className="slider"></span>
+    </label>
 
         <GoogleMapReact
           id="map"
@@ -69,7 +98,7 @@ class MobileMap extends Component {
           defaultZoom={11}
           onGoogleApiLoaded={({ map, maps }) => this.apiIsLoaded(map, maps)}
           center={this.spotStore.mapGeolocation.center}
-          options={{fullscreenControl: false}}
+          options={{fullscreenControl: false, zoomControl: false}}
         >
 
           {

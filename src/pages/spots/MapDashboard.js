@@ -16,6 +16,7 @@ import Switch from "react-switch";
 
 import "react-table/react-table.css";
 
+const preventDefault = e => e.preventDefault();
 
 const db = firebase.firestore();
 
@@ -41,10 +42,17 @@ class MapDashboard extends Component {
   sessionStore = this.props.sessionStore;
   spotStore = this.props.spotStore;
 
+  componentWillUnmount(){
+    // window.removeEventListener('touchmove', preventDefault);
+  }
 
   async componentDidMount() {
+    window.addEventListener('touchmove', preventDefault, { passive: false });
+
     let position = await getPosition();
     this.spotStore.mapGeolocation.center = { lat: position.coords.latitude, lng: position.coords.longitude };
+
+
   }
 
   handleInputChange = (event) => {
@@ -61,8 +69,8 @@ class MapDashboard extends Component {
         <SwipeableDrawer
           anchor="bottom"
           open={this.spotStore.drawerState}
-          onClose={this.spotStore.toggleDrawer}
-          onOpen={this.spotStore.toggleDrawer}
+          onClose={()=>this.spotStore.toggleDrawer(false)}
+          onOpen={() =>this.spotStore.toggleDrawer(true)}
           className="d-lg-none"
         >
           <div className="curve">
@@ -71,7 +79,7 @@ class MapDashboard extends Component {
         </SwipeableDrawer>
 
 
-          <div className="container container-dashboard big-container" style={{ height: "calc(100vh - 76px)", position:"relative"}}  >
+          <div className="container container-dashboard big-container" style={{ height: "calc(100vh - 140px)", position:"relative", overflow: "hidden"}}  >
             <div className="spacer d-none d-lg-block" />
 
             <div className="row" style={{ height: "90%"}}>

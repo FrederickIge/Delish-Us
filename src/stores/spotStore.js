@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import Geopoint from "../models/Geopoint";
 import { ToastContainer, toast } from 'react-toastify';
 import { BrowserView, MobileView ,isBrowser ,isMobile } from "react-device-detect";
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 class spotStore {
  
@@ -152,7 +153,7 @@ class spotStore {
   }
   
   @action
-  toggleDrawer = () => {
+  toggleDrawer = (open) => {
     this.drawerState = !this.drawerState
   }
 
