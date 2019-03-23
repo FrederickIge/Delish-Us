@@ -587,7 +587,7 @@ td{
 } */
 
 .google-map div{
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 
 .spot-detail{
@@ -649,13 +649,14 @@ body {
  .autocomplete {
   position: relative;
   display: inline-block;
-  width:90%;
+  width:100%;
   height: 8%;
 }
 
 .autocomplete-items {
   position: absolute;
-  border: 1px solid #d4d4d4;
+  /* border: 1px solid #d4d4d4; */
+  border-radius: 0;
   border-bottom: none;
   border-top: none;
   z-index: 99;
@@ -861,7 +862,9 @@ div#simple-popper {
 }
 
 
-
+.curve{
+  border-radius: 20px;
+}
 
 
 
@@ -929,11 +932,17 @@ div#simple-popper {
 /* 1200+ */
   @media only screen and (min-width: 1200px) { 
     .search-container{
-      height: 10%
+      height: 7%
     }
   
     .map-list-container{
-      height: 90% 
+      height: 93% 
     }
 
+  }
+
+  @media (max-width: 992px){
+    .container {
+      min-width: 100% !important;
+  }
   }

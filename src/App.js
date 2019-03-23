@@ -35,7 +35,6 @@ class App extends Component {
             <Navbar />
             {/* <PoseGroup> */}
             <ToastContainer/>
-              <RoutesContainer key={location.pathname} style={{ height: "80vh"}}>
                 <Switch location={location}>
                   <Route exact path="/dashboard" component={MapDashboard} />
                   <Route exact path="/doglist" component={MapDashboard} />
@@ -45,7 +44,6 @@ class App extends Component {
                   <Route exact path="/signup" component={Signup} />
                   <Route path="/" component={Landingpage} />
                 </Switch>
-              </RoutesContainer>
             {/* </PoseGroup> */}
             {/* <Footer /> */}
           </div>

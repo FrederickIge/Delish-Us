@@ -47,6 +47,9 @@ class spotStore {
     this.selectedSpot = await this.loadSpotDetails();
     this.moveMapToSelectedSpot();
     this.alreadySaved = this.checkifSaved();
+    if(window.innerWidth <= 992){
+      this.toggleDrawer();
+    }
   }
 
   @action

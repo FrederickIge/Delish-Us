@@ -1,10 +1,10 @@
 import React from 'react';
 import PlacesAutocomplete from 'reactjs-places-autocomplete';
 import { inject } from 'mobx-react';
-import {isMobile, isBrowser} from 'react-device-detect';
+import { isMobile } from 'react-device-detect';
 
 @inject('spotStore')
-class Search extends React.Component {
+class MobileSearch extends React.Component {
 
   spotStore = this.props.spotStore;
 
@@ -20,6 +20,7 @@ class Search extends React.Component {
   };
 
   handleBlur = () => {
+    console.log("mob")
     this.setState({ showResults: false })
   }
 
@@ -86,4 +87,4 @@ class Search extends React.Component {
   }
 }
 
-export default Search;
+export default MobileSearch;

@@ -5,6 +5,7 @@ import withAuthorization from '../../components/hoc/withAuthorization';
 import GoogleMapReact from 'google-map-react';
 import { ToastContainer, toast } from 'react-toastify';
 import {isMobile, isBrowser} from 'react-device-detect';
+import MobileSearch from "../../components/MobileSearch"
 
 const AnyReactComponent = ({ text, onClick }) => (
   <div onClick={onClick} className="demo">
@@ -12,9 +13,11 @@ const AnyReactComponent = ({ text, onClick }) => (
   </div>
 );
 
+
+
 @inject('sessionStore', 'spotStore')
 @observer
-class SpotsMap extends Component {
+class MobileMap extends Component {
 
   spotStore = this.props.spotStore;
   sessionStore = this.props.sessionStore;
@@ -44,23 +47,29 @@ class SpotsMap extends Component {
 
   render() {
     return (
-      <div className="delishus-map-card google-map " style={{display: this.spotStore.mapView ? 'block' : 'none', height:"100%"}} >
+      <div className="google-map d-lg-none" style={{display: this.spotStore.mapView ? 'block' : 'none', position: "absolute", top: "0",bottom: "0", right: "0",   left: "0", zIndex:"1000"}} >
 
-      { this.spotStore.showAllSpots ?
+
+   {this.spotStore.gmapsLoaded ?<div style={{position: "absolute", zIndex:500, width:"100%", left:"0",right:"0"}}><MobileSearch /></div>: null}
+
+      {/* { this.spotStore.showAllSpots ?
       <button 
       onClick={() => this.spotStore.getRandomSpot()} 
       style={{position: "absolute", zIndex:500, borderRadius:"10px"}} 
       type="button" className="btn btn-primary">
       Random
-      </button> :null}
+      </button> :null} */}
 
+      {/* <ToastContainer /> */}
         {this.spotStore.showAllSpots}
+
         <GoogleMapReact
           id="map"
           bootstrapURLKeys={{ key: 'AIzaSyAJdMUyuQiG2DEHgGG3Tvebb9-BzR0JXwE', libraries: "places" }}
           defaultZoom={11}
           onGoogleApiLoaded={({ map, maps }) => this.apiIsLoaded(map, maps)}
           center={this.spotStore.mapGeolocation.center}
+          options={{fullscreenControl: false}}
         >
 
           {
@@ -107,4 +116,4 @@ class SpotsMap extends Component {
 }
 const authCondition = (authUser) => !!authUser;
 
-export default compose(withAuthorization(authCondition))(SpotsMap);
+export default compose(withAuthorization(authCondition))(MobileMap);

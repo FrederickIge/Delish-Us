@@ -6,6 +6,7 @@ import firebase from 'firebase';
 
 import SpotDetailsCard from "./SpotDetailsCard"
 import SpotsMap from './SpotsMap'
+import MobileMap from './MobileMap'
 import SpotList from "./SpotList";
 import Search from "../../components/Search"
 import withAuthorization from '../../components/hoc/withAuthorization';
@@ -14,6 +15,7 @@ import Switch from "react-switch";
 
 
 import "react-table/react-table.css";
+
 
 const db = firebase.firestore();
 
@@ -64,18 +66,16 @@ class MapDashboard extends Component {
           className="d-lg-none"
         >
           <div className="curve">
-          <SpotDetailsCard />
+            <SpotDetailsCard />
           </div>
-       
-
         </SwipeableDrawer>
 
 
-          <div className="container container-dashboard big-container" style={{ height: "100%"}}  >
-            <div className="spacer" />
+          <div className="container container-dashboard big-container" style={{ height: "calc(100vh - 76px)", position:"relative"}}  >
+            <div className="spacer d-none d-lg-block" />
 
-            <div className="row" style={{ height: "100%"}}>
-
+            <div className="row" style={{ height: "90%"}}>
+                <MobileMap></MobileMap>
             <div className="col-md-4 d-none d-lg-block">
               <div className="delishus-card spot-detail">
                 <SpotDetailsCard />
@@ -89,7 +89,7 @@ class MapDashboard extends Component {
 
                   {this.spotStore.gmapsLoaded ? 
 
-                  <div className="search-container" >
+                  <div className="search-container d-none d-lg-block">
 
                     <div className="d-flex">
                       <Search />                
@@ -107,7 +107,7 @@ class MapDashboard extends Component {
 
                   : null}
 
-                <div className="map-list-container" >
+                <div className="map-list-container d-none d-lg-block" >
                   <SpotsMap />
                   <SpotList />
                 </div>
