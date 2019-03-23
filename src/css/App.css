@@ -845,3 +845,95 @@ input:checked + .slider:before {
   cursor: pointer;
   border-radius: 10px;
 }
+
+div#simple-popper {
+  z-index: 500;
+  margin-top: 30px;
+}
+
+#avatar:hover {
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0) !important;
+  outline:0 !important;
+}
+#avatar{
+  outline:0 !important;
+}
+
+
+
+
+
+
+
+  @media only screen and (min-width: 600px) {
+    .search-container{
+      height: 10%
+    }
+  
+    .map-list-container{
+      height: 85% 
+    }
+
+  }
+
+  @media only screen and (min-width: 414px) {
+    .search-container{
+      height: 12%
+    }
+  
+    .map-list-container{
+      height: 80% 
+    }
+
+  }
+
+
+/* 320px+ */
+  @media only screen and (min-width: 320px) {
+    .search-container{
+      height: 16%
+    }
+  
+    .map-list-container{
+      height: 85% 
+    }
+
+  }
+
+/* 375px+ */
+  @media only screen and (min-width: 375px) {
+    .search-container{
+      height: 14%
+    }
+  
+    .map-list-container{
+      height: 90% 
+    }
+
+  }
+
+/* 768px+ */
+  @media only screen and (min-width: 768px) {
+
+    .search-container{
+      height: 10%
+    }
+  
+    .map-list-container{
+      height: 90% 
+    }
+
+  } 
+
+/* 1200+ */
+  @media only screen and (min-width: 1200px) { 
+    .search-container{
+      height: 10%
+    }
+  
+    .map-list-container{
+      height: 90% 
+    }
+
+  }

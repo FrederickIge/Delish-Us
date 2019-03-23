@@ -71,7 +71,7 @@ class MapDashboard extends Component {
         </SwipeableDrawer>
 
 
-          <div className="container-fluid container-dashboard big-container" style={{ height: "100%"}}  >
+          <div className="container container-dashboard big-container" style={{ height: "100%"}}  >
             <div className="spacer" />
 
             <div className="row" style={{ height: "100%"}}>
@@ -85,11 +85,11 @@ class MapDashboard extends Component {
               <div className="col-md-12 col-lg-8">
 
 
-                <div className="google-map-container">
+                <div className="google-map-container" style={{ height: "100%"}}>
 
                   {this.spotStore.gmapsLoaded ? 
 
-                  <div style={{ height: "10%"}}>
+                  <div className="search-container" >
 
                     <div className="d-flex">
                       <Search />                
@@ -107,11 +107,9 @@ class MapDashboard extends Component {
 
                   : null}
 
-                <div style={{ height: "90%" }}>
+                <div className="map-list-container" >
                   <SpotsMap />
-
                   <SpotList />
-
                 </div>
 
                   

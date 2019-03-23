@@ -46,6 +46,8 @@ class AvatarMenu extends Component {
     return (
         <span>
             <Button
+            id ="avatar"
+                disableRipple={true}
                 aria-owns={anchorEl ? 'simple-menu' : undefined}
                 aria-haspopup="true"
                 onClick={this.handleClick}
@@ -59,8 +61,7 @@ class AvatarMenu extends Component {
                 open={Boolean(anchorEl)}
                 onClose={this.handleClose}
             >
-                <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                <MenuItem onClick={this.handleClose}>Settings</MenuItem>
                 <MenuItem onClick={this.handleClose}>Logout</MenuItem>
             </Menu>
         </span>

@@ -34,7 +34,7 @@ class App extends Component {
           <div className="main-container" >
             <Navbar />
             {/* <PoseGroup> */}
-              <RoutesContainer key={location.pathname} style={{ height: "90vh"}}>
+              <RoutesContainer key={location.pathname} style={{ height: "80vh"}}>
                 <Switch location={location}>
                   <Route exact path="/dashboard" component={MapDashboard} />
                   <Route exact path="/doglist" component={MapDashboard} />

@@ -44,11 +44,12 @@ class SpotsMap extends Component {
 
   render() {
     return (
-      <div className="delishus-map-card google-map" style={{display: this.spotStore.mapView ? 'block' : 'none'}} >
+      <div className="delishus-map-card google-map" style={{display: this.spotStore.mapView ? 'block' : 'none', height:"100%"}} >
       { this.spotStore.showAllSpots ?
       <button 
+
       onClick={() => this.spotStore.getRandomSpot()} 
-      style={{position: "absolute", zIndex:500}} 
+      style={{position: "absolute", zIndex:500, borderRadius:"10px"}} 
       type="button" className="btn btn-primary">
       Random
       </button> :null}
