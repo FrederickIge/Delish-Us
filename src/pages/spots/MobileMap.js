@@ -59,9 +59,10 @@ class MobileMap extends Component {
 
         <div style={{ position: "absolute", borderRadius: "0px", top: 46, zIndex: 100, left:"0", right:"0" }}>
 
-          <div style ={{backgroundColor:"white"}} className="d-flex align-items-center justify-content-between">
-
+          <div style ={{backgroundColor:"white", height:"43px"}} className="d-flex align-items-center justify-content-between">
+         
             <button
+              disabled={this.spotStore.showAllSpots}
               onClick={() => this.spotStore.getRandomSpot()}
               style={{ zIndex: 100, borderRadius: "0px" }}
               type="button" className="btn btn-primary">
@@ -72,12 +73,12 @@ class MobileMap extends Component {
               {this.spotStore.showAllSpots ? <span style={{ color: "rgba(0, 0, 0, 0.90)", fontSize: "18px" }}>
               <b>All Spots</b></span>
                : 
-               <span style={{ color: "rgba(0, 0, 0, 0.90);", fontSize: "18px" }}>
+               <span style={{ color: "rgba(0, 0, 0, 0.90)", fontSize: "18px" }}>
                <b>My Spots</b>
                </span>}
             </div>
 
-            <label style={{ zIndex: 100, marginBottom: "0px"}} className="switch  align-self-center">
+            <label style={{ zIndex: 100, marginBottom: "0px",marginRight:"5px"}} className="switch  align-self-center">
               <input name="switch  align-self-center" type="checkbox" onChange={this.handleInputChange} />
               <span className="slider"></span>
             </label>

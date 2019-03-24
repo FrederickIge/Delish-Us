@@ -3,7 +3,7 @@ import PlacesAutocomplete from 'reactjs-places-autocomplete';
 import { inject } from 'mobx-react';
 import preventDefault from "../utils/eventListeners"
 
-const nav =  document.getElementById("app-navbar")
+
 @inject('spotStore')
 class MobileSearch extends React.Component {
 
@@ -27,17 +27,18 @@ class MobileSearch extends React.Component {
     this.setState({ showResults: false })
     window.addEventListener('touchmove', preventDefault, { passive: false });
     this.nav.removeEventListener('touchmove', preventDefault);
+    this.searchInput.removeEventListener('touchmove', preventDefault);
   }
 
   handleFocus = () => {
     this.setState({ showResults: true })
     window.removeEventListener('touchmove', preventDefault);
     this.nav.addEventListener('touchmove', preventDefault, { passive: false })
-
-    // .addEventListener('touchmove', preventDefault, { passive: false });
+    this.searchInput.addEventListener('touchmove', preventDefault, { passive: false })
   }
   componentDidMount(){
     this.nav = document.getElementById("app-navbar");
+    this.searchInput = document.getElementById("mobile-search-input");
   }
 
   render() {
@@ -53,6 +54,7 @@ class MobileSearch extends React.Component {
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div className="autocomplete flex-grow-1 align-self-center" >
             <input
+            id="mobile-search-input"
               name="search"
               ref={this.search}
               onFocus={this.handleFocus}
