@@ -17,7 +17,6 @@ class Search extends React.Component {
   handleSelect = (description, placeId, suggestion) => {
     this.spotStore.selectSearchedSpot(suggestion);
     this.setState({address:''});
-    this.exampleRef.blur();
   };
 
   handleBlur = () => {
@@ -28,16 +27,9 @@ class Search extends React.Component {
     this.setState({ showResults: true })
   }
 
-  componentDidMount() {
-    this.exampleRef = React.createRef();
-    if (isMobile) {
-      this.setState({ mobileSearch: { position: "absolute", top: "0px" , zIndex :"4"} })
-    }
-  }
-
   render() {
     return (
-      <PlacesAutocomplete  style={ this.state.mobileSearch } ref={(c) => {
+      <PlacesAutocomplete   ref={(c) => {
         if (!c) return;
         c.handleInputOnBlur = () => { };
       }}
@@ -75,7 +67,7 @@ class Search extends React.Component {
                         style,
                       })}
                     >
-                      <span>{suggestion.description} gang</span>
+                      <span>{suggestion.description} </span>
                     </div>
 
                   );

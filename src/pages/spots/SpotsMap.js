@@ -33,7 +33,6 @@ class SpotsMap extends Component {
     if (isMobile) {
       this.setState({ mobileStyle: { height: "100vh", width: "100%" , zIndex :"1"} })
     }
-    this.spotStore.getAllSpots();
   }
 
   selectSpot(spot) {

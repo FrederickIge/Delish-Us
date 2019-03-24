@@ -2,7 +2,7 @@ import React from 'react';
 import PlacesAutocomplete from 'reactjs-places-autocomplete';
 import { inject } from 'mobx-react';
 import { isMobile } from 'react-device-detect';
-import ReactDOM from "react-dom"
+
 @inject('spotStore')
 class MobileSearch extends React.Component {
 
@@ -21,7 +21,6 @@ class MobileSearch extends React.Component {
   };
 
   handleBlur = () => {
-    console.log("gan")
     this.setState({ showResults: false })
   }
 
@@ -29,16 +28,9 @@ class MobileSearch extends React.Component {
     this.setState({ showResults: true })
   }
 
-  componentDidMount() {
-    console.log(this.search)
-    if (isMobile) {
-      this.setState({ mobileSearch: { position: "absolute", top: "0px" , zIndex :"600"} })
-    }
-  }
-
   render() {
     return (
-      <PlacesAutocomplete  style={ this.state.mobileSearch } ref={(c) => {
+      <PlacesAutocomplete   ref={(c) => {
         if (!c) return;
         c.handleInputOnBlur = () => { };
       }}
@@ -77,7 +69,7 @@ class MobileSearch extends React.Component {
                         style,
                       })}
                     >
-                      <span>{suggestion.description} gang</span>
+                      <span>{suggestion.description} </span>
                     </div>
 
                   );

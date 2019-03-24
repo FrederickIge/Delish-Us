@@ -48,7 +48,7 @@ class MapDashboard extends Component {
 
   async componentDidMount() {
     window.addEventListener('touchmove', preventDefault, { passive: false });
-
+    this.spotStore.getAllSpots();
     let position = await getPosition();
     this.spotStore.mapGeolocation.center = { lat: position.coords.latitude, lng: position.coords.longitude };
 
@@ -69,8 +69,8 @@ class MapDashboard extends Component {
         <SwipeableDrawer
           anchor="bottom"
           open={this.spotStore.drawerState}
-          onClose={()=>this.spotStore.toggleDrawer(false)}
-          onOpen={() =>this.spotStore.toggleDrawer(true)}
+          onClose={() => this.spotStore.toggleDrawer(false)}
+          onOpen={() => this.spotStore.toggleDrawer(true)}
           className="d-lg-none detail-image curved-drawer"
         >
           <div className="curve detail-image">
@@ -79,7 +79,7 @@ class MapDashboard extends Component {
         </SwipeableDrawer>
 
 
-          <div className="container container-dashboard big-container" style={{ height: "calc(100vh - 140px)", position:"relative", overflow: "hidden"}}  >
+          <div className="container container-dashboard big-container" style={{ height: "calc(100vh - 150px)", position:"relative", overflow: "hidden"}}  >
             <div className="spacer d-none d-lg-block" />
 
             <div className="row" style={{ height: "90%"}}>

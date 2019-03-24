@@ -3,9 +3,8 @@ import { DEFAULT_GEOLOCATION, GOOGLE_DETAILS_FIELDS } from "../constants/mapCons
 import Spot from "../models/Spot";
 import firebase from 'firebase';
 import Geopoint from "../models/Geopoint";
-import { ToastContainer, toast } from 'react-toastify';
-import { BrowserView, MobileView ,isBrowser ,isMobile } from "react-device-detect";
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+import { toast } from 'react-toastify';
+
 
 class spotStore {
  
@@ -48,9 +47,7 @@ class spotStore {
     this.selectedSpot = await this.loadSpotDetails();
     this.moveMapToSelectedSpot();
     this.alreadySaved = this.checkifSaved();
-    if(window.innerWidth <= 992){
-      this.toggleDrawer();
-    }
+    this.toggleDrawer();
   }
 
   @action
@@ -65,9 +62,7 @@ class spotStore {
     this.selectedGeopoint = spot;
     this.selectedSpot = await this.loadSpotDetails();
     this.alreadySaved = this.checkifSaved();
-    if(window.innerWidth <= 992){
-      this.toggleDrawer();
-    }
+    this.toggleDrawer();
     this.findLikedBy()
   }
  
@@ -154,7 +149,9 @@ class spotStore {
   
   @action
   toggleDrawer = (open) => {
+    if(window.innerWidth <= 992){
     this.drawerState = !this.drawerState
+    }
   }
 
   @action

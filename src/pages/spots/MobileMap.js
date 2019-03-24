@@ -36,7 +36,7 @@ class MobileMap extends Component {
     if (isMobile) {
       this.setState({ mobileStyle: { height: "100vh", width: "100%" , zIndex :"1"} })
     }
-    this.spotStore.getAllSpots();
+   
   }
 
   selectSpot(spot) {
@@ -87,7 +87,7 @@ class MobileMap extends Component {
             !this.spotStore.showAllSpots ?
               this.spotStore.uniqueSpotsByGooglePlaceIds.map((spot) =>
                 <AnyReactComponent
-                  key={spot.key}
+                  key={spot.key + "-m"}
                   lat={spot.lat}
                   lng={spot.lng}
                   text={spot.name}
@@ -100,7 +100,7 @@ class MobileMap extends Component {
           {this.spotStore.showAllSpots ?
             this.spotStore.currentUserSpots.map((spot) =>
               <AnyReactComponent
-                key={spot.key}
+                key={spot.key + "-m"}
                 lat={spot.lat}
                 lng={spot.lng}
                 text={spot.name}
