@@ -570,6 +570,12 @@ td{
   background-color: white;
 }
 
+.delishus-map-card-mobile-list{
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 8px;
+  /* border-radius: 18px; */
+  background-color: white;
+}
 .footer{
   /* background-color: white !important; */
 }

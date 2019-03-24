@@ -15,6 +15,7 @@ import Switch from "react-switch";
 import preventDefault from "../../utils/eventListeners"
 
 import "react-table/react-table.css";
+import MobileSpotList from './MobileSpotList';
 
 
 const db = firebase.firestore();
@@ -81,15 +82,16 @@ class MapDashboard extends Component {
           <div className="container container-dashboard big-container" style={{ height: "calc(100vh - 150px)", position:"relative"}}  >
             <div className="spacer d-none d-lg-block" />
 
-            <div className="row" style={{ height: "95%"}}>
+            <div className="row" style={{ height: "95%", maxHeight:"95%"}}>
                 <MobileMap></MobileMap>
-            <div className="col-md-4 d-none d-lg-block">
+                <MobileSpotList></MobileSpotList>
+            <div className="col-md-4 d-none d-lg-block" style={{ maxHeight:"95%"}} >
               <div className="delishus-card spot-detail">
                 <SpotDetailsCard />
               </div>
             </div>
 
-              <div className="col-md-12 col-lg-8">
+              <div className="col-md-12 col-lg-8" style={{ maxHeight:"95%"}}>
 
 
                 <div className="google-map-container" style={{ height: "100%"}}>

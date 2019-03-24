@@ -6,7 +6,7 @@ import Table from 'react-bootstrap/Table'
 
 @inject('sessionStore', 'spotStore')
 @observer
-class SpotList extends Component {
+class MobileSpotList extends Component {
 
     spotStore = this.props.spotStore;
     sessionStore = this.props.sessionStore;
@@ -27,13 +27,14 @@ class SpotList extends Component {
 
     render() {
         return (
-            <div className="delishus-map-card spot-list" style={{ display: this.spotStore.mapView ? 'none' : 'block', height:"100%", overflowY:"auto"}}>
+            <div className="delishus-map-card-mobile-list spot-list d-lg-none" style={{ display: this.spotStore.mapView ? 'none' : 'block',height:"100%", width:"100%", overflow: "scroll" }}>
+                <div className="container-fluid">
                     <br></br>
 
             
                     {!this.spotStore.showAllSpots ?
                         this.spotStore.uniqueSpotsByGooglePlaceIds.map((spot) =>
-                            <div key={spot.key} onClick={() => this.selectSpot(spot)} className="py-4 pl-4 spot-list-item border-bottom">
+                            <div  key={spot.key} onClick={() => this.selectSpot(spot)} className="py-4 pl-4 spot-list-item border-bottom">
                                 <div style={{ fontSize: "24px", color:"rgba(0, 0, 0, 0.85)"}}>{spot.name}</div>
                             </div>            
                     ): null
@@ -41,13 +42,13 @@ class SpotList extends Component {
 
                     {this.spotStore.showAllSpots ?
                         this.spotStore.currentUserSpots.map((spot) =>
-                            <div key={spot.key} onClick={() => this.selectSpot(spot)} className="py-4 pl-4 spot-list-item border-bottom">
+                            <div  key={spot.key} onClick={() => this.selectSpot(spot)} className="py-4 pl-4 spot-list-item border-bottom">
                                 <div style={{ fontSize: "24px", color:"rgba(0, 0, 0, 0.85)"}}>{spot.name} </div>
                             </div>            
                     )
                     : null}
 
-               
+                </div>
 
 
             </div>
@@ -56,4 +57,4 @@ class SpotList extends Component {
 }
 const authCondition = (authUser) => !!authUser;
 
-export default compose(withAuthorization(authCondition))(SpotList);
+export default compose(withAuthorization(authCondition))(MobileSpotList);

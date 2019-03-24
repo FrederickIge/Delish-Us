@@ -51,10 +51,13 @@ class MobileMap extends Component {
 
   render() {
     return (
-      <div className="d-lg-none" style={{display: this.spotStore.mapView ? 'block' : 'none', position: "absolute", top: "0",bottom: "0", right: "0",   left: "0", zIndex:"400"}} >
+      <div className="d-lg-none" style={{display: this.spotStore.mapView ? 'block' : 'none', position: "absolute", top: "0",bottom: "0", right: "0", left: "0", zIndex:"400"}} >
 
 
-   {this.spotStore.gmapsLoaded ?<div style={{position: "absolute", zIndex:500, width:"100%", left:"0",right:"0"}}><MobileSearch /></div>: null}
+   {this.spotStore.gmapsLoaded ?<div style={{position: "absolute", zIndex:500, width:"100%", left:"0",right:"0"}}>
+
+   <MobileSearch />
+   </div>: null}
         
 
         <div style={{ position: "absolute", borderRadius: "0px", top: 46, zIndex: 100, left:"0", right:"0" }}>
@@ -87,26 +90,7 @@ class MobileMap extends Component {
 
         </div>
       
-        {/* {this.spotStore.showAllSpots ?
-                <div style={{ position: "absolute",  borderRadius: "0px", top: 46 }} >
-                    <button
-                        onClick={() => this.spotStore.getRandomSpot()}
-                        style={{ zIndex: 100, borderRadius: "0px" }}
-                        type="button" className="btn btn-primary">
-                        Random
-                    </button>
-                </div>
-      :null} */}
 
-      {/* <div style={{ position: "absolute",  left: "40%", top: 55, zIndex: 100 }}>
-      {this.spotStore.showAllSpots ? <span style={{ color: "rgba(0, 0, 0, 0.90)", fontSize: "18px" }}><b>All Spots</b></span> : <span style={{ color: "rgba(0, 0, 0, 0.90);", fontSize: "18px" }}><b>My Spots</b></span>}
-
-      </div> */}
-          
-    {/* <label style={{position: "absolute", zIndex:100, borderRadius:"0px", top:55, right:"0"}}  className="switch  align-self-center">
-        <input name="switch  align-self-center" type="checkbox" onChange={this.handleInputChange} />
-        <span className="slider"></span>
-    </label> */}
 
         <GoogleMapReact
           id="map"
