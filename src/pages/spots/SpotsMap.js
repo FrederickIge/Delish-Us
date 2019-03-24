@@ -51,7 +51,7 @@ class SpotsMap extends Component {
       style={{position: "absolute", zIndex:500, borderRadius:"10px"}} 
       type="button" className="btn btn-primary">
       Random
-      </button> :null}
+      </button> : null}
 
         {this.spotStore.showAllSpots}
         <GoogleMapReact
@@ -95,6 +95,7 @@ class SpotsMap extends Component {
               lat={this.spotStore.selectedSpot.lat}
               lng={this.spotStore.selectedSpot.lng}
               text={this.spotStore.selectedSpot.name}
+              onClick={this.spotStore.toggleDrawer}
             /> : null}
 
         </GoogleMapReact>

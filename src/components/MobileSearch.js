@@ -9,7 +9,9 @@ class MobileSearch extends React.Component {
   spotStore = this.props.spotStore;
 
   state = { address: '', showResults: false, mobileSearch:{ } };
-  search = React.createRef()
+  
+  search = React.createRef();
+
   handleChange = address => {
     this.setState({ address });
   };

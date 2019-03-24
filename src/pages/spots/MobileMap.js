@@ -68,6 +68,11 @@ class MobileMap extends Component {
                     </button>
                 </div>
       :null}
+
+      <div style={{ position: "absolute",  left: "40%", top: 55, zIndex: 100 }}>
+      {this.spotStore.showAllSpots ? <span style={{ color: "rgba(0, 0, 0, 0.90)", fontSize: "18px" }}><b>All Spots</b></span> : <span style={{ color: "rgba(0, 0, 0, 0.90);", fontSize: "18px" }}><b>My Spots</b></span>}
+
+      </div>
           
     <label style={{position: "absolute", zIndex:100, borderRadius:"0px", top:55, right:"0"}}  className="switch  align-self-center">
         <input name="switch  align-self-center" type="checkbox" onChange={this.handleInputChange} />
@@ -116,6 +121,7 @@ class MobileMap extends Component {
               lat={this.spotStore.selectedSpot.lat}
               lng={this.spotStore.selectedSpot.lng}
               text={this.spotStore.selectedSpot.name}
+              onClick={this.spotStore.toggleDrawer}
             /> : null}
         </GoogleMapReact>
 

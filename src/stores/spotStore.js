@@ -59,6 +59,7 @@ class spotStore {
 
   @action
   async selectExistingSpot(spot) {
+    console.log("select")
     this.selectedGeopoint = spot;
     this.selectedSpot = await this.loadSpotDetails();
     this.alreadySaved = this.checkifSaved();
@@ -148,7 +149,7 @@ class spotStore {
   }
   
   @action
-  toggleDrawer = (open) => {
+  toggleDrawer = () => {
     if(window.innerWidth <= 992){
     this.drawerState = !this.drawerState
     }

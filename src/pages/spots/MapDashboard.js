@@ -108,7 +108,7 @@ class MapDashboard extends Component {
                     </div>
 
                     <div className="d-flex justify-content-center">
-                      {this.spotStore.showAllSpots ? <span style={{ color: "rgba(0, 0, 0, 0.41)", fontSize: "18px" }}><b>Displaying My Spots</b></span> : <span style={{ color: "rgba(0, 0, 0, 0.41)", fontSize: "18px" }}><b>Displaying All Spots</b></span>}
+                      {this.spotStore.showAllSpots ? <span style={{ color: "rgba(0, 0, 0, 0.41)", fontSize: "18px" }}><b>Displaying All Spots</b></span> : <span style={{ color: "rgba(0, 0, 0, 0.41)", fontSize: "18px" }}><b>Displaying My Spots</b></span>}
                     </div>
 
                   </div> 
