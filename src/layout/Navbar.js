@@ -56,7 +56,7 @@ class Navbar extends Component {
     const { anchorEl } = this.state;
 
     const NavigationNonAuth = () => (
-      <nav className="navbar navbar-expand-lg py-3">
+      <nav  className="navbar navbar-expand-lg py-3">
         <div className="container">
 
         <Link style={{ textDecoration: 'none' }} to="/dashboard">
@@ -129,7 +129,7 @@ class Navbar extends Component {
 
     return (
       <Headroom>
-        <div className="doggo-nav">
+        <div id="app-navbar" className="doggo-nav">
           {this.sessionStore.authUser ? <NavigationAuth mapView = {this.spotStore.mapView } photoURL={this.sessionStore.authUser.photoURL} /> : <NavigationNonAuth />}
         </div>
       </Headroom>

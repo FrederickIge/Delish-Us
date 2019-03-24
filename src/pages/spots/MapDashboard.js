@@ -12,11 +12,10 @@ import Search from "../../components/Search"
 import withAuthorization from '../../components/hoc/withAuthorization';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Switch from "react-switch";
-
+import preventDefault from "../../utils/eventListeners"
 
 import "react-table/react-table.css";
 
-const preventDefault = e => e.preventDefault();
 
 const db = firebase.firestore();
 
@@ -43,7 +42,7 @@ class MapDashboard extends Component {
   spotStore = this.props.spotStore;
 
   componentWillUnmount(){
-    // window.removeEventListener('touchmove', preventDefault);
+    window.removeEventListener('touchmove', preventDefault);
   }
 
   async componentDidMount() {

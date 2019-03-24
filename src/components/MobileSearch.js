@@ -1,8 +1,9 @@
 import React from 'react';
 import PlacesAutocomplete from 'reactjs-places-autocomplete';
 import { inject } from 'mobx-react';
-import { isMobile } from 'react-device-detect';
+import preventDefault from "../utils/eventListeners"
 
+const nav =  document.getElementById("app-navbar")
 @inject('spotStore')
 class MobileSearch extends React.Component {
 
@@ -23,12 +24,20 @@ class MobileSearch extends React.Component {
   };
 
   handleBlur = () => {
-    console.log("mob")
     this.setState({ showResults: false })
+    window.addEventListener('touchmove', preventDefault, { passive: false });
+    this.nav.removeEventListener('touchmove', preventDefault);
   }
 
   handleFocus = () => {
     this.setState({ showResults: true })
+    window.removeEventListener('touchmove', preventDefault);
+    this.nav.addEventListener('touchmove', preventDefault, { passive: false })
+
+    // .addEventListener('touchmove', preventDefault, { passive: false });
+  }
+  componentDidMount(){
+    this.nav = document.getElementById("app-navbar");
   }
 
   render() {
@@ -42,7 +51,7 @@ class MobileSearch extends React.Component {
         onSelect={this.handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div className="autocomplete flex-grow-1 align-self-center">
+          <div className="autocomplete flex-grow-1 align-self-center" >
             <input
               name="search"
               ref={this.search}
@@ -54,7 +63,7 @@ class MobileSearch extends React.Component {
               })}
             />
             {this.state.showResults ?
-              <div className="autocomplete-items">
+              <div className="autocomplete-items" style = {{ maxHeight:"300px" , overflow: "scroll"}}>
                 {loading && <div>Loading...</div>}
                 {suggestions.map(suggestion => {
                   const className = suggestion.active
@@ -67,7 +76,7 @@ class MobileSearch extends React.Component {
                   return (
 
                     <div 
-                    style = {{ borderRadius:"10px"}}
+                    
                       {...getSuggestionItemProps(suggestion, {
                         className,
                         style,
