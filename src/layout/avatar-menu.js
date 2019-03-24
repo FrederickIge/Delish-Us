@@ -52,7 +52,10 @@ class AvatarMenu extends Component {
                 aria-haspopup="true"
                 onClick={this.handleClick}
             >
-                <img className="rounded-circle avatar-image--icon" src={this.sessionStore.authUser.photoURL} alt="Logo" />
+                {this.sessionStore.authUser.photoURL ?
+                    <img className="rounded-circle avatar-image--icon" src={this.sessionStore.authUser.photoURL} alt="Logo" />
+                    : <i class="fa fa-user fa-2x" aria-hidden="true"></i>}
+                
             </Button>
 
             <Menu
@@ -61,8 +64,12 @@ class AvatarMenu extends Component {
                 open={Boolean(anchorEl)}
                 onClose={this.handleClose}
             >
-                <MenuItem onClick={this.handleClose}>Settings</MenuItem>
-                <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+                <MenuItem onClick={this.handleClose}>
+                <Link style={{ textDecoration: 'none' }} to="/account">
+                    Settings
+                </Link>
+                </MenuItem>
+
             </Menu>
         </span>
     );

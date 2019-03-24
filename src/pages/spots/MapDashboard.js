@@ -79,10 +79,10 @@ class MapDashboard extends Component {
         </SwipeableDrawer>
 
 
-          <div className="container container-dashboard big-container" style={{ height: "calc(100vh - 150px)", position:"relative", overflow: "hidden"}}  >
+          <div className="container container-dashboard big-container" style={{ height: "calc(100vh - 150px)", position:"relative"}}  >
             <div className="spacer d-none d-lg-block" />
 
-            <div className="row" style={{ height: "90%"}}>
+            <div className="row" style={{ height: "95%"}}>
                 <MobileMap></MobileMap>
             <div className="col-md-4 d-none d-lg-block">
               <div className="delishus-card spot-detail">
@@ -107,8 +107,18 @@ class MapDashboard extends Component {
                       </label>
                     </div>
 
-                    <div className="d-flex justify-content-center">
-                      {this.spotStore.showAllSpots ? <span style={{ color: "rgba(0, 0, 0, 0.41)", fontSize: "18px" }}><b>Displaying All Spots</b></span> : <span style={{ color: "rgba(0, 0, 0, 0.41)", fontSize: "18px" }}><b>Displaying My Spots</b></span>}
+                    <div className="d-flex justify-content-center" style={{ height: "50%"}}>
+
+                      {this.spotStore.showAllSpots ?
+                        <div style={{ color: "rgba(0, 0, 0, 0.41)", fontSize: "18px", marginTop: "auto", marginBottom: "auto" }}>
+                          <b>Displaying All Spots</b>
+                        </div>
+                         :
+                        <div style={{ color: "rgba(0, 0, 0, 0.41)", fontSize: "18px", marginTop: "auto", marginBottom: "auto" }}>
+                          <b>Displaying My Spots</b>
+                        </div>
+                      }
+
                     </div>
 
                   </div> 

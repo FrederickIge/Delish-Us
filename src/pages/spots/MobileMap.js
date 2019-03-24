@@ -51,14 +51,42 @@ class MobileMap extends Component {
 
   render() {
     return (
-      <div className="google-map d-lg-none" style={{display: this.spotStore.mapView ? 'block' : 'none', position: "absolute", top: "0",bottom: "0", right: "0",   left: "0", zIndex:"400"}} >
+      <div className="d-lg-none" style={{display: this.spotStore.mapView ? 'block' : 'none', position: "absolute", top: "0",bottom: "0", right: "0",   left: "0", zIndex:"400"}} >
 
 
    {this.spotStore.gmapsLoaded ?<div style={{position: "absolute", zIndex:500, width:"100%", left:"0",right:"0"}}><MobileSearch /></div>: null}
         
 
+        <div style={{ position: "absolute", borderRadius: "0px", top: 46, zIndex: 100, left:"0", right:"0" }}>
+
+          <div style ={{backgroundColor:"white"}} className="d-flex align-items-center justify-content-between">
+
+            <button
+              onClick={() => this.spotStore.getRandomSpot()}
+              style={{ zIndex: 100, borderRadius: "0px" }}
+              type="button" className="btn btn-primary">
+              Random
+            </button>
+
+            <div style={{ zIndex: 100 }} className="align-self-center">
+              {this.spotStore.showAllSpots ? <span style={{ color: "rgba(0, 0, 0, 0.90)", fontSize: "18px" }}>
+              <b>All Spots</b></span>
+               : 
+               <span style={{ color: "rgba(0, 0, 0, 0.90);", fontSize: "18px" }}>
+               <b>My Spots</b>
+               </span>}
+            </div>
+
+            <label style={{ zIndex: 100, marginBottom: "0px"}} className="switch  align-self-center">
+              <input name="switch  align-self-center" type="checkbox" onChange={this.handleInputChange} />
+              <span className="slider"></span>
+            </label>
+
+          </div>
+
+        </div>
       
-        {this.spotStore.showAllSpots ?
+        {/* {this.spotStore.showAllSpots ?
                 <div style={{ position: "absolute",  borderRadius: "0px", top: 46 }} >
                     <button
                         onClick={() => this.spotStore.getRandomSpot()}
@@ -67,17 +95,17 @@ class MobileMap extends Component {
                         Random
                     </button>
                 </div>
-      :null}
+      :null} */}
 
-      <div style={{ position: "absolute",  left: "40%", top: 55, zIndex: 100 }}>
+      {/* <div style={{ position: "absolute",  left: "40%", top: 55, zIndex: 100 }}>
       {this.spotStore.showAllSpots ? <span style={{ color: "rgba(0, 0, 0, 0.90)", fontSize: "18px" }}><b>All Spots</b></span> : <span style={{ color: "rgba(0, 0, 0, 0.90);", fontSize: "18px" }}><b>My Spots</b></span>}
 
-      </div>
+      </div> */}
           
-    <label style={{position: "absolute", zIndex:100, borderRadius:"0px", top:55, right:"0"}}  className="switch  align-self-center">
+    {/* <label style={{position: "absolute", zIndex:100, borderRadius:"0px", top:55, right:"0"}}  className="switch  align-self-center">
         <input name="switch  align-self-center" type="checkbox" onChange={this.handleInputChange} />
         <span className="slider"></span>
-    </label>
+    </label> */}
 
         <GoogleMapReact
           id="map"

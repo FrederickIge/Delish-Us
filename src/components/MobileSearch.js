@@ -23,6 +23,7 @@ class MobileSearch extends React.Component {
   };
 
   handleBlur = () => {
+    console.log("mob")
     this.setState({ showResults: false })
   }
 
@@ -66,6 +67,7 @@ class MobileSearch extends React.Component {
                   return (
 
                     <div 
+                    style = {{ borderRadius:"10px"}}
                       {...getSuggestionItemProps(suggestion, {
                         className,
                         style,
