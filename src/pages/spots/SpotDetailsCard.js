@@ -77,7 +77,7 @@ class SpotDetailsCard extends Component {
                     <div style={this.style}>
                         <div style={this.style} className="spot-details-top">
                         <br></br>
-                            <h3 className="row justify-content-center">Select a Spot on the Map</h3>
+                            <h3 className="row justify-content-center" style={{fontSize:"2vw"}}>Select a Spot on the Map</h3>
                             <div className="spacer"></div>
                             <div className="row justify-content-center">
                                 <i className="fa fa-cutlery fa-5x mx-auto" aria-hidden="true"></i>
