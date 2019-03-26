@@ -57,7 +57,7 @@ class SpotsMap extends Component {
         <GoogleMapReact
           id="map"
           bootstrapURLKeys={{ key: 'AIzaSyAJdMUyuQiG2DEHgGG3Tvebb9-BzR0JXwE', libraries: "places" }}
-          defaultZoom={11}
+          defaultZoom={13}
           onGoogleApiLoaded={({ map, maps }) => this.apiIsLoaded(map, maps)}
           center={this.spotStore.mapGeolocation.center}
         >

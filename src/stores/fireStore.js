@@ -1,13 +1,14 @@
-import {observable, action, computed} from 'mobx';
+import { action} from 'mobx';
 import firebase from 'firebase';
-import { Then } from 'react-if';
 
 const db = firebase.firestore().collection("spots");
 const users = firebase.firestore().collection("users");
+const comments = firebase.firestore().collection("comments");
 
 class fireStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
+    
   }
 
   @action
@@ -59,6 +60,37 @@ class fireStore {
       return  [...new Set(nameList)];
     } catch(err) {
       alert(err);
+    }
+  }
+
+  @action
+  async postComment(comment){
+    try {
+      let result =  await comments.add(comment);
+       return  await comments.doc(result.id).get();
+    } catch(err) {
+      alert(err);
+    }
+  }
+
+  // @action
+  // async deleteComment(comment){
+  //   try {
+  //     let result =  await comments.add(comment);
+  //      return  await comments.doc(result.id).get();
+  //   } catch(err) {
+  //     alert(err);
+  //   }
+  // }
+
+  @action
+  async getCommentsBySpotId(spotId){
+    console.log(spotId)
+    try {
+     return await comments.where("spotId", "==", spotId).orderBy("timeCreated", "asc").get();
+    
+    } catch(err) {
+      console.log(err);
     }
   }
 

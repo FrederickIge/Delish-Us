@@ -61,7 +61,9 @@ class Navbar extends Component {
 
         <Link style={{ textDecoration: 'none' }} to="/dashboard">
             {/* <FontAwesomeIcon className="icon-layers  fa-2x globe" icon={faGlobeAfrica} /> */}
-          <b>DELISH-US</b>  
+            <img style={{ height: '25px', paddingBottom:"3px" }} className="img-fluid" src={require("../img/compass.png")} alt="Logo" />
+
+          <b style={{  marginLeft:"10px" }}>DELISH-US</b>  
           </Link>
 
           <div>
@@ -86,40 +88,14 @@ class Navbar extends Component {
           <div>
 
             <span style={{ textDecoration: 'none', color:"#1890ff" }} onClick={this.spotStore.toggleView} className="ml-auto mr-3 nav-text-style">
-              {props.mapView ? <b>MAP VIEW</b> : <b>LIST VIEW</b>} 
+              {props.mapView ? <b>LIST VIEW</b> : <b>MAP VIEW</b>} 
             </span>
 
 
 
             <AvatarMenu/>
 
-            {/* <Button
-              aria-owns={anchorEl ? 'simple-menu' : undefined}
-              aria-haspopup="true"
-              onClick={this.handleClick}
-            >
-              <img className="rounded-circle avatar-image--icon" src={props.photoURL} alt="Logo"/>
-            </Button>
 
-            <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={this.handleClose}
-        >
-          <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-          <MenuItem onClick={this.handleClose}>My account</MenuItem>
-          <MenuItem onClick={this.handleClose}>Logout</MenuItem>
-        </Menu> */}
-
-
-            {/* <Dropdown trigger={['click']} overlay={ menu() }>
-              {props.photoURL ? (
-                <img className="rounded-circle avatar-image--icon" src={props.photoURL} alt="Logo" />
-              ) : (
-                <FontAwesomeIcon className="avatar-image--icon" icon={faUser} />
-              )}
-            </Dropdown> */}
 
           </div>
 

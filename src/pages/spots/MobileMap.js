@@ -45,13 +45,13 @@ class MobileMap extends Component {
 
   handleInputChange = (event) => {
     this.spotStore.showAllSpots = !this.spotStore.showAllSpots;
-}
+  }
 
 
 
   render() {
     return (
-      <div className="d-lg-none" style={{display: this.spotStore.mapView ? 'block' : 'none', position: "absolute", top: "0",bottom: "0", right: "0", left: "0", zIndex:"400"}} >
+      <div id="ganggang" className="d-lg-none" style={{display: this.spotStore.mapView ? 'block' : 'none', position: "fixed", top: "0", bottom: "0", right: "0", left: "0", zIndex:"10"}} >
 
 
    {this.spotStore.gmapsLoaded ?<div style={{position: "absolute", zIndex:500, width:"100%", left:"0",right:"0"}}>
@@ -91,11 +91,13 @@ class MobileMap extends Component {
         </div>
       
 
+{/* <div id="ganggang" style={{position: "absolute", top: "0", bottom: "0", right: "0", left: "0"}}> */}
 
-        <GoogleMapReact
-          id="map"
+
+        {/* <GoogleMapReact
+          id="bangbang"
           bootstrapURLKeys={{ key: 'AIzaSyAJdMUyuQiG2DEHgGG3Tvebb9-BzR0JXwE', libraries: "places" }}
-          defaultZoom={11}
+          defaultZoom={3}
           onGoogleApiLoaded={({ map, maps }) => this.apiIsLoaded(map, maps)}
           center={this.spotStore.mapGeolocation.center}
           options={{fullscreenControl: false, zoomControl: false}}
@@ -136,9 +138,9 @@ class MobileMap extends Component {
               text={this.spotStore.selectedSpot.name}
               onClick={this.spotStore.toggleDrawer}
             /> : null}
-        </GoogleMapReact>
-
-      </div>
+        </GoogleMapReact> */}
+        </div>
+      // </div>
 
     )
   }

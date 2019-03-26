@@ -1,9 +1,11 @@
 import { observable, action,computed, autorun } from "mobx";
 import { DEFAULT_GEOLOCATION, GOOGLE_DETAILS_FIELDS } from "../constants/mapConstants";
 import Spot from "../models/Spot";
+import Comment from "../models/Comment";
 import firebase from 'firebase';
 import Geopoint from "../models/Geopoint";
 import { toast } from 'react-toastify';
+import preventDefault from "../utils/eventListeners"
 
 
 class spotStore {
@@ -41,6 +43,12 @@ class spotStore {
 
   @observable likedBy = []
 
+  @observable showModal = false;
+
+  @observable comments = [];
+
+  @observable firstComment;
+
   @action
   async selectSearchedSpot(geopoint) {
     this.selectedGeopoint = new Geopoint(geopoint);
@@ -59,12 +67,12 @@ class spotStore {
 
   @action
   async selectExistingSpot(spot) {
-    console.log("select")
     this.selectedGeopoint = spot;
     this.selectedSpot = await this.loadSpotDetails();
     this.alreadySaved = this.checkifSaved();
     this.toggleDrawer();
-    this.findLikedBy()
+    this.findLikedBy();
+    this.getCommentsBySpotId();
   }
  
   @action
@@ -147,6 +155,8 @@ class spotStore {
   @computed get currentUserSpots() {
     return this.allSpots.filter((element) => element.userId === this.userId );
   }
+
+
   
   @action
   toggleDrawer = () => {
@@ -158,10 +168,53 @@ class spotStore {
   @action
   toggleView = () => {
     this.mapView = !this.mapView;
+    if(this.mapView){
+      window.scrollTo(0,0);
+      window.addEventListener('touchmove', preventDefault, { passive: false });
+    }
+    else if(!this.mapView){
+      window.scrollTo(0,0);
+      window.removeEventListener('touchmove', preventDefault);
+    }
   }
 
   async findLikedBy() {
-     this.likedBy = await this.fireStore.findLikedBy(this.selectedSpot.googlePlaceId);
+    this.likedBy = await this.fireStore.findLikedBy(this.selectedSpot.googlePlaceId);
+  }
+
+
+
+   getCommentsBySpotId = async() => {
+    this.comments = [];
+    let data = await this.fireStore.getCommentsBySpotId(this.selectedSpot.key);
+    if(data){
+      data.forEach((doc) => {
+        let comment = new Comment(doc)
+        this.comments.push(comment)
+      });
+    }
+    this.getfirstComment();
+  }
+
+  getfirstComment(){
+    if(this.comments[0]){
+      this.firstComment = this.comments[0].comment
+      this.firstComment=  this.firstComment.substr(0, 80 - 1) + (this.firstComment.length > 80 ? '...' : '');
+    }else{
+      this.firstComment = "";
+    }
+  }
+
+  handleShow = async () => {
+    window.removeEventListener('touchmove', preventDefault);    this.toggleDrawer();
+    this.showModal = true;
+  }
+
+  handleHide = () =>{
+   
+    window.addEventListener('touchmove', preventDefault, { passive: false });
+    this.toggleDrawer();
+    this.showModal = false;
   }
 
 }

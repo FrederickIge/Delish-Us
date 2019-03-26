@@ -16,6 +16,7 @@ import preventDefault from "../../utils/eventListeners"
 
 import "react-table/react-table.css";
 import MobileSpotList from './MobileSpotList';
+import Modal from 'react-bootstrap/Modal'
 
 
 const db = firebase.firestore();
@@ -51,8 +52,6 @@ class MapDashboard extends Component {
     this.spotStore.getAllSpots();
     let position = await getPosition();
     this.spotStore.mapGeolocation.center = { lat: position.coords.latitude, lng: position.coords.longitude };
-
-
   }
 
   handleInputChange = (event) => {
@@ -79,11 +78,12 @@ class MapDashboard extends Component {
         </SwipeableDrawer>
 
 
-          <div className="container container-dashboard big-container" style={{ height: "calc(100vh - 150px)", position:"relative"}}  >
+          <div className="container container-dashboard big-container"  >
             <div className="spacer d-none d-lg-block" />
 
             <div className="row" style={{ height: "95%", maxHeight:"95%"}}>
-                <MobileMap></MobileMap>
+            {/* mobilemap */}
+                <MobileMap></MobileMap> 
                 <MobileSpotList></MobileSpotList>
             <div className="col-md-4 d-none d-lg-block" style={{ maxHeight:"95%"}} >
               <div className="delishus-card spot-detail">

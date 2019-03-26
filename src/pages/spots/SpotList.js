@@ -34,7 +34,7 @@ class SpotList extends Component {
                     {!this.spotStore.showAllSpots ?
                         this.spotStore.uniqueSpotsByGooglePlaceIds.map((spot) =>
                             <div key={spot.key} onClick={() => this.selectSpot(spot)} className="py-4 pl-4 spot-list-item border-bottom">
-                                <div style={{ fontSize: "24px", color:"rgba(0, 0, 0, 0.85)"}}>{spot.name}</div>
+                                <div style={{ fontSize: "24px", color:"rgba(0, 0, 0, 0.85)"}}><b>{spot.name}</b></div>
                             </div>            
                     ): null
                     }
@@ -42,7 +42,7 @@ class SpotList extends Component {
                     {this.spotStore.showAllSpots ?
                         this.spotStore.currentUserSpots.map((spot) =>
                             <div key={spot.key} onClick={() => this.selectSpot(spot)} className="py-4 pl-4 spot-list-item border-bottom">
-                                <div style={{ fontSize: "24px", color:"rgba(0, 0, 0, 0.85)"}}>{spot.name} </div>
+                                <div style={{ fontSize: "24px", color:"rgba(0, 0, 0, 0.85)"}}><b>{spot.name}</b> </div>
                             </div>            
                     )
                     : null}

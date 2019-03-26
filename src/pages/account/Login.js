@@ -43,10 +43,10 @@ class Login extends Component {
         <div className="row">
           <div className="col-md-12">
             <div className="row">
-              <div className="col-md-8 col-sm-12 mx-auto">
-                <div className="card rounded-0 shadow-lg">
-                  <div className="card-header">
-                    <h3 className="mb-0">Login</h3>
+              <div className="col-xl-4 col-lg-6 col-md-6 col-sm-12 mx-auto delishus-map-card">
+                <div className=" ">
+                  <div >
+                    {/* <h3 className="mb-0">Login</h3> */}
                   </div>
                   <div className="card-body">
                     <div id="firebaseui-auth-container" />
@@ -87,7 +87,7 @@ class Login extends Component {
                       </div>
 
                       <div className="d-flex">
-                        <button type="submit" className="btn btn-success btn-lg ml-auto" id="btnLogin" disabled={isInvalid}>
+                        <button type="submit" className="btn btn-block btn-success btn-lg ml-auto" id="btnLogin" disabled={isInvalid}>
                           Login
                         </button>
                       </div>

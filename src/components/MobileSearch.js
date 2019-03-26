@@ -52,7 +52,7 @@ class MobileSearch extends React.Component {
         onSelect={this.handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div className="autocomplete flex-grow-1 align-self-center" >
+          <div className="mobile-autocomplete  flex-grow-1 align-self-center" >
             <input
             id="mobile-search-input"
               name="search"

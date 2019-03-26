@@ -37,11 +37,9 @@ class Signup extends Component {
         <div className="row">
           <div className="col-md-12">
             <div className="row">
-              <div className="col-md-8 col-sm-12 mx-auto">
-                <div className="card rounded-0 shadow-lg">
-                  <div className="card-header">
-                    <h3 className="mb-0">Signup</h3>
-                  </div>
+              <div className="col-xl-4 col-lg-6 col-md-6 col-sm-12 mx-auto delishus-map-card">
+                <div >
+
                   <div className="card-body">
                     <div id="firebaseui-auth-container" />
 
@@ -89,13 +87,13 @@ class Signup extends Component {
                           />
                         </div>
 
-                        <input className="btn btn-lg btn-primary btn-block" defaultValue="Sign Me Up" type="submit" disabled={isInvalid} />
+                        <input className="btn btn-lg btn-primary btn-block"  type="submit" disabled={isInvalid} value="Sign Up" />
+                        {/* <button className="btn btn-lg btn-primary btn-block">Sign Up</button> */}
                       </fieldset>
 
-                      {this.isInvalid}
                       <div className="warning-wrapper">
-                        {userStore.registerForm.error ? (
-                          <div class="alert alert-danger" role="alert">
+                        {userStore.error ? (
+                          <div className="alert alert-danger" role="alert">
                             {userStore.error.message}
                           </div>
                         ) : null}

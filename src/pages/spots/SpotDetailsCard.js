@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { compose } from 'recompose';
 import withAuthorization from '../../components/hoc/withAuthorization';
-import { If, Then} from 'react-if'
-import StarRatings from 'react-star-ratings';
 import StarRatingComponent from 'react-star-rating-component';
+import CommentModal from "./commentModal"
+const MAX_LENGTH = 50;
 
 @inject('sessionStore', 'spotStore')
 @observer
@@ -25,10 +25,15 @@ class SpotDetailsCard extends Component {
         this.spotStore.deleteSpot();
     }
 
+    truncateWithEllipses(text, max) {
+        return text.substr(0, max - 1) + (text.length > max ? '&hellip;' : '');
+    }
+
     render() {
         return (
 
             <React.Fragment>
+                <CommentModal></CommentModal>
                 {this.spotStore.selectedSpot.name ?
                     <div style={this.style} className="detail-image">
 
@@ -39,7 +44,7 @@ class SpotDetailsCard extends Component {
                             </div>
 
                             <div className="p-3">
-                                <h3>{this.spotStore.selectedSpot.name}</h3>
+                                <h3><b>{this.spotStore.selectedSpot.name}</b></h3>
                                 <div>{this.spotStore.selectedSpot.address}</div>
 
                                 <div className="d-flex align-items-center">
@@ -51,10 +56,23 @@ class SpotDetailsCard extends Component {
                                         starCount={5}
                                         value={this.spotStore.selectedSpot.rating}
                                     />
+                              
                                 </div>
+                        
+                            <div style={{ minHeight : "40px"}}>
+                            {
+                                    this.spotStore.firstComment ?
+                                    
+                                    <div>"{this.spotStore.firstComment}"</div>: null
+                                }
 
+                            </div>
+
+
+                                <a onClick={this.spotStore.handleShow} >View All Comments ({this.spotStore.comments.length}) <i className="fa fa-comment-o fa-lg" aria-hidden="true"></i></a>
+                                    
                                <div>
-
+                               <br></br>
                                Liked By:
                     
 
@@ -77,7 +95,7 @@ class SpotDetailsCard extends Component {
                     <div style={this.style}>
                         <div style={this.style} className="spot-details-top">
                         <br></br>
-                            <h3 className="row justify-content-center" style={{fontSize:"2vw"}}>Select a Spot on the Map</h3>
+                            <h3 className="row justify-content-center" style={{fontSize:"1.5vw"}}>Select a Spot on the Map</h3>
                             <div className="spacer"></div>
                             <div className="row justify-content-center">
                                 <i className="fa fa-cutlery fa-5x mx-auto" aria-hidden="true"></i>

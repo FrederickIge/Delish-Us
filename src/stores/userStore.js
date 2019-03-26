@@ -64,8 +64,7 @@ class UserStore {
         this.updateDisplayName(authUser);
       }),
       action('fetchError', (error) => {
-        console.log(error);
-        // this.error = error;
+        this.error = error;
       })
     );
   };
@@ -78,7 +77,7 @@ class UserStore {
         this.createUser(user);
       }),
       action('fetchError', (error) => {
-        console.log(error);
+        this.error = error;
       })
     );
   };

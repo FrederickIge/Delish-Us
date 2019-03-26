@@ -66,7 +66,7 @@ class AvatarMenu extends Component {
             >
                 <MenuItem onClick={this.handleClose}>
                 <Link style={{ textDecoration: 'none' }} to="/account">
-                    Settings
+                    Account
                 </Link>
                 </MenuItem>
 
