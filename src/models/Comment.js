@@ -1,5 +1,6 @@
 class Comment {
     constructor(doc) {
+      console.log(doc)
       this.id = doc.id;
       this.userName = doc.data().userName; 
       this.timeCreated = doc.data().timeCreated;

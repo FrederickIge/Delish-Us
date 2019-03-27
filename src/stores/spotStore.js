@@ -6,6 +6,7 @@ import firebase from 'firebase';
 import Geopoint from "../models/Geopoint";
 import { toast } from 'react-toastify';
 import preventDefault from "../utils/eventListeners"
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 
 class spotStore {
@@ -13,6 +14,7 @@ class spotStore {
   constructor(root) {
     autorun(() => root.sessionStore.authUser ? this.userId = root.sessionStore.authUser.uid : null);
     this.fireStore = root.fireStore
+    this.targetElement = document.querySelector('#root');
   }
 
   @observable googlePlacesService;
@@ -60,6 +62,7 @@ class spotStore {
     this.moveMapToSelectedSpot();
     this.alreadySaved = this.checkifSaved();
     this.toggleDrawer();
+    this.getCommentsByGooglePlaceId();
   }
 
   @action
@@ -76,7 +79,7 @@ class spotStore {
     this.alreadySaved = this.checkifSaved();
     this.toggleDrawer();
     this.findLikedBy();
-    this.getCommentsBySpotId();
+    this.getCommentsByGooglePlaceId();
   }
  
   @action
@@ -174,10 +177,12 @@ class spotStore {
     this.mapView = !this.mapView;
     if(this.mapView){
       window.scrollTo(0,0);
+     
       window.addEventListener('touchmove', preventDefault, { passive: false });
     }
     else if(!this.mapView){
       window.scrollTo(0,0);
+      enableBodyScroll(this.targetElement);
       window.removeEventListener('touchmove', preventDefault);
     }
   }
@@ -188,19 +193,23 @@ class spotStore {
 
 
 
-   getCommentsBySpotId = async() => {
+   getCommentsByGooglePlaceId = async() => {
     this.comments = [];
-    let data = await this.fireStore.getCommentsBySpotId(this.selectedSpot.key);
-    if(data){
+    let data = await this.fireStore.getCommentsByGooglePlaceId(this.selectedSpot.googlePlaceId);
+    console.log(data)
+    if(!data.empty){
       data.forEach((doc) => {
         let comment = new Comment(doc)
         this.comments.push(comment)
       });
+    
     }
     this.getfirstComment();
+    
   }
 
   getfirstComment(){
+    console.log(this.comments)
     if(this.comments[0]){
       this.firstComment = this.comments[0].comment
       this.firstComment=  this.firstComment.substr(0, 80 - 1) + (this.firstComment.length > 80 ? '...' : '');

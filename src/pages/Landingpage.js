@@ -16,6 +16,8 @@ import axios from 'axios'
 import posed from 'react-pose';
 import { inject, observer } from 'mobx-react';
 import Headroom from 'react-headroom'
+import { compose } from 'recompose';
+import withAuthorization from '../components/hoc/withAuthorization';
 
 const Slide = posed.div({
   enter: { x: 0, opacity: 1 },
@@ -29,42 +31,7 @@ let fullList = []
 class Myresults extends Component {
 
   routingStore = this.props.routingStore;
-
-  array = [
-    "Vegetables",
-    "Fruits",
-    "Oils",
-    "Spices & Seasonings",
-    "All Natural Herbal Teas",
-    "Nuts and Seeds"
-  ];
-
-  state = {
-    foodList: [],
-    category: 'All'
-  };
-
-  goToFood = (id) => {
-    this.routingStore.push("/food/" + id);
-  }
-  onChange = (event) => {
-
-   let filteredList = fullList.filter(food => food.category == event.target.value)
-   
-    this.setState({
-      category: event.target.value,
-      foodList: filteredList
-    })
-
-  }
-
-  componentWillMount() {
-    axios.get('list.json').then(res => {
-     
-       fullList = res.data
-      this.setState({ foodList: res.data })
-    })
-  }
+  sessionStore = this.props.sessionStore;
 
   render() {
 
@@ -101,17 +68,30 @@ class Myresults extends Component {
               </p>
               <div className="btn-wrapper">
 
-                <Link
-                  to="/signup"
-                  className="btn btn-white btn-icon mb-3 mb-sm-0"
-                >
-                  <span className="btn-inner--icon">
-                    <i className="ni ni-cloud-download-95" />
-                  </span>
-                  <span className="btn-inner--text">
-                    Register Now
-                  </span>
-                </Link>
+        {this.sessionStore.authUser?
+        
+        <Link
+        to="/dashboard"
+        className="btn btn-white btn-icon mb-3 mb-sm-0"
+      >
+        <span className="btn-inner--text">
+          Dashboard
+        </span>
+      </Link>
+        
+        :
+        
+        <Link
+        to="/signup"
+        className="btn btn-white btn-icon mb-3 mb-sm-0"
+      >
+        <span className="btn-inner--text">
+          Register Now
+        </span>
+      </Link>
+        }
+
+
 
 
               </div>
@@ -221,3 +201,8 @@ class Myresults extends Component {
 }
 
 export default Myresults;
+
+
+// const authCondition = (authUser) => !!authUser;
+
+// export default compose(withAuthorization(authCondition))(Myresults);

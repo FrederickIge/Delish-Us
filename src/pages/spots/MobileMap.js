@@ -65,7 +65,7 @@ class MobileMap extends Component {
           <div style ={{backgroundColor:"white", height:"43px"}} className="d-flex align-items-center justify-content-between">
          
             <button
-              disabled={this.spotStore.showAllSpots}
+              disabled={!this.spotStore.showAllSpots}
               onClick={() => this.spotStore.getRandomSpot()}
               style={{ zIndex: 100, borderRadius: "0px" }}
               type="button" className="btn btn-primary">
@@ -104,7 +104,7 @@ class MobileMap extends Component {
         >
 
           {
-            !this.spotStore.showAllSpots ?
+            this.spotStore.showAllSpots ?
               this.spotStore.uniqueSpotsByGooglePlaceIds.map((spot) =>
                 <AnyReactComponent
                   key={spot.key + "-m"}
@@ -117,7 +117,7 @@ class MobileMap extends Component {
               ) : null}
 
 
-          {this.spotStore.showAllSpots ?
+          {!this.spotStore.showAllSpots ?
             this.spotStore.currentUserSpots.map((spot) =>
               <AnyReactComponent
                 key={spot.key + "-m"}

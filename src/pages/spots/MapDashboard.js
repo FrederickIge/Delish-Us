@@ -48,7 +48,7 @@ class MapDashboard extends Component {
   }
 
   async componentDidMount() {
-    // window.addEventListener('touchmove', preventDefault, { passive: false });
+    window.addEventListener('touchmove', preventDefault, { passive: false });
     this.spotStore.getAllSpots();
     let position = await getPosition();
     this.spotStore.mapGeolocation.center = { lat: position.coords.latitude, lng: position.coords.longitude };

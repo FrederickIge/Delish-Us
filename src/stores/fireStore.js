@@ -84,10 +84,10 @@ class fireStore {
   // }
 
   @action
-  async getCommentsBySpotId(spotId){
-    console.log(spotId)
+  async getCommentsByGooglePlaceId(id){
+    console.log(id)
     try {
-     return await comments.where("spotId", "==", spotId).orderBy("timeCreated", "asc").get();
+     return await comments.where("googlePlaceId", "==", id).orderBy("timeCreated", "asc").get();
     
     } catch(err) {
       console.log(err);

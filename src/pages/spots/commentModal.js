@@ -47,7 +47,8 @@ class CommentModal extends Component {
       spotId: selectedSpot.key,
       userId: user.uid,
       userName: user.displayName,
-      timeCreated: firebase.firestore.Timestamp.fromDate(new Date())
+      timeCreated: firebase.firestore.Timestamp.fromDate(new Date()),
+      googlePlaceId: this.spotStore.selectedSpot.googlePlaceId
     }
   }
 

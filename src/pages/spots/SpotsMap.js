@@ -63,7 +63,7 @@ class SpotsMap extends Component {
         >
 
           {
-            !this.spotStore.showAllSpots ?
+            this.spotStore.showAllSpots ?
               this.spotStore.uniqueSpotsByGooglePlaceIds.map((spot) =>
                 <AnyReactComponent
                   key={spot.key}
@@ -76,7 +76,7 @@ class SpotsMap extends Component {
               ) : null}
 
 
-          {this.spotStore.showAllSpots ?
+          {!this.spotStore.showAllSpots ?
             this.spotStore.currentUserSpots.map((spot) =>
               <AnyReactComponent
                 key={spot.key}

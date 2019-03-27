@@ -68,9 +68,9 @@ class SpotDetailsCard extends Component {
 
                             </div>
 
-
+                                { this.spotStore.selectedSpot.key ? 
                                 <a onClick={this.spotStore.handleShow} >View All Comments ({this.spotStore.comments.length}) <i className="fa fa-comment-o fa-lg" aria-hidden="true"></i></a>
-                                    
+                                : null}
                                {/* <div>
                                <br></br>
                                Liked By:
