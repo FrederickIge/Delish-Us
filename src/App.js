@@ -10,7 +10,6 @@ import Landingpage from './pages/Landingpage';
 import AccountPage from './pages/account/Account';
 import Login from './pages/account/Login';
 import Signup from './pages/account/Signup';
-import Dashboard from './pages/spots/Dashboard';
 import MapDashboard from './pages/spots/MapDashboard';
 import Footer from  './layout/Footer';
 import { withRouter } from "react-router";
@@ -35,7 +34,6 @@ class App extends Component {
             {/* <PoseGroup> */}
             <ToastContainer/>
                 <Switch location={location}>
-                  <Route exact path="/dashboard" component={MapDashboard} />
                   <Route exact path="/doglist" component={MapDashboard} />
                   <Route exact path="/account" component={AccountPage} />
                   <Route exact path="/login" component={Login} />
