@@ -4,18 +4,17 @@ import { compose } from 'recompose';
 import posed from 'react-pose';
 import firebase from 'firebase';
 
-import SpotDetailsCard from "./SpotDetailsCard"
-import SpotsMap from './SpotsMap'
-import MobileMap from './MobileMap'
-import SpotList from "./SpotList";
+import SpotDetailsCard from "../../components/SpotDetailsCard"
+import SpotsMap from '../../components/desktop/SpotsMap'
+import MobileMap from '../../components/mobile/MobileMap'
+import SpotList from "../../components/desktop/SpotList";
 import Search from "../../components/Search"
 import withAuthorization from '../../components/hoc/withAuthorization';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Switch from "react-switch";
 import preventDefault from "../../utils/eventListeners"
 
 import "react-table/react-table.css";
-import MobileSpotList from './MobileSpotList';
+import MobileSpotList from '../../components/mobile/MobileSpotList';
 import Modal from 'react-bootstrap/Modal'
 
 

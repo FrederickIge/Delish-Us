@@ -13,7 +13,6 @@ import Signup from './pages/account/Signup';
 import Dashboard from './pages/spots/Dashboard';
 import MapDashboard from './pages/spots/MapDashboard';
 import Footer from  './layout/Footer';
-import FoodDetail from './pages/spots/FoodDetail'
 import { withRouter } from "react-router";
 import './css/App.css';
 
@@ -38,7 +37,6 @@ class App extends Component {
                 <Switch location={location}>
                   <Route exact path="/dashboard" component={MapDashboard} />
                   <Route exact path="/doglist" component={MapDashboard} />
-                  <Route exact path="/food/:id" component={FoodDetail} />
                   <Route exact path="/account" component={AccountPage} />
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/signup" component={Signup} />

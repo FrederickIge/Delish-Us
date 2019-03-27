@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { compose } from 'recompose';
-import withAuthorization from '../../components/hoc/withAuthorization';
+import withAuthorization from './hoc/withAuthorization';
 import StarRatingComponent from 'react-star-rating-component';
 import CommentModal from "./commentModal"
 const MAX_LENGTH = 50;

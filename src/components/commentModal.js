@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { inject, observer } from 'mobx-react';
 import Modal from 'react-bootstrap/Modal'
-import Comment from '../../models/Comment'
+import Comment from '../models/Comment'
 import firebase from 'firebase';
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
