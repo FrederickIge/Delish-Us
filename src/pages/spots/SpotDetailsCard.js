@@ -71,7 +71,7 @@ class SpotDetailsCard extends Component {
 
                                 <a onClick={this.spotStore.handleShow} >View All Comments ({this.spotStore.comments.length}) <i className="fa fa-comment-o fa-lg" aria-hidden="true"></i></a>
                                     
-                               <div>
+                               {/* <div>
                                <br></br>
                                Liked By:
                     
@@ -82,7 +82,7 @@ class SpotDetailsCard extends Component {
                                              </div>
                                     )}
 
-                               </div> 
+                               </div>  */}
 
                             </div>
 
@@ -95,11 +95,12 @@ class SpotDetailsCard extends Component {
                     <div style={this.style}>
                         <div style={this.style} className="spot-details-top">
                         <br></br>
-                            <h3 className="row justify-content-center" style={{fontSize:"1.5vw"}}>Select a Spot on the Map</h3>
+                            <h3 className="row justify-content-center select-a-spot" >Select a Spot on the Map</h3>
                             <div className="spacer"></div>
                             <div className="row justify-content-center">
                                 <i className="fa fa-cutlery fa-5x mx-auto" aria-hidden="true"></i>
                             </div>
+                            <br></br>
                         </div>                
                     </div>
                 }

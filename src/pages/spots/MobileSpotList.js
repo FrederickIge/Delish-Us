@@ -66,7 +66,7 @@ class MobileSpotList extends Component {
 </div> */}
             
             <div className="delishus-map-card-mobile-list spot-list d-lg-none" style={{ display: this.spotStore.mapView ? 'none' : 'block',height:"100%", width:"100%", overflow: "scroll" }}>
-                <div className="container-fluid">
+                <div className="container-fluid" style ={{height:"50%"}}>
                     <br></br>
 
             

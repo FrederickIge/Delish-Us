@@ -49,6 +49,10 @@ class spotStore {
 
   @observable firstComment;
 
+  targetElement = null;
+
+  @observable hideMobileMap = true;
+
   @action
   async selectSearchedSpot(geopoint) {
     this.selectedGeopoint = new Geopoint(geopoint);
@@ -206,7 +210,8 @@ class spotStore {
   }
 
   handleShow = async () => {
-    window.removeEventListener('touchmove', preventDefault);    this.toggleDrawer();
+    window.removeEventListener('touchmove', preventDefault); 
+    this.toggleDrawer();
     this.showModal = true;
   }
 

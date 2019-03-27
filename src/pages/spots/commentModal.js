@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react';
 import Modal from 'react-bootstrap/Modal'
 import Comment from '../../models/Comment'
 import firebase from 'firebase';
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 const styles = theme => ({
   typography: {
@@ -18,7 +19,7 @@ class CommentModal extends Component {
   sessionStore = this.props.sessionStore;
   spotStore = this.props.spotStore;
   fireStore = this.props.fireStore;
-
+  targetElement = null;
   state = {
     comment: ''
   }
@@ -51,9 +52,21 @@ class CommentModal extends Component {
   }
 
   componentDidCatch(){
+
     this.getCommentsBySpotId();
   }
 
+  componentDidMount(){
+    clearAllBodyScrollLocks();
+
+    console.log("mount")
+    disableBodyScroll(this.targetElement);
+  }
+
+  componentWillUnmount() {
+    console.log("unmount")
+    this.targetElement = document.querySelector('#root');
+  }
   render() {
     return (
         <>

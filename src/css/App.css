@@ -224,7 +224,8 @@ label {
 
 body {
   background-color: #FADDBC !important;
-  height:100%;
+  height:100vh;
+  margin: 0;
 }
 
 .jumbotron {
@@ -617,12 +618,16 @@ footer{
 }
 }
 
+#root{
+  height: 90vh ;
+}
 
 .main-container {
-  min-height: 100vh; /* will cover the 100% of viewport */
-  overflow: hidden;
-  display: block;
+  height: 100%; /* will cover the 100% of viewport
+  /* overflow: hidden;
   position: relative;
+  display: flex;
+  flex-direction: column;  */
  }
 
  footer {
@@ -634,10 +639,8 @@ footer{
 
  }
 
- html,
-body {
- height: 100%;
- position: relative;
+ .example-custom-modal-styling-title{
+  overflow: scroll; -webkit-overflow-scrolling: touch;
 }
 
 * {
@@ -660,10 +663,13 @@ body {
 }
 
 .mobile-autocomplete {
- 
+  position: relative;
+  z-index:100;
   display: inline-block;
   width:100%;
   height: 8%;
+  left:0;
+  right:0 ;
 }
 
 .autocomplete-items {
@@ -961,11 +967,18 @@ div#simple-popper {
       height: 88% 
     }
 
+    .select-a-spot{
+      font-size:1.5vw
+    }
+
   }
 
   @media (max-width: 992px){
     .container {
       min-width: 100% !important;
+  }
+  .select-a-spot{
+    font-size: 24px;
   }
   }
 
@@ -977,14 +990,14 @@ div#simple-popper {
 
 
 .big-container{
-  height: calc(100vh - 150px);
+  height: 100%;
   position : relative;
 }
 
-@media only screen and (min-width: 992px) {
+/* @media only screen and (min-width: 992px) {
 
   .big-container{
-    height: calc(100vh - 150px);
+    height: calc(100vh);
     position : relative;
   }
   
@@ -993,11 +1006,11 @@ div#simple-popper {
 @media only screen and (max-width: 600px) {
 
   .big-container{
-    height: calc(100vh - 150px);
+    height: calc(100vh);
     position : relative;
   }
   
-} 
+}  */
 
 
 .spot-list-item:last-of-type{
@@ -1011,4 +1024,20 @@ div#simple-popper {
 .modal-content{
   border-style: none !important;
   box-shadow: none !important;
+}
+
+.headroom-wrapper{
+  z-index: 200;
+}
+
+_:-webkit-full-screen, :root .autocomplete-items { 
+  overflow-y: scroll; 
+  
+}
+
+@supports not (-webkit-overflow-scrolling: touch)  {
+  /* CSS for other than iOS devices */ 
+  .autocomplete-items{
+max-height: 200px;
+  }
 }

@@ -48,7 +48,7 @@ class MapDashboard extends Component {
   }
 
   async componentDidMount() {
-    window.addEventListener('touchmove', preventDefault, { passive: false });
+    // window.addEventListener('touchmove', preventDefault, { passive: false });
     this.spotStore.getAllSpots();
     let position = await getPosition();
     this.spotStore.mapGeolocation.center = { lat: position.coords.latitude, lng: position.coords.longitude };
@@ -81,7 +81,7 @@ class MapDashboard extends Component {
           <div className="container container-dashboard big-container"  >
             <div className="spacer d-none d-lg-block" />
 
-            <div className="row" style={{ height: "95%", maxHeight:"95%"}}>
+            <div className="row" style={{ height: "100%", maxHeight:"100%"}}>
             {/* mobilemap */}
                 <MobileMap></MobileMap> 
                 <MobileSpotList></MobileSpotList>

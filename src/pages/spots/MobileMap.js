@@ -51,15 +51,15 @@ class MobileMap extends Component {
 
   render() {
     return (
-      <div id="ganggang" className="d-lg-none" style={{display: this.spotStore.mapView ? 'block' : 'none', position: "fixed", top: "0", bottom: "0", right: "0", left: "0", zIndex:"10"}} >
+      <div id="ganggang" className="d-lg-none" style={{display: this.spotStore.mapView ? 'block' : 'none', zIndex:"10", width:"100%"}} >
 
 
-   {this.spotStore.gmapsLoaded ?<div style={{position: "absolute", zIndex:500, width:"100%", left:"0",right:"0"}}>
+   {this.spotStore.gmapsLoaded ?<div style={{ zIndex:500, width:"100%", left:"0",right:"0"}}>
 
    <MobileSearch />
    </div>: null}
         
-
+{this.spotStore.hideMobileMap ?  
         <div style={{ position: "absolute", borderRadius: "0px", top: 46, zIndex: 100, left:"0", right:"0" }}>
 
           <div style ={{backgroundColor:"white", height:"43px"}} className="d-flex align-items-center justify-content-between">
@@ -88,16 +88,16 @@ class MobileMap extends Component {
 
           </div>
 
-        </div>
+        </div> : null }
       
+        {this.spotStore.hideMobileMap ?  
+ <div id="ganggang" style={{position: "fixed", top:"76px" ,bottom:"0", left: "0", right:"0"}}> 
 
-{/* <div id="ganggang" style={{position: "absolute", top: "0", bottom: "0", right: "0", left: "0"}}> */}
 
-
-        {/* <GoogleMapReact
+        <GoogleMapReact
           id="bangbang"
           bootstrapURLKeys={{ key: 'AIzaSyAJdMUyuQiG2DEHgGG3Tvebb9-BzR0JXwE', libraries: "places" }}
-          defaultZoom={3}
+          defaultZoom={15}
           onGoogleApiLoaded={({ map, maps }) => this.apiIsLoaded(map, maps)}
           center={this.spotStore.mapGeolocation.center}
           options={{fullscreenControl: false, zoomControl: false}}
@@ -138,9 +138,11 @@ class MobileMap extends Component {
               text={this.spotStore.selectedSpot.name}
               onClick={this.spotStore.toggleDrawer}
             /> : null}
-        </GoogleMapReact> */}
+        </GoogleMapReact>
         </div>
-      // </div>
+: null}
+
+      </div>
 
     )
   }

@@ -18,6 +18,7 @@ class MobileSearch extends React.Component {
   };
 
   handleSelect = (description, placeId, suggestion) => {
+    window.scrollTo(0,0);
     this.spotStore.selectSearchedSpot(suggestion);
     this.setState({address:''});
     this.search.current.blur();
@@ -25,13 +26,15 @@ class MobileSearch extends React.Component {
 
   handleBlur = () => {
     this.setState({ showResults: false })
+    this.spotStore.hideMobileMap = true;
     window.addEventListener('touchmove', preventDefault, { passive: false });
     this.nav.removeEventListener('touchmove', preventDefault);
     this.searchInput.removeEventListener('touchmove', preventDefault);
   }
 
   handleFocus = () => {
-    this.setState({ showResults: true })
+    this.setState({ showResults: true });
+    this.spotStore.hideMobileMap = false;
     window.removeEventListener('touchmove', preventDefault);
     this.nav.addEventListener('touchmove', preventDefault, { passive: false })
     this.searchInput.addEventListener('touchmove', preventDefault, { passive: false })
@@ -52,7 +55,7 @@ class MobileSearch extends React.Component {
         onSelect={this.handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div className="mobile-autocomplete  flex-grow-1 align-self-center" >
+          <div className="mobile-autocomplete flex-grow-1 align-self-center" >
             <input
             id="mobile-search-input"
               name="search"
@@ -65,7 +68,7 @@ class MobileSearch extends React.Component {
               })}
             />
             {this.state.showResults ?
-              <div className="autocomplete-items" style = {{ maxHeight:"300px" , overflow: "scroll"}}>
+              <div className="autocomplete-items" style={{ height:"100vh", backgroundColor: "white"}}>
                 {loading && <div>Loading...</div>}
                 {suggestions.map(suggestion => {
                   const className = suggestion.active
