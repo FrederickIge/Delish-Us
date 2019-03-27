@@ -3,16 +3,15 @@ import posed, {PoseGroup} from 'react-pose';
 import {Switch, Route} from 'react-router-dom';
 
 import withAuthentication from './components/hoc/withAuthentication';
-import Navbar from './layout/Navbar';
-import { inject, observer } from 'mobx-react';
+import Navbar from './components/layout/Navbar';
+
 import { ToastContainer, toast } from 'react-toastify';
 import Landingpage from './pages/Landingpage';
 import AccountPage from './pages/account/Account';
 import Login from './pages/account/Login';
 import Signup from './pages/account/Signup';
 import MapDashboard from './pages/spots/MapDashboard';
-import Footer from  './layout/Footer';
-import { withRouter } from "react-router";
+import Footer from  './components/layout/Footer';
 import './css/App.css';
 
 const RoutesContainer = posed.div({
@@ -34,7 +33,7 @@ class App extends Component {
             {/* <PoseGroup> */}
             <ToastContainer/>
                 <Switch location={location}>
-                  <Route exact path="/doglist" component={MapDashboard} />
+                  <Route exact path="/dashboard" component={MapDashboard} />
                   <Route exact path="/account" component={AccountPage} />
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/signup" component={Signup} />

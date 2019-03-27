@@ -12,8 +12,8 @@ class SpotList extends Component {
     sessionStore = this.props.sessionStore;
 
     state = {
-        mobileStyle: {},
-        mobileSearch: {}
+        mobileStyle: {}
+      
     }
 
 

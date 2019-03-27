@@ -8,7 +8,7 @@ import SpotDetailsCard from "../../components/SpotDetailsCard"
 import SpotsMap from '../../components/desktop/SpotsMap'
 import MobileMap from '../../components/mobile/MobileMap'
 import SpotList from "../../components/desktop/SpotList";
-import Search from "../../components/Search"
+import Search from "../../components/desktop/Search"
 import withAuthorization from '../../components/hoc/withAuthorization';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import preventDefault from "../../utils/eventListeners"

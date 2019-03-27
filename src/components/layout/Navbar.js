@@ -1,16 +1,9 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
-import Dropdown from 'rc-dropdown';
+
 import 'rc-dropdown/assets/index.css';
-import Headroom from 'react-headroom';
-import Fade from '@material-ui/core/Fade';
-import Popper from '@material-ui/core/Popper';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
+
 import AvatarMenu from './avatar-menu'
 const styles = theme => ({
   typography: {
@@ -61,7 +54,7 @@ class Navbar extends Component {
 
         <Link style={{ textDecoration: 'none' }} to="/dashboard">
             {/* <FontAwesomeIcon className="icon-layers  fa-2x globe" icon={faGlobeAfrica} /> */}
-            <img style={{ height: '25px', paddingBottom:"3px" }} className="img-fluid" src={require("../img/compass.png")} alt="Logo" />
+            <img style={{ height: '25px', paddingBottom:"3px" }} className="img-fluid" src={require("../../img/compass.png")} alt="Logo" />
 
           <b style={{  marginLeft:"10px" }}>DELISH-US</b>  
           </Link>
@@ -82,7 +75,7 @@ class Navbar extends Component {
         <div className="container">
         
           <Link style={{ textDecoration: 'none' }} to="/dashboard">
-            <img style={{ height: '25px', paddingBottom:"3px" }} className="img-fluid" src={require("../img/compass.png")} alt="Logo" />
+            <img style={{ height: '25px', paddingBottom:"3px" }} className="img-fluid" src={require("../../img/compass.png")} alt="Logo" />
             <b style={{  marginLeft:"10px" }}>DELISH-US</b>  
           </Link>
           <div>

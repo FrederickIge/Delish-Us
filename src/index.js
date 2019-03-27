@@ -9,7 +9,7 @@ import App from './App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import stores from './stores';
-import ScrollToTop from './components/ScrollToTop';
+
 
 const browserHistory = createBrowserHistory();
 

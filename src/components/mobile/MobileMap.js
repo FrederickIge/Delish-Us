@@ -5,7 +5,7 @@ import withAuthorization from '../hoc/withAuthorization';
 import GoogleMapReact from 'google-map-react';
 import { ToastContainer, toast } from 'react-toastify';
 import {isMobile, isBrowser} from 'react-device-detect';
-import MobileSearch from "../MobileSearch"
+import MobileSearch from "./MobileSearch"
 
 const AnyReactComponent = ({ text, onClick }) => (
   <div onClick={onClick} className="demo">

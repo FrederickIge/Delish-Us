@@ -13,7 +13,7 @@ class Footer extends Component {
             <div className="col-6 ">
               <div className="d-flex h-100 align-items-center">
 
-                <div>Made by Frederick Ige</div>
+                <div>Made by Frederick Igee</div>
 
 
 

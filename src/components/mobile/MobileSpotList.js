@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { compose } from 'recompose';
 import withAuthorization from '../hoc/withAuthorization';
-import Table from 'react-bootstrap/Table'
-import preventDefault from "../../utils/eventListeners"
-import MobileSearch from "../MobileSearch"
+
 
 @inject('sessionStore', 'spotStore')
 @observer
@@ -12,16 +10,6 @@ class MobileSpotList extends Component {
 
     spotStore = this.props.spotStore;
     sessionStore = this.props.sessionStore;
-
-    state = {
-        mobileStyle: {},
-        mobileSearch: {}
-    }
-
-
-    componentDidMount() {
-
-    }
 
     selectSpot(spot) {
         this.props.spotStore.selectExistingSpot(spot);

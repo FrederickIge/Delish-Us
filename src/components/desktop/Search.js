@@ -1,47 +1,30 @@
 import React from 'react';
 import PlacesAutocomplete from 'reactjs-places-autocomplete';
 import { inject } from 'mobx-react';
-import preventDefault from "../utils/eventListeners"
-
+import {isMobile, isBrowser} from 'react-device-detect';
 
 @inject('spotStore')
-class MobileSearch extends React.Component {
+class Search extends React.Component {
 
   spotStore = this.props.spotStore;
 
-  state = { address: '', showResults: false, mobileSearch:{ } };
-  
-  search = React.createRef();
+  state = { address: '', showResults: false };
 
   handleChange = address => {
     this.setState({ address });
   };
 
   handleSelect = (description, placeId, suggestion) => {
-    window.scrollTo(0,0);
     this.spotStore.selectSearchedSpot(suggestion);
     this.setState({address:''});
-    this.search.current.blur();
   };
 
   handleBlur = () => {
     this.setState({ showResults: false })
-    this.spotStore.hideMobileMap = true;
-    window.addEventListener('touchmove', preventDefault, { passive: false });
-    this.nav.removeEventListener('touchmove', preventDefault);
-    this.searchInput.removeEventListener('touchmove', preventDefault);
   }
 
   handleFocus = () => {
-    this.setState({ showResults: true });
-    this.spotStore.hideMobileMap = false;
-    window.removeEventListener('touchmove', preventDefault);
-    this.nav.addEventListener('touchmove', preventDefault, { passive: false })
-    this.searchInput.addEventListener('touchmove', preventDefault, { passive: false })
-  }
-  componentDidMount(){
-    this.nav = document.getElementById("app-navbar");
-    this.searchInput = document.getElementById("mobile-search-input");
+    this.setState({ showResults: true })
   }
 
   render() {
@@ -55,11 +38,9 @@ class MobileSearch extends React.Component {
         onSelect={this.handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div className="mobile-autocomplete flex-grow-1 align-self-center" >
+          <div className="autocomplete flex-grow-1 align-self-center">
             <input
-            id="mobile-search-input"
-              name="search"
-              ref={this.search}
+              ref={this.exampleRef}
               onFocus={this.handleFocus}
               {...getInputProps({
                 placeholder: 'Search For a Spot',
@@ -68,7 +49,7 @@ class MobileSearch extends React.Component {
               })}
             />
             {this.state.showResults ?
-              <div className="autocomplete-items" style={{ height:"100vh", backgroundColor: "white"}}>
+              <div className="autocomplete-items">
                 {loading && <div>Loading...</div>}
                 {suggestions.map(suggestion => {
                   const className = suggestion.active
@@ -81,7 +62,6 @@ class MobileSearch extends React.Component {
                   return (
 
                     <div 
-                    
                       {...getSuggestionItemProps(suggestion, {
                         className,
                         style,
@@ -101,4 +81,4 @@ class MobileSearch extends React.Component {
   }
 }
 
-export default MobileSearch;
+export default Search;

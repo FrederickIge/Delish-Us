@@ -3,8 +3,7 @@ import { inject, observer } from 'mobx-react';
 import { compose } from 'recompose';
 import withAuthorization from '../hoc/withAuthorization';
 import GoogleMapReact from 'google-map-react';
-import { ToastContainer, toast } from 'react-toastify';
-import {isMobile, isBrowser} from 'react-device-detect';
+import {isMobile} from 'react-device-detect';
 
 const AnyReactComponent = ({ text, onClick }) => (
   <div onClick={onClick} className="demo">
@@ -20,8 +19,7 @@ class SpotsMap extends Component {
   sessionStore = this.props.sessionStore;
 
   state = {
-    mobileStyle: { },
-    mobileSearch: { }
+    mobileStyle: { }
   }
 
   apiIsLoaded = (map, maps) => {
