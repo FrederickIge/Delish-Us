@@ -17,30 +17,23 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import './css/App.css';
 import { syncHistoryWithStore } from 'mobx-react-router';
 import stores from './stores';
-
+console.log(stores)
 const browserHistory = createBrowserHistory();
 
 const history = syncHistoryWithStore(browserHistory, stores.routingStore);
 
-const RoutesContainer = posed.div({
-  enter: {
-    opacity: 1,
-    delay: 300,
-    beforeChildren: true
-  },
-  exit: {opacity: 0}
-});
+
 
 class App extends Component {
   render() {
     return (
-
+   
       <Router history={history} onUpdate={() => window.scrollTo(0, 0)} >
-      <Route
-        render={({location}) => (
-          <div className="main-container" >
-            <Navbar />
-            {/* <PoseGroup> */}
+
+      <Route render={({location}) => (
+
+          <div className="main-container">
+            <Navbar />         
             <ToastContainer/>
                 <Switch location={location}>
                   <Route exact path="/dashboard" component={MapDashboard} />
@@ -49,13 +42,13 @@ class App extends Component {
                   <Route exact path="/signup" component={Signup} />
                   <Route path="/" component={Landingpage} />
                 </Switch>
-            {/* </PoseGroup> */}
-            {/* <Footer /> */}
+           
           </div>
         )}
       />
+      
     </Router>
-  
+ 
 
 
     );

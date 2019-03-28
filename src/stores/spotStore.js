@@ -15,6 +15,7 @@ class spotStore {
     autorun(() => root.sessionStore.authUser ? this.userId = root.sessionStore.authUser.uid : null);
     this.fireStore = root.fireStore
     this.targetElement = document.querySelector('#root');
+    console.log("YAY")
   }
 
   @observable googlePlacesService;
