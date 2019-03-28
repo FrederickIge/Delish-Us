@@ -3,7 +3,6 @@ import {inject, observer} from "mobx-react";
 import {compose} from "recompose";
 import withAuthorization from "../hoc/withAuthorization";
 import GoogleMapReact from "google-map-react";
-import {isMobile} from "react-device-detect";
 import styled from "styled-components";
 import RandomButton from "./RandomButton"
 

@@ -21,7 +21,7 @@ render() {
     return (
       <React.Fragment>
            {this.spotStore.showAllSpots ? (
-          <Random onClick={() => this.spotStore.getRandomSpot()} type="button" className="btn btn-primary">
+          <Random onClick={() => this.spotStore.getRandomSpot()} type="button" disabled={!this.spotStore.showAllSpots} className="btn btn-primary">
             Random
           </Random>
         ) : null}

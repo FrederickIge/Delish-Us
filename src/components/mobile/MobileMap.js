@@ -3,9 +3,10 @@ import { inject, observer } from 'mobx-react';
 import { compose } from 'recompose';
 import withAuthorization from '../hoc/withAuthorization';
 import GoogleMapReact from 'google-map-react';
-import { ToastContainer, toast } from 'react-toastify';
-import {isMobile, isBrowser} from 'react-device-detect';
 import MobileSearch from "./MobileSearch"
+import styled from "styled-components";
+import RandomButton from "./MobileRandomButton"
+import MobileMapSwitcher from "./MobileMapSwitcher"
 
 const AnyReactComponent = ({ text, onClick }) => (
   <div onClick={onClick} className="demo">
@@ -13,7 +14,19 @@ const AnyReactComponent = ({ text, onClick }) => (
   </div>
 );
 
+const MobileSearchWrapper = styled.div`
+z-index 500;
+width:100%;
+left:0
+right:0;
+`;
 
+const DisplayText = styled.div`
+  color: rgba(0, 0, 0, 0.90);
+  font-size: 18px !important;
+`;
+
+const DisplayTextWrapper = styled.div``
 
 @inject('sessionStore', 'spotStore')
 @observer
@@ -22,22 +35,10 @@ class MobileMap extends Component {
   spotStore = this.props.spotStore;
   sessionStore = this.props.sessionStore;
 
-  state = {
-    mobileStyle: { },
-    mobileSearch: { }
-  }
-
   apiIsLoaded = (map, maps) => {
     this.spotStore.gmapsLoaded = true;
     this.spotStore.googlePlacesService = new maps.places.PlacesService(map);
   };
-
-  componentDidMount() {
-    if (isMobile) {
-      this.setState({ mobileStyle: { height: "100vh", width: "100%" , zIndex :"1"} })
-    }
-   
-  }
 
   selectSpot(spot) {
     this.props.spotStore.selectExistingSpot(spot);
@@ -47,48 +48,39 @@ class MobileMap extends Component {
     this.spotStore.showAllSpots = !this.spotStore.showAllSpots;
   }
 
-
-
   render() {
     return (
-      <div id="ganggang" className="d-lg-none" style={{display: this.spotStore.mapView ? 'block' : 'none', zIndex:"10", width:"100%"}} >
+      <div className="d-lg-none" style={{display: this.spotStore.mapView ? 'block' : 'none', zIndex:"10", width:"100%"}} >
 
 
-   {this.spotStore.gmapsLoaded ?<div style={{ zIndex:500, width:"100%", left:"0",right:"0"}}>
+        {this.spotStore.gmapsLoaded ?
 
-   <MobileSearch />
-   </div>: null}
+          <MobileSearchWrapper>
+
+            <MobileSearch />
+
+          </MobileSearchWrapper>  : null}
         
 {this.spotStore.hideMobileMap ?  
-        <div style={{ position: "absolute", borderRadius: "0px", top: 46, zIndex: 100, left:"0", right:"0" }}>
+       
 
-          <div style ={{backgroundColor:"white", height:"43px"}} className="d-flex align-items-center justify-content-between">
+          <div style ={{backgroundColor:"white", height:"43px",  position: "absolute", borderRadius: "0px", top: 46, zIndex: 100, left:"0", right:"0"}} className="d-flex align-items-center justify-content-between">
          
-            <button
-              disabled={!this.spotStore.showAllSpots}
-              onClick={() => this.spotStore.getRandomSpot()}
-              style={{ zIndex: 100, borderRadius: "0px" }}
-              type="button" className="btn btn-primary">
-              Random
-            </button>
+            <RandomButton/>
 
-            <div style={{ zIndex: 100 }} className="align-self-center">
-              {this.spotStore.showAllSpots ? <span style={{ color: "rgba(0, 0, 0, 0.90)", fontSize: "18px" }}>
-              <b>All Spots</b></span>
-               : 
-               <span style={{ color: "rgba(0, 0, 0, 0.90)", fontSize: "18px" }}>
-               <b>My Spots</b>
-               </span>}
-            </div>
+              <DisplayTextWrapper className="align-self-center">
 
-            <label style={{ zIndex: 100, marginBottom: "0px",marginRight:"5px"}} className="switch  align-self-center">
-              <input name="switch  align-self-center" type="checkbox" onChange={this.handleInputChange} />
-              <span className="slider"></span>
-            </label>
+                <DisplayText>
+                  {this.spotStore.showAllSpots ? <b>All Spots</b> : <b>My Spots</b>}
+                </DisplayText>
+
+              </DisplayTextWrapper>
+
+            <MobileMapSwitcher/>
 
           </div>
 
-        </div> : null }
+        : null }
       
         {this.spotStore.hideMobileMap ?  
  <div id="ganggang" style={{position: "fixed", top:"76px" ,bottom:"0", left: "0", right:"0"}}> 
