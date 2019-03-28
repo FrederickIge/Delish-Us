@@ -1,39 +1,118 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { compose } from 'recompose';
-import posed from 'react-pose';
-import firebase from 'firebase';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import styled from 'styled-components';
 
+import MobileSpotList from '../../components/mobile/MobileSpotList';
 import SpotDetailsCard from "../../components/SpotDetailsCard"
 import SpotsMap from '../../components/desktop/SpotsMap'
 import MobileMap from '../../components/mobile/MobileMap'
 import SpotList from "../../components/desktop/SpotList";
 import Search from "../../components/desktop/Search"
 import withAuthorization from '../../components/hoc/withAuthorization';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import preventDefault from "../../utils/eventListeners"
-
-import "react-table/react-table.css";
-import MobileSpotList from '../../components/mobile/MobileSpotList';
-import Modal from 'react-bootstrap/Modal'
-
-
-const db = firebase.firestore();
-
-db.settings({
-  timestampsInSnapshots: true
-});
-
-const Slide = posed.div({
-  enter: { x: 0, opacity: 1 },
-  exit: { x: -50, opacity: 0 }
-});
+import MapSwitcher from "../../components/desktop/MapSwitcher";
+import Spacer from "../../components/layout/Spacer";
 
 var getPosition = function (options) {
   return new Promise(function (resolve, reject) {
     navigator.geolocation.getCurrentPosition(resolve, reject, options);
   });
 }
+
+const DisplayText = styled.div`
+  color: rgba(0, 0, 0, 0.41);
+  fontSize: 18px
+  marginTop: auto;
+  marginBottom: auto
+`;
+
+const GoogleMapContainer = styled.div`
+  height: 100%;
+`;
+
+const DashboardContainer = styled.div`
+  height: 100%;
+  position: relative;
+`;
+
+const DashboardRowContainer = styled.div`
+  height: 95% ;
+  max-height: 100% ;
+`;
+
+const SpotDetailsCardWrapper = styled.div`
+  height: 100%;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 18px;
+  background-color: white;
+`;
+
+const SearchContainer = styled.div`
+@media only screen and (min-width: 600px) {
+    height: 10%
+}
+
+@media only screen and (min-width: 414px) {
+    height: 12%
+}
+
+/* 320px+ */
+@media only screen and (min-width: 320px) {
+    height: 16%
+}
+
+/* 375px+ */
+@media only screen and (min-width: 375px) {
+    height: 14%
+}
+
+/* 768px+ */
+@media only screen and (min-width: 768px) {
+    height: 10%
+} 
+
+/* 1200+ */
+@media only screen and (min-width: 1200px) { 
+    height: 12%
+}
+`;
+
+const MapListContainer = styled.div`
+
+@media only screen and (min-width: 600px) {
+    height: 85% 
+}
+
+@media only screen and (min-width: 414px) {
+    height: 80% 
+}
+
+
+/* 320px+ */
+@media only screen and (min-width: 320px) {
+    height: 85% 
+}
+
+/* 375px+ */
+@media only screen and (min-width: 375px) {
+    height: 90% 
+}
+
+/* 768px+ */
+@media only screen and (min-width: 768px) {
+    height: 90% 
+} 
+
+/* 1200+ */
+@media only screen and (min-width: 1200px) { 
+    height: 88% 
+}`;
+
+const DashboardLeftSide = styled.div``;
+const DashboardRightSide = styled.div``;
+const Flex = styled.div``;
 
 @inject('sessionStore', 'spotStore')
 @observer
@@ -42,7 +121,7 @@ class MapDashboard extends Component {
   sessionStore = this.props.sessionStore;
   spotStore = this.props.spotStore;
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     window.removeEventListener('touchmove', preventDefault);
   }
 
@@ -53,96 +132,75 @@ class MapDashboard extends Component {
     this.spotStore.mapGeolocation.center = { lat: position.coords.latitude, lng: position.coords.longitude };
   }
 
-  handleInputChange = (event) => {
-      this.spotStore.showAllSpots = !this.spotStore.showAllSpots;
-  }
-
-
-
   render() {
 
     return (
-<React.Fragment>
-  
+      <React.Fragment>
+
         <SwipeableDrawer
           anchor="bottom"
           open={this.spotStore.drawerState}
           onClose={() => this.spotStore.toggleDrawer(false)}
           onOpen={() => this.spotStore.toggleDrawer(true)}
-          className="d-lg-none detail-image curved-drawer"
+          className="d-lg-none"
         >
-          <div className="curve detail-image">
             <SpotDetailsCard />
-          </div>
         </SwipeableDrawer>
 
 
-          <div className="container container-dashboard big-container"  >
-            <div className="spacer d-none d-lg-block" />
+      <DashboardContainer className="container">
 
-            <div className="row" style={{ height: "100%", maxHeight:"100%"}}>
-            {/* mobilemap */}
-                <MobileMap></MobileMap> 
-                <MobileSpotList></MobileSpotList>
-            <div className="col-md-4 d-none d-lg-block" style={{ maxHeight:"95%"}} >
-              <div className="delishus-card spot-detail">
+          <Spacer/>
+
+          <DashboardRowContainer className="row">
+
+            <MobileMap />
+
+            <MobileSpotList />
+
+            <DashboardLeftSide className="col-md-4 d-none d-lg-block">
+              <SpotDetailsCardWrapper className="delishus-card spot-detail">
                 <SpotDetailsCard />
-              </div>
-            </div>
+              </SpotDetailsCardWrapper>
+            </DashboardLeftSide>
 
-              <div className="col-md-12 col-lg-8" style={{ maxHeight:"95%"}}>
+            <DashboardRightSide className="col-md-12 col-lg-8">
 
+              <GoogleMapContainer>
 
-                <div className="google-map-container" style={{ height: "100%"}}>
+                {this.spotStore.gmapsLoaded ?
 
-                  {this.spotStore.gmapsLoaded ? 
+                  <SearchContainer className="d-none d-lg-block">
 
-                  <div className="search-container d-none d-lg-block">
+                    <Flex className="d-flex">
+                      <Search />
+                      <MapSwitcher />
+                    </Flex>
 
-                    <div className="d-flex">
-                      <Search />                
-                      <label style={{ marginBottom: "0rem", marginLeft: "10px" }} className="switch  align-self-center">
-                        <input name="switch  align-self-center" type="checkbox" onChange={this.handleInputChange} />
-                        <span className="slider"></span>
-                      </label>
-                    </div>
+                    <DisplayText className="d-flex justify-content-center">
+                      {this.spotStore.showAllSpots ? <b>Displaying All Spots</b> : <b>Displaying My Spots</b>}
+                    </DisplayText>
 
-                    <div className="d-flex justify-content-center" style={{ height: "50%"}}>
-
-                      {this.spotStore.showAllSpots ?
-                        <div style={{ color: "rgba(0, 0, 0, 0.41)", fontSize: "18px", marginTop: "auto", marginBottom: "auto" }}>
-                          <b>Displaying All Spots</b>
-                        </div>
-                         :
-                        <div style={{ color: "rgba(0, 0, 0, 0.41)", fontSize: "18px", marginTop: "auto", marginBottom: "auto" }}>
-                          <b>Displaying My Spots</b>
-                        </div>
-                      }
-
-                    </div>
-
-                  </div> 
+                  </SearchContainer>
 
                   : null}
 
-                <div className="map-list-container d-none d-lg-block" >
+                <MapListContainer className="d-none d-lg-block" >
                   <SpotsMap />
                   <SpotList />
-                </div>
+                </MapListContainer>
 
-                  
+              </GoogleMapContainer>
+
+            </DashboardRightSide>
+
+          </DashboardRowContainer>
+
+        </DashboardContainer>
+
+      </React.Fragment>
 
 
-
-                    
-                </div>
-              </div>
-            </div>
-          </div>
-        
-        </React.Fragment>
-
-     
 
     )
   }

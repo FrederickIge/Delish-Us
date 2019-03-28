@@ -558,8 +558,6 @@ td{
 
 .delishus-card{
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
-
-  /* padding: 8px; */
   border-radius: 18px;
   background-color: white;
 }
@@ -890,88 +888,8 @@ div#simple-popper {
 }
 
 
-.curve{
-  border-radius: 20px;
-}
 
 
-
-
-  @media only screen and (min-width: 600px) {
-    .search-container{
-      height: 10%
-    }
-  
-    .map-list-container{
-      height: 85% 
-    }
-
-  }
-
-  @media only screen and (min-width: 414px) {
-    .search-container{
-      height: 12%
-    }
-  
-    .map-list-container{
-      height: 80% 
-    }
-
-  }
-
-
-/* 320px+ */
-  @media only screen and (min-width: 320px) {
-    .search-container{
-      height: 16%
-    }
-  
-    .map-list-container{
-      height: 85% 
-    }
-
-  }
-
-/* 375px+ */
-  @media only screen and (min-width: 375px) {
-    .search-container{
-      height: 14%
-    }
-  
-    .map-list-container{
-      height: 90% 
-    }
-
-  }
-
-/* 768px+ */
-  @media only screen and (min-width: 768px) {
-
-    .search-container{
-      height: 10%
-    }
-  
-    .map-list-container{
-      height: 90% 
-    }
-
-  } 
-
-/* 1200+ */
-  @media only screen and (min-width: 1200px) { 
-    .search-container{
-      height: 12%
-    }
-  
-    .map-list-container{
-      height: 88% 
-    }
-
-    .select-a-spot{
-      font-size:1.5vw
-    }
-
-  }
 
   @media (max-width: 992px){
     .container {
@@ -988,29 +906,6 @@ div#simple-popper {
 }
 
 
-
-.big-container{
-  height: 100%;
-  position : relative;
-}
-
-/* @media only screen and (min-width: 992px) {
-
-  .big-container{
-    height: calc(100vh);
-    position : relative;
-  }
-  
-} 
-
-@media only screen and (max-width: 600px) {
-
-  .big-container{
-    height: calc(100vh);
-    position : relative;
-  }
-  
-}  */
 
 
 .spot-list-item:last-of-type{
