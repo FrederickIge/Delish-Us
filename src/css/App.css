@@ -512,49 +512,15 @@ overflow: hidden
   background-color: #FADDBC !important;
 }
 
-.footer.has-cards:before{
-  /* background-color: #FADDBC !important; */
-}
+
 
 .headroom--unpinned {
   transition: none !important;
 }
 
-thead{
-  border-bottom-color: transparent !important;
 
-}
 
-tr:first-child  {
-  border-top-color: transparent !important;
-}
 
-tbody{
-  border-color: transparent !important;
-}
-
-.ant-table-thead > tr > th{
-  border-color: transparent !important;
-}
-
-thead {
-  -moz-border-radius: 20px;
-  -webkit-border-radius: 20px;
-}
-
-tbody{
-  -moz-border-radius: 20px;
-  -webkit-border-radius: 20px;
-}
-
-table{
-  border-collapse: separate;
-}
-
-td{
-  padding-top: 36px !important;
-  padding-bottom: 36px !important;
-}
 
 .delishus-card{
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
@@ -608,10 +574,6 @@ footer{
 
 .main-container {
   height: 100%; /* will cover the 100% of viewport
-  /* overflow: hidden;
-  position: relative;
-  display: flex;
-  flex-direction: column;  */
  }
 
  footer {
@@ -840,14 +802,9 @@ input:checked + .slider:before {
 }
 
 
-.MuiDrawer-paper-3 {
-  border-radius: 10px;
-}
 
-.dv-star-rating{
-  padding-left: 10px;
-  padding-top: 8px;
-}
+
+
 
 .nav-text-style{
   font-family: 'Roboto', sans-serif;
