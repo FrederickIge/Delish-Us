@@ -144,13 +144,12 @@ class MapDashboard extends Component {
           onOpen={() => this.spotStore.toggleDrawer(true)}
           className="d-lg-none"
         >
-            <SpotDetailsCard />
+          <SpotDetailsCard />
         </SwipeableDrawer>
 
+        <DashboardContainer className="container">
 
-      <DashboardContainer className="container">
-
-          <Spacer/>
+          <Spacer />
 
           <DashboardRowContainer className="row">
 
@@ -199,9 +198,6 @@ class MapDashboard extends Component {
         </DashboardContainer>
 
       </React.Fragment>
-
-
-
     )
   }
 }
