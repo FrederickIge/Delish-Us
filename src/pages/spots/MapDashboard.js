@@ -38,8 +38,8 @@ const DashboardContainer = styled.div`
 `;
 
 const DashboardRowContainer = styled.div`
-  height: 95% ;
-  max-height: 100% ;
+  height: 95%;
+  max-height: 100%;
 `;
 
 const SpotDetailsCardWrapper = styled.div`
@@ -83,35 +83,52 @@ const MapListContainer = styled.div`
 
 @media only screen and (min-width: 600px) {
     height: 85% 
+    max-height:85%;
+    
 }
 
 @media only screen and (min-width: 414px) {
     height: 80% 
+    max-height:80%;
+    
 }
 
 
 /* 320px+ */
 @media only screen and (min-width: 320px) {
     height: 85% 
+    max-height:85%;
+   
 }
 
 /* 375px+ */
 @media only screen and (min-width: 375px) {
     height: 90% 
+    max-height:90%;
+   
 }
 
 /* 768px+ */
 @media only screen and (min-width: 768px) {
     height: 90% 
+    max-height:90%;
+   
 } 
 
 /* 1200+ */
 @media only screen and (min-width: 1200px) { 
-    height: 88% 
+    height: 88%;
+    max-height:88%;
+  
 }`;
 
-const DashboardLeftSide = styled.div``;
-const DashboardRightSide = styled.div``;
+const DashboardLeftSide = styled.div`
+  height: 100%;
+`;
+const DashboardRightSide = styled.div`
+  height: 100%;
+`;
+
 const Flex = styled.div``;
 
 @inject('sessionStore', 'spotStore')
@@ -151,27 +168,26 @@ class MapDashboard extends Component {
 
           <Spacer />
 
-          <DashboardRowContainer className="row">
+          <DashboardRowContainer id="DashboardRowContainer" className="row">
 
             <MobileMap />
-
             <MobileSpotList />
 
-            <DashboardLeftSide className="col-md-4 d-none d-lg-block">
-              <SpotDetailsCardWrapper className="delishus-card spot-detail">
+            <DashboardLeftSide id = "dashbaord-left-side" className="col-md-4 d-none d-lg-block">
+              <SpotDetailsCardWrapper id = "dashbaord-details-wrapper" className="delishus-card spot-detail">
                 <SpotDetailsCard />
               </SpotDetailsCardWrapper>
             </DashboardLeftSide>
 
-            <DashboardRightSide className="col-md-12 col-lg-8">
+            <DashboardRightSide id = "dashbaord-right-side" className="col-md-12 col-lg-8">
 
-              <GoogleMapContainer>
+              <GoogleMapContainer id="google-map-container">
 
                 {this.spotStore.gmapsLoaded ?
 
-                  <SearchContainer className="d-none d-lg-block">
+                  <SearchContainer id="searchContainer" className="d-none d-lg-block">
 
-                    <Flex className="d-flex">
+                    <Flex id="flex" className="d-flex">
                       <Search />
                       <MapSwitcher />
                     </Flex>
@@ -184,10 +200,10 @@ class MapDashboard extends Component {
 
                   : null}
 
-                <MapListContainer className="d-none d-lg-block" >
+                <MapListContainer id="map-list-container" className="d-none d-lg-block" >
                   <SpotsMap />
                   <SpotList />
-                </MapListContainer>
+                </MapListContainer> 
 
               </GoogleMapContainer>
 

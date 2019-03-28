@@ -39,11 +39,16 @@ class SpotsMap extends Component {
 
   render() {
     return (
-      <DelishusMapCard style={{ display: this.spotStore.mapView ? "block" : "none",height: "100%"}}>
-
+      <DelishusMapCard id="dcard" style={{ display: this.spotStore.mapView ? "block" : "none", height: "100%"}}>
 
         <RandomButton/>
-
+        <div id="reactmap" style={{
+      borderRadius: '10px',
+      height: '100%',
+      width: '100%',
+      overflow: 'hidden'
+    }}
+    >
         <GoogleMapReact
           id="map"
           bootstrapURLKeys={{
@@ -94,7 +99,7 @@ class SpotsMap extends Component {
         
 
         </GoogleMapReact>
-
+        </div>
       </DelishusMapCard>
     );
   }
