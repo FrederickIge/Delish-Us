@@ -18,8 +18,6 @@ textDecoration: none;
 color: #1890ff;
 `;
 
-
-
 @inject("routingStore", "sessionStore", "spotStore")
 @observer
 class Navbar extends Component {
@@ -58,7 +56,6 @@ class Navbar extends Component {
             <b className="ml-3">DELISH-US</b>
           </Link>
 
-        
             <ViewSwitcher onClick={this.spotStore.toggleView} className="ml-auto mr-3 nav-text-style">
               {props.mapView ? <b>LIST VIEW</b> : <b>MAP VIEW</b>}
             </ViewSwitcher>
