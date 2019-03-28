@@ -70,6 +70,7 @@ class SpotDetailsCard extends Component {
                         <SpotDetailsTop>
 
                             <DetailImageWrapper>
+                               
                                 <SpotDetailImage className="img-fluid" alt="gag" src={this.spotStore.selectedSpot.image} />
                             </DetailImageWrapper>
 
@@ -118,6 +119,7 @@ class SpotDetailsCard extends Component {
                     <CardDetailsContainer>
                         <SpotDetailsTop>
                             <br></br>
+                            {1 + 1}
                             <h3 className="row justify-content-center select-a-spot" >Select a Spot on the Map</h3>
                             <div className="spacer"></div>
                             <div className="row justify-content-center">
