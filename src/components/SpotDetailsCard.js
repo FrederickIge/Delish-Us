@@ -4,7 +4,41 @@ import { compose } from 'recompose';
 import withAuthorization from './hoc/withAuthorization';
 import StarRatingComponent from 'react-star-rating-component';
 import CommentModal from "./commentModal"
-const MAX_LENGTH = 50;
+import styled from "styled-components";
+
+
+// .detail-image{
+//     border-top-left-radius: 10px;
+//     border-top-right-radius: 10px;
+//   }
+
+const CardDetailsContainer = styled.div`
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    min-height: 70%;
+`;
+
+const SpotDetailsTop = styled.div`
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+`;
+
+const DetailImageWrapper = styled.div`
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+`;
+
+const SpotDetailImage = styled.img`
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 25vh;
+    width: 100%;
+`;
+
+const SpotName = styled.h3`
+    border-top-left-radius: 10px;
+    font-weight: bold;
+`;
 
 @inject('sessionStore', 'spotStore')
 @observer
@@ -13,15 +47,11 @@ class SpotDetailsCard extends Component {
     spotStore = this.props.spotStore;
     sessionStore = this.props.sessionStore;
 
-    style = {
-        minHeight: "70%"
-    }
-
-    handleSave = ( ) => {
+    handleSave = () => {
         this.spotStore.saveSpot();
     }
 
-    handleDelete = () =>{
+    handleDelete = () => {
         this.spotStore.deleteSpot();
     }
 
@@ -35,16 +65,17 @@ class SpotDetailsCard extends Component {
             <React.Fragment>
                 <CommentModal></CommentModal>
                 {this.spotStore.selectedSpot.name ?
-                    <div style={this.style} className="detail-image">
+                    <CardDetailsContainer>
 
-                        <div className="spot-details-top detail-image">
+                        <SpotDetailsTop>
 
-                            <div style={{minHeight:"50%"}} className="detail-image">
-                                <img style={{height:"30vh", width:"100%"}} className="img-fluid detail-image" alt="gag" src={this.spotStore.selectedSpot.image} />                         
-                            </div>
+                            <DetailImageWrapper>
+                                <SpotDetailImage className="img-fluid" alt="gag" src={this.spotStore.selectedSpot.image} />
+                            </DetailImageWrapper>
 
                             <div className="p-3">
-                                <h3><b>{this.spotStore.selectedSpot.name}</b></h3>
+                            
+                                <SpotName>{this.spotStore.selectedSpot.name}</SpotName>
                                 <div>{this.spotStore.selectedSpot.address}</div>
 
                                 <div className="d-flex align-items-center">
@@ -56,62 +87,52 @@ class SpotDetailsCard extends Component {
                                         starCount={5}
                                         value={this.spotStore.selectedSpot.rating}
                                     />
-                              
+
                                 </div>
-                        
-                            <div style={{ minHeight : "40px"}}>
-                            {
-                                    this.spotStore.firstComment ?
-                                    
-                                    <div>"{this.spotStore.firstComment}"</div>: null
-                                }
 
-                            </div>
+                                <div style={{ minHeight: "40px" }}>
+                                    {
+                                        this.spotStore.firstComment ?
 
-                                { this.spotStore.selectedSpot.key ? 
-                                <a onClick={this.spotStore.handleShow} >View All Comments ({this.spotStore.comments.length}) <i className="fa fa-comment-o fa-lg" aria-hidden="true"></i></a>
-                                : null}
-                               {/* <div>
-                               <br></br>
-                               Liked By:
-                    
+                                            <div>"{this.spotStore.firstComment}"</div> : null
+                                    }
 
-                                    {this.spotStore.likedBy.map((user) =>
-                                             <div key={user}>
-                                                 {user}
-                                             </div>
-                                    )}
+                                </div>
 
-                               </div>  */}
+                                {this.spotStore.selectedSpot.key ?
+                                    <div onClick={this.spotStore.handleShow}>
+                                        View All Comments ({this.spotStore.comments.length})
+                                    <i className="fa fa-comment-o fa-lg" aria-hidden="true"></i>
+                                    </div>
+                                    : null}
+
 
                             </div>
 
 
-                        </div>
-                      
+                        </SpotDetailsTop>
 
-                    </div>
+
+                    </CardDetailsContainer>
                     :
-                    <div style={this.style}>
-                        <div style={this.style} className="spot-details-top">
-                        <br></br>
+                    <CardDetailsContainer>
+                        <SpotDetailsTop>
+                            <br></br>
                             <h3 className="row justify-content-center select-a-spot" >Select a Spot on the Map</h3>
                             <div className="spacer"></div>
                             <div className="row justify-content-center">
                                 <i className="fa fa-cutlery fa-5x mx-auto" aria-hidden="true"></i>
                             </div>
                             <br></br>
-                        </div>                
-                    </div>
+                        </SpotDetailsTop>
+                    </CardDetailsContainer>
                 }
-                  <hr className="d-lg-block d-none"></hr>
+                <hr className="d-lg-block d-none"></hr>
 
                 <div>
                     <div>
-                
-                    {/* <br className="d-lg-block d-none"></br>
-                
-                    <br className="d-lg-block d-none"></br> */}
+
+
                         <div className="container">
 
                             {!this.spotStore.alreadySaved && this.spotStore.selectedSpot.name ?
@@ -135,12 +156,12 @@ class SpotDetailsCard extends Component {
 
 
                         </div>
-                    
+
                     </div>
                 </div>
 
 
-                </React.Fragment>
+            </React.Fragment>
 
         )
     }
