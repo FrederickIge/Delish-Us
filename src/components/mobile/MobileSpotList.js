@@ -2,7 +2,15 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { compose } from 'recompose';
 import withAuthorization from '../hoc/withAuthorization';
+import styled from "styled-components";
 
+const SpotName = styled.div`
+font-size:24px;
+color: rgba(0, 0, 0, 0.85);
+font-weight: bold;
+`;
+
+const SpotNameWrapper = styled.div``;
 
 @inject('sessionStore', 'spotStore')
 @observer
@@ -28,17 +36,17 @@ class MobileSpotList extends Component {
             
                     {this.spotStore.showAllSpots ?
                         this.spotStore.uniqueSpotsByGooglePlaceIds.map((spot) =>
-                            <div  key={spot.key} onClick={() => this.selectSpot(spot)} className="py-4 pl-4 spot-list-item border-bottom">
-                                <div style={{ fontSize: "24px", color:"rgba(0, 0, 0, 0.85)"}}><b>{spot.name}</b></div>
-                            </div>            
+                            <SpotNameWrapper  key={spot.key} onClick={() => this.selectSpot(spot)} className="py-4 pl-4 spot-list-item border-bottom">
+                                <SpotName>{spot.name}</SpotName>
+                            </SpotNameWrapper>            
                     ): null
                     }
 
                     {!this.spotStore.showAllSpots ?
                         this.spotStore.currentUserSpots.map((spot) =>
-                            <div  key={spot.key} onClick={() => this.selectSpot(spot)} className="py-4 pl-4 spot-list-item border-bottom">
-                                <div style={{ fontSize: "24px", color:"rgba(0, 0, 0, 0.85)"}}><b>{spot.name}</b> </div>
-                            </div>            
+                            <SpotNameWrapper  key={spot.key} onClick={() => this.selectSpot(spot)} className="py-4 pl-4 spot-list-item border-bottom">
+                                <SpotName>{spot.name} </SpotName>
+                            </SpotNameWrapper>            
                     )
                     : null}
 

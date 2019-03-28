@@ -26,6 +26,25 @@ const DisplayText = styled.div`
   font-size: 18px !important;
 `;
 
+const ToolBar = styled.div`
+  background-color: white;
+  height: 43px;
+  position: absolute;
+  border-radius: 0px;
+  top: 46;
+  z-index: 100;
+  left: 0;
+  right: 0;
+`;
+
+const MobileMapWrapper = styled.div`
+  position: fixed;
+  top: 76px;
+  bottom: 0;
+  left: 0;
+  right: 0; 
+`;
+
 const DisplayTextWrapper = styled.div``
 
 @inject('sessionStore', 'spotStore')
@@ -44,13 +63,9 @@ class MobileMap extends Component {
     this.props.spotStore.selectExistingSpot(spot);
   }
 
-  handleInputChange = (event) => {
-    this.spotStore.showAllSpots = !this.spotStore.showAllSpots;
-  }
-
   render() {
     return (
-      <div className="d-lg-none" style={{display: this.spotStore.mapView ? 'block' : 'none', zIndex:"10", width:"100%"}} >
+      <div className="d-lg-none" style={{ display: this.spotStore.mapView ? 'block' : 'none', zIndex: "10", width: "100%" }} >
 
 
         {this.spotStore.gmapsLoaded ?
@@ -59,80 +74,81 @@ class MobileMap extends Component {
 
             <MobileSearch />
 
-          </MobileSearchWrapper>  : null}
-        
-{this.spotStore.hideMobileMap ?  
-       
+          </MobileSearchWrapper> : null}
 
-          <div style ={{backgroundColor:"white", height:"43px",  position: "absolute", borderRadius: "0px", top: 46, zIndex: 100, left:"0", right:"0"}} className="d-flex align-items-center justify-content-between">
-         
-            <RandomButton/>
+        {this.spotStore.hideMobileMap ?
 
-              <DisplayTextWrapper className="align-self-center">
+          <ToolBar className="d-flex align-items-center justify-content-between">
 
-                <DisplayText>
-                  {this.spotStore.showAllSpots ? <b>All Spots</b> : <b>My Spots</b>}
-                </DisplayText>
+            <RandomButton />
 
-              </DisplayTextWrapper>
+            <DisplayTextWrapper className="align-self-center">
 
-            <MobileMapSwitcher/>
+              <DisplayText>
+                {this.spotStore.showAllSpots ? <b>All Spots</b> : <b>My Spots</b>}
+              </DisplayText>
 
-          </div>
+            </DisplayTextWrapper>
 
-        : null }
-      
-        {this.spotStore.hideMobileMap ?  
- <div id="ganggang" style={{position: "fixed", top:"76px" ,bottom:"0", left: "0", right:"0"}}> 
+            <MobileMapSwitcher />
+
+          </ToolBar>
+
+          : null}
+
+        {this.spotStore.hideMobileMap ?
+          <MobileMapWrapper >
 
 
-        <GoogleMapReact
-          id="bangbang"
-          bootstrapURLKeys={{ key: 'AIzaSyAJdMUyuQiG2DEHgGG3Tvebb9-BzR0JXwE', libraries: "places" }}
-          defaultZoom={15}
-          onGoogleApiLoaded={({ map, maps }) => this.apiIsLoaded(map, maps)}
-          center={this.spotStore.mapGeolocation.center}
-          options={{fullscreenControl: false, zoomControl: false}}
-        >
+            <GoogleMapReact
+              id="bangbang"
+              bootstrapURLKeys={{ key: 'AIzaSyAJdMUyuQiG2DEHgGG3Tvebb9-BzR0JXwE', libraries: "places" }}
+              defaultZoom={15}
+              onGoogleApiLoaded={({ map, maps }) => this.apiIsLoaded(map, maps)}
+              center={this.spotStore.mapGeolocation.center}
+              options={{ fullscreenControl: false, zoomControl: false }}
+            >
 
-          {
-            this.spotStore.showAllSpots ?
-              this.spotStore.uniqueSpotsByGooglePlaceIds.map((spot) =>
+              {
+                this.spotStore.showAllSpots ?
+                  this.spotStore.uniqueSpotsByGooglePlaceIds.map((spot) =>
+                    <AnyReactComponent
+                      key={spot.key + "-m"}
+                      lat={spot.lat}
+                      lng={spot.lng}
+                      text={spot.name}
+                      googlePlaceId={spot.googlePlaceId}
+                      onClick={() => this.selectSpot(spot)}
+                    />
+                  ) : null}
+
+
+              {!this.spotStore.showAllSpots ?
+                this.spotStore.currentUserSpots.map((spot) =>
+                  <AnyReactComponent
+                    key={spot.key + "-m"}
+                    lat={spot.lat}
+                    lng={spot.lng}
+                    text={spot.name}
+                    googlePlaceId={spot.googlePlaceId}
+                    onClick={() => this.selectSpot(spot)}
+                  />
+                )
+                : null}
+
+
+              {this.spotStore.selectedSpot.name ?
                 <AnyReactComponent
-                  key={spot.key + "-m"}
-                  lat={spot.lat}
-                  lng={spot.lng}
-                  text={spot.name}
-                  googlePlaceId={spot.googlePlaceId}
-                  onClick={() => this.selectSpot(spot)}
-                />
-              ) : null}
+                  lat={this.spotStore.selectedSpot.lat}
+                  lng={this.spotStore.selectedSpot.lng}
+                  text={this.spotStore.selectedSpot.name}
+                  onClick={this.spotStore.toggleDrawer}
+                /> : null}
+            </GoogleMapReact>
 
 
-          {!this.spotStore.showAllSpots ?
-            this.spotStore.currentUserSpots.map((spot) =>
-              <AnyReactComponent
-                key={spot.key + "-m"}
-                lat={spot.lat}
-                lng={spot.lng}
-                text={spot.name}
-                googlePlaceId={spot.googlePlaceId}
-                onClick={() => this.selectSpot(spot)}
-              />
-            )
-            : null}
-
-
-          {this.spotStore.selectedSpot.name ?
-            <AnyReactComponent
-              lat={this.spotStore.selectedSpot.lat}
-              lng={this.spotStore.selectedSpot.lng}
-              text={this.spotStore.selectedSpot.name}
-              onClick={this.spotStore.toggleDrawer}
-            /> : null}
-        </GoogleMapReact>
-        </div>
-: null}
+          </MobileMapWrapper>
+          : null}
 
       </div>
 
