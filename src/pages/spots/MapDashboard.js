@@ -181,7 +181,7 @@ class MapDashboard extends Component {
               </SpotDetailsCardWrapper>
             </DashboardLeftSide>
 
-            <DashboardRightSide id = "dashbaord-right-side" className="col-md-12 col-lg-8">
+            <DashboardRightSide id = "dashbaord-right-side" className="col-md-12 col-lg-8 d-none d-lg-block">
 
               <GoogleMapContainer id="google-map-container">
 

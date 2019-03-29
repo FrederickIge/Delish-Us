@@ -61,6 +61,7 @@ class MobileMap extends Component {
   };
 
   selectSpot(spot) {
+    console.log(spot)
     this.props.spotStore.selectExistingSpot(spot);
   }
 
