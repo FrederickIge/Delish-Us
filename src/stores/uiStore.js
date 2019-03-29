@@ -1,53 +1,57 @@
-import { observable, action,computed, autorun } from "mobx";
+import { observable, action } from "mobx";
 import preventDefault from "../utils/eventListeners"
-import { enableBodyScroll } from 'body-scroll-lock';
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 class UiStore {
- 
 
   constructor(root) {
+    this.root = root;
+    this.targetElement = document.querySelector('#mobile-list');
+  }
+ 
+  @observable drawerState = false; 
+
+  @observable mapView = true;  
+
+  @observable hideMobileMap = true;  
+
+  @observable modalState = false;  
+
+  @action openDrawer=() =>{
+      this.drawerState = true
   }
 
-  @observable drawerState = false; //ui
-
-  @observable mapView = true;  //ui
-
-  @observable hideMobileMap = true;  //ui
-
-  @observable showModal = false;  //ui
-
-  @action //ui
-  toggleDrawer = () => {
-    if(window.innerWidth <= 992){
-    this.drawerState = !this.drawerState
-    }
+  @action closeDrawer = () => {
+    this.drawerState = false;
   }
 
-  handleHide = () => { //ui
-   
+  @action openDrawerDelayed(){
+      setTimeout(() =>  this.drawerState = true, 800);
+  }
+
+  hideModal = () =>{ 
     window.addEventListener('touchmove', preventDefault, { passive: false });
-    this.toggleDrawer();
-    this.showModal = false;
+    this.openDrawer();
+    this.modalState = false;
   }
 
-  handleShow = async () => { //ui
+  showModal = () => { 
     window.removeEventListener('touchmove', preventDefault); 
-    this.toggleDrawer();
-    this.showModal = true;
+    this.closeDrawer();
+    this.modalState = true;
   }
-
 
   @action 
   toggleView = () => {
     this.mapView = !this.mapView;
     if(this.mapView){
       window.scrollTo(0,0);
-     
+      enableBodyScroll(this.targetElement);
       window.addEventListener('touchmove', preventDefault, { passive: false });
     }
     else if(!this.mapView){
       window.scrollTo(0,0);
-      enableBodyScroll(this.targetElement);
+      disableBodyScroll(this.targetElement);
       window.removeEventListener('touchmove', preventDefault);
     }
   }

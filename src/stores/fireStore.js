@@ -1,7 +1,7 @@
 import { action} from 'mobx';
 import firebase from 'firebase';
 
-const db = firebase.firestore().collection("spots");
+const spots = firebase.firestore().collection("spots");
 const users = firebase.firestore().collection("users");
 const comments = firebase.firestore().collection("comments");
 
@@ -14,7 +14,7 @@ class fireStore {
   @action
   async fetchAllSpots(){
     try {
-      return await db.get();
+      return await spots.get();
     } catch(err) {
       alert(err);
     }
@@ -23,7 +23,16 @@ class fireStore {
   @action
   async fetchSingleSpot(docId){
     try {
-      return await db.doc(docId).get();
+      return await spots.doc(docId).get();
+    } catch(err) {
+      alert(err);
+    }
+  }
+
+  @action
+  async fetchSpotsByUserId(userId){
+    try {
+      return await spots.where("userId", "==", userId).get();
     } catch(err) {
       alert(err);
     }
@@ -32,7 +41,7 @@ class fireStore {
   @action
   async postSpot(payload){
     try {
-      return await db.add(payload);
+      return await spots.add(payload);
     } catch(err) {
       alert(err);
     }
@@ -41,7 +50,7 @@ class fireStore {
   @action
   async deleteSpot(docId){
     try {
-      return await db.doc(docId).delete();
+      return await spots.doc(docId).delete();
     } catch(err) {
       alert(err);
     }
@@ -50,17 +59,26 @@ class fireStore {
   @action
   async findLikedBy(googlePlaceId){
     try {
+
       let nameList = []
-      let spotList = await db.where("googlePlaceId", "==", googlePlaceId).get();
-      await Promise.all(spotList.docs.map(async doc => {
-       let userId = doc.data().userId 
-       let user = await users.doc(userId).get();
-       nameList.push(user.data().displayName)
-      }))
+
+      let spotList = await spots.where("googlePlaceId", "==", googlePlaceId).get();
+
+      await this.newMethod(spotList, nameList);
+
       return  [...new Set(nameList)];
+
     } catch(err) {
       alert(err);
     }
+  }
+
+  async newMethod(spotList, nameList) {
+    await Promise.all(spotList.docs.map(async (doc) => {
+      let userId = doc.data().userId;
+      let user = await users.doc(userId).get();
+      nameList.push(user.data().displayName);
+    }));
   }
 
   @action

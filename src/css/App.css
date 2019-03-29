@@ -401,3 +401,6 @@ _:-webkit-full-screen,
 }
 
 
+.dv-star-rating-star{
+  margin-bottom: 0px !important;
+}

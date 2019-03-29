@@ -13,6 +13,9 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import './css/App.css';
 import { syncHistoryWithStore } from 'mobx-react-router';
 import rootStore from './stores';
+import ScrollToTop from './components/layout/ScrollToTop'
+
+
 const browserHistory = createBrowserHistory();
 
 const history = syncHistoryWithStore(browserHistory, rootStore.routingStore);
@@ -24,7 +27,7 @@ class App extends Component {
     return (
    
       <Router history={history} onUpdate={() => window.scrollTo(0, 0)} >
-
+        <ScrollToTop>
       <Route render={({location}) => (
 
           <div className="main-container">
@@ -41,7 +44,7 @@ class App extends Component {
           </div>
         )}
       />
-      
+      </ScrollToTop>
     </Router>
  
 

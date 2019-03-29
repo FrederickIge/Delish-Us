@@ -141,6 +141,7 @@ class MapDashboard extends Component {
 
   componentWillUnmount() {
     window.removeEventListener('touchmove', preventDefault);
+    console.log('f')
   }
 
   async componentDidMount() {
@@ -158,8 +159,8 @@ class MapDashboard extends Component {
         <SwipeableDrawer
           anchor="bottom"
           open={this.uiStore.drawerState}
-          onClose={() => this.uiStore.toggleDrawer(false)}
-          onOpen={() => this.uiStore.toggleDrawer(true)}
+          onClose={() => this.uiStore.closeDrawer()}
+          onOpen={() => this.uiStore.openDrawer()}
           className="d-lg-none"
         >
           <SpotDetailsCard />

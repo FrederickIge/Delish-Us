@@ -75,8 +75,8 @@ class CommentModal extends Component {
         <>
    
           <Modal
-            show={this.uiStore.showModal}
-            onHide={this.uiStore.handleHide}
+            show={this.uiStore.modalState}
+            onHide={this.uiStore.hideModal}
             dialogClassName="delishus-map-card"
             aria-labelledby="example-custom-modal-styling-title"
           >
