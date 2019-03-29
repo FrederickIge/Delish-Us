@@ -59,6 +59,7 @@ class spotStore {
     this.root.uiStore.openDrawer();
     this.findLikedBy();
     this.root.commentStore.getCommentsByGooglePlaceId();
+
   }
  
   @action
@@ -74,6 +75,8 @@ class spotStore {
     await this.displayNewSpot(docRef);
     toast("Spot Saved !");
     this.alreadySaved = this.checkifSaved();
+    this.root.commentStore.getCommentsByGooglePlaceId();
+    this.findLikedBy();
   }
 
   @action
@@ -84,6 +87,7 @@ class spotStore {
     this.allSpots.splice(this.allSpots.findIndex((spot) => spot.key === key), 1);  
     this.selectedSpot = {};
     this.alreadySaved = false;
+  
   }
 
   displaySpots(querySnapshot) {

@@ -95,7 +95,7 @@ class SpotDetailsCard extends Component {
                   
                     <span style={{marginTop:"20px",display:"inlineBlock",cursor: "pointer", textDecoration: "underline"}}>View Comments</span>  
                     <i style={{marginLeft:"5px", lineHeight:"1.4"}} className='fa fa-comment-o fa-sm' aria-hidden='true' /> ({this.commentStore.comments.length})
-                   
+                    <i style={{marginLeft:"5px", lineHeight:"1.4"}} className='fa fa-user fa-sm' aria-hidden='true' /> ({this.spotStore.likedBy.length})
                   </div>
                 ) : null}
               </div>

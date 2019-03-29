@@ -4,12 +4,14 @@ import Modal from 'react-bootstrap/Modal'
 import Comment from '../models/Comment'
 import firebase from 'firebase';
 import { disableBodyScroll,clearAllBodyScrollLocks } from 'body-scroll-lock';
+import styled from 'styled-components';
 
-const styles = theme => ({
-  typography: {
-    padding: theme.spacing.unit * 2,
-  },
-});
+const UserListItem = styled.div`
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline; 
+  }
+`;
 
 @inject('routingStore', 'sessionStore', 'spotStore','fireStore', 'uiStore','commentStore')
 @observer
@@ -83,7 +85,30 @@ class CommentModal extends Component {
 
             <Modal.Header closeButton>
               <Modal.Title id="example-custom-modal-styling-title">
-                Comments
+                This spot was saved by:
+              </Modal.Title>
+            </Modal.Header>
+
+
+
+
+        <Modal.Body>
+
+        {this.spotStore.likedBy.map((user) =>
+          <React.Fragment key={user.userId}>
+            <UserListItem > <i className="fa fa-user" aria-hidden="true"></i> {user.userName}</UserListItem>
+            <br></br>
+          </React.Fragment>
+
+
+          )}
+        </Modal.Body>
+           
+
+
+            <Modal.Header closeButton>
+              <Modal.Title id="example-custom-modal-styling-title">
+                User Comments
               </Modal.Title>
             </Modal.Header>
 
@@ -93,7 +118,7 @@ class CommentModal extends Component {
             {this.commentStore.comments.map((comment) =>
 
               <div key={comment.id}>
-                <div>{comment.userName}</div>
+                <div>- {comment.userName}</div>
                 <br></br>
                 <div>{comment.comment}</div>
                 <hr></hr>  

@@ -66,7 +66,7 @@ class fireStore {
 
       await this.newMethod(spotList, nameList);
 
-      return  [...new Set(nameList)];
+      return  nameList;
 
     } catch(err) {
       alert(err);
@@ -77,7 +77,15 @@ class fireStore {
     await Promise.all(spotList.docs.map(async (doc) => {
       let userId = doc.data().userId;
       let user = await users.doc(userId).get();
-      nameList.push(user.data().displayName);
+      nameList.push(
+
+       {
+         userName: user.data().displayName,
+         userId:user.id
+        }
+
+
+        );
     }));
   }
 
