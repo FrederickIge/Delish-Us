@@ -13,7 +13,7 @@ class spotStore {
  
   constructor(root) {
     console.log(root)
-    console.log(Object.keys(root))
+    this.root = root;
     this.fireStore = root.fireStore
     this.sessionStore = root.sessionStore
     this.uiStore = root.uiStore;
@@ -59,8 +59,15 @@ class spotStore {
     this.selectedSpot = await this.loadSpotDetails();
     this.moveMapToSelectedSpot();
     this.alreadySaved = this.checkifSaved();
-    this.uiStore.toggleDrawer();
-    this.commentStore.getCommentsByGooglePlaceId();
+
+    if (window.innerWidth <= 992) {
+      setTimeout(() => { this.root.uiStore.toggleDrawer() }, 800);
+    }
+    else {
+      this.root.uiStore.toggleDrawer();
+    }
+
+    this.root.commentStore.getCommentsByGooglePlaceId();
   }
 
   @action
@@ -75,10 +82,9 @@ class spotStore {
     this.selectedGeopoint = spot;
     this.selectedSpot = await this.loadSpotDetails();
     this.alreadySaved = this.checkifSaved();
-    this.uiStore.toggleDrawer();
+    this.root.uiStore.toggleDrawer();
     this.findLikedBy();
-    console.log(this.commentStore)
-    this.commentStore.getCommentsByGooglePlaceId();
+    this.root.commentStore.getCommentsByGooglePlaceId();
   }
  
   @action

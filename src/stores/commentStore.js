@@ -1,34 +1,35 @@
-import { observable, action,computed, autorun } from "mobx";
-import preventDefault from "../utils/eventListeners"
-import { enableBodyScroll } from 'body-scroll-lock';
+import { observable } from "mobx";
+import Comment from "../models/Comment";
 
 class CommentStore {
- 
 
   constructor(root) {
-    console.log(root)
-    this.spotStore = root.spotStore;
-    this.fireStore = root.fireStore;
+    this.root = root;
   }
 
   @observable comments = [];
 
+  @observable firstComment;
+
   getCommentsByGooglePlaceId = async() => {
     this.comments = [];
-    let data = await this.fireStore.getCommentsByGooglePlaceId(this.spotStore.selectedSpot.googlePlaceId);
+    let data = await this.root.fireStore.getCommentsByGooglePlaceId(this.root.spotStore.selectedSpot.googlePlaceId);
+    console.log(data)
     if(!data.empty){
+    
       data.forEach((doc) => {
         let comment = new Comment(doc)
+        console.log(comment)
         this.comments.push(comment)
       });
-    
+      console.log(this.comments)
     }
     this.getfirstComment();
     
   }
 
   getfirstComment(){
-    console.log(this.comments)
+ 
     if(this.comments[0]){
       this.firstComment = this.comments[0].comment
       this.firstComment=  this.firstComment.substr(0, 80 - 1) + (this.firstComment.length > 80 ? '...' : '');

@@ -6,7 +6,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import App from './App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import stores from './stores';
+import rootStore from './stores';
 
 
 
@@ -14,7 +14,7 @@ import stores from './stores';
 
 const render = Component =>{
 return ReactDOM.render(
-  <Provider {...stores}>
+  <Provider  { ...rootStore }>
       <App />
   </Provider>,
   document.getElementById('root')

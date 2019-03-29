@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import Modal from 'react-bootstrap/Modal'
 import Comment from '../models/Comment'
 import firebase from 'firebase';
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+import { disableBodyScroll,clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 const styles = theme => ({
   typography: {
@@ -11,7 +11,7 @@ const styles = theme => ({
   },
 });
 
-@inject('routingStore', 'sessionStore', 'spotStore','fireStore', 'uiStore')
+@inject('routingStore', 'sessionStore', 'spotStore','fireStore', 'uiStore','commentStore')
 @observer
 class CommentModal extends Component {
 
@@ -20,6 +20,7 @@ class CommentModal extends Component {
   spotStore = this.props.spotStore;
   fireStore = this.props.fireStore;
   uiStore = this.props.uiStore
+  commentStore = this.props.commentStore;
 
   targetElement = null;
   state = {
@@ -34,12 +35,12 @@ class CommentModal extends Component {
     let comment = this.prepareComment(this.state.comment, this.spotStore.selectedSpot, this.sessionStore.authUser);
     let newComment = await this.fireStore.postComment(comment);
     newComment = new Comment(newComment);
-    this.spotStore.comments.push(newComment);
+    this.commentStore.comments.push(newComment);
     this.setState({comment:''})
   }
 
-  getCommentsBySpotId() {
-      this.spotStore.getCommentsBySpotId()
+  getCommentsByGooglePlaceId() {
+      this.commentStore.getCommentsByGooglePlaceId();
   }
 
   prepareComment(comment, selectedSpot, user) {
@@ -55,13 +56,11 @@ class CommentModal extends Component {
   }
 
   componentDidCatch(){
-
-    this.getCommentsBySpotId();
+    this.getCommentsByGooglePlaceId();
   }
 
   componentDidMount(){
     clearAllBodyScrollLocks();
-
     console.log("mount")
     disableBodyScroll(this.targetElement);
   }
@@ -70,6 +69,7 @@ class CommentModal extends Component {
     console.log("unmount")
     this.targetElement = document.querySelector('#root');
   }
+
   render() {
     return (
         <>
@@ -90,13 +90,12 @@ class CommentModal extends Component {
             <Modal.Body>
 
 
-            {this.spotStore.comments.map((comment) =>
+            {this.commentStore.comments.map((comment) =>
 
               <div key={comment.id}>
                 <div>{comment.userName}</div>
                 <br></br>
                 <div>{comment.comment}</div>
-                {/* <div className="d-flex flex-row-reverse">  <i className="fa fa-trash" aria-hidden="true"></i></div> */}
                 <hr></hr>  
               </div>
 
