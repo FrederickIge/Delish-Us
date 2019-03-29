@@ -11,7 +11,7 @@ const styles = theme => ({
   },
 });
 
-@inject('routingStore', 'sessionStore', 'spotStore','fireStore')
+@inject('routingStore', 'sessionStore', 'spotStore','fireStore', 'uiStore')
 @observer
 class CommentModal extends Component {
 
@@ -19,6 +19,8 @@ class CommentModal extends Component {
   sessionStore = this.props.sessionStore;
   spotStore = this.props.spotStore;
   fireStore = this.props.fireStore;
+  uiStore = this.props.uiStore
+
   targetElement = null;
   state = {
     comment: ''
@@ -73,8 +75,8 @@ class CommentModal extends Component {
         <>
    
           <Modal
-            show={this.spotStore.showModal}
-            onHide={this.spotStore.handleHide}
+            show={this.uiStore.showModal}
+            onHide={this.uiStore.handleHide}
             dialogClassName="delishus-map-card"
             aria-labelledby="example-custom-modal-styling-title"
           >

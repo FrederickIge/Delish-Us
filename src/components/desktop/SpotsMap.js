@@ -21,13 +21,14 @@ background-color: white;
 `;
 
 // style={{ position: "absolute", zIndex: 500, borderRadius: "10px" }}
-@inject("sessionStore", "spotStore")
+@inject("sessionStore", "spotStore",'uiStore')
 @observer
 class SpotsMap extends Component {
 
   spotStore = this.props.spotStore;
   sessionStore = this.props.sessionStore;
-
+  uiStore = this.props.uiStore;
+  
   apiIsLoaded = (map, maps) => {
     this.spotStore.gmapsLoaded = true;
     this.spotStore.googlePlacesService = new maps.places.PlacesService(map);
@@ -39,7 +40,7 @@ class SpotsMap extends Component {
 
   render() {
     return (
-      <DelishusMapCard id="dcard" style={{ display: this.spotStore.mapView ? "block" : "none", height: "100%"}}>
+      <DelishusMapCard id="dcard" style={{ display: this.uiStore.mapView ? "block" : "none", height: "100%"}}>
 
         <RandomButton/>
         <div id="reactmap" style={{

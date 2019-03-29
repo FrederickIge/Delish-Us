@@ -1,23 +1,23 @@
-import { configure } from 'mobx';
-import createBrowserHistory from 'history/createBrowserHistory';
-import { RouterStore, syncHistoryWithStore } from 'mobx-react-router';
+import { RouterStore } from 'mobx-react-router';
 
 import SessionStore from './sessionStore';
 import UserStore from './userStore';
-import fireStore from './fireStore';
+import FireStore from './fireStore';
 import spotStore from './spotStore';
-
-const browserHistory = createBrowserHistory();
-
-const routingStore = new RouterStore();
+import UiStore from './uiStore'
+import CommentStore from './commentStore'
 
 class RootStore {
   constructor() {
-    this.sessionStore = new SessionStore(this);
-    this.userStore = new UserStore(this);
-    this.fireStore= new fireStore(this);
-    this.routingStore = new RouterStore(this);
+    this.fireStore= new FireStore(this);
     this.spotStore = new spotStore(this);
+    this.commentStore = new CommentStore(this);
+    
+
+    this.sessionStore = new SessionStore(this);
+    this.uiStore = new UiStore(this);
+    this.userStore = new UserStore(this);
+    this.routingStore = new RouterStore(this);
   }
 }
 

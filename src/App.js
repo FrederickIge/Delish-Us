@@ -17,7 +17,6 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import './css/App.css';
 import { syncHistoryWithStore } from 'mobx-react-router';
 import stores from './stores';
-console.log(stores)
 const browserHistory = createBrowserHistory();
 
 const history = syncHistoryWithStore(browserHistory, stores.routingStore);

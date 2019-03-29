@@ -131,12 +131,13 @@ const DashboardRightSide = styled.div`
 
 const Flex = styled.div``;
 
-@inject('sessionStore', 'spotStore')
+@inject('sessionStore', 'spotStore', 'uiStore')
 @observer
 class MapDashboard extends Component {
 
   sessionStore = this.props.sessionStore;
   spotStore = this.props.spotStore;
+  uiStore = this.props.uiStore;
 
   componentWillUnmount() {
     window.removeEventListener('touchmove', preventDefault);
@@ -156,9 +157,9 @@ class MapDashboard extends Component {
 
         <SwipeableDrawer
           anchor="bottom"
-          open={this.spotStore.drawerState}
-          onClose={() => this.spotStore.toggleDrawer(false)}
-          onOpen={() => this.spotStore.toggleDrawer(true)}
+          open={this.uiStore.drawerState}
+          onClose={() => this.uiStore.toggleDrawer(false)}
+          onOpen={() => this.uiStore.toggleDrawer(true)}
           className="d-lg-none"
         >
           <SpotDetailsCard />

@@ -52,47 +52,6 @@ body {
   margin: 0;
 }
 
-.circle h5 {
-  margin-bottom: 3px;
-}
-
-.grow {
-  transition: all 0.2s ease-in-out;
-}
-.grow:hover {
-  transform: scale(1.1);
-}
-
-.dash-icon {
-  color: #51677d94 !important;
-}
-
-h5 {
-  font-family: "Open Sans", sans-serif !important;
-}
-
-body {
-  background-attachment: fixed;
-}
-
-.dropdown {
-  display: inline-block;
-}
-
-.dropdown__content {
-  display: none;
-  position: absolute;
-}
-
-.dropdown--active .dropdown__content {
-  display: block;
-}
-
-.doggo-nav {
-  background-color: white !important;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
-}
-
 .section-shaped .shape-style-1.shape-default {
   background: linear-gradient(
     150deg,
@@ -429,10 +388,6 @@ div#simple-popper {
   box-shadow: none !important;
 }
 
-.headroom-wrapper {
-  z-index: 200;
-}
-
 _:-webkit-full-screen,
 :root .autocomplete-items {
   overflow-y: scroll;
@@ -446,10 +401,3 @@ _:-webkit-full-screen,
 }
 
 
-#map-list-container > div {
-  border-radius: 10px;
-}
-
-#map > div {
-  border-radius: 20px;
-}

@@ -1,13 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
-import Dropdown from 'rc-dropdown';
-import 'rc-dropdown/assets/index.css';
-import Headroom from 'react-headroom';
-import Fade from '@material-ui/core/Fade';
-import Popper from '@material-ui/core/Popper';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
@@ -46,7 +39,8 @@ class AvatarMenu extends Component {
     return (
         <span>
             <Button
-            id ="avatar"
+                style ={{ }}
+                id ="avatar"
                 disableRipple={true}
                 aria-owns={anchorEl ? 'simple-menu' : undefined}
                 aria-haspopup="true"

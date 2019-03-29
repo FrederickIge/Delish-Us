@@ -4,11 +4,12 @@ import { inject } from 'mobx-react';
 import preventDefault from "../../utils/eventListeners"
 
 
-@inject('spotStore')
+@inject('spotStore','uiStore')
 class MobileSearch extends React.Component {
 
   spotStore = this.props.spotStore;
-
+  uiStore = this.props.uiStore;
+  
   state = { address: '', showResults: false, mobileSearch:{ } };
   
   search = React.createRef();
@@ -26,7 +27,7 @@ class MobileSearch extends React.Component {
 
   handleBlur = () => {
     this.setState({ showResults: false })
-    this.spotStore.hideMobileMap = true;
+    this.uiStore.hideMobileMap = true;
     window.addEventListener('touchmove', preventDefault, { passive: false });
     this.nav.removeEventListener('touchmove', preventDefault);
     this.searchInput.removeEventListener('touchmove', preventDefault);
@@ -34,7 +35,7 @@ class MobileSearch extends React.Component {
 
   handleFocus = () => {
     this.setState({ showResults: true });
-    this.spotStore.hideMobileMap = false;
+    this.uiStore.hideMobileMap = false;
     window.removeEventListener('touchmove', preventDefault);
     this.nav.addEventListener('touchmove', preventDefault, { passive: false })
     this.searchInput.addEventListener('touchmove', preventDefault, { passive: false })

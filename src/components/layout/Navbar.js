@@ -6,6 +6,8 @@ import styled from 'styled-components';
 
 const Nav = styled.div`
   z-index: 5000;
+  background-color: white !important;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
 `;
 
 const AvatarImg = styled.img`
@@ -18,14 +20,15 @@ textDecoration: none;
 color: #1890ff;
 `;
 
-@inject("routingStore", "sessionStore", "spotStore")
+@inject("routingStore", "sessionStore", "spotStore",'uiStore')
 @observer
 class Navbar extends Component {
 
   routingStore = this.props.routingStore;
   sessionStore = this.props.sessionStore;
   spotStore = this.props.spotStore;
-
+  uiStore = this.props.uiStore;
+  
   render() {
    
     const NavigationNonAuth = () => (
@@ -56,7 +59,7 @@ class Navbar extends Component {
             <b className="ml-3">DELISH-US</b>
           </Link>
 
-            <ViewSwitcher onClick={this.spotStore.toggleView} className="ml-auto mr-3 nav-text-style">
+            <ViewSwitcher onClick={this.uiStore.toggleView} className="ml-auto mr-3 nav-text-style">
               {props.mapView ? <b>LIST VIEW</b> : <b>MAP VIEW</b>}
             </ViewSwitcher>
 
@@ -69,7 +72,7 @@ class Navbar extends Component {
     return (
       <Nav id="app-navbar" className="doggo-nav">
         {this.sessionStore.authUser ? 
-          <NavigationAuth mapView={this.spotStore.mapView} photoURL={this.sessionStore.authUser.photoURL} /> : <NavigationNonAuth />
+          <NavigationAuth mapView={this.uiStore.mapView} photoURL={this.sessionStore.authUser.photoURL} /> : <NavigationNonAuth />
         }
       </Nav>
     );

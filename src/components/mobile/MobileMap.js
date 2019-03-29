@@ -47,12 +47,13 @@ const MobileMapWrapper = styled.div`
 
 const DisplayTextWrapper = styled.div``
 
-@inject('sessionStore', 'spotStore')
+@inject('sessionStore', 'spotStore','uiStore')
 @observer
 class MobileMap extends Component {
 
   spotStore = this.props.spotStore;
   sessionStore = this.props.sessionStore;
+  uiStore = this.props.uiStore;
 
   apiIsLoaded = (map, maps) => {
     this.spotStore.gmapsLoaded = true;
@@ -65,7 +66,7 @@ class MobileMap extends Component {
 
   render() {
     return (
-      <div className="d-lg-none" style={{ display: this.spotStore.mapView ? 'block' : 'none', zIndex: "10", width: "100%" }} >
+      <div className="d-lg-none" style={{ display: this.uiStore.mapView ? 'block' : 'none', zIndex: "10", width: "100%" }} >
 
 
         {this.spotStore.gmapsLoaded ?
@@ -76,7 +77,7 @@ class MobileMap extends Component {
 
           </MobileSearchWrapper> : null}
 
-        {this.spotStore.hideMobileMap ?
+        {this.uiStore.hideMobileMap ?
 
           <ToolBar className="d-flex align-items-center justify-content-between">
 
@@ -96,7 +97,7 @@ class MobileMap extends Component {
 
           : null}
 
-        {this.spotStore.hideMobileMap ?
+        {this.uiStore.hideMobileMap ?
           <MobileMapWrapper >
 
 

@@ -6,16 +6,19 @@ import firebase from 'firebase';
 import Geopoint from "../models/Geopoint";
 import { toast } from 'react-toastify';
 import preventDefault from "../utils/eventListeners"
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+import { enableBodyScroll } from 'body-scroll-lock';
 
 
 class spotStore {
  
   constructor(root) {
-    autorun(() => root.sessionStore.authUser ? this.userId = root.sessionStore.authUser.uid : null);
+    console.log(root)
+    console.log(Object.keys(root))
     this.fireStore = root.fireStore
+    this.sessionStore = root.sessionStore
+    this.uiStore = root.uiStore;
+    this.commentStore = root.commentStore;
     this.targetElement = document.querySelector('#root');
-    console.log("YAY")
   }
 
   @observable googlePlacesService;
@@ -40,13 +43,7 @@ class spotStore {
 
   @observable selectedGeopoint;
 
-  @observable drawerState = false;
-
-  @observable mapView = true;
-
   @observable likedBy = []
-
-  @observable showModal = false;
 
   @observable comments = [];
 
@@ -54,7 +51,7 @@ class spotStore {
 
   targetElement = null;
 
-  @observable hideMobileMap = true;
+
 
   @action
   async selectSearchedSpot(geopoint) {
@@ -62,8 +59,8 @@ class spotStore {
     this.selectedSpot = await this.loadSpotDetails();
     this.moveMapToSelectedSpot();
     this.alreadySaved = this.checkifSaved();
-    this.toggleDrawer();
-    this.getCommentsByGooglePlaceId();
+    this.uiStore.toggleDrawer();
+    this.commentStore.getCommentsByGooglePlaceId();
   }
 
   @action
@@ -78,9 +75,10 @@ class spotStore {
     this.selectedGeopoint = spot;
     this.selectedSpot = await this.loadSpotDetails();
     this.alreadySaved = this.checkifSaved();
-    this.toggleDrawer();
+    this.uiStore.toggleDrawer();
     this.findLikedBy();
-    this.getCommentsByGooglePlaceId();
+    console.log(this.commentStore)
+    this.commentStore.getCommentsByGooglePlaceId();
   }
  
   @action
@@ -161,31 +159,7 @@ class spotStore {
   }
 
   @computed get currentUserSpots() {
-    return this.allSpots.filter((element) => element.userId === this.userId );
-  }
-
-
-  
-  @action
-  toggleDrawer = () => {
-    if(window.innerWidth <= 992){
-    this.drawerState = !this.drawerState
-    }
-  }
-
-  @action
-  toggleView = () => {
-    this.mapView = !this.mapView;
-    if(this.mapView){
-      window.scrollTo(0,0);
-     
-      window.addEventListener('touchmove', preventDefault, { passive: false });
-    }
-    else if(!this.mapView){
-      window.scrollTo(0,0);
-      enableBodyScroll(this.targetElement);
-      window.removeEventListener('touchmove', preventDefault);
-    }
+    return this.allSpots.filter((element) => element.userId === this.sessionStore.authUser.uid );
   }
 
   async findLikedBy() {
@@ -194,43 +168,8 @@ class spotStore {
 
 
 
-   getCommentsByGooglePlaceId = async() => {
-    this.comments = [];
-    let data = await this.fireStore.getCommentsByGooglePlaceId(this.selectedSpot.googlePlaceId);
-    console.log(data)
-    if(!data.empty){
-      data.forEach((doc) => {
-        let comment = new Comment(doc)
-        this.comments.push(comment)
-      });
-    
-    }
-    this.getfirstComment();
-    
-  }
 
-  getfirstComment(){
-    console.log(this.comments)
-    if(this.comments[0]){
-      this.firstComment = this.comments[0].comment
-      this.firstComment=  this.firstComment.substr(0, 80 - 1) + (this.firstComment.length > 80 ? '...' : '');
-    }else{
-      this.firstComment = "";
-    }
-  }
 
-  handleShow = async () => {
-    window.removeEventListener('touchmove', preventDefault); 
-    this.toggleDrawer();
-    this.showModal = true;
-  }
-
-  handleHide = () =>{
-   
-    window.addEventListener('touchmove', preventDefault, { passive: false });
-    this.toggleDrawer();
-    this.showModal = false;
-  }
 
 }
 

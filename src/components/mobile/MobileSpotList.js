@@ -12,13 +12,14 @@ font-weight: bold;
 
 const SpotNameWrapper = styled.div``;
 
-@inject('sessionStore', 'spotStore')
+@inject('sessionStore', 'spotStore', 'uiStore')
 @observer
 class MobileSpotList extends Component {
 
     spotStore = this.props.spotStore;
     sessionStore = this.props.sessionStore;
-
+    uiStore = this.props.uiStore;
+    
     selectSpot(spot) {
         this.props.spotStore.selectExistingSpot(spot);
     }
@@ -29,7 +30,7 @@ class MobileSpotList extends Component {
 
 
             
-            <div className="delishus-map-card-mobile-list spot-list d-lg-none" style={{ display: this.spotStore.mapView ? 'none' : 'block',height:"100%", width:"100%", overflow: "scroll" }}>
+            <div className="delishus-map-card-mobile-list spot-list d-lg-none" style={{ display: this.uiStore.mapView ? 'none' : 'block',height:"100%", width:"100%", overflow: "scroll" }}>
                 <div className="container-fluid" style ={{height:"50%"}}>
                     <br></br>
 

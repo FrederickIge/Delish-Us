@@ -4,13 +4,14 @@ import { compose } from 'recompose';
 import withAuthorization from '../hoc/withAuthorization';
 import Table from 'react-bootstrap/Table'
 
-@inject('sessionStore', 'spotStore')
+@inject('sessionStore', 'spotStore','uiStore')
 @observer
 class SpotList extends Component {
 
     spotStore = this.props.spotStore;
     sessionStore = this.props.sessionStore;
-
+    uiStore = this.props.uiStore;
+    
     state = {
         mobileStyle: {}
     }
@@ -20,7 +21,7 @@ class SpotList extends Component {
 
     render() {
         return (
-            <div className="delishus-map-card spot-list" style={{ display: this.spotStore.mapView ? 'none' : 'block', height:"100%", overflowY:"scroll"}}>
+            <div className="delishus-map-card spot-list" style={{ display: this.uiStore.mapView ? 'none' : 'block', height:"100%", overflowY:"scroll"}}>
                     <br></br>
 
             

@@ -43,11 +43,13 @@ const FirstComment = styled.div`
   min-height: 5vh;
 `;
 
-@inject("sessionStore", "spotStore")
+@inject("sessionStore", "spotStore", "uiStore")
 @observer
 class SpotDetailsCard extends Component {
+
   spotStore = this.props.spotStore;
   sessionStore = this.props.sessionStore;
+  uiStore = this.props.uiStore
 
   handleDelete = () => {
     this.spotStore.deleteSpot();
@@ -95,9 +97,9 @@ class SpotDetailsCard extends Component {
                 ) : null}
 
                 {this.spotStore.selectedSpot.key ? (
-                  <div onClick={this.spotStore.handleShow}>
-                    View All Comments ({this.spotStore.comments.length})
-                    <i className="fa fa-comment-o fa-lg" aria-hidden="true" />
+                  <div onClick={this.uiStore.handleShow}>
+                    View All Comments ( {this.spotStore.comments.length} )
+                     <i className="fa fa-comment-o fa-md" aria-hidden="true" />
                   </div>
                 ) : null}
               </div>
