@@ -120,6 +120,17 @@ class fireStore {
     }
   }
 
+  @action
+  async getAllUsers(){
+    console.log()
+    try {
+     return await users.get();
+    
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
 
 }
 

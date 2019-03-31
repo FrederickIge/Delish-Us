@@ -92,9 +92,9 @@ body {
   border-radius: 10px;
 }
 
-.spot-detail {
+/* .spot-detail {
   height: 100%;
-}
+} */
 
 .white-bg {
   background-color: white !important;
@@ -112,7 +112,8 @@ footer {
 }
 
 #root {
-  height: 90vh;
+  height: 100vh;
+  margin: 0;
 }
 
 .main-container {

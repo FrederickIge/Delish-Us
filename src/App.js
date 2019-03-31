@@ -14,7 +14,7 @@ import './css/App.css';
 import { syncHistoryWithStore } from 'mobx-react-router';
 import rootStore from './stores';
 import ScrollToTop from './components/layout/ScrollToTop'
-
+import UsersPage from './pages/users/UsersPage'
 
 const browserHistory = createBrowserHistory();
 
@@ -35,6 +35,7 @@ class App extends Component {
             <ToastContainer/>
                 <Switch location={location}>
                   <Route exact path="/dashboard" component={MapDashboard} />
+                  <Route exact path="/users" component={UsersPage} />
                   <Route exact path="/account" component={AccountPage} />
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/signup" component={Signup} />

@@ -59,8 +59,16 @@ class Navbar extends Component {
             <b className="ml-3">DELISH-US</b>
           </Link>
 
-            <ViewSwitcher onClick={this.uiStore.toggleView} className="ml-auto mr-3 nav-text-style">
-              {props.mapView ? <b>LIST VIEW</b> : <b>MAP VIEW</b>}
+
+
+            <ViewSwitcher className="ml-auto mr-3 nav-text-style">
+            <Link style={{textDecoration: "none"}} to="/users">
+            <span  className="ml-auto mr-3 nav-text-style"><b>USERS</b></span>
+            </Link>
+             {/* ///users */}
+
+            <span onClick={this.uiStore.toggleView}  className="ml-auto mr-3 nav-text-style">  {props.mapView ? <b>LIST VIEW</b> : <b>MAP VIEW</b>}</span>
+
             </ViewSwitcher>
 
             <AvatarMenu />

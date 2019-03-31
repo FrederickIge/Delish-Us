@@ -25,6 +25,8 @@ class UserStore {
     error: null
   };
 
+  @observable allUsers = []
+
   @observable
   uiConfig = {
     // Popup signin flow rather than redirect flow.
@@ -104,6 +106,23 @@ class UserStore {
         this.rootStore.routingStore.push('/dashboard');
       });
   };
+
+
+  getAllUsers = async () => {
+    let querySnapshot = await this.rootStore.fireStore.getAllUsers();
+    querySnapshot.forEach((doc) => {
+      console.log(doc.data().displayName)
+      console.log(doc.data().email)
+      if (this.allUsers.find(x => x.userId === doc.data().uid)) {
+
+      } else {
+        this.allUsers.push({ username: doc.data().displayName, email: doc.data().email, userId: doc.data().uid })
+
+      }
+    });
+  }
+
+
 }
 
 export default UserStore;
