@@ -30,26 +30,30 @@ class App extends Component {
         <ScrollToTop>
       <Route render={({location}) => (
 
-          <div className="main-container">
-            <Navbar />         
+        <div className="main-container"  style={{  overflowY:"scroll", WebkitOverflowScrolling:"touch" }} >
+
+<Navbar /> 
+       
+
+          <div  style={{ height:"100%"}}>
+                    
             <ToastContainer/>
                 <Switch location={location}>
-                  <Route exact path="/dashboard" component={MapDashboard} />
-                  <Route exact path="/users" component={UsersPage} />
-                  <Route exact path="/account" component={AccountPage} />
-                  <Route exact path="/login" component={Login} />
-                  <Route exact path="/signup" component={Signup} />
-                  <Route path="/" component={Landingpage} />
+                  <Route  path="/dashboard" component={MapDashboard} />
+                  <Route  path="/users" component={UsersPage} />
+                  <Route  path="/account" component={AccountPage} />
+                  <Route  path="/login" component={Login} />
+                  <Route  path="/signup" component={Signup} />
+                  <Route exact path="/" component={Landingpage} />
                 </Switch>
            
+          </div>
+
           </div>
         )}
       />
       </ScrollToTop>
     </Router>
- 
-
-
     );
   }
 }

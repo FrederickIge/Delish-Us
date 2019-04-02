@@ -131,6 +131,26 @@ class fireStore {
     }
   }
 
+  @action
+  async getUserSpots(userId){
+    try {
+     return await spots.where("userId", "==", userId).get();
+    
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  @action
+  async getUserComments(userId){
+    try {
+     return await comments.where("userId", "==", userId).get();
+    
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
 
 }
 

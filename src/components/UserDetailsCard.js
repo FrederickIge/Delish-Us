@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {inject, observer} from 'mobx-react';
-import {compose} from 'recompose';
+import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
+import { compose } from 'recompose';
 import withAuthorization from './hoc/withAuthorization';
 import StarRatingComponent from 'react-star-rating-component';
 import CommentModal from './commentModal';
@@ -44,19 +44,19 @@ const UserCard = styled.div`
 
 padding: 8px;
 border-radius: 11px;
-background-color: white;
+
 min-height:120px;
 margin-top:10px;
 `;
 
-@inject('sessionStore', 'spotStore', 'uiStore', 'commentStore')
+@inject('sessionStore', 'spotStore', 'uiStore', 'commentStore', 'userStore')
 @observer
 class UserDetailsCard extends Component {
   spotStore = this.props.spotStore;
   sessionStore = this.props.sessionStore;
   uiStore = this.props.uiStore;
   commentStore = this.props.commentStore;
-
+  userStore = this.props.userStore
   handleDelete = () => {
     this.spotStore.deleteSpot();
   };
@@ -68,30 +68,29 @@ class UserDetailsCard extends Component {
   render() {
     return (
       <React.Fragment>
+
         <CommentModal />
-     
-          <CardDetailsContainer id="card-details-container">
+
+        <CardDetailsContainer id="card-details-container">
           <Spacer />
           <Spacer />
-              <DetailImageWrapper id="card-image-wrapper" className="mx-auto text-center">
-              <img style={{width:100, height:100}} height="50" className='img-fluid' alt='gag' src={require("../img/default-user.png")} />
-              </DetailImageWrapper>
-              <Spacer />
-            
-              <div className='p-3' id="card-detail -text">
-   
-              <UserCard className="text-center" >
-                            <h3>Frederick Ige</h3>
-                            <div>duelarm@gmail.com</div>
-                          </UserCard>
 
+          <DetailImageWrapper id="card-image-wrapper" className="mx-auto text-center">
+            <img style={{ width: 100, height: 100 }} height="50" className='img-fluid' alt='gag' src={require("../img/default-user.png")} />
+          </DetailImageWrapper>
 
-          
+          <Spacer />
 
-              </div>
-          </CardDetailsContainer>
+          <div className='p-3' id="card-detail -text">
 
-        <hr className='d-lg-block d-none' />
+            <UserCard className="text-center" >
+              <h3>{this.userStore.selectedUser.username}</h3>
+              <div>{this.userStore.selectedUser.email}</div>
+            </UserCard>
+
+          </div>
+
+        </CardDetailsContainer>
 
 
       </React.Fragment>

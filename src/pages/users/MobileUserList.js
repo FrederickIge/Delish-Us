@@ -15,19 +15,9 @@ margin-top:10px;
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 `;
 
-
-const DelishusMapCard = styled.div`
-box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
-padding: 8px;
-border-radius: 18px;
-background-color: white;
-height:100%;
-`;
-
-
 @inject('sessionStore', 'spotStore', 'uiStore', 'fireStore', 'userStore')
 @observer
-class UserList extends Component {
+class MobileUserList extends Component {
 
     sessionStore = this.props.sessionStore;
     userStore = this.props.userStore;
@@ -43,9 +33,8 @@ class UserList extends Component {
     render() {
         return (
 
-            <DelishusMapCard id="dcard ">
 
-            <div className="container">
+            <div className="container d-lg-none" >
                 <div className="row">
                     {this.userStore.allUsers.map(user => (
                         <React.Fragment key={user.userId}>
@@ -57,14 +46,16 @@ class UserList extends Component {
                             </div>
                         </React.Fragment>
                     ))}
+                    <div style={{height:"100px"}}></div>
                 </div>
+                <div style={{height:"100px"}}></div>
+            
             </div>
 
-            
-            </DelishusMapCard>
+
 
         )
     }
 }
 
-export default UserList;
+export default MobileUserList;

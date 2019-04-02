@@ -27,6 +27,12 @@ class UserStore {
 
   @observable allUsers = []
 
+  @observable currentUserComments = []
+  @observable currentUserSpots = []
+  @observable selectedUser = {
+
+   }
+
   @observable
   uiConfig = {
     // Popup signin flow rather than redirect flow.
@@ -111,14 +117,40 @@ class UserStore {
   getAllUsers = async () => {
     let querySnapshot = await this.rootStore.fireStore.getAllUsers();
     querySnapshot.forEach((doc) => {
-      console.log(doc.data().displayName)
-      console.log(doc.data().email)
+
       if (this.allUsers.find(x => x.userId === doc.data().uid)) {
 
       } else {
         this.allUsers.push({ username: doc.data().displayName, email: doc.data().email, userId: doc.data().uid })
 
       }
+    });
+  }
+
+  getUserComments = async (userId) => {
+    
+    this.currentUserComments = [];
+
+    let querySnapshot = await this.rootStore.fireStore.getUserComments(userId);
+
+    querySnapshot.forEach((doc) => {
+        this.currentUserComments.push({ 
+          comment: doc.data().comment,
+          spotName: doc.data().spotName,
+          googlePlaceId:doc.data().googlePlaceId,
+          spotId: doc.data().spotId,
+         })
+    });
+  }
+
+  getUserSpots = async (userId) => {
+    
+    this.currentUserSpots = [];
+
+    let querySnapshot = await this.rootStore.fireStore.fetchSpotsByUserId(userId);
+
+    querySnapshot.forEach((doc) => {
+        this.currentUserSpots.push({ spotName: doc.data().name, googlePlaceId: doc.data().googlePlaceId })
     });
   }
 

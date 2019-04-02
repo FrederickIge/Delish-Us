@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { compose } from 'recompose';
 import withAuthorization from '../hoc/withAuthorization';
-import Table from 'react-bootstrap/Table'
 
 @inject('sessionStore', 'spotStore','uiStore')
 @observer

@@ -32,7 +32,7 @@ class Navbar extends Component {
   render() {
    
     const NavigationNonAuth = () => (
-      <nav className="navbar navbar-expand-lg py-2">
+      <nav className="navbar navbar-expand-lg py-2 fixed-top">
 
         <div className="container">
 

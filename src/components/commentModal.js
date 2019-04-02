@@ -5,6 +5,7 @@ import Comment from '../models/Comment'
 import firebase from 'firebase';
 import { disableBodyScroll,clearAllBodyScrollLocks } from 'body-scroll-lock';
 import styled from 'styled-components';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const UserListItem = styled.div`
   cursor: pointer;
@@ -50,6 +51,7 @@ class CommentModal extends Component {
       id: Math.random().toString(36).substring(7),
       comment: comment,
       spotId: selectedSpot.key,
+      spotName: selectedSpot.name,
       userId: user.uid,
       userName: user.displayName,
       timeCreated: firebase.firestore.Timestamp.fromDate(new Date()),
@@ -96,7 +98,9 @@ class CommentModal extends Component {
 
         {this.spotStore.likedBy.map((user) =>
           <React.Fragment key={user.userId}>
+          <Link to={'/users/' + user.userId}>
             <UserListItem > <i className="fa fa-user" aria-hidden="true"></i> {user.userName}</UserListItem>
+          </Link>
             <br></br>
           </React.Fragment>
 
