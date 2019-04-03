@@ -59,7 +59,7 @@ class spotStore {
     this.root.uiStore.openDrawer();
     this.findLikedBy();
     this.root.commentStore.getCommentsByGooglePlaceId();
-
+    console.log('yay')
   }
  
   @action
@@ -93,7 +93,15 @@ class spotStore {
   displaySpots(querySnapshot) {
     querySnapshot.forEach((doc) => {
       let geopoint = new Geopoint(doc);
-      this.allSpots.push(geopoint);
+
+
+      if (this.allSpots.find(x => x.key === doc.id)){
+
+      }else{
+        this.allSpots.push(geopoint);
+      }
+
+      
     });
   }
 

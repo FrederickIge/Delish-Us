@@ -131,8 +131,8 @@ class CommentModal extends Component {
 
             {this.commentStore.comments.map((comment) =>
 
-              <div key={comment.id}>
-                <div>- {comment.userName}</div>
+              <div  key={comment.id}>
+                <div onClick={() => this.goToUser(comment.userId)} >- {comment.userName}</div>
                 <br></br>
                 <div>{comment.comment}</div>
                 <hr></hr>  

@@ -18,6 +18,7 @@ class UiStore {
   @observable modalState = false;  
 
   @action openDrawer=() =>{
+    
       this.drawerState = true
   }
 

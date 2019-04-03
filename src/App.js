@@ -32,7 +32,7 @@ class App extends Component {
 
         <div className="main-container"  style={{  overflowY:"scroll", WebkitOverflowScrolling:"touch" }} >
 
-<Navbar /> 
+<Navbar />  
        
 
           <div  style={{ height:"100%"}}>

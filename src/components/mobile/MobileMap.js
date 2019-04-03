@@ -144,7 +144,7 @@ class MobileMap extends Component {
                   lat={this.spotStore.selectedSpot.lat}
                   lng={this.spotStore.selectedSpot.lng}
                   text={this.spotStore.selectedSpot.name}
-                  onClick={this.spotStore.toggleDrawer}
+                  onClick={() => this.uiStore.openDrawer()}
                 /> : null}
             </GoogleMapReact>
 

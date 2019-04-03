@@ -35,6 +35,7 @@ class SpotsMap extends Component {
   };
 
   selectSpot(spot) {
+    console.log('gang')
     this.spotStore.selectExistingSpot(spot);
   }
 
@@ -43,6 +44,7 @@ class SpotsMap extends Component {
       <DelishusMapCard id="dcard" style={{ display: this.uiStore.mapView ? "block" : "none", height: "100%"}}>
 
         <RandomButton/>
+
         <div id="reactmap" style={{
       borderRadius: '10px',
       height: '100%',
@@ -93,7 +95,7 @@ class SpotsMap extends Component {
               lat={this.spotStore.selectedSpot.lat}
               lng={this.spotStore.selectedSpot.lng}
               text={this.spotStore.selectedSpot.name}
-              onClick={this.spotStore.toggleDrawer}
+              onClick={() => this.uiStore.openDrawer()}
             />
           ) : null}
 
