@@ -16,16 +16,34 @@ height:100%;
 @inject('sessionStore', 'spotStore', 'uiStore', 'fireStore', 'userStore')
 @observer
 class UserPage extends React.Component {
+
   sessionStore = this.props.sessionStore;
   spotStore = this.props.spotStore;
   uiStore = this.props.uiStore;
   fireStore = this.props.fireStore;
   userStore = this.props.userStore;
 
-  componentDidMount() {
+  async componentDidMount() {
     let userId = this.props.match.params.userId;
     this.userStore.getUserComments(userId);
     this.userStore.getUserSpots(userId);
+
+
+    let result = await this.fireStore.getUserById(userId);
+
+        console.log(result.data())
+
+      this.userStore.selectedUser = {
+        username: result.data().displayName,
+        email: result.data().email
+    }
+
+
+
+  }
+
+  handleBack =() => {
+    this.props.history.goBack();
   }
 
   render() {
@@ -34,10 +52,11 @@ class UserPage extends React.Component {
        
 <DelishusMapCard id="dcard">
       <div className='container' >
-        <div>
-          <UserDetailsCard />
-        </div>
-
+      <div style={{height:"20px"}}></div>
+      <div onClick={this.handleBack} style={{fontSize:"20px", cursor: "pointer" }}>
+<i className="fa fa-arrow-left" aria-hidden="true"></i> Back
+</div>
+<div style={{height:"20px"}}></div>
         <h2>Saved Spots</h2>
         <hr style={{marginTop: '0px'}} />
         {this.userStore.currentUserSpots.map(spot => (

@@ -10,7 +10,7 @@ border-radius: 11px;
 background-color: white;
 min-height:120px;
 margin-top:10px;
-
+word-wrap: break-word;
 &:hover {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 `;
@@ -35,7 +35,7 @@ class MobileUserList extends Component {
 
 
             <div className="container d-lg-none" >
-                <div className="row">
+                <div className="row row-eq-height">
                     {this.userStore.allUsers.map(user => (
                         <React.Fragment key={user.userId}>
                             <div className="col-sm-4">

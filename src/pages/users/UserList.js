@@ -22,6 +22,7 @@ padding: 8px;
 border-radius: 18px;
 background-color: white;
 height:100%;
+word-wrap: break-word;
 `;
 
 
@@ -46,10 +47,10 @@ class UserList extends Component {
             <DelishusMapCard id="dcard ">
 
             <div className="container">
-                <div className="row">
+                <div className="row row-eq-height">
                     {this.userStore.allUsers.map(user => (
                         <React.Fragment key={user.userId}>
-                            <div className="col-sm-4">
+                            <div className="col-xl-4 col-lg-6">
                                 <UserCard className="pl-3" onClick={() => this.handleClick(user)} >
                                     <h3>{user.username}</h3>
                                     <div>{user.email}</div>                               

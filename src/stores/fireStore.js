@@ -132,6 +132,17 @@ class fireStore {
   }
 
   @action
+  async getUserById(userId){
+    console.log()
+    try {
+     return await users.doc(userId).get();
+    
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  @action
   async getUserSpots(userId){
     try {
      return await spots.where("userId", "==", userId).get();

@@ -74,6 +74,12 @@ class CommentModal extends Component {
     this.targetElement = document.querySelector('#root');
   }
 
+  goToUser = (userId)=>{
+    this.uiStore.hideModal();
+    console.log(this.props)
+   this.routingStore.history.push('/users/' + userId);
+  }
+
   render() {
     return (
         <>
@@ -98,9 +104,13 @@ class CommentModal extends Component {
 
         {this.spotStore.likedBy.map((user) =>
           <React.Fragment key={user.userId}>
-          <Link to={'/users/' + user.userId}>
-            <UserListItem > <i className="fa fa-user" aria-hidden="true"></i> {user.userName}</UserListItem>
-          </Link>
+         
+          
+          <UserListItem onClick={() => this.goToUser(user.userId) }>
+           <i className="fa fa-user" aria-hidden="true"></i> 
+           {user.userName}
+           </UserListItem>
+
             <br></br>
           </React.Fragment>
 

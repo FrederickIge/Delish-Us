@@ -28,14 +28,24 @@ class MobileUserPage extends React.Component {
     // this.userStore.getUserSpots(userId);
   }
 
+  handleBack =() => {
+    this.props.history.goBack();
+  }
+
   render() {
     return (
 
        
-<div style={{backgroundColor:"white"}} className="d-lg-none">
+<div style={{backgroundColor:"white", height: "100%"}} className="d-lg-none">
+
 <div style={{height:"20px"}}></div>
-      <div className='container'  >
-      
+      <div className='container'>
+
+
+<div onClick={this.handleBack} style={{fontSize:"20px", cursor: "pointer" }}>
+<i className="fa fa-arrow-left" aria-hidden="true"></i> Back
+</div>
+
           <UserDetailsCard />
       
 
