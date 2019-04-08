@@ -34,8 +34,9 @@ const GoogleMapContainer = styled.div`
 `;
 
 const DashboardContainer = styled.div`
-  height: 100%;
+height: calc(100% - 60px );
   position: relative;
+
 `;
 
 const DashboardRowContainer = styled.div`
@@ -141,12 +142,11 @@ class MapDashboard extends Component {
   uiStore = this.props.uiStore;
 
   componentWillUnmount() {
-    window.removeEventListener('touchmove', preventDefault);
- 
+    // window.removeEventListener('touchmove', preventDefault);
   }
 
   async componentDidMount() {
-     window.addEventListener('touchmove', preventDefault, { passive: false });
+    //  window.addEventListener('touchmove', preventDefault, { passive: false });
     // this.targetElement = document.querySelector('#mobile-list');
     // disableBodyScroll(this.targetElement);
     this.spotStore.getAllSpots();

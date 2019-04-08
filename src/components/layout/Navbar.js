@@ -5,9 +5,13 @@ import AvatarMenu from "./avatar-menu";
 import styled from 'styled-components';
 
 const Nav = styled.div`
-  z-index: 5000;
+  z-index: 1;
   background-color: white !important;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  top: 0;
+  right:0;
+  left: 0;
 `;
 
 const AvatarImg = styled.img`
@@ -67,7 +71,7 @@ class Navbar extends Component {
             </Link>
              {/* ///users */}
 
-            <span onClick={this.uiStore.toggleView}  className="ml-auto mr-3 nav-text-style">  {props.mapView ? <b>LIST VIEW</b> : <b>MAP VIEW</b>}</span>
+            {/* <span onClick={this.uiStore.toggleView}  className="ml-auto mr-3 nav-text-style">  {props.mapView ? <b>LIST VIEW</b> : <b>MAP VIEW</b>}</span> */}
 
             </ViewSwitcher>
 

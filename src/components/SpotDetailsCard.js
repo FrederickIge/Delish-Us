@@ -91,8 +91,7 @@ class SpotDetailsCard extends Component {
                 {this.spotStore.firstComment ? <FirstComment>{this.commentStore.firstComment}</FirstComment> : null}
 
                 {this.spotStore.selectedSpot.key ? (
-                  <div   onClick={this.uiStore.showModal}>
-                  
+                  <div onClick={this.uiStore.showModal}>                
                     <span style={{marginTop:"20px",display:"inlineBlock",cursor: "pointer", textDecoration: "underline"}}>View Comments</span>  
                     <i style={{marginLeft:"5px", lineHeight:"1.4"}} className='fa fa-comment-o fa-sm' aria-hidden='true' /> ({this.commentStore.comments.length})
                     <i style={{marginLeft:"5px", lineHeight:"1.4"}} className='fa fa-user fa-sm' aria-hidden='true' /> ({this.spotStore.likedBy.length})

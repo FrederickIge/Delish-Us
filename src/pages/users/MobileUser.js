@@ -42,7 +42,7 @@ class MobileUserPage extends React.Component {
                 <div  className='container'>
 
 
-                    <div onClick={this.handleBack} style={{ fontSize: "20px", cursor: "pointer" }}>
+                    <div onClick={this.handleBack} style={{ fontSize: "20px", cursor: "pointer", color:"black"  }}>
                         <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
                     </div>
 
@@ -52,7 +52,7 @@ class MobileUserPage extends React.Component {
                     <h2>Saved Spots</h2>
                     <hr style={{ marginTop: '0px' }} />
                     {this.userStore.currentUserSpots.map(spot => (
-                        <div key={spot.googlePlaceId}> {spot.spotName} </div>
+                        <div style ={{paddingTop:"10px"}} key={spot.googlePlaceId}> {spot.spotName} </div>
                     ))}
 
                     <Spacer />
@@ -62,10 +62,10 @@ class MobileUserPage extends React.Component {
                     <hr style={{ marginTop: '0px' }} />
                     {this.userStore.currentUserComments.map(comment => (
                         <div key={comment.spotId}>
-                            <div style={{ fontSize: '22px' }}>
-                                <b> {comment.spotName}</b>{' '}
+                            <div style={{ fontSize: '20px',color:"black"  }}>
+                                <b style ={{color:"black" }}> {comment.spotName}</b>{' '}
                             </div>
-                            <p> {comment.comment} </p>
+                            <p > {comment.comment} </p>
                         </div>
                     ))}
 

@@ -3,14 +3,15 @@ import { inject, observer } from 'mobx-react';
 import Modal from 'react-bootstrap/Modal'
 import Comment from '../models/Comment'
 import firebase from 'firebase';
-import { disableBodyScroll,clearAllBodyScrollLocks } from 'body-scroll-lock';
+// import { disableBodyScroll,clearAllBodyScrollLocks } from 'body-scroll-lock';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const UserListItem = styled.div`
   cursor: pointer;
+  color: #1890ff;
   &:hover {
-    text-decoration: underline; 
+    text-decoration: underline #1890ff; 
   }
 `;
 
@@ -42,6 +43,13 @@ class CommentModal extends Component {
     this.setState({comment:''})
   }
 
+  onEnterPress = (e) => {
+    if(e.keyCode == 13 && e.shiftKey == false) {
+      e.preventDefault();
+      this.submitComment()
+    }
+  }
+
   getCommentsByGooglePlaceId() {
       this.commentStore.getCommentsByGooglePlaceId();
   }
@@ -64,20 +72,23 @@ class CommentModal extends Component {
   }
 
   componentDidMount(){
-    clearAllBodyScrollLocks();
-    console.log("mount")
-    disableBodyScroll(this.targetElement);
+    // clearAllBodyScrollLocks();
+    // disableBodyScroll(this.targetElement);
   }
 
   componentWillUnmount() {
-    console.log("unmount")
-    this.targetElement = document.querySelector('#root');
+    // this.targetElement = document.querySelector('#root');
   }
 
-  goToUser = (userId)=>{
-    this.uiStore.hideModal();
-    console.log(this.props)
-   this.routingStore.history.push('/users/' + userId);
+  goToUser = (userId) => {
+  //  console.log(this.routingStore.history);
+   this.uiStore.hideModal();
+   this.routingStore.history.push({
+    pathname: '/users/' + userId,
+    state: { prevPath: "dashboard" }
+});
+
+
   }
 
   render() {
@@ -85,10 +96,12 @@ class CommentModal extends Component {
         <>
    
           <Modal
+            
             show={this.uiStore.modalState}
             onHide={this.uiStore.hideModal}
             dialogClassName="delishus-map-card"
             aria-labelledby="example-custom-modal-styling-title"
+            animation ={false}
           >
 
             <Modal.Header closeButton>
@@ -106,10 +119,12 @@ class CommentModal extends Component {
           <React.Fragment key={user.userId}>
          
           
-          <UserListItem onClick={() => this.goToUser(user.userId) }>
-           <i className="fa fa-user" aria-hidden="true"></i> 
-           {user.userName}
-           </UserListItem>
+            <UserListItem onClick={() => this.goToUser(user.userId)}>
+              <i className="fa fa-user" aria-hidden="true" style={{ paddingRight: "10px", color: "#1890ff" }}></i>
+              <span style={{ color: "#1890ff" , textDecorationColor:"#1890ff"}}>
+                {user.userName}
+              </span>
+            </UserListItem>
 
             <br></br>
           </React.Fragment>
@@ -120,7 +135,7 @@ class CommentModal extends Component {
            
 
 
-            <Modal.Header closeButton>
+            <Modal.Header>
               <Modal.Title id="example-custom-modal-styling-title">
                 User Comments
               </Modal.Title>
@@ -131,18 +146,25 @@ class CommentModal extends Component {
 
             {this.commentStore.comments.map((comment) =>
 
-              <div  key={comment.id}>
-                <div onClick={() => this.goToUser(comment.userId)} >- {comment.userName}</div>
+              <div key={comment.id}>
+
+                <UserListItem  onClick={() => this.goToUser(comment.userId)}>
+                 {comment.userName}
+                </UserListItem>
+
                 <br></br>
+
                 <div>{comment.comment}</div>
+
                 <hr></hr>  
+
               </div>
 
             )}
 
            
             
-              <textarea value={this.state.comment} className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Comment ..."  onChange={this.handleChange}></textarea>
+              <textarea onKeyDown={this.onEnterPress} value={this.state.comment} className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Comment ..."  onChange={this.handleChange}></textarea>
               <br></br>
               <button onClick = { this.submitComment } disabled = { !this.state.comment } type="button" className="btn btn-success">Submit</button>
 

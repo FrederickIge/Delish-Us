@@ -11,14 +11,14 @@ const styles = theme => ({
   },
 });
 
-@inject('routingStore', 'sessionStore', 'spotStore')
+@inject('routingStore', 'sessionStore', 'spotStore','uiStore')
 @observer
 class AvatarMenu extends Component {
 
     routingStore = this.props.routingStore;
     sessionStore = this.props.sessionStore;
     spotStore = this.props.spotStore;
-
+    uiStore = this.props.uiStore;
     state = {
         anchorEl: null,
     };
@@ -62,6 +62,11 @@ class AvatarMenu extends Component {
                 <Link style={{ textDecoration: 'none' }} to="/account">
                     Account
                 </Link>
+                </MenuItem>
+
+                <MenuItem onClick={this.handleClose}>
+                <span onClick={this.props.uiStore.toggleView}  className="ml-auto mr-3 nav-text-style">  {this.props.spotStore.mapView ? <b>LIST VIEW</b> : <b>MAP VIEW</b>}</span>
+
                 </MenuItem>
 
             </Menu>

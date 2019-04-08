@@ -49,7 +49,8 @@ label {
 body {
   background-color: #faddbc !important;
   height: 100vh;
-  margin: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .section-shaped .shape-style-1.shape-default {
@@ -114,10 +115,13 @@ footer {
 #root {
   height: 100vh;
   margin: 0;
+  /* display: flex;
+  flex-direction: column; */
 }
 
 .main-container {
-  height: 100%;
+  height: calc(100%);
+  margin-top: 60px;
 }
 
 .example-custom-modal-styling-title {
@@ -381,7 +385,8 @@ div#simple-popper {
 }
 
 .modal {
-  z-index: 2000 !important;
+  z-index: 100001 !important;
+  display: block !important;
 }
 
 .modal-content {
@@ -405,3 +410,14 @@ _:-webkit-full-screen,
 .dv-star-rating-star{
   margin-bottom: 0px !important;
 }
+
+.modal-backdrop {
+  position: fixed;
+  z-index: 100001 !important;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #00000087 !important;
+} 
+

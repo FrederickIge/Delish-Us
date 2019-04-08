@@ -40,9 +40,7 @@ class Myresults extends Component {
  
  <main>
   <div className="position-relative">
-    {/* shape Hero */}
 
-    {/* <img src={require("../img/map.png")} /> */}
     <section className="section section-lg section-shaped pb-250">
       <div className="shape shape-style-1 shape-default">
         <span />

@@ -34,7 +34,7 @@ class MobileUserList extends Component {
         return (
 
 
-            <div className="container d-lg-none" >
+            <div className="container d-lg-none position-relative" >
                 <div className="row row-eq-height">
                     {this.userStore.allUsers.map(user => (
                         <React.Fragment key={user.userId}>

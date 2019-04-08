@@ -28,15 +28,10 @@ class App extends Component {
    
       <Router history={history} onUpdate={() => window.scrollTo(0, 0)} >
         <ScrollToTop>
+        <Navbar />
       <Route render={({location}) => (
 
-        <div className="main-container"  style={{  overflowY:"scroll", WebkitOverflowScrolling:"touch" }} >
-
-<Navbar />  
-       
-
-          <div  style={{ height:"100%"}}>
-                    
+        <div className="main-container">
             <ToastContainer/>
                 <Switch location={location}>
                   <Route  path="/dashboard" component={MapDashboard} />
@@ -46,9 +41,6 @@ class App extends Component {
                   <Route  path="/signup" component={Signup} />
                   <Route exact path="/" component={Landingpage} />
                 </Switch>
-           
-          </div>
-
           </div>
         )}
       />

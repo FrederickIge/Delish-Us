@@ -1,6 +1,6 @@
 import { observable, action } from "mobx";
 import preventDefault from "../utils/eventListeners"
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 class UiStore {
 
@@ -18,7 +18,6 @@ class UiStore {
   @observable modalState = false;  
 
   @action openDrawer=() =>{
-    
       this.drawerState = true
   }
 
@@ -31,13 +30,13 @@ class UiStore {
   }
 
   hideModal = () =>{ 
-    window.addEventListener('touchmove', preventDefault, { passive: false });
+    // window.addEventListener('touchmove', preventDefault, { passive: false });
     this.openDrawer();
     this.modalState = false;
   }
 
   showModal = () => { 
-    window.removeEventListener('touchmove', preventDefault); 
+    // window.removeEventListener('touchmove', preventDefault); 
     this.closeDrawer();
     this.modalState = true;
   }
@@ -46,14 +45,14 @@ class UiStore {
   toggleView = () => {
     this.mapView = !this.mapView;
     if(this.mapView){
-      window.scrollTo(0,0);
-      enableBodyScroll(this.targetElement);
-      window.addEventListener('touchmove', preventDefault, { passive: false });
+      // window.scrollTo(0,0);
+      // enableBodyScroll(this.targetElement);
+      // window.addEventListener('touchmove', preventDefault, { passive: false });
     }
     else if(!this.mapView){
-      window.scrollTo(0,0);
-      disableBodyScroll(this.targetElement);
-      window.removeEventListener('touchmove', preventDefault);
+      // window.scrollTo(0,0);
+      // disableBodyScroll(this.targetElement);
+      // window.removeEventListener('touchmove', preventDefault);
     }
   }
 

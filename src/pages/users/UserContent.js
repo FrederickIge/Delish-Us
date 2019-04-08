@@ -3,7 +3,6 @@ import { inject, observer } from 'mobx-react';
 import { compose } from 'recompose';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import styled from 'styled-components';
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 import MobileSpotList from '../../components/mobile/MobileSpotList';
 import UserDetailsCard from "../../components/UserDetailsCard"
