@@ -61,7 +61,6 @@ class MobileMap extends Component {
   };
 
   selectSpot(spot) {
-    console.log(spot)
     this.props.spotStore.selectExistingSpot(spot);
   }
 
@@ -105,7 +104,7 @@ class MobileMap extends Component {
             <GoogleMapReact
               id="bangbang"
               bootstrapURLKeys={{ key: 'AIzaSyAJdMUyuQiG2DEHgGG3Tvebb9-BzR0JXwE', libraries: "places" }}
-              defaultZoom={15}
+              defaultZoom={2}
               onGoogleApiLoaded={({ map, maps }) => this.apiIsLoaded(map, maps)}
               center={this.spotStore.mapGeolocation.center}
               options={{ fullscreenControl: false, zoomControl: false }}

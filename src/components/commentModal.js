@@ -25,6 +25,8 @@ class CommentModal extends Component {
   uiStore = this.props.uiStore
   commentStore = this.props.commentStore;
 
+  userId = this.sessionStore.authUser.uid
+
   targetElement = null;
   state = {
     comment: ''
@@ -53,6 +55,9 @@ class CommentModal extends Component {
       this.commentStore.getCommentsByGooglePlaceId();
   }
 
+  deleteComment(id){
+    this.commentStore.deleteComment(id);
+  }
   prepareComment(comment, selectedSpot, user) {
     return {
       id: Math.random().toString(36).substring(7),
@@ -91,86 +96,78 @@ class CommentModal extends Component {
 
   render() {
     return (
-        <>
-   
-          <Modal
-            
-            show={this.uiStore.modalState}
-            onHide={this.uiStore.hideModal}
-            dialogClassName="delishus-map-card"
-             aria-labelledby="example-custom-modal-styling-title"
-            animation ={false}
-          >
+      <>
+        <Modal
+          show={this.uiStore.modalState}
+          onHide={this.uiStore.hideModal}
+          dialogClassName='delishus-map-card'
+          aria-labelledby='example-custom-modal-styling-title'
+          animation={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id='example-custom-modal-styling-title'>This spot was saved by:</Modal.Title>
+          </Modal.Header>
 
-            <Modal.Header closeButton>
-              <Modal.Title id="example-custom-modal-styling-title">
-                This spot was saved by:
-              </Modal.Title>
-            </Modal.Header>
-
-
-
-
-        <Modal.Body>
-
-        {this.spotStore.likedBy.map((user) =>
-          <React.Fragment key={user.userId}>
-         
-          
-            <UserListItem onClick={() => this.goToUser(user.userId)}>
-              <i className="fa fa-user" aria-hidden="true" style={{ paddingRight: "10px", color: "#1890ff" }}></i>
-              <span style={{ color: "#1890ff" , textDecorationColor:"#1890ff"}}>
-                {user.userName}
-              </span>
-            </UserListItem>
-
-            <br></br>
-          </React.Fragment>
-
-
-          )}
-        </Modal.Body>
-           
-
-
-            <Modal.Header>
-              <Modal.Title id="example-custom-modal-styling-title">
-                User Comments
-              </Modal.Title>
-            </Modal.Header>
-
-            <Modal.Body>
-
-
-            {this.commentStore.comments.map((comment) =>
-
-              <div key={comment.id}>
-
-                <UserListItem  onClick={() => this.goToUser(comment.userId)}>
-                 {comment.userName}
+          <Modal.Body>
+            {this.spotStore.likedBy.map(user => (
+              <React.Fragment key={user.userId}>
+                <UserListItem onClick={() => this.goToUser(user.userId)}>
+                  <i className='fa fa-user' aria-hidden='true' style={{paddingRight: '10px', color: '#1890ff'}} />
+                  <span style={{color: '#1890ff', textDecorationColor: '#1890ff'}}>{user.userName}</span>
                 </UserListItem>
 
-                <br></br>
+                <br />
+              </React.Fragment>
+            ))}
+          </Modal.Body>
+
+          <Modal.Header>
+            <Modal.Title id='example-custom-modal-styling-title'>User Comments</Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            {this.commentStore.comments.map(comment => (
+              <div key={comment.id}>
+                <UserListItem onClick={() => this.goToUser(comment.userId)}>{comment.userName}</UserListItem>
+
+                <br />
 
                 <div>{comment.comment}</div>
+                
+                {comment.userId == this.sessionStore.authUser.uid ? (
+                  
+                  <div className='text-right'>
+                    <i onClick={() => this.deleteComment(comment.id)} className='fa fa-trash' aria-hidden='true' />
+                  </div>
 
-                <hr></hr>  
+                ) : null}
 
+                <hr style={{marginTop: '10px'}} />
               </div>
+            ))}
 
-            )}
-
-           
-            
-              <textarea onKeyDown={this.onEnterPress} value={this.state.comment} className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Comment ..."  onChange={this.handleChange}></textarea>
-              <br></br>
-              <button onClick = { this.submitComment } disabled = { !this.state.comment } type="button" className="btn btn-success">Submit</button>
-
-            </Modal.Body>
-
-          </Modal>
-        </>
-      );
+            <textarea
+              onKeyDown={this.onEnterPress}
+              value={this.state.comment}
+              className='form-control'
+              id='exampleFormControlTextarea1'
+              rows='3'
+              placeholder='Enter Comment ...'
+              onChange={this.handleChange}
+            />
+            <br />
+            <button
+              onClick={this.submitComment}
+              disabled={!this.state.comment || this.commentStore.hasCommented}
+              type='button'
+              className='btn btn-success'
+            >
+              Submit
+            </button>
+          </Modal.Body>
+        </Modal>
+      </>
+    );
 
   }
 }

@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react';
 import Spacer from '../../components/layout/Spacer';
 import styled from 'styled-components';
 import ContentLoader, { Facebook } from "react-content-loader";
+import Geopoint from "../../models/Geopoint";
 
 const DelishusMapCard = styled.div`
 box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
@@ -12,6 +13,23 @@ background-color: white;
 height:100%;
 `;
 
+
+const Spot = styled.div`
+  cursor: pointer;
+  color: #1890ff;
+  &:hover {
+    text-decoration: underline #1890ff; 
+  }
+`;
+
+const SpotCommentTitle = styled.b`
+  cursor: pointer;
+  color: #1890ff;
+  font-size: '22px';
+  &:hover {
+    text-decoration: underline #1890ff; 
+  }
+`;
 
 @inject('sessionStore', 'spotStore', 'uiStore', 'fireStore', 'userStore')
 @observer
@@ -25,12 +43,12 @@ class UserPage extends React.Component {
 
   async componentDidMount() {
     let userId = this.props.match.params.userId;
-    // this.userStore.getUserComments(userId);
+    this.userStore.getUserComments(userId);
     this.userStore.getUserSpots(userId);
 
     let result = await this.fireStore.getUserById(userId);
 
-    console.log(this.props.history)
+    
 
     this.userStore.selectedUser = {
       username: result.data().displayName,
@@ -40,7 +58,7 @@ class UserPage extends React.Component {
   }
 
   handleBack = () => {
-    console.log(this.props.history.location.state)
+    
     if(!this.props.history.location.state){
       this.props.history.push('/dashboard');
     }
@@ -53,6 +71,17 @@ class UserPage extends React.Component {
     }
     
    
+  }
+
+  loadSpot(spot){
+    console.log(spot)
+    this.spotStore.selectExistingSpot(spot);
+    this.props.history.push('/dashboard');
+  }
+
+   loadSpotbyId = async (id) => {
+    let doc = await this.fireStore.fetchSingleSpot(id)
+    this.loadSpot(new Geopoint(doc))
   }
 
   render() {
@@ -78,7 +107,7 @@ class UserPage extends React.Component {
 
 
           {this.userStore.currentUserSpots.map(spot => (
-            <div style ={{paddingTop:"10px"}} key={spot.googlePlaceId}> {spot.spotName} </div>
+            <Spot onClick = { () => this.loadSpot(spot)} style ={{paddingTop:"10px"}} key={spot.key}> {spot.name} </Spot>
           ))}
 
           <Spacer />
@@ -89,9 +118,9 @@ class UserPage extends React.Component {
 
 
           {this.userStore.currentUserComments.map(comment => (
-            <div key={comment.spotId}>
-              <div style={{ fontSize: '22px' , color: "black" }}>
-                <b style={{color:"black" }}> {comment.spotName}</b>
+            <div key={comment.commentId}>
+              <div onClick = { () => this.loadSpotbyId(comment.spotId)} style={{ fontSize: '22px' , color: "black" }}>
+                <SpotCommentTitle > {comment.spotName}</SpotCommentTitle>
               </div>
               <p style={{color:"black" }}> {comment.comment} </p>
             </div>

@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import {auth} from '../../firebase';
 
 const styles = theme => ({
   typography: {
@@ -24,13 +25,16 @@ class AvatarMenu extends Component {
     };
 
     handleClick = event => {
-        console.log(event.currentTarget)
         this.setState({ anchorEl: event.currentTarget });
     };
 
     handleClose = () => {
         this.setState({ anchorEl: null });
     };
+
+    goToMyProfile = () => {
+        this.routingStore.history.push({pathname: '/users/' + this.sessionStore.authUser.uid});
+    }
 
   render() {
 
@@ -58,16 +62,26 @@ class AvatarMenu extends Component {
                 open={Boolean(anchorEl)}
                 onClose={this.handleClose}
             >
+
+<MenuItem onClick={this.goToMyProfile}>
+                
+                My Profile
+           
+                </MenuItem>
                 <MenuItem onClick={this.handleClose}>
+
                 <Link style={{ textDecoration: 'none' }} to="/account">
-                    Account
+                    Settings
                 </Link>
                 </MenuItem>
 
-                <MenuItem onClick={this.handleClose}>
-                <span onClick={this.props.uiStore.toggleView}  className="ml-auto mr-3 nav-text-style">  {this.props.spotStore.mapView ? <b>LIST VIEW</b> : <b>MAP VIEW</b>}</span>
-
+                <MenuItem onClick={auth.doSignOut}>
+                
+                    Sign Out
+               
                 </MenuItem>
+
+
 
             </Menu>
         </span>

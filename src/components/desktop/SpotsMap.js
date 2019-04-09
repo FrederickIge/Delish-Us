@@ -35,7 +35,6 @@ class SpotsMap extends Component {
   };
 
   selectSpot(spot) {
-    console.log('gang')
     this.spotStore.selectExistingSpot(spot);
   }
 
@@ -58,7 +57,7 @@ class SpotsMap extends Component {
             key: "AIzaSyAJdMUyuQiG2DEHgGG3Tvebb9-BzR0JXwE",
             libraries: "places"
           }}
-          defaultZoom={13}
+          defaultZoom={2}
           onGoogleApiLoaded={({map, maps}) => this.apiIsLoaded(map, maps)}
           center={this.spotStore.mapGeolocation.center}
         >

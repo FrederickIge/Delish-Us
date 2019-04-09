@@ -1,4 +1,4 @@
-import { observable, action,computed, autorun } from "mobx";
+import { observable, action,computed } from "mobx";
 import { DEFAULT_GEOLOCATION, GOOGLE_DETAILS_FIELDS } from "../constants/mapConstants";
 import Spot from "../models/Spot";
 import firebase from 'firebase';
@@ -59,7 +59,6 @@ class spotStore {
     this.root.uiStore.openDrawer();
     this.findLikedBy();
     this.root.commentStore.getCommentsByGooglePlaceId();
-    console.log('yay')
   }
  
   @action
@@ -94,14 +93,12 @@ class spotStore {
     querySnapshot.forEach((doc) => {
       let geopoint = new Geopoint(doc);
 
-
       if (this.allSpots.find(x => x.key === doc.id)){
 
       }else{
         this.allSpots.push(geopoint);
       }
 
-      
     });
   }
 

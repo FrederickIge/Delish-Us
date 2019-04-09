@@ -1,34 +1,17 @@
 import React, { Component } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFire,
-  faDog,
-  faHeart,
-  faShareAlt,
-  faLeaf
-} from "@fortawesome/free-solid-svg-icons";
-import { faReact, faCss3Alt } from "@fortawesome/free-brands-svg-icons";
 import { Link } from "react-router-dom";
-import { africa } from "../img/africa.png";
-import { map } from "../img/map.png";
-import { family } from "../img/family-eating.png";
-import axios from 'axios'
 import posed from 'react-pose';
 import { inject, observer } from 'mobx-react';
-import Headroom from 'react-headroom'
-import { compose } from 'recompose';
-import withAuthorization from '../components/hoc/withAuthorization';
 
 const Slide = posed.div({
   enter: { x: 0, opacity: 1 },
   exit: { x: -50, opacity: 0 }
 });
 
-let fullList = []
 
 @inject('routingStore', 'sessionStore')
 @observer
-class Myresults extends Component {
+class Landingpage extends Component {
 
   routingStore = this.props.routingStore;
   sessionStore = this.props.sessionStore;
@@ -104,7 +87,6 @@ class Myresults extends Component {
           </div>
         </div>
       </div>
-      {/* SVG separator */}
       
       <div className="separator separator-bottom separator-skew">
         <svg
@@ -198,9 +180,4 @@ class Myresults extends Component {
   }
 }
 
-export default Myresults;
-
-
-// const authCondition = (authUser) => !!authUser;
-
-// export default compose(withAuthorization(authCondition))(Myresults);
+export default Landingpage;

@@ -32,8 +32,6 @@ class UiStore {
 
   hideModal = () =>{ 
     window.addEventListener('touchmove', preventDefault, { passive: false });
-    // clearAllBodyScrollLocks();
-  
     this.openDrawer();
     this.modalState = false;
     window.scrollTo(0, 0);
@@ -42,27 +40,12 @@ class UiStore {
 
   showModal = () => { 
     window.removeEventListener('touchmove', preventDefault); 
-    // this.targetElement = document.querySelector('#modal');
-    // disableBodyScroll(this.targetElement);
-   this.modalState = true;
+    this.modalState = true;
     this.closeDrawer();
     
   }
 
-  @action 
-  toggleView = () => {
-    this.mapView = !this.mapView;
-    if(this.mapView){
-      // window.scrollTo(0,0);
-      // enableBodyScroll(this.targetElement);
-      // window.addEventListener('touchmove', preventDefault, { passive: false });
-    }
-    else if(!this.mapView){
-      // window.scrollTo(0,0);
-      // disableBodyScroll(this.targetElement);
-      // window.removeEventListener('touchmove', preventDefault);
-    }
-  }
+
 
 
 }

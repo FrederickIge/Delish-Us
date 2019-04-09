@@ -39,9 +39,7 @@ const SpotName = styled.h3`
 
 const SpotAddress = styled.div``;
 
-const FirstComment = styled.div`
-  min-height: 5vh;
-`;
+
 
 @inject('sessionStore', 'spotStore', 'uiStore', 'commentStore')
 @observer
@@ -88,7 +86,6 @@ class SpotDetailsCard extends Component {
                   />
                 </div>
 
-                {this.spotStore.firstComment ? <FirstComment>{this.commentStore.firstComment}</FirstComment> : null}
 
                 {this.spotStore.selectedSpot.key ? (
                   <div onClick={this.uiStore.showModal}>                

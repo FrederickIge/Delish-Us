@@ -36,10 +36,6 @@ const SpotName = styled.h3`
 
 const SpotAddress = styled.div``;
 
-const FirstComment = styled.div`
-  min-height: 5vh;
-`;
-
 const UserCard = styled.div`
 
 padding: 8px;

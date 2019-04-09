@@ -99,16 +99,7 @@ class Passwordchange extends Component {
                 <br />
 
               </div>
-              <div className="col-xl-4 col-lg-6 col-md-6 col-sm-12 mx-auto ">
-              <br />
-
-              <p>Sign Out?</p>
-              <button type="button" onClick={auth.doSignOut} className="btn btn-primary btn-block">
-                  Sign Out
-                </button>
-              </div>
-
-
+   
             </div>
           </div>
         </div>

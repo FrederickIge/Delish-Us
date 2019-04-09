@@ -29,7 +29,6 @@ class MobileUserPage extends React.Component {
     }
 
     handleBack = () => {
-        console.log(this.props.history.location.state)
         if(!this.props.history.location.state){
           this.props.history.push('/dashboard');
         }
@@ -71,7 +70,7 @@ class MobileUserPage extends React.Component {
 
                     <hr style={{ marginTop: '0px' }} />
                     {this.userStore.currentUserComments.map(comment => (
-                        <div key={comment.spotId}>
+                        <div key={comment.commentId}>
                             <div style={{ fontSize: '20px',color:"black"  }}>
                                 <b style ={{color:"black" }}> {comment.spotName}</b>{' '}
                             </div>

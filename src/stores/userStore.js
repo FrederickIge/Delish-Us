@@ -1,7 +1,7 @@
 import {observable, action} from 'mobx';
 import {auth} from '../firebase';
 import firebase from 'firebase';
-
+import Geopoint from "../models/Geopoint";
 const db = firebase.firestore();
 
 db.settings({
@@ -25,13 +25,11 @@ class UserStore {
     error: null
   };
 
-  @observable allUsers = []
+  @observable allUsers = [];
 
-  @observable currentUserComments = []
-  @observable currentUserSpots = []
-  @observable selectedUser = {
-
-   }
+  @observable currentUserComments = [];
+  @observable currentUserSpots = [];
+  @observable selectedUser = {};
 
   @observable
   uiConfig = {
@@ -43,8 +41,7 @@ class UserStore {
     signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
     callbacks: {
       // Avoid redirects after sign-in.
-      signInSuccessWithAuthResult: (data) => {
-        console.log(data);
+      signInSuccessWithAuthResult: data => {
         // this.createUser(data.user)
         this.createUser(data.user);
       }
@@ -54,10 +51,10 @@ class UserStore {
   @action
   emailLogin = (email, password) => {
     auth.doSignInWithEmailAndPassword(email, password).then(
-      action('fetchSuccess', (response) => {
+      action('fetchSuccess', response => {
         this.rootStore.routingStore.push('/dashboard');
       }),
-      action('fetchError', (error) => {
+      action('fetchError', error => {
         this.error = error;
       })
     );
@@ -67,38 +64,36 @@ class UserStore {
   emailRegistration = () => {
     const {email, passwordOne} = this.registerForm;
     auth.doCreateUserWithEmailAndPassword(email, passwordOne).then(
-      action('fetchSuccess', (authUser) => {
+      action('fetchSuccess', authUser => {
         authUser = firebase.auth().currentUser;
         this.updateDisplayName(authUser);
       }),
-      action('fetchError', (error) => {
+      action('fetchError', error => {
         this.error = error;
       })
     );
   };
 
   @action
-  updateDisplayName = (user) => {
+  updateDisplayName = user => {
     const {username} = this.registerForm;
     user.updateProfile({displayName: username}).then(
-      action('fetchSuccess', (authUser) => {
+      action('fetchSuccess', authUser => {
         this.createUser(user);
       }),
-      action('fetchError', (error) => {
+      action('fetchError', error => {
         this.error = error;
       })
     );
   };
 
   @action
-  createUser = (user) => {
+  createUser = user => {
     const newUser = {
       displayName: user.displayName,
       uid: user.uid,
       email: user.email
     };
-
-    console.log(newUser);
 
     const userRef = db.doc('users/' + newUser.uid);
 
@@ -108,54 +103,51 @@ class UserStore {
         uid: user.uid,
         email: user.email
       })
-      .then((data) => {
+      .then(data => {
         this.rootStore.routingStore.push('/dashboard');
       });
   };
 
-
   getAllUsers = async () => {
     let querySnapshot = await this.rootStore.fireStore.getAllUsers();
-    querySnapshot.forEach((doc) => {
-
+    querySnapshot.forEach(doc => {
       if (this.allUsers.find(x => x.userId === doc.data().uid)) {
-
       } else {
-        this.allUsers.push({ username: doc.data().displayName, email: doc.data().email, userId: doc.data().uid })
-
+        this.allUsers.push({username: doc.data().displayName, email: doc.data().email, userId: doc.data().uid});
       }
     });
-  }
+  };
 
-  getUserComments = async (userId) => {
-    
+  getUserComments = async userId => {
     this.currentUserComments = [];
-
-    let querySnapshot = await this.rootStore.fireStore.currentUserComments(userId);
-    console.log(querySnapshot )
-
-    querySnapshot.forEach((doc) => {
-        this.currentUserComments.push({ 
-          comment: doc.data().comment,
-          spotName: doc.data().spotName,
-          googlePlaceId:doc.data().googlePlaceId,
-          spotId: doc.data().spotId,
-         })
+    let querySnapshot = await this.rootStore.fireStore.getUserComments(userId);
+    querySnapshot.forEach(doc => {
+      this.currentUserComments.push({
+        comment: doc.data().comment,
+        spotName: doc.data().spotName,
+        googlePlaceId: doc.data().googlePlaceId,
+        spotId: doc.data().spotId,
+        commentId: doc.id
+      });
     });
-  }
+  };
 
-  getUserSpots = async (userId) => {
-    
+  getUserSpots = async userId => {
     this.currentUserSpots = [];
 
     let querySnapshot = await this.rootStore.fireStore.fetchSpotsByUserId(userId);
 
-    querySnapshot.forEach((doc) => {
-        this.currentUserSpots.push({ spotName: doc.data().name, googlePlaceId: doc.data().googlePlaceId })
+    querySnapshot.forEach(doc => {
+      // this.currentUserSpots.push({
+      //   spotName: doc.data().name,
+      //   spotId: doc.id,
+      //   googlePlaceId: doc.data().googlePlaceId
+      //   });
+
+        this.currentUserSpots.push(new Geopoint(doc));
+        
     });
-  }
-
-
+  };
 }
 
 export default UserStore;
