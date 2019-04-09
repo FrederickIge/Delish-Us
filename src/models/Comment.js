@@ -7,7 +7,6 @@ class Comment {
       this.userId = doc.data().userId;
       this.spotId = doc.data().spotId;
       this.comment = doc.data().comment;
-      console.log(this)
     }
   }
   

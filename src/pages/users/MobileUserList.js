@@ -23,7 +23,10 @@ class MobileUserList extends Component {
     userStore = this.props.userStore;
 
     handleClick(user){
-        this.props.history.push('/users/' + user.userId);
+        this.props.history.push({
+            pathname: '/users/' + user.userId,
+            state: { prevPath: "users" }
+        });
         this.userStore.selectedUser = {
             username: user.username,
             email: user.email

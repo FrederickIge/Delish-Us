@@ -26,7 +26,7 @@ class UserPage extends React.Component {
   async componentDidMount() {
     let userId = this.props.match.params.userId;
     // this.userStore.getUserComments(userId);
-    // this.userStore.getUserSpots(userId);
+    this.userStore.getUserSpots(userId);
 
     let result = await this.fireStore.getUserById(userId);
 

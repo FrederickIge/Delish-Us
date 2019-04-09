@@ -1,12 +1,12 @@
 import { observable, action } from "mobx";
 import preventDefault from "../utils/eventListeners"
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import { disableBodyScroll, enableBodyScroll,clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 class UiStore {
 
   constructor(root) {
     this.root = root;
-    this.targetElement = document.querySelector('#mobile-list');
+    this.targetElement = document.querySelector('#modal');
   }
  
   @observable drawerState = false; 
@@ -23,6 +23,7 @@ class UiStore {
 
   @action closeDrawer = () => {
     this.drawerState = false;
+    document.body.style.overflowY = "auto";
   }
 
   @action openDrawerDelayed(){
@@ -30,15 +31,22 @@ class UiStore {
   }
 
   hideModal = () =>{ 
-    // window.addEventListener('touchmove', preventDefault, { passive: false });
+    window.addEventListener('touchmove', preventDefault, { passive: false });
+    // clearAllBodyScrollLocks();
+  
     this.openDrawer();
     this.modalState = false;
+    window.scrollTo(0, 0);
+    document.body.style.overflowY = "auto";
   }
 
   showModal = () => { 
-    // window.removeEventListener('touchmove', preventDefault); 
+    window.removeEventListener('touchmove', preventDefault); 
+    // this.targetElement = document.querySelector('#modal');
+    // disableBodyScroll(this.targetElement);
+   this.modalState = true;
     this.closeDrawer();
-    this.modalState = true;
+    
   }
 
   @action 

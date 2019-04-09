@@ -19,7 +19,6 @@ class CommentStore {
     
       data.forEach((doc) => {
         let comment = new Comment(doc)
-        console.log(comment)
         this.comments.push(comment)
       });
       console.log(this.comments)

@@ -29,7 +29,17 @@ class MobileUserPage extends React.Component {
     }
 
     handleBack = () => {
-        this.props.history.goBack();
+        console.log(this.props.history.location.state)
+        if(!this.props.history.location.state){
+          this.props.history.push('/dashboard');
+        }
+       else if(this.props.history.location.state.prevPath == "users"){
+          this.props.history.push('/users');
+        } 
+        else if(this.props.history.location.state.prevPath == "dashboard"){
+          this.uiStore.showModal();
+          this.props.history.goBack();
+        }
     }
 
     render() {

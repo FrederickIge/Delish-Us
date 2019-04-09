@@ -120,8 +120,8 @@ footer {
 }
 
 .main-container {
-  height: calc(100%);
-  margin-top: 60px;
+  height: calc(100% - 60px);
+  padding-top: 60px;
 }
 
 .example-custom-modal-styling-title {

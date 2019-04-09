@@ -131,7 +131,8 @@ class UserStore {
     
     this.currentUserComments = [];
 
-    let querySnapshot = await this.rootStore.fireStore.getUserComments(userId);
+    let querySnapshot = await this.rootStore.fireStore.currentUserComments(userId);
+    console.log(querySnapshot )
 
     querySnapshot.forEach((doc) => {
         this.currentUserComments.push({ 

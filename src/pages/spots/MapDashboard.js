@@ -34,13 +34,13 @@ const GoogleMapContainer = styled.div`
 `;
 
 const DashboardContainer = styled.div`
-height: calc(100% - 60px );
+height: calc(100%);
   position: relative;
 
 `;
 
 const DashboardRowContainer = styled.div`
-  height: 95%;
+  height: 100%;
   max-height: 100%;
 `;
 
@@ -142,12 +142,13 @@ class MapDashboard extends Component {
   uiStore = this.props.uiStore;
 
   componentWillUnmount() {
-    // window.removeEventListener('touchmove', preventDefault);
+    window.removeEventListener('touchmove', preventDefault);
   }
 
   async componentDidMount() {
-    //  window.addEventListener('touchmove', preventDefault, { passive: false });
-    // this.targetElement = document.querySelector('#mobile-list');
+    if(!this.uiStore.modalState){
+      window.addEventListener('touchmove', preventDefault, { passive: false });
+    }
     // disableBodyScroll(this.targetElement);
     this.spotStore.getAllSpots();
     let position = await getPosition();

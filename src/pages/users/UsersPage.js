@@ -10,18 +10,20 @@ import UserList from './UserList';
 import User from './User';
 import MobileUser from './MobileUser';
 import MobileUserList from './MobileUserList';
+import preventDefault from "../../utils/eventListeners"
+
 
 const GoogleMapContainer = styled.div`
   height: 100%;
 `;
 
 const DashboardContainer = styled.div`
-  height: calc(100% - 60px);
+  height: calc(100%);
   position: relative;
 `;
 
 const DashboardRowContainer = styled.div`
-  height: 95%;
+  height: 100%;
   max-height: 100%;
 `;
 
@@ -53,7 +55,13 @@ class UsersPage extends Component {
     this.userStore.getAllUsers();
   }
 
-  async componentDidMount() {}
+  componentDidMount(){
+    // window.removeEventListener('touchmove', preventDefault); 
+  }
+
+  componentWillUnmount() {
+    // window.removeEventListener('touchmove', preventDefault);
+  }
 
   render() {
     return (

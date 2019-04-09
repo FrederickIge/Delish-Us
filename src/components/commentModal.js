@@ -3,9 +3,8 @@ import { inject, observer } from 'mobx-react';
 import Modal from 'react-bootstrap/Modal'
 import Comment from '../models/Comment'
 import firebase from 'firebase';
-// import { disableBodyScroll,clearAllBodyScrollLocks } from 'body-scroll-lock';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 const UserListItem = styled.div`
   cursor: pointer;
@@ -77,18 +76,17 @@ class CommentModal extends Component {
   }
 
   componentWillUnmount() {
+    //  clearAllBodyScrollLocks();
     // this.targetElement = document.querySelector('#root');
   }
 
   goToUser = (userId) => {
-  //  console.log(this.routingStore.history);
+ 
    this.uiStore.hideModal();
    this.routingStore.history.push({
     pathname: '/users/' + userId,
     state: { prevPath: "dashboard" }
 });
-
-
   }
 
   render() {
@@ -100,7 +98,7 @@ class CommentModal extends Component {
             show={this.uiStore.modalState}
             onHide={this.uiStore.hideModal}
             dialogClassName="delishus-map-card"
-            aria-labelledby="example-custom-modal-styling-title"
+             aria-labelledby="example-custom-modal-styling-title"
             animation ={false}
           >
 
