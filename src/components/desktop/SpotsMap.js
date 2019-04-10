@@ -5,7 +5,7 @@ import withAuthorization from "../hoc/withAuthorization";
 import GoogleMapReact from "google-map-react";
 import styled from "styled-components";
 import RandomButton from "./RandomButton"
-
+import posed from 'react-pose';
 
 const AnyReactComponent = ({text, onClick}) => (
   <div onClick={onClick} className="demo">
@@ -19,6 +19,8 @@ padding: 8px;
 border-radius: 18px;
 background-color: white;
 `;
+
+
 
 // style={{ position: "absolute", zIndex: 500, borderRadius: "10px" }}
 @inject("sessionStore", "spotStore",'uiStore')
@@ -40,9 +42,14 @@ class SpotsMap extends Component {
 
   render() {
     return (
-      <DelishusMapCard id="dcard" style={{ display: this.uiStore.mapView ? "block" : "none", height: "100%"}}>
+      
 
-        <RandomButton/>
+      
+      <DelishusMapCard id="dcard" style={{ display: this.uiStore.mapView ? "block" : "none", height: "100%"}}>
+ 
+  <RandomButton/>
+ 
+       
 
         <div id="reactmap" style={{
       borderRadius: '10px',
@@ -103,6 +110,7 @@ class SpotsMap extends Component {
         </GoogleMapReact>
         </div>
       </DelishusMapCard>
+     
     );
   }
 }

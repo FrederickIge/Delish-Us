@@ -38,6 +38,13 @@ class UiStore {
     document.body.style.overflowY = "auto";
   }
 
+  goToUserHideModal = () =>{ 
+    window.addEventListener('touchmove', preventDefault, { passive: false });
+    this.modalState = false;
+    window.scrollTo(0, 0);
+    document.body.style.overflowY = "auto";
+  }
+
   showModal = () => { 
     window.removeEventListener('touchmove', preventDefault); 
     this.modalState = true;

@@ -87,7 +87,7 @@ class CommentModal extends Component {
 
   goToUser = (userId) => {
  
-   this.uiStore.hideModal();
+   this.uiStore.goToUserHideModal();
    this.routingStore.history.push({
     pathname: '/users/' + userId,
     state: { prevPath: "dashboard" }

@@ -162,7 +162,7 @@ class MapDashboard extends Component {
           anchor="bottom"
           open={this.uiStore.drawerState}
           onClose={() => this.uiStore.closeDrawer()}
-          onOpen={() => this.uiStore.openDrawer()}
+          // onOpen={() => this.uiStore.openDrawer()}
           className="d-lg-none"
         >
           <SpotDetailsCard />

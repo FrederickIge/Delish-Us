@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import Spacer from '../components/layout/Spacer';
 import SaveSpotButton from '../components/SaveSpotButton';
 import DeleteSpotButton from '../components/DeleteSpotButton';
+import posed, { PoseGroup } from 'react-pose';
 
 const CardDetailsContainer = styled.div`
   border-top-left-radius: 10px;
@@ -37,8 +38,24 @@ const SpotName = styled.h3`
   font-weight: bold;
 `;
 
-const SpotAddress = styled.div``;
+const SpotAddress = styled.a``;
 
+const Animate = posed.div({
+  enter: {
+    y: 0,
+    opacity: 1,
+    delay: 300,
+    transition: {
+      y: { type: 'spring', stiffness: 1000, damping: 15 },
+      default: { duration: 300 }
+    }
+  },
+  exit: {
+    y: 50,
+    opacity: 0,
+    transition: { duration: 150 }
+  }
+});
 
 
 @inject('sessionStore', 'spotStore', 'uiStore', 'commentStore')
@@ -70,7 +87,8 @@ class SpotDetailsCard extends Component {
 
               <div className='p-3'>
                 <SpotName>{this.spotStore.selectedSpot.name}</SpotName>
-                <SpotAddress>{this.spotStore.selectedSpot.address}</SpotAddress>
+                <SpotAddress  target="_blank" href={"https://www.google.com/maps/search/?api=1&query=" + encodeURI(this.spotStore.selectedSpot.address ) + "&query_place_id=" + this.spotStore.selectedSpot.googlePlaceId }>{this.spotStore.selectedSpot.address}</SpotAddress>
+                {/* <a href={"https://www.google.com/maps/search/?api=1&query=" + encodeURI(this.spotStore.selectedSpot.address ) + "&query_place_id=" + this.spotStore.selectedSpot.googlePlaceId }>Open Google Maps</a> */}
 
                 <div className='d-flex align-items-center' style={{height:"70px"}}>
                   <div style={{marginRight:"10px"}}> Rating: {this.spotStore.selectedSpot.rating}</div>
@@ -101,7 +119,11 @@ class SpotDetailsCard extends Component {
           <CardDetailsContainer>
             <SpotDetailsTop>
               <br />
+              <PoseGroup>
+              <Animate key="modal">
               <h4 className='row justify-content-center select-a-spot'>Select a Spot on the Map</h4>
+              </Animate>
+              </PoseGroup>
               <Spacer />
               <div className='row justify-content-center'>
                 <i className='fa fa-cutlery fa-5x mx-auto' aria-hidden='true' />

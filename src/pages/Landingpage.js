@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import posed from 'react-pose';
-import { inject, observer } from 'mobx-react';
 
-const Slide = posed.div({
-  enter: { x: 0, opacity: 1 },
-  exit: { x: -50, opacity: 0 }
+import { inject, observer } from 'mobx-react';
+import posed, { PoseGroup } from 'react-pose';
+
+const Box = posed.div({
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 }
 });
 
 
@@ -15,6 +16,14 @@ class Landingpage extends Component {
 
   routingStore = this.props.routingStore;
   sessionStore = this.props.sessionStore;
+
+  state = { isVisible: false };
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ isVisible: !this.state.isVisible });
+    }, 1000);
+  }
 
   render() {
 
@@ -40,15 +49,18 @@ class Landingpage extends Component {
         <div className="col px-0">
           <div className="row">
             <div className="col-lg-6">
+
               <h1 className="display-3  text-black">
                 Share the places you love 
                 <span>with the people you love</span>
               </h1>
+              
               <p className="lead  text-black">
                 Life is better when we eat together. DelishUs let's you keep track and share your favorite resturants with friends and family. 
               </p>
+             
               <div className="btn-wrapper">
-
+            
         {this.sessionStore.authUser?
         
         <Link

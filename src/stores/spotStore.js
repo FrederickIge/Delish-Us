@@ -139,7 +139,10 @@ class spotStore {
   @action
   fetchGooglePlaceDetails() {
     return new Promise((resolve) => {
-      let SpotCreationCallback = (place) => {resolve(new Spot(place, this.selectedGeopoint)) }
+      let SpotCreationCallback = (place) => {
+        console.log(place)
+        resolve(new Spot(place, this.selectedGeopoint)) 
+      }
       this.googlePlacesService.getDetails(this.requestOptions, SpotCreationCallback);
     });
   }
