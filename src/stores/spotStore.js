@@ -47,7 +47,13 @@ class spotStore {
   @action
   async getRandomSpot() {
     let randomSpot = this.allSpots[Math.floor(Math.random() * this.allSpots.length)];
-    await this.selectExistingSpot(randomSpot);
+    // await this.selectExistingSpot(randomSpot);
+    this.selectedGeopoint = randomSpot;
+    this.selectedSpot = await this.loadSpotDetails();
+    this.alreadySaved = this.checkifSaved();
+    this.root.uiStore.openDrawerDelayed();
+    this.findLikedBy();
+    this.root.commentStore.getCommentsByGooglePlaceId();
     this.moveMapToSelectedSpot();
   }
 

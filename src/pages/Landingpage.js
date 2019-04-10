@@ -81,7 +81,7 @@ class Landingpage extends Component {
           <img
             src={require("../img/family-eating.png")} 
             alt="Smiley face"
-            className="img-fluid floating"
+            className="img-fluid floating  mx-auto d-block"
           />
         </div>
           </div>
@@ -115,13 +115,13 @@ class Landingpage extends Component {
           <img
             src={require("../img/map.png")} 
             alt="Smiley face"
-            className="img-fluid floating"
+            className="img-fluid floating mx-auto d-block"
           />
         </div>
         <div className="col-md-6 order-md-1">
           <div className="pr-md-5">
             <div className="icon icon-lg icon-shape icon-shape-success shadow rounded-circle mb-5">
-              <i className="ni ni-settings-gear-65" />
+              <i className="ni ni-map-big" />
             </div>
             <h3>Google Maps Integration</h3>
             <p>
@@ -132,12 +132,12 @@ class Landingpage extends Component {
                 <div className="d-flex align-items-center">
                   <div>
                     <div className="badge badge-circle badge-success mr-3">
-                      <i className="ni ni-settings-gear-65" />
+                      <i className="ni ni-world-2" /> 
                     </div>
                   </div>
                   <div>
                     <h6 className="mb-0">
-                      Easy to search
+                      Search for Spots on the world map!
                     </h6>
                   </div>
                 </div>
@@ -146,11 +146,11 @@ class Landingpage extends Component {
                 <div className="d-flex align-items-center">
                   <div>
                     <div className="badge badge-circle badge-success mr-3">
-                      <i className="ni ni-html5" />
+                      <i className="ni ni-favourite-28" />
                     </div>
                   </div>
                   <div>
-                    <h6 className="mb-0">Google Maps deep Linking</h6>
+                    <h6 className="mb-0">Save and share your favorite Spots!</h6>
                   </div>
                 </div>
               </li>
@@ -158,12 +158,12 @@ class Landingpage extends Component {
                 <div className="d-flex align-items-center">
                   <div>
                     <div className="badge badge-circle badge-success mr-3">
-                      <i className="ni ni-satisfied" />
+                      <i className="ni ni-pin-3" />
                     </div>
                   </div>
                   <div>
                     <h6 className="mb-0">
-                      Easy to Share
+                      Check out a new Spot with the Random feature!
                     </h6>
                   </div>
                 </div>
