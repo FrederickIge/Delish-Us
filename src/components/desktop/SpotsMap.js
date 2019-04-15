@@ -64,7 +64,7 @@ class SpotsMap extends Component {
             key: "AIzaSyAJdMUyuQiG2DEHgGG3Tvebb9-BzR0JXwE",
             libraries: "places"
           }}
-          defaultZoom={2}
+          defaultZoom={5}
           onGoogleApiLoaded={({map, maps}) => this.apiIsLoaded(map, maps)}
           center={this.spotStore.mapGeolocation.center}
         >

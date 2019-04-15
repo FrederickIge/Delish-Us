@@ -22,21 +22,10 @@ const browserHistory = createBrowserHistory();
 const history = syncHistoryWithStore(browserHistory, rootStore.routingStore);
 
 const RoutesContainer = posed.div({
-  enter: {
-    opacity: 1,
-    delay: 500,
-    beforeChildren: true,
-    transition: {
-      duration: 500
-    }
-  },
-
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: 500
-    }
-  }
+  enter: { opacity: 1, delay: 300, beforeChildren: true },
+  exit: { opacity: 0, transition: {
+    duration: 200
+  } }
 });
 
 class App extends Component {
@@ -66,6 +55,7 @@ class App extends Component {
 
                   </RoutesContainer>
                 </PoseGroup>
+
               </div>
             )}
           />

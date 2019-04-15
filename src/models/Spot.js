@@ -1,17 +1,20 @@
-class Spot {
-  constructor(place, spot) {
-    this.name = place.name;
-    this.address = place.formatted_address;
-    this.rating = place.rating;
-    this.image = place.photos[0].getUrl();
+import { observable, action } from "mobx";
 
-    this.lat = place.geometry.location.lat();
-    this.lng = place.geometry.location.lng();
 
-    this.userId = spot.userId;
-    this.key = spot.key;
-    this.googlePlaceId = spot.googlePlaceId;
-  }
+ 
+function Spot (place, spot)  {
+
+return {
+    name : place.name,
+    address : place.formatted_address,
+    rating : place.rating,
+    image : place.photos[0].getUrl(),
+    lat : place.geometry.location.lat(),
+    lng : place.geometry.location.lng(),
+    userId : spot.userId,
+    key : spot.key? spot.key : null,
+    googlePlaceId : spot.googlePlaceId
+}
 }
 
 export default Spot;

@@ -4,3 +4,5 @@ export const DEFAULT_GEOLOCATION = {
     zoom: 2
 };
 export const GOOGLE_DETAILS_FIELDS  = ["name", "rating", "formatted_phone_number", "geometry", "formatted_address", "photos"];
+
+export const SEARCH_OPTIONS = {};

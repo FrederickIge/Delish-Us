@@ -1,24 +1,22 @@
 import React from 'react';
-import { inject, observer } from 'mobx-react';
+import {inject, observer} from 'mobx-react';
 import Spacer from '../../components/layout/Spacer';
 import styled from 'styled-components';
-import ContentLoader, { Facebook } from "react-content-loader";
-import Geopoint from "../../models/Geopoint";
+import Geopoint from '../../models/Geopoint';
 
 const DelishusMapCard = styled.div`
-box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
-padding: 8px;
-border-radius: 18px;
-background-color: white;
-height:100%;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 8px;
+  border-radius: 18px;
+  background-color: white;
+  height: 100%;
 `;
-
 
 const Spot = styled.div`
   cursor: pointer;
   color: #1890ff;
   &:hover {
-    text-decoration: underline #1890ff; 
+    text-decoration: underline #1890ff;
   }
 `;
 
@@ -27,7 +25,7 @@ const SpotCommentTitle = styled.b`
   color: #1890ff;
   font-size: '22px';
   &:hover {
-    text-decoration: underline #1890ff; 
+    text-decoration: underline #1890ff;
   }
 `;
 
@@ -42,95 +40,78 @@ class UserPage extends React.Component {
   userStore = this.props.userStore;
 
   async componentDidMount() {
+    console.log(this.props)
     let userId = this.props.match.params.userId;
     this.userStore.getUserComments(userId);
     this.userStore.getUserSpots(userId);
 
     let result = await this.fireStore.getUserById(userId);
 
-    
-
     this.userStore.selectedUser = {
       username: result.data().displayName,
       email: result.data().email
-    }
-
+    };
   }
 
   handleBack = () => {
-    
-    if(!this.props.history.location.state){
+    if (!this.props.history.location.state) {
       this.props.history.push('/dashboard');
-    }
-   else if(this.props.history.location.state.prevPath == "users"){
+    } else if (this.props.history.location.state.prevPath == 'users') {
       this.props.history.push('/users');
-    } 
-    else if(this.props.history.location.state.prevPath == "dashboard"){
+    } else if (this.props.history.location.state.prevPath == 'dashboard') {
       this.uiStore.showModal();
       this.props.history.goBack();
     }
-    
-   
-  }
+  };
 
-  loadSpot(spot){
-    console.log(spot)
-    this.spotStore.selectExistingSpot(spot);
+  loadSpot(spot) {
+    console.log(spot);
     this.props.history.push('/dashboard');
+    this.spotStore.selectExistingSpot(spot);
   }
 
-   loadSpotbyId = async (id) => {
-    let doc = await this.fireStore.fetchSingleSpot(id)
-    this.loadSpot(new Geopoint(doc))
-  }
+  loadSpotbyId = async id => {
+    let doc = await this.fireStore.fetchSingleSpot(id);
+    this.loadSpot(new Geopoint(doc));
+  };
 
   render() {
     return (
-
-
-      <DelishusMapCard id="dcard" style={{  overflowY:"scroll", WebkitOverflowScrolling:"touch" }} >
-        <div className='container' >
-
-          <div style={{ height: "20px" }}></div>
-          <div onClick={this.handleBack} style={{ fontSize: "20px", cursor: "pointer", color:"black" }}>
-            <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
+      <DelishusMapCard id='dcard' style={{overflowY: 'scroll', WebkitOverflowScrolling: 'touch'}}>
+        <div className='container'>
+          <div style={{height: '20px'}} />
+          <div onClick={this.handleBack} style={{fontSize: '20px', cursor: 'pointer', color: 'black'}}>
+            <i className='fa fa-arrow-left' aria-hidden='true' /> Back
           </div>
 
-          <div style={{ height: "20px" }}></div>
+          <div style={{height: '20px'}} />
 
           <h2>Saved Spots</h2>
-          <hr style={{ marginTop: '0px' }} />
-
-
-
-
-
+          <hr style={{marginTop: '0px'}} />
 
           {this.userStore.currentUserSpots.map(spot => (
-            <Spot onClick = { () => this.loadSpot(spot)} style ={{paddingTop:"10px"}} key={spot.key}> {spot.name} </Spot>
+            <Spot onClick={() => this.loadSpot(spot)} style={{paddingTop: '10px'}} key={spot.key}>
+              {' '}
+              {spot.name}{' '}
+            </Spot>
           ))}
 
           <Spacer />
 
           <h2>Comments</h2>
 
-          <hr style={{ marginTop: '0px' }} />
-
+          <hr style={{marginTop: '0px'}} />
 
           {this.userStore.currentUserComments.map(comment => (
             <div key={comment.commentId}>
-              <div onClick = { () => this.loadSpotbyId(comment.spotId)} style={{ fontSize: '22px' , color: "black" }}>
-                <SpotCommentTitle > {comment.spotName}</SpotCommentTitle>
+              <div onClick={() => this.loadSpotbyId(comment.spotId)} style={{fontSize: '22px', color: 'black'}}>
+                <SpotCommentTitle> {comment.spotName}</SpotCommentTitle>
               </div>
-              <p style={{color:"black" }}> {comment.comment} </p>
+              <p style={{color: 'black'}}> {comment.comment} </p>
             </div>
           ))}
-
-
         </div>
       </DelishusMapCard>
-
-
     );
   }
 }

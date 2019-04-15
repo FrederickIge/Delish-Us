@@ -45,10 +45,8 @@ const DashboardRightSide = styled.div`
 @observer
 class UsersPage extends Component {
   
-  sessionStore = this.props.sessionStore;
+ 
   spotStore = this.props.spotStore;
-  uiStore = this.props.uiStore;
-  fireStore = this.props.fireStore;
   userStore = this.props.userStore;
 
   componentWillMount() {
@@ -56,19 +54,17 @@ class UsersPage extends Component {
   }
 
   componentDidMount(){
-    // window.removeEventListener('touchmove', preventDefault); 
   }
 
   componentWillUnmount() {
-    // window.removeEventListener('touchmove', preventDefault);
   }
 
   render() {
     return (
       <React.Fragment>
         <Switch>
-          <Route exact path='/users' component={MobileUserList} />
-          <Route path='/users/:userId?' component={MobileUser} />
+          <Route exact path='/users' component={MobileUserList} key="MobileUserList" />
+          <Route path='/users/:userId?' component={MobileUser} key="MobileUser" />
         </Switch>
         <DashboardContainer id='dashboard-container' className='container d-none d-lg-block'>
           <Spacer />
@@ -83,8 +79,8 @@ class UsersPage extends Component {
             <DashboardRightSide id='dashbaord-right-side' className='col-md-12 col-lg-8'>
               <GoogleMapContainer id='google-map-container'>
                 <Switch>
-                  <Route exact path='/users' component={UserList} />
-                  <Route path='/users/:userId?' component={User} />
+                  <Route exact path='/users' component={UserList} key="UserList" />
+                  <Route path='/users/:userId?' component={User} key="User" />
                 </Switch>
               </GoogleMapContainer>
             </DashboardRightSide>

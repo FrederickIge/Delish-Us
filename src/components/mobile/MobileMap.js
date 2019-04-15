@@ -7,6 +7,7 @@ import MobileSearch from "./MobileSearch"
 import styled from "styled-components";
 import RandomButton from "./MobileRandomButton"
 import MobileMapSwitcher from "./MobileMapSwitcher"
+import { SEARCH_OPTIONS } from "../../constants/mapConstants"
 
 const AnyReactComponent = ({ text, onClick }) => (
   <div onClick={onClick} className="demo">
@@ -55,13 +56,19 @@ class MobileMap extends Component {
   sessionStore = this.props.sessionStore;
   uiStore = this.props.uiStore;
 
-  apiIsLoaded = (map, maps) => {
-    this.spotStore.gmapsLoaded = true;
-    this.spotStore.googlePlacesService = new maps.places.PlacesService(map);
-  };
+  // apiIsLoaded = (map, maps) => {
+  //   this.spotStore.gmapsLoaded = true;
+  //   this.spotStore.googlePlacesService = new maps.places.PlacesService(map);
+  //   console.log(maps)
+    
+  // };
 
   selectSpot(spot) {
     this.props.spotStore.selectExistingSpot(spot);
+  }
+
+  componentDidMount(){
+    console.log("mapmount")
   }
 
   render() {
@@ -105,7 +112,7 @@ class MobileMap extends Component {
               id="bangbang"
               bootstrapURLKeys={{ key: 'AIzaSyAJdMUyuQiG2DEHgGG3Tvebb9-BzR0JXwE', libraries: "places" }}
               defaultZoom={2}
-              onGoogleApiLoaded={({ map, maps }) => this.apiIsLoaded(map, maps)}
+              onGoogleApiLoaded={({ map, maps }) => this.spotStore.apiIsLoaded(map, maps)}
               center={this.spotStore.mapGeolocation.center}
               options={{ fullscreenControl: false, zoomControl: false }}
             >

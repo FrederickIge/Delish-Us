@@ -1,4 +1,4 @@
-import { observable, action,computed } from "mobx";
+import { observable, action,computed, extendObservable ,set} from "mobx";
 import { DEFAULT_GEOLOCATION, GOOGLE_DETAILS_FIELDS } from "../constants/mapConstants";
 import Spot from "../models/Spot";
 import firebase from 'firebase';
@@ -16,7 +16,7 @@ class spotStore {
 
   @observable googlePlacesService;
 
-  @observable selectedSpot = { };
+  @observable selectedSpot = {};
 
   @observable mapGeolocation = DEFAULT_GEOLOCATION;
 
@@ -32,12 +32,32 @@ class spotStore {
 
   @observable selectedGeopoint;
 
-  @observable likedBy = []
+  @observable likedBy = [];
+
+  @observable userGeoLocation = {};
+
+  @observable maps = null;
+
+  apiIsLoaded(map, maps){
+    this.googlePlacesService = new maps.places.PlacesService(map);
+    this.maps = maps
+    this.gmapsLoaded = true;
+
+   let lol = {
+      // location:  new maps.LatLng(30, -30),
+      // radius: "2000",
+      types: ["address"]
+    }
+
+    console.log(new maps.LatLng(30, -30))
+
+  }
 
   @action
   async selectSearchedSpot(geopoint) {
     this.selectedGeopoint = new Geopoint(geopoint);
     this.selectedSpot = await this.loadSpotDetails();
+    console.log(this.selectedSpot)
     this.moveMapToSelectedSpot();
     this.alreadySaved = this.checkifSaved();
     this.root.uiStore.openDrawerDelayed();
@@ -78,6 +98,7 @@ class spotStore {
     let payload = this.prepareSpotPayload();
     let docRef = await this.root.fireStore.postSpot(payload);
     await this.displayNewSpot(docRef);
+   console.log(docRef)
     toast("Spot Saved !");
     this.alreadySaved = this.checkifSaved();
     this.root.commentStore.getCommentsByGooglePlaceId();
@@ -117,10 +138,14 @@ class spotStore {
     };
   }
 
+
+  @action
   async displayNewSpot(docRef) {
     let doc = await this.root.fireStore.fetchSingleSpot(docRef.id)
     this.allSpots.push(new Geopoint(doc));
-    this.selectedSpot.key = doc.id;
+    this.selectedSpot.key = docRef.id;
+    set(this.selectedSpot, { "key" : docRef.id})
+
   }
 
   async loadSpotDetails() {
@@ -141,7 +166,7 @@ class spotStore {
     return new Promise((resolve) => {
       let SpotCreationCallback = (place) => {
         console.log(place)
-        resolve(new Spot(place, this.selectedGeopoint)) 
+        resolve(Spot(place, this.selectedGeopoint)) 
       }
       this.googlePlacesService.getDetails(this.requestOptions, SpotCreationCallback);
     });

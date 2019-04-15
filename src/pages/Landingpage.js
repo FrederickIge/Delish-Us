@@ -49,12 +49,14 @@ class Landingpage extends Component {
         <div className="col px-0">
           <div className="row">
             <div className="col-lg-6">
+<Box>
+
 
               <h1 className="display-3  text-black">
                 Share the places you love 
                 <span>with the people you love</span>
               </h1>
-              
+              </Box>
               <p className="lead  text-black">
                 Life is better when we eat together. DelishUs let's you keep track and share your favorite resturants with friends and family. 
               </p>

@@ -105,6 +105,7 @@ class SpotDetailsCard extends Component {
                 </div>
 
 
+
                 {this.spotStore.selectedSpot.key ? (
                   <div onClick={this.uiStore.showModal}>                
                     <span style={{marginTop:"20px",display:"inlineBlock",cursor: "pointer", textDecoration: "underline"}}>View Comments</span>  
@@ -112,6 +113,8 @@ class SpotDetailsCard extends Component {
                     <i style={{marginLeft:"5px", lineHeight:"1.4"}} className='fa fa-user fa-sm' aria-hidden='true' /> ({this.spotStore.likedBy.length})
                   </div>
                 ) : null}
+
+
               </div>
             </SpotDetailsTop>
           </CardDetailsContainer>

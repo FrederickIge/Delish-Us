@@ -6,12 +6,12 @@ let loginUi = null;
 let config = null;
 
 const prodconfig = {
-  apiKey: "AIzaSyB91ib-e9kb_ODsGtKM6TatzPy58q4xtxo",
-  authDomain: "delish-50d4b.firebaseapp.com",
-  databaseURL: "https://delish-50d4b.firebaseio.com",
-  projectId: "delish-50d4b",
-  storageBucket: "delish-50d4b.appspot.com",
-  messagingSenderId: "790815818945"
+  apiKey: "AIzaSyBq7QJUkVJzxIM4OpCIh9hk7o4SimgDWC0",
+  authDomain: "delish-prod.firebaseapp.com",
+  databaseURL: "https://delish-prod.firebaseio.com",
+  projectId: "delish-prod",
+  storageBucket: "delish-prod.appspot.com",
+  messagingSenderId: "489159126974"
 };
 
 const devconfig = {

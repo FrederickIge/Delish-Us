@@ -151,6 +151,12 @@ class MapDashboard extends Component {
     this.spotStore.getAllSpots();
     let position = await getPosition();
     this.spotStore.mapGeolocation.center = { lat: position.coords.latitude, lng: position.coords.longitude };
+    // this.spotStore.userGeoLocation = {
+    //   location: { lat: position.coords.latitude, lng: position.coords.longitude },
+    //   radius: 2000,
+    //   types: ['restaurant']
+    // }
+
   }
 
   render() {
