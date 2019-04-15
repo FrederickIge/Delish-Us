@@ -421,3 +421,6 @@ _:-webkit-full-screen,
   background-color: #00000087 !important;
 } 
 
+.fa-trash:hover {
+  color: red;
+}

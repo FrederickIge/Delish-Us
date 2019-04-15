@@ -5,6 +5,7 @@ import Comment from '../models/Comment'
 import firebase from 'firebase';
 import styled from 'styled-components';
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+import TouchRipple from '@material-ui/core/ButtonBase/TouchRipple';
 
 const UserListItem = styled.div`
   cursor: pointer;
@@ -137,7 +138,9 @@ class CommentModal extends Component {
                 {comment.userId == this.sessionStore.authUser.uid ? (
                   
                   <div className='text-right'>
+                  {/* <TouchRipple> */}
                     <i onClick={() => this.deleteComment(comment.id)} className='fa fa-trash' aria-hidden='true' />
+                    {/* </TouchRipple> */}
                   </div>
 
                 ) : null}

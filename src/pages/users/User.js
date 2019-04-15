@@ -29,7 +29,7 @@ const SpotCommentTitle = styled.b`
   }
 `;
 
-@inject('sessionStore', 'spotStore', 'uiStore', 'fireStore', 'userStore')
+@inject('sessionStore', 'spotStore', 'uiStore', 'fireStore', 'userStore', 'commentStore')
 @observer
 class UserPage extends React.Component {
 
@@ -38,6 +38,7 @@ class UserPage extends React.Component {
   uiStore = this.props.uiStore;
   fireStore = this.props.fireStore;
   userStore = this.props.userStore;
+  commentStore = this.props.commentStore;
 
   async componentDidMount() {
     console.log(this.props)
@@ -75,6 +76,10 @@ class UserPage extends React.Component {
     this.loadSpot(new Geopoint(doc));
   };
 
+  deleteComment(id){
+    this.userStore.deleteComment(id);
+  }
+
   render() {
     return (
       <DelishusMapCard id='dcard' style={{overflowY: 'scroll', WebkitOverflowScrolling: 'touch'}}>
@@ -108,6 +113,9 @@ class UserPage extends React.Component {
                 <SpotCommentTitle> {comment.spotName}</SpotCommentTitle>
               </div>
               <p style={{color: 'black'}}> {comment.comment} </p>
+              <div className='text-right'>
+                    <i onClick={() => this.deleteComment(comment.commentId)} className='fa fa-trash' aria-hidden='true' />
+                  </div>
             </div>
           ))}
         </div>

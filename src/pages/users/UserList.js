@@ -45,12 +45,20 @@ class UserList extends Component {
         }
     }
 
+    handleBack = () => {
+        this.props.history.push('/dashboard');
+      };
+
     render() {
         return (
 
             <DelishusMapCard id="dcard ">
 
             <div className="container">
+            <div style={{height: '20px'}} />
+            <div onClick={this.handleBack} style={{ fontSize: "20px", cursor: "pointer", color:"black"  }}>
+                        <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
+                    </div>
                 <div className="row row-eq-height">
                     {this.userStore.allUsers.map(user => (
                         <React.Fragment key={user.userId}>

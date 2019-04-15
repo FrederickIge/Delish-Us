@@ -132,6 +132,14 @@ class UserStore {
     });
   };
 
+  deleteComment = async (id) => {
+    await this.rootStore.fireStore.deleteComment(id);
+
+    const result = this.currentUserComments.filter(comment => comment.commentId != id);
+
+    this.currentUserComments = result;
+  }
+
   getUserSpots = async userId => {
     this.currentUserSpots = [];
 

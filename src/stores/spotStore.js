@@ -42,15 +42,6 @@ class spotStore {
     this.googlePlacesService = new maps.places.PlacesService(map);
     this.maps = maps
     this.gmapsLoaded = true;
-
-   let lol = {
-      // location:  new maps.LatLng(30, -30),
-      // radius: "2000",
-      types: ["address"]
-    }
-
-    console.log(new maps.LatLng(30, -30))
-
   }
 
   @action
