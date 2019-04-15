@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { inject, observer } from 'mobx-react';
 import posed, { PoseGroup } from 'react-pose';
 
-const Box = posed.div({
+const Fade = posed.div({
   hidden: { opacity: 0 },
   visible: { opacity: 1 }
 });
@@ -22,7 +22,7 @@ class Landingpage extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.setState({ isVisible: !this.state.isVisible });
-    }, 1000);
+    }, 500);
   }
 
   render() {
@@ -49,31 +49,32 @@ class Landingpage extends Component {
         <div className="col px-0">
           <div className="row">
             <div className="col-lg-6">
-<Box>
 
-
+            <Fade  pose={this.state.isVisible ? 'visible' : 'hidden'}>
               <h1 className="display-3  text-black">
                 Share the places you love 
                 <span>with the people you love</span>
               </h1>
-              </Box>
+            
+
               <p className="lead  text-black">
                 Life is better when we eat together. DelishUs let's you keep track and share your favorite resturants with friends and family. 
               </p>
-             
+              </Fade>
               <div className="btn-wrapper">
-            
+              <Fade  pose={this.state.isVisible ? 'visible' : 'hidden'}>
         {this.sessionStore.authUser?
-        
+       
         <Link
         to="/dashboard"
         className="btn btn-white btn-icon mb-3 mb-sm-0"
       >
+      
         <span className="btn-inner--text">
           Dashboard
         </span>
       </Link>
-        
+       
         :
         
         <Link
@@ -85,18 +86,20 @@ class Landingpage extends Component {
         </span>
       </Link>
         }
-
+ </Fade>
 
 
 
               </div>
             </div>
             <div className="col-md-6 order-md-2">
+            <Fade pose={this.state.isVisible ? 'visible' : 'hidden'}>
           <img
             src={require("../img/family-eating.png")} 
             alt="Smiley face"
             className="img-fluid floating  mx-auto d-block"
           />
+           </Fade>
         </div>
           </div>
         </div>
