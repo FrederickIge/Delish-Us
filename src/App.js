@@ -17,6 +17,8 @@ import ScrollToTop from './components/layout/ScrollToTop';
 import UsersPage from './pages/users/UsersPage';
 import posed, {PoseGroup} from 'react-pose';
 
+
+
 const browserHistory = createBrowserHistory();
 
 const history = syncHistoryWithStore(browserHistory, rootStore.routingStore);
@@ -28,22 +30,24 @@ const RoutesContainer = posed.div({
   } }
 });
 
+
+
+
+
 class App extends Component {
+
+
   render() {
     return (
       <Router history={history} onUpdate={() => window.scrollTo(0, 0)}>
-        
-
-          
         <ScrollToTop>
           <Navbar />
           <Route
             render={({location}) => (
-              <div className='main-container'>
+              <div id="main-container" className='main-container-full'>
                 <ToastContainer />
-                <PoseGroup style = {{height: "100%"}}>
+                <PoseGroup style={{height: '100%'}}>
                   <RoutesContainer key={location.pathname}>
-
                     <Switch location={location}>
                       <Route path='/dashboard' component={MapDashboard} key='dashboard' />
                       <Route path='/users' component={UsersPage} key='users' />
@@ -52,15 +56,12 @@ class App extends Component {
                       <Route path='/signup' component={Signup} key='signup' />
                       <Route exact path='/' component={Landingpage} key='landingPage' />
                     </Switch>
-
                   </RoutesContainer>
                 </PoseGroup>
-
               </div>
             )}
           />
         </ScrollToTop>
-       
       </Router>
     );
   }

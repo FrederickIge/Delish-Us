@@ -38,9 +38,14 @@ class spotStore {
 
   @observable maps = null;
 
+  @observable map = null;
+
+  @observable mapZoom = 5
+
   apiIsLoaded(map, maps){
     this.googlePlacesService = new maps.places.PlacesService(map);
     this.maps = maps
+    this.map = map
     this.gmapsLoaded = true;
   }
 
@@ -48,7 +53,6 @@ class spotStore {
   async selectSearchedSpot(geopoint) {
     this.selectedGeopoint = new Geopoint(geopoint);
     this.selectedSpot = await this.loadSpotDetails();
-    console.log(this.selectedSpot)
     this.moveMapToSelectedSpot();
     this.alreadySaved = this.checkifSaved();
     this.root.uiStore.openDrawerDelayed();
@@ -70,10 +74,22 @@ class spotStore {
 
   @action
   async selectExistingSpot(spot) {
+    console.log(spot)
     this.selectedGeopoint = spot;
     this.selectedSpot = await this.loadSpotDetails();
     this.alreadySaved = this.checkifSaved();
     this.root.uiStore.openDrawer();
+    this.findLikedBy();
+    this.root.commentStore.getCommentsByGooglePlaceId();
+  }
+
+  @action
+  async selectExistingSpotMobile(spot) {
+    console.log(spot)
+    this.selectedGeopoint = spot;
+    this.selectedSpot = await this.loadSpotDetails();
+    this.alreadySaved = this.checkifSaved();
+    this.root.uiStore.openDrawerDelayed();
     this.findLikedBy();
     this.root.commentStore.getCommentsByGooglePlaceId();
   }
@@ -89,7 +105,6 @@ class spotStore {
     let payload = this.prepareSpotPayload();
     let docRef = await this.root.fireStore.postSpot(payload);
     await this.displayNewSpot(docRef);
-   console.log(docRef)
     toast("Spot Saved !");
     this.alreadySaved = this.checkifSaved();
     this.root.commentStore.getCommentsByGooglePlaceId();
@@ -144,8 +159,9 @@ class spotStore {
     return await this.fetchGooglePlaceDetails();
   }
 
-  moveMapToSelectedSpot() {
-    this.mapGeolocation.center = { lat: this.selectedSpot.lat, lng: this.selectedSpot.lng };
+  moveMapToSelectedSpot() { 
+    this.mapGeolocation = { lat: this.selectedSpot.lat, lng: this.selectedSpot.lng };
+    this.mapZoom = 14
   }
 
   prepareRequest() {
@@ -156,7 +172,6 @@ class spotStore {
   fetchGooglePlaceDetails() {
     return new Promise((resolve) => {
       let SpotCreationCallback = (place) => {
-        console.log(place)
         resolve(Spot(place, this.selectedGeopoint)) 
       }
       this.googlePlacesService.getDetails(this.requestOptions, SpotCreationCallback);

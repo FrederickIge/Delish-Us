@@ -119,9 +119,16 @@ footer {
   flex-direction: column; */
 }
 
-.main-container {
+.main-container-full {
   height: calc(100% - 60px);
   padding-top: 60px;
+  /* padding-top: 80px; */
+}
+
+.main-container-ios {
+  height: calc(100% - 60px);
+  padding-top: 80px;
+ 
 }
 
 .example-custom-modal-styling-title {
@@ -424,3 +431,7 @@ _:-webkit-full-screen,
 .fa-trash:hover {
   color: red;
 }
+/* 
+.fix{
+  position:fixed;
+} */

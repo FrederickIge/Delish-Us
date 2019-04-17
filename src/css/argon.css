@@ -101,7 +101,7 @@ body
 
     text-align: left;
 
-    color: #525f7f;
+    color: rgba(0, 0, 0, 0.65);
     background-color: #fff;
 }
 
@@ -228,7 +228,7 @@ a
 {
     text-decoration: none;
 
-    color: #5e72e4;
+    color: #1890ff;
     background-color: transparent;
 
     -webkit-text-decoration-skip: objects;
@@ -237,7 +237,7 @@ a:hover
 {
     text-decoration: none; 
 
-    color: #233dd2;
+    color: #1890ff;
 }
 
 a:not([href]):not([tabindex])
@@ -499,7 +499,7 @@ h6,
 
     margin-bottom: .5rem;
 
-    color: #32325d;
+    color: #212529;
 }
 
 h1,

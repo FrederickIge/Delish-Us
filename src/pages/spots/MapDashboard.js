@@ -13,12 +13,15 @@ import withAuthorization from '../../components/hoc/withAuthorization';
 import preventDefault from "../../utils/eventListeners"
 import MapSwitcher from "../../components/desktop/MapSwitcher";
 import Spacer from "../../components/layout/Spacer";
-
+import { toast } from 'react-toastify';
+var innerHeight = require('ios-inner-height');
 var getPosition = function (options) {
   return new Promise(function (resolve, reject) {
     navigator.geolocation.getCurrentPosition(resolve, reject, options);
   });
 }
+
+var position;
 
 const DisplayText = styled.div`
   color: rgba(0, 0, 0, 0.41);
@@ -131,10 +134,13 @@ const DashboardRightSide = styled.div`
 
 const Flex = styled.div``;
 
+
+
+
+
 @inject('sessionStore', 'spotStore', 'uiStore')
 @observer
 class MapDashboard extends Component {
-
   sessionStore = this.props.sessionStore;
   spotStore = this.props.spotStore;
   uiStore = this.props.uiStore;
@@ -144,87 +150,94 @@ class MapDashboard extends Component {
   }
 
   async componentDidMount() {
-    if(!this.uiStore.modalState){
-      window.addEventListener('touchmove', preventDefault, { passive: false });
+
+
+    if (!this.uiStore.modalState) {
+      window.addEventListener('touchmove', preventDefault, {passive: false});
     }
-    // disableBodyScroll(this.targetElement);
-    this.spotStore.getAllSpots();
-    let position = await getPosition();
-    this.spotStore.mapGeolocation.center = { lat: position.coords.latitude, lng: position.coords.longitude };
-    // this.spotStore.userGeoLocation = {
-    //   location: { lat: position.coords.latitude, lng: position.coords.longitude },
-    //   radius: 2000,
-    //   types: ['restaurant']
-    // }
+
+    await this.spotStore.getAllSpots();
+
+    navigator.geolocation.getCurrentPosition(
+      repsonse => {
+        position = repsonse;
+        this.initialize();
+      },
+      error => {
+        position = {
+          coords: {
+            lat: 38.9854313,
+            lng: 76.9577455
+          }
+        };
+        this.initialize();
+      }
+    );
 
   }
 
-  render() {
+  initialize() {
+    if (this.spotStore.selectedSpot.key) {
+      this.spotStore.mapGeolocation = {lat: this.spotStore.selectedSpot.lat, lng: this.spotStore.selectedSpot.lng};
+      console.log(this.spotStore.mapGeolocation )
+      setTimeout(() => { this.spotStore.mapZoom = 14;}, 500);
+    } else {
+      console.log(this.spotStore.mapGeolocation )
+      // this.spotStore.mapGeolocation = {lat: position.coords.latitude, lng: position.coords.longitude};
+    }
+  }
 
+  render() {
     return (
       <React.Fragment>
-
         <SwipeableDrawer
-          anchor="bottom"
+          anchor='bottom'
           open={this.uiStore.drawerState}
           onClose={() => this.uiStore.closeDrawer()}
-          onOpen={() => function(){} }
-          className="d-lg-none"
+          onOpen={() => function() {}}
+          className='d-lg-none'
         >
           <SpotDetailsCard />
         </SwipeableDrawer>
 
-        <DashboardContainer id="dashboard-container" className="container">
-
+        <DashboardContainer id='dashboard-container' className='container'>
           <Spacer />
 
-          <DashboardRowContainer id="DashboardRowContainer" className="row">
-
+          <DashboardRowContainer id='DashboardRowContainer' className='row'>
             <MobileMap />
             <MobileSpotList />
 
-            <DashboardLeftSide id = "dashbaord-left-side" className="col-md-4 d-none d-lg-block">
-              <SpotDetailsCardWrapper id = "dashbaord-details-wrapper" className="delishus-card spot-detail">
+            <DashboardLeftSide id='dashbaord-left-side' className='col-md-4 d-none d-lg-block'>
+              <SpotDetailsCardWrapper id='dashbaord-details-wrapper' className='delishus-card spot-detail'>
                 <SpotDetailsCard />
               </SpotDetailsCardWrapper>
             </DashboardLeftSide>
 
-            <DashboardRightSide id = "dashbaord-right-side" className="col-md-12 col-lg-8 d-none d-lg-block">
-
-              <GoogleMapContainer id="google-map-container">
-
-                {this.spotStore.gmapsLoaded ?
-
-                  <SearchContainer id="searchContainer" className="d-none d-lg-block">
-
-                    <Flex id="flex" className="d-flex">
+            <DashboardRightSide id='dashbaord-right-side' className='col-md-12 col-lg-8 d-none d-lg-block'>
+              <GoogleMapContainer id='google-map-container'>
+                {this.spotStore.gmapsLoaded ? (
+                  <SearchContainer id='searchContainer' className='d-none d-lg-block'>
+                    <Flex id='flex' className='d-flex'>
                       <Search />
                       <MapSwitcher />
                     </Flex>
 
-                    <DisplayText className="d-flex justify-content-center">
+                    <DisplayText className='d-flex justify-content-center'>
                       {this.spotStore.showAllSpots ? <b>Displaying All Spots</b> : <b>Displaying My Spots</b>}
                     </DisplayText>
-
                   </SearchContainer>
+                ) : null}
 
-                  : null}
-
-                <MapListContainer id="map-list-container" className="d-none d-lg-block" >
+                <MapListContainer id='map-list-container' className='d-none d-lg-block'>
                   <SpotsMap />
                   <SpotList />
-                </MapListContainer> 
-
+                </MapListContainer>
               </GoogleMapContainer>
-
-            </DashboardRightSide> 
-
+            </DashboardRightSide>
           </DashboardRowContainer>
-
         </DashboardContainer>
-
       </React.Fragment>
-    )
+    );
   }
 }
 const authCondition = (authUser) => !!authUser;

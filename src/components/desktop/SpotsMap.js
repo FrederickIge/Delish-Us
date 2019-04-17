@@ -38,6 +38,13 @@ class SpotsMap extends Component {
 
   selectSpot(spot) {
     this.spotStore.selectExistingSpot(spot);
+    
+  }
+
+  onChange = ({center, zoom}) => {
+    this.spotStore.mapZoom = zoom;
+    this.spotStore.mapGeolocation = { lat: center.lat , lng: center.lng  };
+
   }
 
   render() {
@@ -64,9 +71,11 @@ class SpotsMap extends Component {
             key: "AIzaSyAJdMUyuQiG2DEHgGG3Tvebb9-BzR0JXwE",
             libraries: "places"
           }}
-          defaultZoom={5}
+          defaultZoom={this.spotStore.mapZoom}
+          zoom={this.spotStore.mapZoom}
           onGoogleApiLoaded={({map, maps}) => this.apiIsLoaded(map, maps)}
-          center={this.spotStore.mapGeolocation.center}
+          center={this.spotStore.mapGeolocation}
+          onChange={this.onChange}
         >
           {this.spotStore.showAllSpots
             ? this.spotStore.uniqueSpotsByGooglePlaceIds.map(spot => (

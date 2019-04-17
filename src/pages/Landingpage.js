@@ -51,13 +51,13 @@ class Landingpage extends Component {
             <div className="col-lg-6">
 
             <Fade  pose={this.state.isVisible ? 'visible' : 'hidden'}>
-              <h1 className="display-3  text-black">
+              <h1 className="display-3">
                 Share the places you love 
                 <span>with the people you love</span>
               </h1>
             
 
-              <p className="lead  text-black">
+              <p className="lead">
                 Life is better when we eat together. DelishUs let's you keep track and share your favorite resturants with friends and family. 
               </p>
               </Fade>

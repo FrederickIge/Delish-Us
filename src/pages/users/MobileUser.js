@@ -33,86 +33,79 @@ const SpotCommentTitle = styled.b`
 @inject('sessionStore', 'spotStore', 'uiStore', 'fireStore', 'userStore')
 @observer
 class MobileUserPage extends React.Component {
-    sessionStore = this.props.sessionStore;
-    spotStore = this.props.spotStore;
-    uiStore = this.props.uiStore;
-    fireStore = this.props.fireStore;
-    userStore = this.props.userStore;
+  sessionStore = this.props.sessionStore;
+  spotStore = this.props.spotStore;
+  uiStore = this.props.uiStore;
+  fireStore = this.props.fireStore;
+  userStore = this.props.userStore;
 
-    componentDidMount() {
-        // let userId = this.props.match.params.userId;
-        // this.userStore.getUserComments(userId);
-        // this.userStore.getUserSpots(userId);
+  componentDidMount() {
+    // let userId = this.props.match.params.userId;
+    // this.userStore.getUserComments(userId);
+    // this.userStore.getUserSpots(userId);
+  }
+
+  handleBack = () => {
+    if (!this.props.history.location.state) {
+      this.props.history.push('/dashboard');
+    } else if (this.props.history.location.state.prevPath == 'users') {
+      this.props.history.push('/users');
+    } else if (this.props.history.location.state.prevPath == 'dashboard') {
+      this.uiStore.showModal();
+      this.props.history.goBack();
     }
+  };
 
-    handleBack = () => {
-        if(!this.props.history.location.state){
-          this.props.history.push('/dashboard');
-        }
-       else if(this.props.history.location.state.prevPath == "users"){
-          this.props.history.push('/users');
-        } 
-        else if(this.props.history.location.state.prevPath == "dashboard"){
-          this.uiStore.showModal();
-          this.props.history.goBack();
-        }
-    }
+  async loadSpot(spot) {
+    
+    await this.spotStore.selectExistingSpotMobile(spot);
+    this.props.history.push('/dashboard');
+    
+  }
 
-    loadSpot(spot){
-        console.log(spot)
-        this.spotStore.selectExistingSpot(spot);
-        this.props.history.push('/dashboard');
-      }
+  loadSpotbyId = async id => {
+    let doc = await this.fireStore.fetchSingleSpot(id);
+    this.loadSpot(new Geopoint(doc));
+  };
 
-      loadSpotbyId = async (id) => {
-        let doc = await this.fireStore.fetchSingleSpot(id)
-        this.loadSpot(new Geopoint(doc))
-      }
+  render() {
+    return (
+      <div style={{backgroundColor: 'white', minHeight: '100%'}} className='d-lg-none'>
+        <div style={{height: '20px'}} />
+        <div className='container'>
+          <div onClick={this.handleBack} style={{fontSize: '20px', cursor: 'pointer', color: 'black'}}>
+            <i className='fa fa-arrow-left' aria-hidden='true' /> Back
+          </div>
 
-    render() {
-        return (
+          <UserDetailsCard />
 
-
-            <div style={{ backgroundColor: "white", minHeight:"100%" }} className="d-lg-none">
-
-                <div style={{ height: "20px" }}></div>
-                <div  className='container'>
-
-
-                    <div onClick={this.handleBack} style={{ fontSize: "20px", cursor: "pointer", color:"black"  }}>
-                        <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
-                    </div>
-
-                    <UserDetailsCard />
-
-
-                    <h2>Saved Spots</h2>
-                    <hr style={{ marginTop: '0px' }} />
-                    {this.userStore.currentUserSpots.map(spot => (
-            <Spot onClick = { () => this.loadSpot(spot)} style ={{paddingTop:"10px"}} key={spot.key}> {spot.name} </Spot>
+          <h2>Saved Spots</h2>
+          <hr style={{marginTop: '0px'}} />
+          {this.userStore.currentUserSpots.map(spot => (
+            <Spot onClick={() => this.loadSpot(spot)} style={{paddingTop: '10px'}} key={spot.key}>
+              {' '}
+              {spot.name}{' '}
+            </Spot>
           ))}
 
-                    <Spacer />
-                    <br></br>
-                    <h2>Comments</h2>
+          <Spacer />
+          <br />
+          <h2>Comments</h2>
 
-                    <hr style={{ marginTop: '0px' }} />
-                    {this.userStore.currentUserComments.map(comment => (
+          <hr style={{marginTop: '0px'}} />
+          {this.userStore.currentUserComments.map(comment => (
             <div key={comment.commentId}>
-              <div onClick = { () => this.loadSpotbyId(comment.spotId)} style={{ fontSize: '22px' , color: "black" }}>
-                <SpotCommentTitle > {comment.spotName}</SpotCommentTitle>
+              <div onClick={() => this.loadSpotbyId(comment.spotId)} style={{fontSize: '22px', color: 'black'}}>
+                <SpotCommentTitle> {comment.spotName}</SpotCommentTitle>
               </div>
-              <p style={{color:"black" }}> {comment.comment} </p>
+              <p style={{color: 'black'}}> {comment.comment} </p>
             </div>
           ))}
+        </div>
 
-                </div>
-
-                <div style={{ height: "20px" }}></div>
-            </div>
-
-
-        );
-    }
+        <div style={{height: '20px'}} />
+      </div>
+    );
+  }
 }
 export default MobileUserPage;

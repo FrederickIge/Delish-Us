@@ -32,7 +32,6 @@ const SpotCommentTitle = styled.b`
 @inject('sessionStore', 'spotStore', 'uiStore', 'fireStore', 'userStore', 'commentStore')
 @observer
 class UserPage extends React.Component {
-
   sessionStore = this.props.sessionStore;
   spotStore = this.props.spotStore;
   uiStore = this.props.uiStore;
@@ -41,7 +40,7 @@ class UserPage extends React.Component {
   commentStore = this.props.commentStore;
 
   async componentDidMount() {
-    console.log(this.props)
+    console.log(this.props);
     let userId = this.props.match.params.userId;
     this.userStore.getUserComments(userId);
     this.userStore.getUserSpots(userId);
@@ -65,10 +64,10 @@ class UserPage extends React.Component {
     }
   };
 
-  loadSpot(spot) {
+  async loadSpot(spot) {
     console.log(spot);
+    await this.spotStore.selectExistingSpot(spot);
     this.props.history.push('/dashboard');
-    this.spotStore.selectExistingSpot(spot);
   }
 
   loadSpotbyId = async id => {
@@ -76,7 +75,7 @@ class UserPage extends React.Component {
     this.loadSpot(new Geopoint(doc));
   };
 
-  deleteComment(id){
+  deleteComment(id) {
     this.userStore.deleteComment(id);
   }
 
@@ -114,8 +113,8 @@ class UserPage extends React.Component {
               </div>
               <p style={{color: 'black'}}> {comment.comment} </p>
               <div className='text-right'>
-                    <i onClick={() => this.deleteComment(comment.commentId)} className='fa fa-trash' aria-hidden='true' />
-                  </div>
+                <i onClick={() => this.deleteComment(comment.commentId)} className='fa fa-trash' aria-hidden='true' />
+              </div>
             </div>
           ))}
         </div>

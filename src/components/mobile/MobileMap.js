@@ -16,11 +16,13 @@ const AnyReactComponent = ({ text, onClick }) => (
 );
 
 const MobileSearchWrapper = styled.div`
-z-index 500;
+z-index 50000;
 width:100%;
 left:0
 right:0;
 `;
+
+
 
 const DisplayText = styled.div`
   color: rgba(0, 0, 0, 0.90);
@@ -40,7 +42,7 @@ const ToolBar = styled.div`
 
 const MobileMapWrapper = styled.div`
   position: fixed;
-  top: 76px;
+  top: 149px;
   bottom: 0;
   left: 0;
   right: 0; 
@@ -56,24 +58,25 @@ class MobileMap extends Component {
   sessionStore = this.props.sessionStore;
   uiStore = this.props.uiStore;
 
-  // apiIsLoaded = (map, maps) => {
-  //   this.spotStore.gmapsLoaded = true;
-  //   this.spotStore.googlePlacesService = new maps.places.PlacesService(map);
-  //   console.log(maps)
-    
-  // };
 
   selectSpot(spot) {
     this.props.spotStore.selectExistingSpot(spot);
   }
 
   componentDidMount(){
-    console.log("mapmount")
+
+  }
+
+  onChange = ({center, zoom}) => {
+    this.spotStore.mapZoom = zoom;
+    this.spotStore.mapGeolocation = { lat: center.lat , lng: center.lng  };
   }
 
   render() {
     return (
       <div className="d-lg-none" style={{ display: this.uiStore.mapView ? 'block' : 'none', zIndex: "10", width: "100%" }} >
+
+<div style ={{position:"fixed", top: "60",right: "0", left:"0"}}>
 
 
         {this.spotStore.gmapsLoaded ?
@@ -103,7 +106,7 @@ class MobileMap extends Component {
           </ToolBar>
 
           : null}
-
+</div>
         {this.uiStore.hideMobileMap ?
           <MobileMapWrapper >
 
@@ -111,10 +114,12 @@ class MobileMap extends Component {
             <GoogleMapReact
               id="bangbang"
               bootstrapURLKeys={{ key: 'AIzaSyAJdMUyuQiG2DEHgGG3Tvebb9-BzR0JXwE', libraries: "places" }}
-              defaultZoom={2}
+              defaultZoom={this.spotStore.mapZoom}
               onGoogleApiLoaded={({ map, maps }) => this.spotStore.apiIsLoaded(map, maps)}
-              center={this.spotStore.mapGeolocation.center}
+              center={this.spotStore.mapGeolocation}
               options={{ fullscreenControl: false, zoomControl: false }}
+              onChange={this.onChange}
+              zoom={this.spotStore.mapZoom}
             >
 
               {
@@ -127,6 +132,7 @@ class MobileMap extends Component {
                       text={spot.name}
                       googlePlaceId={spot.googlePlaceId}
                       onClick={() => this.selectSpot(spot)}
+                      
                     />
                   ) : null}
 

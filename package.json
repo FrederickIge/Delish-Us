@@ -51,6 +51,7 @@
     "i": "^0.3.6",
     "icheck-bootstrap": "^3.0.1",
     "identity-obj-proxy": "3.0.0",
+    "ios-inner-height": "^1.1.0",
     "jest": "23.6.0",
     "jest-pnp-resolver": "1.0.1",
     "jest-resolve": "23.6.0",
