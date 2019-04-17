@@ -68,6 +68,11 @@ class MobileUserPage extends React.Component {
     this.loadSpot(new Geopoint(doc));
   };
 
+  deleteComment(id) {
+    this.userStore.deleteComment(id);
+  }
+
+
   render() {
     return (
       <div style={{backgroundColor: 'white', minHeight: '100%'}} className='d-lg-none'>
@@ -99,6 +104,9 @@ class MobileUserPage extends React.Component {
                 <SpotCommentTitle> {comment.spotName}</SpotCommentTitle>
               </div>
               <p style={{color: 'black'}}> {comment.comment} </p>
+              <div className='text-right'>
+                <i onClick={() => this.deleteComment(comment.commentId)} className='fa fa-trash' aria-hidden='true' />
+              </div>
             </div>
           ))}
         </div>

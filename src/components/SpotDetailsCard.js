@@ -9,6 +9,15 @@ import Spacer from '../components/layout/Spacer';
 import SaveSpotButton from '../components/SaveSpotButton';
 import DeleteSpotButton from '../components/DeleteSpotButton';
 import posed, { PoseGroup } from 'react-pose';
+import ProgressiveImage  from "react-progressive-image"
+import Img from 'react-image'
+
+const Fade = posed.div({
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 }
+});
+
+
 
 const CardDetailsContainer = styled.div`
   border-top-left-radius: 10px;
@@ -24,6 +33,7 @@ const SpotDetailsTop = styled.div`
 const DetailImageWrapper = styled.div`
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  min-height: 25vh;
 `;
 
 const SpotDetailImage = styled.img`
@@ -82,16 +92,49 @@ class SpotDetailsCard extends Component {
           <CardDetailsContainer>
             <SpotDetailsTop>
               <DetailImageWrapper>
-                <SpotDetailImage className='img-fluid' alt='gag' src={this.spotStore.selectedSpot.image} />
+                {/* <SpotDetailImage className='img-fluid' alt='gag' src={this.spotStore.selectedSpot.image} /> */}
+
+                {/* <img
+                  style={{borderTopLeftRadius: '10px', borderTopRightRadius: '10px', maxHeight: '25vh', width: '100%'}}
+                  className='img-fluid'
+                  alt='gag'
+                  src={this.spotStore.selectedSpot.image}
+                /> */}
+
+                {/* <ProgressiveImage  src={this.spotStore.selectedSpot.image}>
+                  {src =>
+<Fade>
+<img style={{borderTopLeftRadius: '10px', borderTopRightRadius: '10px', maxHeight: '25vh', width: '100%'}} src={src}/>
+
+</Fade>
+                     //require("../img/noImage.jpg")
+                     }
+
+
+                </ProgressiveImage> */}
+<Img
+  style={{borderTopLeftRadius: '10px', borderTopRightRadius: '10px', maxHeight: '25vh', width: '100%'}} 
+  src={[this.spotStore.selectedSpot.image, require("../img/noImage.jpg") ] }/>
+
               </DetailImageWrapper>
 
               <div className='p-3'>
                 <SpotName>{this.spotStore.selectedSpot.name}</SpotName>
-                <SpotAddress  target="_blank" href={"https://www.google.com/maps/search/?api=1&query=" + encodeURI(this.spotStore.selectedSpot.address ) + "&query_place_id=" + this.spotStore.selectedSpot.googlePlaceId }>{this.spotStore.selectedSpot.address}</SpotAddress>
+                <SpotAddress
+                  target='_blank'
+                  href={
+                    'https://www.google.com/maps/search/?api=1&query=' +
+                    encodeURI(this.spotStore.selectedSpot.address) +
+                    '&query_place_id=' +
+                    this.spotStore.selectedSpot.googlePlaceId
+                  }
+                >
+                  {this.spotStore.selectedSpot.address}
+                </SpotAddress>
                 {/* <a href={"https://www.google.com/maps/search/?api=1&query=" + encodeURI(this.spotStore.selectedSpot.address ) + "&query_place_id=" + this.spotStore.selectedSpot.googlePlaceId }>Open Google Maps</a> */}
 
-                <div className='d-flex align-items-center' style={{height:"70px"}}>
-                  <div style={{marginRight:"10px"}}> Rating: {this.spotStore.selectedSpot.rating}</div>
+                <div className='d-flex align-items-center' style={{height: '70px'}}>
+                  <div style={{marginRight: '10px'}}> Rating: {this.spotStore.selectedSpot.rating}</div>
                   <StarRatingComponent
                     name='rate2'
                     renderStarIcon={() => (
@@ -104,17 +147,15 @@ class SpotDetailsCard extends Component {
                   />
                 </div>
 
-
-
                 {this.spotStore.selectedSpot.key ? (
-                  <div onClick={this.uiStore.showModal}>                
-                    <span style={{marginTop:"20px",display:"inlineBlock",cursor: "pointer", textDecoration: "underline"}}>View Comments</span>  
-                    <i style={{marginLeft:"5px", lineHeight:"1.4"}} className='fa fa-comment-o fa-sm' aria-hidden='true' /> ({this.commentStore.comments.length})
-                    <i style={{marginLeft:"5px", lineHeight:"1.4"}} className='fa fa-user fa-sm' aria-hidden='true' /> ({this.spotStore.likedBy.length})
+                  <div onClick={this.uiStore.showModal}>
+                    <span style={{marginTop: '20px', display: 'inlineBlock', cursor: 'pointer', textDecoration: 'underline'}}>View Comments</span>
+                    <i style={{marginLeft: '5px', lineHeight: '1.4'}} className='fa fa-comment-o fa-sm' aria-hidden='true' /> (
+                    {this.commentStore.comments.length})
+                    <i style={{marginLeft: '5px', lineHeight: '1.4'}} className='fa fa-user fa-sm' aria-hidden='true' /> (
+                    {this.spotStore.likedBy.length})
                   </div>
                 ) : null}
-
-
               </div>
             </SpotDetailsTop>
           </CardDetailsContainer>
@@ -123,9 +164,9 @@ class SpotDetailsCard extends Component {
             <SpotDetailsTop>
               <br />
               <PoseGroup>
-              <Animate key="modal">
-              <h4 className='row justify-content-center select-a-spot'>Select a Spot on the Map</h4>
-              </Animate>
+                <Animate key='modal'>
+                  <h4 className='row justify-content-center select-a-spot'>Select a Spot on the Map</h4>
+                </Animate>
               </PoseGroup>
               <Spacer />
               <div className='row justify-content-center'>

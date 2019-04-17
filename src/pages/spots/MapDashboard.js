@@ -195,7 +195,7 @@ class MapDashboard extends Component {
           open={this.uiStore.drawerState}
           onClose={() => this.uiStore.closeDrawer()}
           onOpen={() => function() {}}
-          className='d-lg-none'
+          className='d-lg-none curve'
         >
           <SpotDetailsCard />
         </SwipeableDrawer>

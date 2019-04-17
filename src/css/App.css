@@ -435,3 +435,8 @@ _:-webkit-full-screen,
 .fix{
   position:fixed;
 } */
+
+[class^="MuiPaper-root-"] {
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+}
