@@ -14,7 +14,7 @@ class CommentStore {
     this.comments = [];
 
     this.fireStoreData = await this.root.fireStore.getCommentsByGooglePlaceId(this.root.spotStore.selectedSpot.googlePlaceId);
-
+console.log(this.fireStoreData)
     return this.fireStoreData.empty ? null : this.displayComments();
   };
 

@@ -106,14 +106,15 @@ class fireStore {
 
   @action
   async getCommentsByGooglePlaceId(id) {
-    try {
+  
       return await comments
         .where('googlePlaceId', '==', id)
         .orderBy('timeCreated', 'asc')
-        .get();
-    } catch (err) {
-      console.log(err);
-    }
+        .get().then(snapshot =>{
+          return snapshot
+        }).catch((error)=>{
+          console.log(error);
+        })
   }
 
   @action

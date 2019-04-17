@@ -58,7 +58,7 @@ class AvatarMenu extends Component {
         <Menu id='simple-menu' anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.handleClose}>
           <MenuItem onClick={this.goToMyProfile}>My Profile</MenuItem>
           <MenuItem onClick={this.handleClose}>
-            <Link style={{textDecoration: 'none'}} to='/account'>
+            <Link style={{textDecoration: 'none', color:"rgba(0, 0, 0, 0.87)"}} to='/account'>
               Settings
             </Link>
           </MenuItem>
