@@ -16,8 +16,10 @@ import rootStore from './stores';
 import ScrollToTop from './components/layout/ScrollToTop';
 import UsersPage from './pages/users/UsersPage';
 import posed, {PoseGroup} from 'react-pose';
+import GoogleMapsLoader from 'google-maps';
 
-
+GoogleMapsLoader.KEY = 'AIzaSyAJdMUyuQiG2DEHgGG3Tvebb9-BzR0JXwE';
+GoogleMapsLoader.LIBRARIES = [ 'places'];
 
 const browserHistory = createBrowserHistory();
 
@@ -36,6 +38,12 @@ const RoutesContainer = posed.div({
 
 class App extends Component {
 
+  componentDidMount(){
+    GoogleMapsLoader.load(function(google) {
+      console.log(google)
+  });
+  }
+
 
   render() {
     return (
@@ -46,6 +54,8 @@ class App extends Component {
             render={({location}) => (
               <div id="main-container" className='main-container-full'>
                 <ToastContainer />
+
+
                 <PoseGroup style={{height: '100%'}}>
                   <RoutesContainer key={location.pathname}>
                     <Switch location={location}>
@@ -58,6 +68,7 @@ class App extends Component {
                     </Switch>
                   </RoutesContainer>
                 </PoseGroup>
+
               </div>
             )}
           />

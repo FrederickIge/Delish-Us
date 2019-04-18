@@ -63,7 +63,7 @@ class MobileSearch extends React.Component {
               ref={this.search}
               onFocus={this.handleFocus}
               {...getInputProps({
-                placeholder: 'Search For a Spot',
+                placeholder: 'Search For a New Spot Here!',
                 className: 'form-control form-control-alternative',
                 onBlur: () => { this.handleBlur() },
               })}

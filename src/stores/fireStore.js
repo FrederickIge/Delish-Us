@@ -12,52 +12,62 @@ class fireStore {
 
   @action
   async fetchAllSpots() {
-    try {
-      return await spots.get();
-    } catch (err) {
-      alert(err);
-    }
+  
+      return await spots.get().then(snapshot =>{
+        return snapshot
+      }).catch((error)=>{
+        console.log(error);
+      });
+
   }
 
   @action
   async fetchSingleSpot(docId) {
-    try {
-      return await spots.doc(docId).get();
-    } catch (err) {
-      alert(err);
-    }
+ 
+      return await spots.doc(docId).get().then(snapshot =>{
+        return snapshot
+      }).catch((error)=>{
+        console.log(error);
+      });
+
   }
 
   @action
   async fetchSpotsByUserId(userId) {
-    try {
-      return await spots.where('userId', '==', userId).get();
-    } catch (err) {
-      alert(err);
-    }
+  
+      return await spots.where('userId', '==', userId).get().then(snapshot =>{
+        return snapshot
+      }).catch((error)=>{
+        console.log(error);
+      });
+
   }
 
   @action
   async postSpot(payload) {
-    try {
-      return await spots.add(payload);
-    } catch (err) {
-      alert(err);
-    }
+  
+      return await spots.add(payload).then(snapshot =>{
+        return snapshot
+      }).catch((error)=>{
+        console.log(error);
+      });
+
   }
 
   @action
   async deleteSpot(docId) {
-    try {
-      return await spots.doc(docId).delete();
-    } catch (err) {
-      alert(err);
-    }
+   
+      return await spots.doc(docId).delete().then(snapshot =>{
+        return snapshot
+      }).catch((error)=>{
+        console.log(error);
+      });
+
   }
 
   @action
   async findLikedBy(googlePlaceId) {
-    try {
+ 
       let nameList = [];
 
       let spotList = await spots.where('googlePlaceId', '==', googlePlaceId).get();
@@ -65,9 +75,7 @@ class fireStore {
       await this.newMethod(spotList, nameList);
 
       return nameList;
-    } catch (err) {
-      alert(err);
-    }
+
   }
 
   async newMethod(spotList, nameList) {
@@ -85,72 +93,94 @@ class fireStore {
 
   @action
   async postComment(comment) {
-    try {
+  
       let result = await comments.add(comment);
-      return await comments.doc(result.id).get();
-    } catch (err) {
-      alert(err);
-    }
+      return await comments.doc(result.id).get().then(snapshot =>{
+        return snapshot
+      }).catch((error)=>{
+        console.log(error);
+      });
+
   }
 
   @action
   async deleteComment(id) {
-    try {
-      return await comments.doc(id).delete();
-    } catch (err) {
-      alert(err);
-    }
+  
+      return await comments
+        .doc(id)
+        .delete()
+        .then(snapshot => {
+          return snapshot;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+
   }
-
-
 
   @action
   async getCommentsByGooglePlaceId(id) {
-  
-      return await comments
-        .where('googlePlaceId', '==', id)
-        .orderBy('timeCreated', 'asc')
-        .get().then(snapshot =>{
-          return snapshot
-        }).catch((error)=>{
-          console.log(error);
-        })
+    return await comments
+      .where('googlePlaceId', '==', id)
+      .orderBy('timeCreated', 'asc')
+      .get()
+      .then(snapshot => {
+        return snapshot;
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   @action
   async getAllUsers() {
-    try {
-      return await users.get();
-    } catch (err) {
-      console.log(err);
-    }
+    return await users
+      .get()
+      .then(snapshot => {
+        return snapshot;
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   @action
   async getUserById(userId) {
-    try {
-      return await users.doc(userId).get();
-    } catch (err) {
-      console.log(err);
-    }
+    return await users
+      .doc(userId)
+      .get()
+      .then(snapshot => {
+        return snapshot;
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   @action
   async getUserSpots(userId) {
-    try {
-      return await spots.where('userId', '==', userId).get();
-    } catch (err) {
-      console.log(err);
-    }
+    return await spots
+      .where('userId', '==', userId)
+      .get()
+      .then(snapshot => {
+        return snapshot;
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   @action
   async getUserComments(userId) {
-    try {
-      return await comments.where('userId', '==', userId).get();
-    } catch (err) {
-      console.log(err);
-    }
+    return await comments
+      .where('userId', '==', userId)
+      .get()
+      .then(snapshot => {
+        return snapshot;
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 }
 

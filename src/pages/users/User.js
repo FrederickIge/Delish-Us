@@ -65,9 +65,13 @@ class UserPage extends React.Component {
   };
 
   async loadSpot(spot) {
-    console.log(spot);
-    await this.spotStore.selectExistingSpot(spot);
-    this.props.history.push('/dashboard');
+   
+
+
+    this.props.history.push({
+      pathname: '/dashboard',
+      state: {spot:spot}
+  });
   }
 
   loadSpotbyId = async id => {

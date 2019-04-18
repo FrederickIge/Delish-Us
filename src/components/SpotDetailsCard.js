@@ -11,13 +11,22 @@ import DeleteSpotButton from '../components/DeleteSpotButton';
 import posed, { PoseGroup } from 'react-pose';
 import ProgressiveImage  from "react-progressive-image"
 import Img from 'react-image'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const Fade = posed.div({
   hidden: { opacity: 0 },
   visible: { opacity: 1 }
 });
 
+const Loader = () =>{
+return(
 
+<CircularProgress style={{}} className="mx-auto align-self-center"></CircularProgress>
+
+)
+
+
+} 
 
 const CardDetailsContainer = styled.div`
   border-top-left-radius: 10px;
@@ -34,6 +43,7 @@ const DetailImageWrapper = styled.div`
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   min-height: 25vh;
+  display: flex;
 `;
 
 const SpotDetailImage = styled.img`
@@ -112,9 +122,9 @@ class SpotDetailsCard extends Component {
 
 
                 </ProgressiveImage> */}
-<Img
+ <Img
   style={{borderTopLeftRadius: '10px', borderTopRightRadius: '10px', maxHeight: '25vh', width: '100%'}} 
-  src={[this.spotStore.selectedSpot.image, require("../img/noImage.jpg") ] }/>
+  src={[this.spotStore.selectedSpot.image, require("../img/noImage.jpg") ] } loader={<Loader />}/> 
 
               </DetailImageWrapper>
 

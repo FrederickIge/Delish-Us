@@ -14,12 +14,23 @@ import preventDefault from "../../utils/eventListeners"
 import MapSwitcher from "../../components/desktop/MapSwitcher";
 import Spacer from "../../components/layout/Spacer";
 import { toast } from 'react-toastify';
+import introJs from 'intro.js/intro.js';
+
 var innerHeight = require('ios-inner-height');
 var getPosition = function (options) {
   return new Promise(function (resolve, reject) {
     navigator.geolocation.getCurrentPosition(resolve, reject, options);
   });
 }
+
+const intro = introJs();
+intro.setOptions({
+  steps: [ { 
+    element: document.querySelector('#google-map-container'),
+    intro: "Hello world!"
+  }]
+});
+
 
 var position;
 
@@ -150,8 +161,7 @@ class MapDashboard extends Component {
   }
 
   async componentDidMount() {
-
-
+    // intro.start();
     if (!this.uiStore.modalState) {
       window.addEventListener('touchmove', preventDefault, {passive: false});
     }
@@ -176,13 +186,20 @@ class MapDashboard extends Component {
 
   }
 
-  initialize() {
-    if (this.spotStore.selectedSpot.key) {
+ async initialize() {
+   let spot
+   if(this.props.history.location.state ) {
+     spot = this.props.history.location.state.spot
+   }
+  
+console.log(spot)
+
+    if (spot) {
+      await this.spotStore.selectExistingSpot(spot);
+
       this.spotStore.mapGeolocation = {lat: this.spotStore.selectedSpot.lat, lng: this.spotStore.selectedSpot.lng};
-      console.log(this.spotStore.mapGeolocation )
       setTimeout(() => { this.spotStore.mapZoom = 14;}, 500);
     } else {
-      console.log(this.spotStore.mapGeolocation )
       // this.spotStore.mapGeolocation = {lat: position.coords.latitude, lng: position.coords.longitude};
     }
   }

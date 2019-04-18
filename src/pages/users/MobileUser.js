@@ -58,8 +58,10 @@ class MobileUserPage extends React.Component {
 
   async loadSpot(spot) {
     
-    await this.spotStore.selectExistingSpotMobile(spot);
-    this.props.history.push('/dashboard');
+    this.props.history.push({
+      pathname: '/dashboard',
+      state: {spot:spot}
+  });
     
   }
 
