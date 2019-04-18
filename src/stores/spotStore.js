@@ -57,6 +57,7 @@ class spotStore {
     this.selectedSpot = await this.loadSpotDetails();
     this.moveMapToSelectedSpot();
     this.alreadySaved = this.checkifSaved();
+    this.findLikedBy();
     this.root.uiStore.openDrawerDelayed();
     this.root.commentStore.getCommentsByGooglePlaceId();
   }

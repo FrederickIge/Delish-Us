@@ -102,26 +102,7 @@ class SpotDetailsCard extends Component {
           <CardDetailsContainer>
             <SpotDetailsTop>
               <DetailImageWrapper>
-                {/* <SpotDetailImage className='img-fluid' alt='gag' src={this.spotStore.selectedSpot.image} /> */}
 
-                {/* <img
-                  style={{borderTopLeftRadius: '10px', borderTopRightRadius: '10px', maxHeight: '25vh', width: '100%'}}
-                  className='img-fluid'
-                  alt='gag'
-                  src={this.spotStore.selectedSpot.image}
-                /> */}
-
-                {/* <ProgressiveImage  src={this.spotStore.selectedSpot.image}>
-                  {src =>
-<Fade>
-<img style={{borderTopLeftRadius: '10px', borderTopRightRadius: '10px', maxHeight: '25vh', width: '100%'}} src={src}/>
-
-</Fade>
-                     //require("../img/noImage.jpg")
-                     }
-
-
-                </ProgressiveImage> */}
  <Img
   style={{borderTopLeftRadius: '10px', borderTopRightRadius: '10px', maxHeight: '25vh', width: '100%'}} 
   src={[this.spotStore.selectedSpot.image, require("../img/noImage.jpg") ] } loader={<Loader />}/> 
@@ -157,7 +138,7 @@ class SpotDetailsCard extends Component {
                   />
                 </div>
 
-                {this.spotStore.selectedSpot.key ? (
+                {this.commentStore.comments.length > 0 || this.spotStore.likedBy.length > 0  ? (
                   <div onClick={this.uiStore.showModal}>
                     <span style={{marginTop: '20px', display: 'inlineBlock', cursor: 'pointer', textDecoration: 'underline'}}>View Comments</span>
                     <i style={{marginLeft: '5px', lineHeight: '1.4'}} className='fa fa-comment-o fa-sm' aria-hidden='true' /> (
