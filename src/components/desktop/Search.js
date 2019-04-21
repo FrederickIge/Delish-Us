@@ -63,6 +63,7 @@ class Search extends React.Component {
                 <input
                   ref={this.exampleRef}
                   onFocus={this.handleFocus}
+                 
                   {...getInputProps({
                     placeholder: 'Search For a New Spot Here!',
                     className: 'form-control form-control-alternative',

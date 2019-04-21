@@ -110,7 +110,7 @@ class MobileMap extends Component {
         {this.uiStore.hideMobileMap ?
           <MobileMapWrapper id="mobile-map" >
 
-            <i onClick ={this.spotStore.recenterMap} className="fa fa-location-arrow fa-2x mobile-recenter" aria-hidden="true"></i>
+            <i id="mobile-recenter" onClick ={this.spotStore.recenterMap} className="fa fa-location-arrow fa-2x mobile-recenter" aria-hidden="true"></i>
 
             <GoogleMapReact
               id="bangbang"

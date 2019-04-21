@@ -466,3 +466,20 @@ i.mobile-recenter {
 i.fa-location-arrow:hover{
   color: #1890ff;
 }
+
+#mobile-search{
+  font-family: 'Helvetica', FontAwesome, sans-serif;
+  box-sizing: border-box !important;
+  
+  border-top: 1px solid #dee2e6bf !important;
+  border-bottom: 1px solid #dee2e6bf !important;
+  -webkit-box-sizing: border-box; 
+  -moz-box-sizing: border-box;    
+  box-sizing: border-box;    
+}
+
+#mobile-search-input{
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  border-radius: 0 !important;
+}

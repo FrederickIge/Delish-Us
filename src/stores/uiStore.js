@@ -39,6 +39,12 @@ class UiStore {
       title: "The Spot Map"
     },
     {
+      content: "You can re-center the map to your current location",
+      placement: "auto",
+      target: "#dektop-recenter",
+      title: "The Spot Map"
+    },
+    {
       content: "Information about a selectd spot will be displayed here",
       placement: "right",
       target: "#dashbaord-details-wrapper",
@@ -69,6 +75,12 @@ class UiStore {
       content: "Check out the map to see spots saved by other users",
       placement: "auto ",
       target: "#mobile-map",
+      title: "The Spot Map"
+    },
+    {
+      content: "You can re-center the map to your current location",
+      placement: "auto",
+      target: "#mobile-recenter",
       title: "The Spot Map"
     },
     {

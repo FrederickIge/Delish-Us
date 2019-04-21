@@ -63,7 +63,7 @@ class Navbar extends Component {
               </span>
             </Link>
           </ViewSwitcher>
-<p onClick={this.uiStore.startTour}>test</p>
+{/* <p onClick={this.uiStore.startTour}>test</p> */}
           <AvatarMenu />
         </div>
       </nav>
