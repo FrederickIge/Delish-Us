@@ -17,7 +17,9 @@ import ScrollToTop from './components/layout/ScrollToTop';
 import UsersPage from './pages/users/UsersPage';
 import posed, {PoseGroup} from 'react-pose';
 import GoogleMapsLoader from 'google-maps';
-
+import PropTypes from "prop-types";
+import ReactJoyride, { EVENTS } from "react-joyride";
+import { inject, observer } from 'mobx-react';
 GoogleMapsLoader.KEY = 'AIzaSyAJdMUyuQiG2DEHgGG3Tvebb9-BzR0JXwE';
 GoogleMapsLoader.LIBRARIES = [ 'places'];
 
@@ -32,27 +34,72 @@ const RoutesContainer = posed.div({
   } }
 });
 
+var tourSteps 
 
 
-
-
+@inject( 'uiStore')
+@observer
 class App extends Component {
 
-  componentDidMount(){
-    GoogleMapsLoader.load(function(google) {
-      console.log(google)
-  });
-  }
+  uiStore = this.props.uiStore;
 
+  handleJoyrideCallback = data => {
+    const {joyride} = this.props;
+    const {type} = data;
+
+    if (type === EVENTS.TOUR_END && this.uiStore.runTour) {
+      // Need to set our running state to false, so we can restart if we click start again.
+      this.uiStore.runTour = false
+    }
+
+    if (typeof joyride.callback === 'function') {
+      joyride.callback(data);
+    } else {
+      console.group(type);
+      console.log(data); //eslint-disable-line no-console
+      console.groupEnd();
+    }
+  };
+
+  static propTypes = {
+    joyride: PropTypes.shape({
+      callback: PropTypes.func
+    })
+  };
+
+  static defaultProps = {
+    joyride: {}
+  };
+
+  componentDidMount() {
+    GoogleMapsLoader.load(function(google) {});
+
+    if(window.innerWidth <= 992 ){
+      
+      this.uiStore.tourSteps = this.uiStore.mobileTourSteps
+    }else{
+      this.uiStore.tourSteps = this.uiStore.DesktopTourSteps
+    }
+  }
 
   render() {
     return (
       <Router history={history} onUpdate={() => window.scrollTo(0, 0)}>
         <ScrollToTop>
           <Navbar />
+          <ReactJoyride
+                debug ={true}
+          continuous
+          scrollToFirstStep
+          showProgress
+          showSkipButton
+          run={this.uiStore.runTour}
+          steps={this.uiStore.tourSteps}
+          callback={this.handleJoyrideCallback}
+        />
           <Route
             render={({location}) => (
-              <div id="main-container" className='main-container-full'>
+              <div id='main-container' className='main-container-full'>
                 <ToastContainer />
 
 
@@ -68,7 +115,6 @@ class App extends Component {
                     </Switch>
                   </RoutesContainer>
                 </PoseGroup>
-
               </div>
             )}
           />

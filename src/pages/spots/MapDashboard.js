@@ -152,6 +152,7 @@ const Flex = styled.div``;
 @inject('sessionStore', 'spotStore', 'uiStore')
 @observer
 class MapDashboard extends Component {
+
   sessionStore = this.props.sessionStore;
   spotStore = this.props.spotStore;
   uiStore = this.props.uiStore;
@@ -161,7 +162,7 @@ class MapDashboard extends Component {
   }
 
   async componentDidMount() {
-    // intro.start();
+    
     if (!this.uiStore.modalState) {
       window.addEventListener('touchmove', preventDefault, {passive: false});
     }
@@ -192,7 +193,6 @@ class MapDashboard extends Component {
      spot = this.props.history.location.state.spot
    }
   
-console.log(spot)
 
     if (spot) {
       await this.spotStore.selectExistingSpot(spot);
@@ -200,7 +200,9 @@ console.log(spot)
       this.spotStore.mapGeolocation = {lat: this.spotStore.selectedSpot.lat, lng: this.spotStore.selectedSpot.lng};
       setTimeout(() => { this.spotStore.mapZoom = 14;}, 500);
     } else {
-      // this.spotStore.mapGeolocation = {lat: position.coords.latitude, lng: position.coords.longitude};
+      console.log('yuh');
+      this.spotStore.savedGeolocation = {lat: position.coords.latitude, lng: position.coords.longitude};
+      this.spotStore.mapGeolocation = {lat: position.coords.latitude, lng: position.coords.longitude};
     }
   }
 
@@ -234,7 +236,7 @@ console.log(spot)
               <GoogleMapContainer id='google-map-container'>
                 {this.spotStore.gmapsLoaded ? (
                   <SearchContainer id='searchContainer' className='d-none d-lg-block'>
-                    <Flex id='flex' className='d-flex'>
+                    <Flex id='desktop-search' className='d-flex'>
                       <Search />
                       <MapSwitcher />
                     </Flex>

@@ -22,6 +22,7 @@ background-color: white;
 
 
 
+
 // style={{ position: "absolute", zIndex: 500, borderRadius: "10px" }}
 @inject("sessionStore", "spotStore",'uiStore')
 @observer
@@ -52,10 +53,10 @@ class SpotsMap extends Component {
       
 
       
-      <DelishusMapCard id="dcard" style={{ display: this.uiStore.mapView ? "block" : "none", height: "100%"}}>
+      <DelishusMapCard id="desktop-map-card" style={{ display: this.uiStore.mapView ? "block" : "none", height: "100%"}}>
  
   <RandomButton/>
- 
+  <i onClick ={this.spotStore.recenterMap} className="fa fa-location-arrow fa-2x recenter" aria-hidden="true"></i>
        
 
         <div id="reactmap" style={{
@@ -67,7 +68,7 @@ class SpotsMap extends Component {
     >
         <GoogleMapReact
           id="map"
-
+          options={{ fullscreenControl: false, zoomControl: false }}
           defaultZoom={this.spotStore.mapZoom}
           zoom={this.spotStore.mapZoom}
           onGoogleApiLoaded={({map, maps}) => this.apiIsLoaded(map, maps)}

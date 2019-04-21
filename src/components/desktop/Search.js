@@ -59,7 +59,7 @@ class Search extends React.Component {
             searchOptions={searchOptions}
           >
             {({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
-              <div className='autocomplete flex-grow-1 align-self-center'>
+              <div id="desktop-search" className='autocomplete flex-grow-1 align-self-center'>
                 <input
                   ref={this.exampleRef}
                   onFocus={this.handleFocus}

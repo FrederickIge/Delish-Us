@@ -42,6 +42,8 @@ class spotStore {
   @observable map = null;
 
   @observable mapZoom = 5
+  
+  @observable savedGeolocation;
 
   apiIsLoaded(map, maps){
     
@@ -197,6 +199,12 @@ class spotStore {
   async findLikedBy() {
     this.likedBy = await this.root.fireStore.findLikedBy(this.selectedSpot.googlePlaceId);
   }
+
+  recenterMap = () => {
+    this.mapGeolocation = this.savedGeolocation;
+    this.mapZoom = 11;
+  }
+
 }
 
 export default spotStore;

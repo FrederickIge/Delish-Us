@@ -48,12 +48,13 @@ class UsersPage extends Component {
  
   spotStore = this.props.spotStore;
   userStore = this.props.userStore;
-
+  uiStore = this.props.uiStore;
   componentWillMount() {
     this.userStore.getAllUsers();
   }
 
   componentDidMount(){
+    
   }
 
   componentWillUnmount() {

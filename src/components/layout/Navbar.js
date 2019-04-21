@@ -57,13 +57,13 @@ class Navbar extends Component {
           </Link>
 
           <ViewSwitcher className='ml-auto mr-3 nav-text-style'>
-            <Link style={{textDecoration: 'none'}} to='/users'>
+            <Link id = "users-link" style={{textDecoration: 'none'}} to='/users'>
               <span className='ml-auto mr-3 nav-text-style'>
                 <b>USERS</b>
               </span>
             </Link>
           </ViewSwitcher>
-
+<p onClick={this.uiStore.startTour}>test</p>
           <AvatarMenu />
         </div>
       </nav>

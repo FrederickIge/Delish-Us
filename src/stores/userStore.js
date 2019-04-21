@@ -105,6 +105,7 @@ class UserStore {
       })
       .then(data => {
         this.rootStore.routingStore.push('/dashboard');
+        this.rootStore.uiStore.runTour = true;
       });
   };
 

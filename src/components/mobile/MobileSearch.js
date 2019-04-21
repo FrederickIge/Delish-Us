@@ -56,15 +56,17 @@ class MobileSearch extends React.Component {
         onSelect={this.handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div className="mobile-autocomplete flex-grow-1 align-self-center fix" >
+          <div id="mobile-search" className="mobile-autocomplete flex-grow-1 align-self-center fix" >
             <input
             id="mobile-search-input"
               name="search"
+               style = {{fontFamily:"FontAwesome, inherit"}}
               ref={this.search}
               onFocus={this.handleFocus}
               {...getInputProps({
                 placeholder: 'Search For a New Spot Here!',
                 className: 'form-control form-control-alternative',
+               
                 onBlur: () => { this.handleBlur() },
               })}
             />
