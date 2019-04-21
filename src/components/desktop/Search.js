@@ -61,11 +61,12 @@ class Search extends React.Component {
             {({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
               <div id="desktop-search" className='autocomplete flex-grow-1 align-self-center'>
                 <input
+                style = {{fontFamily:"FontAwesome, inherit"}}
                   ref={this.exampleRef}
                   onFocus={this.handleFocus}
-                 
+                  placeholder = 'Search For a New Spot Here!'
                   {...getInputProps({
-                    placeholder: 'Search For a New Spot Here!',
+                  
                     className: 'form-control form-control-alternative',
                     onBlur: () => {
                       this.handleBlur();
