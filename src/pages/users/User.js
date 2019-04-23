@@ -3,6 +3,7 @@ import {inject, observer} from 'mobx-react';
 import Spacer from '../../components/layout/Spacer';
 import styled from 'styled-components';
 import Geopoint from '../../models/Geopoint';
+import BackButton from '../../components/BackButton'
 
 const DelishusMapCard = styled.div`
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
@@ -29,18 +30,18 @@ const SpotCommentTitle = styled.b`
   }
 `;
 
-@inject('sessionStore', 'spotStore', 'uiStore', 'fireStore', 'userStore', 'commentStore')
+@inject('sessionStore','uiStore', 'fireStore', 'userStore')
 @observer
 class UserPage extends React.Component {
+
   sessionStore = this.props.sessionStore;
-  spotStore = this.props.spotStore;
   uiStore = this.props.uiStore;
   fireStore = this.props.fireStore;
   userStore = this.props.userStore;
-  commentStore = this.props.commentStore;
+ 
 
   async componentDidMount() {
-    console.log(this.props);
+ 
     let userId = this.props.match.params.userId;
     this.userStore.getUserComments(userId);
     this.userStore.getUserSpots(userId);
@@ -65,9 +66,6 @@ class UserPage extends React.Component {
   };
 
   async loadSpot(spot) {
-   
-
-
     this.props.history.push({
       pathname: '/dashboard',
       state: {spot:spot}
@@ -88,9 +86,12 @@ class UserPage extends React.Component {
       <DelishusMapCard id='dcard' style={{overflowY: 'scroll', WebkitOverflowScrolling: 'touch'}}>
         <div className='container'>
           <div style={{height: '20px'}} />
-          <div onClick={this.handleBack} style={{fontSize: '20px', cursor: 'pointer', color: 'black'}}>
+
+          {/* <div onClick={this.handleBack} style={{fontSize: '20px', cursor: 'pointer', color: 'black'}}>
             <i className='fa fa-arrow-left' aria-hidden='true' /> Back
-          </div>
+          </div> */}
+
+          <BackButton/>
 
           <div style={{height: '20px'}} />
 

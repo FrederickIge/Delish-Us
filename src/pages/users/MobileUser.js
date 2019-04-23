@@ -4,14 +4,7 @@ import Spacer from '../../components/layout/Spacer';
 import UserDetailsCard from '../../components/UserDetailsCard';
 import styled from 'styled-components';
 import Geopoint from "../../models/Geopoint";
-
-const DelishusMapCard = styled.div`
-box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
-
-width:100%;
-background-color: white;
-height:100%;
-`;
+import BackButton from '../../components/BackButton'
 
 const Spot = styled.div`
   cursor: pointer;
@@ -33,17 +26,12 @@ const SpotCommentTitle = styled.b`
 @inject('sessionStore', 'spotStore', 'uiStore', 'fireStore', 'userStore')
 @observer
 class MobileUserPage extends React.Component {
+
   sessionStore = this.props.sessionStore;
   spotStore = this.props.spotStore;
   uiStore = this.props.uiStore;
   fireStore = this.props.fireStore;
   userStore = this.props.userStore;
-
-  componentDidMount() {
-    // let userId = this.props.match.params.userId;
-    // this.userStore.getUserComments(userId);
-    // this.userStore.getUserSpots(userId);
-  }
 
   handleBack = () => {
     if (!this.props.history.location.state) {
@@ -57,12 +45,10 @@ class MobileUserPage extends React.Component {
   };
 
   async loadSpot(spot) {
-    
     this.props.history.push({
       pathname: '/dashboard',
       state: {spot:spot}
   });
-    
   }
 
   loadSpotbyId = async id => {
@@ -80,9 +66,11 @@ class MobileUserPage extends React.Component {
       <div style={{backgroundColor: 'white', minHeight: '100%'}} className='d-lg-none'>
         <div style={{height: '20px'}} />
         <div className='container'>
-          <div onClick={this.handleBack} style={{fontSize: '20px', cursor: 'pointer', color: 'black'}}>
+          {/* <div onClick={this.handleBack} style={{fontSize: '20px', cursor: 'pointer', color: 'black'}}>
             <i className='fa fa-arrow-left' aria-hidden='true' /> Back
-          </div>
+          </div> */}
+
+<BackButton/>
 
           <UserDetailsCard />
 

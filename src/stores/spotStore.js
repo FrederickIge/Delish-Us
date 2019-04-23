@@ -41,7 +41,7 @@ class spotStore {
 
   @observable map = null;
 
-  @observable mapZoom = 5
+  @observable mapZoom = 11
   
   @observable savedGeolocation;
 
