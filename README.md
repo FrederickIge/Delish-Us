@@ -1,9 +1,10 @@
  [Demo Link](https://react-fire-9a99e.firebaseapp.com/dashboard) 
  
 ## Delish-Us
+Desktop
+![alt text](https://firebasestorage.googleapis.com/v0/b/react-fire-9a99e.appspot.com/o/desk.JPG?alt=media&token=07d6812e-2fa3-4137-ac1a-80b121595cce)
 
-![alt text](https://firebasestorage.googleapis.com/v0/b/react-fire-9a99e.appspot.com/o/ihop.JPG?alt=media&token=83c191ae-a69a-42a4-8aee-a8401c9d761c)
-
+Mobile
 ![alt text](https://firebasestorage.googleapis.com/v0/b/react-fire-9a99e.appspot.com/o/mobile.JPG?alt=media&token=bf77819b-bace-4693-801b-ca713cf98ac6)
  
 ## About
