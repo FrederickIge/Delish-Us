@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'mobx-react';
-import createBrowserHistory from 'history/createBrowserHistory';
 
 import App from './App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import rootStore from './stores';
-
 
 
 

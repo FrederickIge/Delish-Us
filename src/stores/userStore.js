@@ -142,6 +142,7 @@ class UserStore {
   }
 
   getUserSpots = async userId => {
+    console.log('yuh')
     this.currentUserSpots = [];
 
     let querySnapshot = await this.rootStore.fireStore.fetchSpotsByUserId(userId);
@@ -157,6 +158,20 @@ class UserStore {
         
     });
   };
+
+
+  async loadUserSpot(spot) {
+    this.rootStore.routingStore.history.push({
+      pathname: '/dashboard',
+      state: {spot:spot}
+  });
+  }
+
+  loadUserSpotbyId = async id => {
+    let doc = await this.rootStore.fireStore.fetchSingleSpot(id);
+    this.loadUserSpot(new Geopoint(doc));
+  };
+
 }
 
 export default UserStore;

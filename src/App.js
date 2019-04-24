@@ -20,6 +20,7 @@ import GoogleMapsLoader from 'google-maps';
 import PropTypes from "prop-types";
 import ReactJoyride, { EVENTS } from "react-joyride";
 import { inject, observer } from 'mobx-react';
+
 GoogleMapsLoader.KEY = 'AIzaSyAJdMUyuQiG2DEHgGG3Tvebb9-BzR0JXwE';
 GoogleMapsLoader.LIBRARIES = [ 'places'];
 

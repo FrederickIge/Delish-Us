@@ -16,6 +16,7 @@ class RootStore {
     this.uiStore = new UiStore(this);
     this.userStore = new UserStore(this);
     this.routingStore = new RouterStore(this);
+    console.log(this.routingStore)
   }
 }
 

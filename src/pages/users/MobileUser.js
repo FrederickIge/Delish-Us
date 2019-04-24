@@ -5,7 +5,8 @@ import UserDetailsCard from '../../components/UserDetailsCard';
 import styled from 'styled-components';
 import Geopoint from "../../models/Geopoint";
 import BackButton from '../../components/BackButton'
-
+import UserSavedSpots from '../../components/UserSavedSpots'
+import UserComments from '../../components/UserComments'
 const Spot = styled.div`
   cursor: pointer;
   color: #1890ff;
@@ -33,32 +34,7 @@ class MobileUserPage extends React.Component {
   fireStore = this.props.fireStore;
   userStore = this.props.userStore;
 
-  handleBack = () => {
-    if (!this.props.history.location.state) {
-      this.props.history.push('/dashboard');
-    } else if (this.props.history.location.state.prevPath == 'users') {
-      this.props.history.push('/users');
-    } else if (this.props.history.location.state.prevPath == 'dashboard') {
-      this.uiStore.showModal();
-      this.props.history.goBack();
-    }
-  };
 
-  async loadSpot(spot) {
-    this.props.history.push({
-      pathname: '/dashboard',
-      state: {spot:spot}
-  });
-  }
-
-  loadSpotbyId = async id => {
-    let doc = await this.fireStore.fetchSingleSpot(id);
-    this.loadSpot(new Geopoint(doc));
-  };
-
-  deleteComment(id) {
-    this.userStore.deleteComment(id);
-  }
 
 
   render() {
@@ -66,26 +42,18 @@ class MobileUserPage extends React.Component {
       <div style={{backgroundColor: 'white', minHeight: '100%'}} className='d-lg-none'>
         <div style={{height: '20px'}} />
         <div className='container'>
-          {/* <div onClick={this.handleBack} style={{fontSize: '20px', cursor: 'pointer', color: 'black'}}>
-            <i className='fa fa-arrow-left' aria-hidden='true' /> Back
-          </div> */}
 
-<BackButton/>
+
+          <BackButton/>
 
           <UserDetailsCard />
 
-          <h2>Saved Spots</h2>
-          <hr style={{marginTop: '0px'}} />
-          {this.userStore.currentUserSpots.map(spot => (
-            <Spot onClick={() => this.loadSpot(spot)} style={{paddingTop: '10px'}} key={spot.key}>
-              {' '}
-              {spot.name}{' '}
-            </Spot>
-          ))}
-
-          <Spacer />
+          <UserSavedSpots/>
           <br />
-          <h2>Comments</h2>
+
+          <UserComments/>
+
+          {/* <h2>Comments</h2>
 
           <hr style={{marginTop: '0px'}} />
           {this.userStore.currentUserComments.map(comment => (
@@ -98,7 +66,9 @@ class MobileUserPage extends React.Component {
                 <i onClick={() => this.deleteComment(comment.commentId)} className='fa fa-trash' aria-hidden='true' />
               </div>
             </div>
-          ))}
+          ))} */}
+
+
         </div>
 
         <div style={{height: '20px'}} />

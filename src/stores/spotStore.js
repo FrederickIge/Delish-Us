@@ -79,7 +79,6 @@ class spotStore {
 
   @action
   async selectExistingSpot(spot) {
-    console.log(spot)
     this.selectedGeopoint = spot;
     this.selectedSpot = await this.loadSpotDetails();
     this.alreadySaved = this.checkifSaved();
@@ -98,6 +97,8 @@ class spotStore {
     this.findLikedBy();
     this.root.commentStore.getCommentsByGooglePlaceId();
   }
+
+
  
   @action
   async getAllSpots() {
