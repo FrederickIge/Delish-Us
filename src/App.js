@@ -20,9 +20,11 @@ import GoogleMapsLoader from 'google-maps';
 import PropTypes from "prop-types";
 import ReactJoyride, { EVENTS } from "react-joyride";
 import { inject, observer } from 'mobx-react';
+import  bootstrapURLKeys  from './keys'
+console.log(bootstrapURLKeys.key)
 
-GoogleMapsLoader.KEY = 'AIzaSyAJdMUyuQiG2DEHgGG3Tvebb9-BzR0JXwE';
-GoogleMapsLoader.LIBRARIES = [ 'places'];
+GoogleMapsLoader.KEY = bootstrapURLKeys.key;
+GoogleMapsLoader.LIBRARIES = ['places'];
 
 const browserHistory = createBrowserHistory();
 
@@ -34,8 +36,6 @@ const RoutesContainer = posed.div({
     duration: 200
   } }
 });
-
-var tourSteps 
 
 
 @inject( 'uiStore')
@@ -57,7 +57,6 @@ class App extends Component {
       joyride.callback(data);
     } else {
       console.group(type);
-      console.log(data); //eslint-disable-line no-console
       console.groupEnd();
     }
   };
@@ -88,8 +87,7 @@ class App extends Component {
       <Router history={history} onUpdate={() => window.scrollTo(0, 0)}>
         <ScrollToTop>
           <Navbar />
-          <ReactJoyride
-                debug ={true}
+          <ReactJoyride         
           continuous
           scrollToFirstStep
           showProgress

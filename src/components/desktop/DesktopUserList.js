@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {inject, observer} from 'mobx-react';
 import styled from 'styled-components';
-import BackButton from '../../components/BackButton'
+import BackButton from '../BackButton'
 
 const UserCard = styled.div`
 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);

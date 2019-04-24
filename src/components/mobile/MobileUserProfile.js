@@ -1,9 +1,9 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
-import UserDetailsCard from '../../components/UserDetailsCard';
-import BackButton from '../../components/BackButton'
-import UserSavedSpots from '../../components/UserSavedSpots'
-import UserComments from '../../components/UserComments'
+import UserDetailsCard from '../UserDetailsCard';
+import BackButton from '../BackButton'
+import UserSavedSpots from '../UserSavedSpots'
+import UserComments from '../UserComments'
 
 @inject('sessionStore', 'spotStore', 'uiStore', 'fireStore', 'userStore')
 @observer

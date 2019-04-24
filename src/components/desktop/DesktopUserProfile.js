@@ -1,9 +1,9 @@
 import React from 'react';
 import {inject, observer} from 'mobx-react';
 import styled from 'styled-components';
-import BackButton from '../../components/BackButton';
-import UserSavedSpots from '../../components/UserSavedSpots'
-import UserComments from '../../components/UserComments'
+import BackButton from '../BackButton';
+import UserSavedSpots from '../UserSavedSpots'
+import UserComments from '../UserComments'
 
 const DelishusMapCard = styled.div`
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);

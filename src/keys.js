@@ -1,4 +1,4 @@
-export const bootstrapURLKeys = {
-    key: "AIzaSyAJdMUyuQiG2DEHgGG3Tvebb9",
-    libraries: ['places'].join(','),
+ const bootstrapURLKeys = {
+    key: "AIzaSyAJdMUyuQiG2DEHgGG3Tvebb9-BzR0JXwE"
 }
+export default bootstrapURLKeys

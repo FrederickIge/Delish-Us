@@ -6,10 +6,10 @@ import UserDetailsCard from '../../components/UserDetailsCard';
 import withAuthorization from '../../components/hoc/withAuthorization';
 import Spacer from '../../components/layout/Spacer';
 import {Switch, Route} from 'react-router-dom';
-import DesktopUserList from './DesktopUserList';
-import DesktopUserProfile from './DesktopUserProfile';
-import MobileUserProfile from './MobileUserProfile';
-import MobileUserList from './MobileUserList';
+import DesktopUserList from '../../components/desktop/DesktopUserList';
+import DesktopUserProfile from '../../components/desktop/DesktopUserProfile';
+import MobileUserProfile from '../../components/mobile/MobileUserProfile';
+import MobileUserList from '../../components/mobile/MobileUserList';
 
 
 

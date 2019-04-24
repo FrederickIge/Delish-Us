@@ -21,12 +21,10 @@ background-color: white;
 `;
 
 
-
-
 // style={{ position: "absolute", zIndex: 500, borderRadius: "10px" }}
 @inject("sessionStore", "spotStore",'uiStore')
 @observer
-class SpotsMap extends Component {
+class DesktopMap extends Component {
 
   spotStore = this.props.spotStore;
   sessionStore = this.props.sessionStore;
@@ -123,4 +121,4 @@ class SpotsMap extends Component {
 }
 const authCondition = authUser => !!authUser;
 
-export default compose(withAuthorization(authCondition))(SpotsMap);
+export default compose(withAuthorization(authCondition))(DesktopMap);

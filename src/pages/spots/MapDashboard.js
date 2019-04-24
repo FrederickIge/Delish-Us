@@ -4,9 +4,9 @@ import { compose } from 'recompose';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import styled from 'styled-components';
 import SpotDetailsCard from "../../components/SpotDetailsCard"
-import SpotsMap from '../../components/desktop/SpotsMap'
+import DesktopMap from '../../components/desktop/DesktopMap'
 import MobileMap from '../../components/mobile/MobileMap'
-import Search from "../../components/desktop/Search"
+import DesktopSearch from "../../components/desktop/DesktopSearch"
 import withAuthorization from '../../components/hoc/withAuthorization';
 import preventDefault from "../../utils/eventListeners"
 import DesktopMapSwitcher from "../../components/desktop/DesktopMapSwitcher";
@@ -218,7 +218,7 @@ class MapDashboard extends Component {
                 {this.spotStore.gmapsLoaded ? (
                   <SearchContainer id='searchContainer' className='d-none d-lg-block'>
                     <Flex id='desktop-search' className='d-flex'>
-                      <Search />
+                      <DesktopSearch />
                       <DesktopMapSwitcher />
                     </Flex>
 
@@ -229,7 +229,7 @@ class MapDashboard extends Component {
                 ) : null}
 
                 <MapListContainer id='map-list-container' className='d-none d-lg-block'>
-                  <SpotsMap />
+                  <DesktopMap />
                 </MapListContainer>
               </GoogleMapContainer>
             </DashboardRightSide>

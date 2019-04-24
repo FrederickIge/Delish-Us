@@ -13,7 +13,7 @@ var getPosition = function (options) {
 var searchOptions = { };
 
 @inject('spotStore')
-class Search extends React.Component {
+class DesktopSearch extends React.Component {
   spotStore = this.props.spotStore;
   maps = this.props.spotStore.maps;
 
@@ -104,4 +104,4 @@ class Search extends React.Component {
   }
 }
 
-export default Search;
+export default DesktopSearch;
