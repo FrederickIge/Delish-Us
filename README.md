@@ -1,6 +1,6 @@
  [Demo Link](https://react-fire-9a99e.firebaseapp.com/dashboard) 
  
-## Doggie Boiler
+## Delish-Us
 
 ![alt text](https://firebasestorage.googleapis.com/v0/b/react-fire-9a99e.appspot.com/o/ihop.JPG?alt=media&token=83c191ae-a69a-42a4-8aee-a8401c9d761c)
  
@@ -18,12 +18,9 @@ You need to know the following to use Doggie Boiler
 
 ### To-dos
 
-- [x] Add ESLint
-- [x] Add basic Unit Testing Suite with Jest and React Testing Library
-- [ ] Dashboad component should realy be updating nested state object, not a flat object
-- [ ] Take the Firebase configs out of the version control (and document it)
-- [ ] Add styled components
-- [ ] Simplify the menu drop down by removing rc menu
-- [ ] Implement an SEO solution that isn't Nextjs 
-- [ ] Add icon for chrome tab
+- [] FireStore Data Integrity bug fixes and use cases
+- [] Article 1 - How to Structure Multiple Mobx Stores in a React Project
+- [] Article 2 - Desktop vs Mobile layouts 
+- [] Article 3 - Modern UI Principles 
+
 
