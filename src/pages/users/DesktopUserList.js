@@ -32,7 +32,7 @@ height:20px;
 
 @inject('sessionStore', 'userStore')
 @observer
-class UserList extends Component {
+class DesktopUserList extends Component {
 
   sessionStore = this.props.sessionStore;
   userStore = this.props.userStore;
@@ -80,4 +80,4 @@ class UserList extends Component {
   }
 }
 
-export default UserList;
+export default DesktopUserList;

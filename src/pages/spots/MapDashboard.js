@@ -3,15 +3,13 @@ import { inject, observer } from 'mobx-react';
 import { compose } from 'recompose';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import styled from 'styled-components';
-import MobileSpotList from '../../components/mobile/MobileSpotList';
 import SpotDetailsCard from "../../components/SpotDetailsCard"
 import SpotsMap from '../../components/desktop/SpotsMap'
 import MobileMap from '../../components/mobile/MobileMap'
-import SpotList from "../../components/desktop/SpotList";
 import Search from "../../components/desktop/Search"
 import withAuthorization from '../../components/hoc/withAuthorization';
 import preventDefault from "../../utils/eventListeners"
-import MapSwitcher from "../../components/desktop/MapSwitcher";
+import DesktopMapSwitcher from "../../components/desktop/DesktopMapSwitcher";
 import Spacer from "../../components/layout/Spacer";
 import introJs from 'intro.js/intro.js';
 
@@ -136,14 +134,9 @@ const DashboardRightSide = styled.div`
 
 const Flex = styled.div``;
 
-
-
-
-
 @inject('sessionStore', 'spotStore', 'uiStore')
 @observer
 class MapDashboard extends Component {
-
   sessionStore = this.props.sessionStore;
   spotStore = this.props.spotStore;
   uiStore = this.props.uiStore;
@@ -153,7 +146,6 @@ class MapDashboard extends Component {
   }
 
   async componentDidMount() {
-    
     if (!this.uiStore.modalState) {
       window.addEventListener('touchmove', preventDefault, {passive: false});
     }
@@ -175,23 +167,22 @@ class MapDashboard extends Component {
         this.initialize();
       }
     );
-
   }
 
- async initialize() {
-   let spot
-   if(this.props.history.location.state ) {
-     spot = this.props.history.location.state.spot
-   }
-  
+  async initialize() {
+    let spot;
+    if (this.props.history.location.state) {
+      spot = this.props.history.location.state.spot;
+    }
 
     if (spot) {
       await this.spotStore.selectExistingSpot(spot);
 
       this.spotStore.mapGeolocation = {lat: this.spotStore.selectedSpot.lat, lng: this.spotStore.selectedSpot.lng};
-      setTimeout(() => { this.spotStore.mapZoom = 14;}, 500);
+      setTimeout(() => {
+        this.spotStore.mapZoom = 14;
+      }, 500);
     } else {
-      console.log('yuh');
       this.spotStore.savedGeolocation = {lat: position.coords.latitude, lng: position.coords.longitude};
       this.spotStore.mapGeolocation = {lat: position.coords.latitude, lng: position.coords.longitude};
     }
@@ -215,7 +206,6 @@ class MapDashboard extends Component {
 
           <DashboardRowContainer id='DashboardRowContainer' className='row'>
             <MobileMap />
-            <MobileSpotList />
 
             <DashboardLeftSide id='dashbaord-left-side' className='col-md-4 d-none d-lg-block'>
               <SpotDetailsCardWrapper id='dashbaord-details-wrapper' className='delishus-card spot-detail'>
@@ -229,7 +219,7 @@ class MapDashboard extends Component {
                   <SearchContainer id='searchContainer' className='d-none d-lg-block'>
                     <Flex id='desktop-search' className='d-flex'>
                       <Search />
-                      <MapSwitcher />
+                      <DesktopMapSwitcher />
                     </Flex>
 
                     <DisplayText className='d-flex justify-content-center'>
@@ -240,7 +230,6 @@ class MapDashboard extends Component {
 
                 <MapListContainer id='map-list-container' className='d-none d-lg-block'>
                   <SpotsMap />
-                  <SpotList />
                 </MapListContainer>
               </GoogleMapContainer>
             </DashboardRightSide>

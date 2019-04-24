@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
 import { inject, observer } from 'mobx-react';
-import posed, { PoseGroup } from 'react-pose';
+import posed from 'react-pose';
 
 const Fade = posed.div({
   hidden: { opacity: 0 },
   visible: { opacity: 1 }
 });
-
 
 @inject('routingStore', 'sessionStore')
 @observer

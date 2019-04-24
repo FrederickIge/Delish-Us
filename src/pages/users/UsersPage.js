@@ -6,11 +6,11 @@ import UserDetailsCard from '../../components/UserDetailsCard';
 import withAuthorization from '../../components/hoc/withAuthorization';
 import Spacer from '../../components/layout/Spacer';
 import {Switch, Route} from 'react-router-dom';
-import UserList from './UserList';
-import User from './User';
-import MobileUser from './MobileUser';
+import DesktopUserList from './DesktopUserList';
+import DesktopUserProfile from './DesktopUserProfile';
+import MobileUserProfile from './MobileUserProfile';
 import MobileUserList from './MobileUserList';
-import preventDefault from "../../utils/eventListeners"
+
 
 
 const GoogleMapContainer = styled.div`
@@ -65,7 +65,7 @@ class UsersPage extends Component {
       <React.Fragment>
         <Switch>
           <Route exact path='/users' component={MobileUserList} key="MobileUserList" />
-          <Route path='/users/:userId?' component={MobileUser} key="MobileUser" />
+          <Route path='/users/:userId?' component={MobileUserProfile} key="MobileUser" />
         </Switch>
         <DashboardContainer id='dashboard-container' className='container d-none d-lg-block'>
           <Spacer />
@@ -80,8 +80,8 @@ class UsersPage extends Component {
             <DashboardRightSide id='dashbaord-right-side' className='col-md-12 col-lg-8'>
               <GoogleMapContainer id='google-map-container'>
                 <Switch>
-                  <Route exact path='/users' component={UserList} key="UserList" />
-                  <Route path='/users/:userId?' component={User} key="User" />
+                  <Route exact path='/users' component={DesktopUserList} key="UserList" />
+                  <Route path='/users/:userId?' component={DesktopUserProfile} key="User" />
                 </Switch>
               </GoogleMapContainer>
             </DashboardRightSide>

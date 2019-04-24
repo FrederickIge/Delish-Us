@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 
 @inject('sessionStore', 'spotStore')
 @observer
-class MapSwitcher extends Component {
+class DesktopMapSwitcher extends Component {
 
     spotStore = this.props.spotStore;
 
@@ -23,4 +23,4 @@ class MapSwitcher extends Component {
 }
 
 
-export default MapSwitcher;
+export default DesktopMapSwitcher;

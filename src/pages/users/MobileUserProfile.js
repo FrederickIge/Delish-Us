@@ -7,7 +7,7 @@ import UserComments from '../../components/UserComments'
 
 @inject('sessionStore', 'spotStore', 'uiStore', 'fireStore', 'userStore')
 @observer
-class MobileUserPage extends React.Component {
+class MobileUserProfile extends React.Component {
 
   render() {
     return (
@@ -32,4 +32,4 @@ class MobileUserPage extends React.Component {
     );
   }
 }
-export default MobileUserPage;
+export default MobileUserProfile;

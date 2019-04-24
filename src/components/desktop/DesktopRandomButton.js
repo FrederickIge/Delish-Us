@@ -10,7 +10,7 @@ const Random = styled.button`
 
 @inject("sessionStore", "spotStore")
 @observer
-class RandomButton extends Component {
+class DesktopRandomButton extends Component {
   spotStore = this.props.spotStore;
 
   handleInputChange = event => {
@@ -30,4 +30,4 @@ render() {
   }
 }
 
-export default RandomButton;
+export default DesktopRandomButton;

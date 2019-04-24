@@ -15,7 +15,7 @@ const DelishusMapCard = styled.div`
 
 @inject('sessionStore','uiStore', 'fireStore', 'userStore')
 @observer
-class UserPage extends React.Component {
+class DesktopUserProfile extends React.Component {
 
   sessionStore = this.props.sessionStore;
   uiStore = this.props.uiStore;
@@ -55,4 +55,4 @@ class UserPage extends React.Component {
     );
   }
 }
-export default UserPage;
+export default DesktopUserProfile;

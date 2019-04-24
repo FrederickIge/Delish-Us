@@ -4,7 +4,7 @@ import {compose} from "recompose";
 import withAuthorization from "../hoc/withAuthorization";
 import GoogleMapReact from "google-map-react";
 import styled from "styled-components";
-import RandomButton from "./RandomButton"
+import DesktopRandomButton from "./DesktopRandomButton"
 import posed from 'react-pose';
 
 const AnyReactComponent = ({text, onClick}) => (
@@ -55,8 +55,8 @@ class SpotsMap extends Component {
       
       <DelishusMapCard id="desktop-map-card" style={{ display: this.uiStore.mapView ? "block" : "none", height: "100%"}}>
  
-  <RandomButton/>
-  <i  id="dektop-recenter" onClick ={this.spotStore.recenterMap} className="fa fa-location-arrow fa-lg recenter" aria-hidden="true"></i>
+  <DesktopRandomButton/>
+  <i  id="dektop-recenter" onClick ={this.spotStore.recenterMap} className="fa fa-location-arrow fa-2x recenter" aria-hidden="true"></i>
        
 
         <div id="reactmap" style={{
