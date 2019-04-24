@@ -177,6 +177,11 @@ footer {
   border-bottom-right-radius: 10px;
 }
 
+.curved-card{
+  border-top-left-radius: 18px !important;
+  border-top-right-radius: 18px !important;
+}
+
 .autocomplete-items div {
   z-index: 1000;
   padding: 10px;

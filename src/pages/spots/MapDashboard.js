@@ -197,6 +197,7 @@ class MapDashboard extends Component {
           onClose={() => this.uiStore.closeDrawer()}
           onOpen={() => function() {}}
           className='d-lg-none curve'
+          classes = {{paper: "curved-card"}}
         >
           <SpotDetailsCard />
         </SwipeableDrawer>

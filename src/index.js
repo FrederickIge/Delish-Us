@@ -7,9 +7,6 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import rootStore from './stores';
 
-
-
-
 const render = Component =>{
 return ReactDOM.render(
   <Provider  { ...rootStore }>

@@ -104,7 +104,7 @@ class SpotDetailsCard extends Component {
               <DetailImageWrapper>
 
  <Img
-  style={{ maxHeight: '25vh', width: '100%'}} 
+  style={{ maxHeight: '25vh', width: '100%', borderTopLeftRadius:"18px",borderTopRightRadius:"18px"}} 
   src={[this.spotStore.selectedSpot.image, require("../img/noImage.jpg") ] } loader={<Loader />}/> 
 
               </DetailImageWrapper>
