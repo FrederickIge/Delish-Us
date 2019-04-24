@@ -24,9 +24,9 @@ You need to know the following to use Doggie Boiler
 
 ### To-dos
 
-[] FireStore Data Integrity bug fixes and use cases
-[] Article 1 - How to Structure Multiple Mobx Stores in a React Project
-[] Article 2 - Desktop vs Mobile layouts 
-[] Article 3 - Modern UI Principles 
+- FireStore Data Integrity bug fixes and use cases
+- Article 1 - How to Structure Multiple Mobx Stores in a React Project
+- Article 2 - Desktop vs Mobile layouts 
+- Article 3 - Modern UI Principles 
 
 
