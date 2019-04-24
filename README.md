@@ -2,13 +2,12 @@
  
 
  
-## Delish-Us
-
-## About
+## About Delish-Us
 
 Delish-Us is a Yelp inspired showcase Application, demonstrating the use of the Google Maps API, React, and Responsive Design principles
 
 [Demo Link](https://react-fire-9a99e.firebaseapp.com/dashboard) 
+
 ### Desktop
 ![alt text](https://firebasestorage.googleapis.com/v0/b/react-fire-9a99e.appspot.com/o/desk.JPG?alt=media&token=07d6812e-2fa3-4137-ac1a-80b121595cce)
 
