@@ -1,26 +1,20 @@
- [Demo Link](https://react-fire-9a99e.firebaseapp.com) 
+ [Demo Link](https://react-fire-9a99e.firebaseapp.com/dashboard) 
  
 ## Doggie Boiler
 
-![alt text](https://github.com/FrederickIge/Doggie-Boiler/blob/master/src/img/boiler.JPG)
+![alt text](https://firebasestorage.googleapis.com/v0/b/react-fire-9a99e.appspot.com/o/ihop.JPG?alt=media&token=83c191ae-a69a-42a4-8aee-a8401c9d761c)
  
 ## About
 
-Doggie-Boiler is a Simple CRUD Boilerplate application that lets you hit the ground running with any of your web app ideas
-It has some basic themeing and features geared towards a non sensical dog app (hence the name Doggie Boiler)
-It's the foundational code base for Doggie-Time
+Delish-Us is a Yelp inspired showcase Application, demonstrating the use of the Google Maps API, React, and Responsive Design principles
 
-## What You need to know
+## Technologies Used
 You need to know the following to use Doggie Boiler
 - React
 - Mobx
+- Google Maps API
 - Firebase Firestore
 - Bootsrap 4
-
-## Contribute
-I will be improving and adding new features to Doggie boiler overtime
-
-Feel free to fork and contribute as well
 
 ### To-dos
 
