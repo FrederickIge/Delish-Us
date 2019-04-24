@@ -1,8 +1,6 @@
 import React from 'react';
 import {inject, observer} from 'mobx-react';
-import Spacer from '../../components/layout/Spacer';
 import styled from 'styled-components';
-import Geopoint from '../../models/Geopoint';
 import BackButton from '../../components/BackButton';
 import UserSavedSpots from '../../components/UserSavedSpots'
 import UserComments from '../../components/UserComments'
@@ -15,23 +13,6 @@ const DelishusMapCard = styled.div`
   height: 100%;
 `;
 
-const Spot = styled.div`
-  cursor: pointer;
-  color: #1890ff;
-  &:hover {
-    text-decoration: underline #1890ff;
-  }
-`;
-
-const SpotCommentTitle = styled.b`
-  cursor: pointer;
-  color: #1890ff;
-  font-size: '22px';
-  &:hover {
-    text-decoration: underline #1890ff;
-  }
-`;
-
 @inject('sessionStore','uiStore', 'fireStore', 'userStore')
 @observer
 class UserPage extends React.Component {
@@ -41,7 +22,6 @@ class UserPage extends React.Component {
   fireStore = this.props.fireStore;
   userStore = this.props.userStore;
  
-
   async componentDidMount() {
  
     let userId = this.props.match.params.userId;
@@ -56,15 +36,11 @@ class UserPage extends React.Component {
     };
   }
 
-
-
-
   render() {
     return (
       <DelishusMapCard id='dcard' style={{overflowY: 'scroll', WebkitOverflowScrolling: 'touch'}}>
         <div className='container'>
           <div style={{height: '20px'}} />
-
 
           <BackButton/>
 

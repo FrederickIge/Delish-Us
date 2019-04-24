@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import { inject, observer } from 'mobx-react';
+import React, {Component} from 'react';
+import {inject, observer} from 'mobx-react';
 import styled from 'styled-components';
+import BackButton from '../../components/BackButton'
 
 const UserCard = styled.div`
 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -15,69 +16,68 @@ margin-top:10px;
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 `;
 
-
 const DelishusMapCard = styled.div`
-box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
-padding: 8px;
-border-radius: 18px;
-background-color: white;
-height:100%;
-word-wrap: break-word;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 8px;
+  border-radius: 18px;
+  background-color: white;
+  height: 100%;
+  word-wrap: break-word;
+`;
+
+const Spacer = styled.div`
+height:20px;
 `;
 
 
-@inject('sessionStore', 'spotStore', 'uiStore', 'fireStore', 'userStore')
+@inject('sessionStore', 'userStore')
 @observer
 class UserList extends Component {
 
-    sessionStore = this.props.sessionStore;
-    userStore = this.props.userStore;
+  sessionStore = this.props.sessionStore;
+  userStore = this.props.userStore;
 
-    handleClick(user){
-        this.props.history.push({
-            pathname: '/users/' + user.userId,
-            state: { prevPath: "users" }
-        });
+  handleClick(user) {
+    this.props.history.push({
+      pathname: '/users/' + user.userId,
+      state: {prevPath: 'users'}
+    });
+
+    this.userStore.selectedUser = {
+      username: user.username,
+      email: user.email
+    };
+  }
+
+  handleBack = () => {
+    this.props.history.push('/dashboard');
+  };
+
+  render() {
+    return (
+      <DelishusMapCard id='dcard'>
+        <div className='container'>
         
-        this.userStore.selectedUser = {
-            username: user.username,
-            email: user.email
-        }
-    }
+          <Spacer/>
 
-    handleBack = () => {
-        this.props.history.push('/dashboard');
-      };
+          <BackButton></BackButton>
 
-    render() {
-        return (
-
-            <DelishusMapCard id="dcard ">
-
-            <div className="container">
-            <div style={{height: '20px'}} />
-            <div onClick={this.handleBack} style={{ fontSize: "20px", cursor: "pointer", color:"black"  }}>
-                        <i className="fa fa-arrow-left" aria-hidden="true"></i> Back
-                    </div>
-                <div className="row row-eq-height">
-                    {this.userStore.allUsers.map(user => (
-                        <React.Fragment key={user.userId}>
-                            <div className="col-xl-4 col-lg-6">
-                                <UserCard className="pl-3" onClick={() => this.handleClick(user)} >
-                                    <h3>{user.username}</h3>
-                                    <div>{user.email}</div>                               
-                                </UserCard>
-                            </div>
-                        </React.Fragment>
-                    ))}
+          <div className='row row-eq-height'>
+            {this.userStore.allUsers.map(user => (
+              <React.Fragment key={user.userId}>
+                <div className='col-xl-4 col-lg-6'>
+                  <UserCard className='pl-3' onClick={() => this.handleClick(user)}>
+                    <h3>{user.username}</h3>
+                    <div>{user.email}</div>
+                  </UserCard>
                 </div>
-            </div>
-
-            
-            </DelishusMapCard>
-
-        )
-    }
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+      </DelishusMapCard>
+    );
+  }
 }
 
 export default UserList;

@@ -56,7 +56,7 @@ class SpotsMap extends Component {
       <DelishusMapCard id="desktop-map-card" style={{ display: this.uiStore.mapView ? "block" : "none", height: "100%"}}>
  
   <RandomButton/>
-  <i  id="dektop-recenter" onClick ={this.spotStore.recenterMap} className="fa fa-location-arrow fa-2x recenter" aria-hidden="true"></i>
+  <i  id="dektop-recenter" onClick ={this.spotStore.recenterMap} className="fa fa-location-arrow fa-lg recenter" aria-hidden="true"></i>
        
 
         <div id="reactmap" style={{

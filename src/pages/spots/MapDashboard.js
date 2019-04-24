@@ -13,15 +13,7 @@ import withAuthorization from '../../components/hoc/withAuthorization';
 import preventDefault from "../../utils/eventListeners"
 import MapSwitcher from "../../components/desktop/MapSwitcher";
 import Spacer from "../../components/layout/Spacer";
-import { toast } from 'react-toastify';
 import introJs from 'intro.js/intro.js';
-
-var innerHeight = require('ios-inner-height');
-var getPosition = function (options) {
-  return new Promise(function (resolve, reject) {
-    navigator.geolocation.getCurrentPosition(resolve, reject, options);
-  });
-}
 
 const intro = introJs();
 intro.setOptions({
@@ -30,7 +22,6 @@ intro.setOptions({
     intro: "Hello world!"
   }]
 });
-
 
 var position;
 
