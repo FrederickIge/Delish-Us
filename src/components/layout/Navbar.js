@@ -38,11 +38,11 @@ class Navbar extends Component {
         <div className='container'>
           <Link style={{textDecoration: 'none'}} to='/dashboard'>
             <AvatarImg className='img-fluid' src={require('../../img/compass.png')} alt='Logo' />
-            <b className='ml-3'>DELISH-US</b>
+            <b style={{fontSize: '14px'}}  className='ml-3'>DELISH-US</b>
           </Link>
 
           <Link style={{textDecoration: 'none'}} to='/login' className='ml-auto mr-3 nav-text-style'>
-            <b>LOGIN</b>
+            <b style={{fontSize: '14px'}}>LOGIN</b>
           </Link>
         </div>
       </nav>
@@ -53,13 +53,13 @@ class Navbar extends Component {
         <div className='container'>
           <Link style={{textDecoration: 'none'}} to='/dashboard'>
             <AvatarImg className='img-fluid' src={require('../../img/compass.png')} alt='Logo' />
-            <b className='ml-3'>DELISH-US</b>
+            <b style={{fontSize: '14px'}} className='ml-3'>DELISH-US</b>
           </Link>
 
           <ViewSwitcher className='ml-auto mr-3 nav-text-style'>
             <Link id = "users-link" style={{textDecoration: 'none'}} to='/users'>
               <span className='ml-auto mr-3 nav-text-style'>
-                <b>USERS</b>
+                <b style={{fontSize: '14px'}}>USERSsssss</b>
               </span>
             </Link>
           </ViewSwitcher>
