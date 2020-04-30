@@ -57,7 +57,7 @@
     "jest": "23.6.0",
     "jest-pnp-resolver": "1.0.1",
     "jest-resolve": "23.6.0",
-    "jquery": "3.3.1",
+    "jquery": "3.5.0",
     "material-ui-search-bar": "^1.0.0-beta.13",
     "mini-css-extract-plugin": "0.4.3",
     "mobx": "^5.5.0",
